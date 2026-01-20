@@ -97,6 +97,39 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
     
+    // === NUEVAS RUTAS PREMIUM ===
+    router.register('/galeria', () => {
+        hideMicro();
+        window.location.href = '/galeria.html';
+    });
+    
+    router.register('/press-kit', () => {
+        hideMicro();
+        const container = document.getElementById('press-kit-container');
+        if (container && typeof PressKitSystem !== 'undefined') {
+            document.querySelectorAll('[data-view]').forEach(v => v.classList.add('hidden'));
+            container.classList.remove('hidden');
+        }
+    });
+    
+    router.register('/eventos', () => {
+        hideMicro();
+        const container = document.getElementById('eventos-container');
+        if (container && typeof EventosSystem !== 'undefined') {
+            document.querySelectorAll('[data-view]').forEach(v => v.classList.add('hidden'));
+            container.classList.remove('hidden');
+        }
+    });
+    
+    router.register('/catalogo', () => {
+        hideMicro();
+        const container = document.getElementById('catalogo-container');
+        if (container && typeof CatalogoSystem !== 'undefined') {
+            document.querySelectorAll('[data-view]').forEach(v => v.classList.add('hidden'));
+            container.classList.remove('hidden');
+        }
+    });
+    
     // Pre-cache de imágenes críticas al estar en idle
     if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
