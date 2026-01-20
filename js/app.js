@@ -25,6 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (mode === 'play') {
                 archiveView.classList.remove('hidden');
                 new RitualGame();
+                
+                // ✨ DISRUPTIVE FEATURES
+                new GlitchText();
+                new WebDecay();
+                new RitualHandshake();
+                new HeartbeatCursor();
             } else {
                 loadStaticMode();
             }

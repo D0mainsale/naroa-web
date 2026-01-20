@@ -122,7 +122,148 @@ class ColorExtractor {
     }
 }
 
+// === GLITCH TEXT - Textos que se corrompen ===
+class GlitchText {
+    constructor() {
+        this.glitchChars = '█▓▒░╳╱╲◤◥◢◣△▽○●';
+        this.originalTexts = new Map();
+        this.init();
+    }
+    
+    init() {
+        // Aplicar a títulos ocasionalmente
+        setInterval(() => this.randomGlitch(), 8000);
+    }
+    
+    randomGlitch() {
+        const elements = document.querySelectorAll('h1, h2, .hud-value');
+        if (elements.length === 0) return;
+        
+        const el = elements[Math.floor(Math.random() * elements.length)];
+        if (!this.originalTexts.has(el)) {
+            this.originalTexts.set(el, el.textContent);
+        }
+        
+        const original = this.originalTexts.get(el);
+        el.textContent = this.glitchify(original);
+        
+        setTimeout(() => {
+            el.textContent = original;
+        }, 150);
+    }
+    
+    glitchify(text) {
+        return text.split('').map(char => 
+            Math.random() > 0.7 ? this.glitchChars[Math.floor(Math.random() * this.glitchChars.length)] : char
+        ).join('');
+    }
+}
+
+// === WEB DECAY - Web que se descompone con el tiempo ===
+class WebDecay {
+    constructor() {
+        this.visits = this.loadVisits();
+        this.decay();
+    }
+    
+    loadVisits() {
+        const v = parseInt(localStorage.getItem('naroa_visits') || '0');
+        localStorage.setItem('naroa_visits', (v + 1).toString());
+        return v + 1;
+    }
+    
+    decay() {
+        const decayLevel = Math.min(this.visits / 100, 0.3); // Max 30% decay
+        
+        if (decayLevel > 0.05) {
+            // Slight visual decay
+            document.documentElement.style.setProperty('--decay-blur', `${decayLevel * 2}px`);
+            document.documentElement.style.setProperty('--decay-noise', decayLevel);
+        }
+        
+        // Random element "breaks" after many visits
+        if (this.visits > 20 && Math.random() > 0.9) {
+            setTimeout(() => {
+                const tiles = document.querySelectorAll('.tile');
+                if (tiles.length) {
+                    const randomTile = tiles[Math.floor(Math.random() * tiles.length)];
+                    randomTile.style.transform = `rotate(${(Math.random() - 0.5) * 10}deg)`;
+                }
+            }, 3000);
+        }
+    }
+}
+
+// === RITUAL HANDSHAKE - El usuario debe "demostrar" algo ===
+class RitualHandshake {
+    constructor() {
+        this.secrets = {
+            'kintsugi': 'Has encontrado la esencia dorada.',
+            'oca': '🦆 De oca a oca...',
+            'naroa': '💜 La artista te saluda.',
+            'arte': 'El arte es el espejo del alma.',
+            'roto': 'Lo roto también brilla.'
+        };
+        this.init();
+    }
+    
+    init() {
+        let typed = '';
+        document.addEventListener('keydown', (e) => {
+            typed += e.key.toLowerCase();
+            typed = typed.slice(-15);
+            
+            for (const [secret, message] of Object.entries(this.secrets)) {
+                if (typed.includes(secret)) {
+                    this.showSecret(message);
+                    typed = '';
+                    break;
+                }
+            }
+        });
+    }
+    
+    showSecret(message) {
+        const el = document.createElement('div');
+        el.className = 'ritual-secret';
+        el.textContent = message;
+        document.body.appendChild(el);
+        
+        setTimeout(() => el.classList.add('visible'), 50);
+        setTimeout(() => {
+            el.classList.remove('visible');
+            setTimeout(() => el.remove(), 500);
+        }, 3000);
+    }
+}
+
+// === HEARTBEAT CURSOR - Cursor que late ===
+class HeartbeatCursor {
+    constructor() {
+        this.cursor = document.createElement('div');
+        this.cursor.id = 'heartbeat-cursor';
+        document.body.appendChild(this.cursor);
+        
+        document.addEventListener('mousemove', (e) => {
+            this.cursor.style.left = e.clientX + 'px';
+            this.cursor.style.top = e.clientY + 'px';
+        });
+        
+        this.beat();
+    }
+    
+    beat() {
+        this.cursor.classList.add('pulse');
+        setTimeout(() => this.cursor.classList.remove('pulse'), 200);
+        setTimeout(() => this.beat(), 800 + Math.random() * 400);
+    }
+}
+
 // Exportar globalmente
 window.PigmentTrail = PigmentTrail;
 window.DayNightCycle = DayNightCycle;
 window.ColorExtractor = ColorExtractor;
+window.GlitchText = GlitchText;
+window.WebDecay = WebDecay;
+window.RitualHandshake = RitualHandshake;
+window.HeartbeatCursor = HeartbeatCursor;
