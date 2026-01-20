@@ -56,6 +56,10 @@ class Portfolio {
                     }
                 });
             }
+            
+            // 🎲 SHUFFLE ALEATORIO - Cada visita es única
+            this.shuffleArray(allImages);
+            
             this.obras = allImages.slice(0, 40);
 
             // Cargar blog
@@ -65,6 +69,15 @@ class Portfolio {
         } catch (e) {
             console.error('Error cargando datos:', e);
         }
+    }
+    
+    // Fisher-Yates shuffle algorithm
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
     
     
