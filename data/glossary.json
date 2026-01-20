@@ -1,0 +1,34 @@
+{
+  "peso": {
+    "word": "Peso",
+    "images": []
+  },
+  "residuo": {
+    "word": "Residuo",
+    "images": []
+  },
+  "fragmento": {
+    "word": "Fragmento",
+    "images": []
+  },
+  "piel": {
+    "word": "Piel",
+    "images": []
+  },
+  "materia": {
+    "word": "Materia",
+    "images": []
+  },
+  "huella": {
+    "word": "Huella",
+    "images": []
+  },
+  "grieta": {
+    "word": "Grieta",
+    "images": []
+  },
+  "vacio": {
+    "word": "Vacío",
+    "images": []
+  }
+}

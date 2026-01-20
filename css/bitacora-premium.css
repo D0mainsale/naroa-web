@@ -1,0 +1,543 @@
+/* === BITÁCORA PREMIUM SYSTEM - 15 FEATURES === */
+
+/* FEATURE 12: Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    z-index: 9999;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), var(--pop-magenta, #ff2d6a));
+    width: 0%;
+    transition: width 0.1s ease-out;
+}
+
+/* FEATURE 7: Search Bar */
+.bitacora-search {
+    position: relative;
+    margin: 30px 0;
+}
+
+.bitacora-search input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: var(--text);
+    font-family: var(--font);
+    transition: all 0.3s;
+}
+
+.bitacora-search input:focus {
+    outline: none;
+    background: rgba(255,255,255,0.05);
+    border-color: var(--red);
+}
+
+.bitacora-search .search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* FEATURE 6: Filter Buttons */
+.bitacora-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 16px;
+    align-items: center;
+}
+
+.filter-btn {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font);
+}
+
+.filter-btn:hover {
+    background: rgba(201, 48, 48, 0.1);
+    border-color: rgba(201, 48, 48, 0.3);
+    color: var(--text);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+}
+
+/* FEATURE 10: View Toggle */
+.view-toggle {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.view-btn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.view-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: rgba(255,255,255,0.4);
+    stroke-width: 2;
+}
+
+.view-btn:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(201, 48, 48, 0.3);
+}
+
+.view-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+}
+
+.view-btn.active svg {
+    stroke: white;
+}
+
+/* FEATURE 1: Post Cover Images */
+.post-cover {
+    width: calc(100% + 72px);
+    margin: -36px -36px 32px -36px;
+    aspect-ratio: 2.5/1;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+}
+
+.post-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.blog-post:hover .post-cover img {
+    transform: scale(1.05);
+}
+
+/* FEATURE 2: Pull-out Quotes */
+.post-pullquote {
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 32px 0;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(201, 48, 48, 0.05) 0%, rgba(255,255,255,0.02) 100%);
+    border-left: 3px solid var(--red);
+    border-radius: 8px;
+    position: relative;
+}
+
+.quote-mark {
+    font-size: 3rem;
+    color: var(--red);
+    opacity: 0.2;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+/* FEATURE 3: YouTube Embeds */
+.post-youtube {
+    margin: 32px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: #000;
+}
+
+.post-youtube iframe {
+    width: 100%;
+    height: 100%;
+}
+
+/* FEATURE 3: GIF Support */
+.post-gif {
+    margin: 32px 0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.post-gif img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* FEATURE 3: Image Gallery */
+.post-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+}
+
+.post-gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.post-gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* FEATURE 13: Share Buttons */
+.post-share {
+    display: flex;
+    gap: 8px;
+}
+
+.share-btn {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.share-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+    transform: translateY(-2px);
+}
+
+.share-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* FEATURE 14: Next Post Preview */
+.post-next-preview {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.next-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.4;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.next-post {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.4s;
+}
+
+.next-post:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(201, 48, 48, 0.2);
+    transform: translateX(8px);
+}
+
+.next-post img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.next-info h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.next-info p {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    line-height: 1.5;
+}
+
+/* FEATURE 5: Visual Separators */
+.post-separator {
+    text-align: center;
+    margin: 50px 0;
+    opacity: 0.15;
+}
+
+.separator-symbol {
+    font-size: 1.5rem;
+    color: var(--red);
+}
+
+/* FEATURE 11: Glitch Hover on Titles */
+.glitch-hover {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch-hover a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.blog-post:hover .glitch-hover {
+    animation: glitch-text 0.3s ease;
+}
+
+@keyframes glitch-text {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 1px); }
+    40% { transform: translate(2px, -1px); }
+    60% { transform: translate(-1px, -2px); }
+    80% { transform: translate(1px, 2px); }
+}
+
+/* FEATURE 10: Grid View */
+.bitacora-list.view-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+.blog-post-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s;
+    animation: fadeInUp 0.6s backwards;
+}
+
+.blog-post-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(201, 48, 48, 0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.blog-post-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-post-card .card-content {
+    padding: 24px;
+}
+
+.blog-post-card time {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.4;
+}
+
+.blog-post-card h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 12px 0;
+    line-height: 1.3;
+}
+
+.blog-post-card p {
+    font-size: 0.9rem;
+    opacity: 0.6;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.blog-post-card .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.blog-post-card .card-tags span {
+    font-size: 0.6rem;
+    padding: 4px 12px;
+    background: rgba(201, 48, 48, 0.1);
+    border-radius: 20px;
+}
+
+/* FEATURE 9: Timeline View */
+.bitacora-list.view-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.timeline-year {
+    position: relative;
+}
+
+.year-label {
+    font-size: 3rem;
+    font-weight: 100;
+    opacity: 0.15;
+    position: sticky;
+    top: 80px;
+    margin-bottom: 24px;
+}
+
+.timeline-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 80px;
+    border-left: 2px solid rgba(255,255,255,0.08);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 24px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -86px;
+    width: 12px;
+    height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    border: 3px solid var(--bg);
+}
+
+.timeline-item:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(201, 48, 48, 0.3);
+    transform: translateX(8px);
+}
+
+.timeline-item time {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+    min-width: 80px;
+}
+
+.timeline-item h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    flex: 1;
+}
+
+.timeline-tags {
+    display: flex;
+    gap: 6px;
+}
+
+.timeline-tags span {
+    font-size: 0.6rem;
+    padding: 4px 10px;
+    background: rgba(201, 48, 48, 0.1);
+    border-radius: 20px;
+}
+
+/* FEATURE 4: Text Reveal Animation - DISABLED, always visible */
+.post-content {
+    opacity: 0.8;
+    transform: translateY(0);
+}
+
+.post-content.revealed {
+    opacity: 0.8;
+    transform: translateY(0);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .bitacora-filters {
+        padding: 16px;
+    }
+    
+    .view-toggle {
+        width: 100%;
+        justify-content: center;
+        margin-top: 12px;
+    }
+    
+    .post-cover {
+        width: calc(100% + 48px);
+        margin: -24px -24px 24px -24px;
+    }
+    
+    .post-pullquote {
+        font-size: 1.1rem;
+        padding: 20px;
+    }
+    
+    .timeline-posts {
+        padding-left: 40px;
+    }
+    
+    .timeline-item::before {
+        left: -46px;
+    }
+    
+    .next-post {
+        flex-direction: column;
+    }
+    
+    .next-post img {
+        width: 100%;
+        height: 150px;
+    }
+}

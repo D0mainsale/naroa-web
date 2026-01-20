@@ -1,0 +1,9 @@
+{
+  "name": "naroa-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio de Naroa Gutiérrez Gil - Artista Plástica",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "vercel-build": "echo 'Static site - no build needed'"
+  }
+}

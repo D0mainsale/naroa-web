@@ -1,0 +1,418 @@
+/* ═════════════════════════════════════════════════════════════
+   NAROA 2026 - AWARD-WINNING DESIGN SYSTEM
+   Premium visual experience for contemporary art portfolio
+   ════════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 1. COLOR PALETTE 2026 - TRENDING & SOPHISTICATED
+   ────────────────────────────────────────────────────────── */
+
+:root {
+    /* Primary Palette - Minimalist Luxe */
+    --color-cream: #FAF8F5;
+    --color-charcoal: #1A1A1A;
+    --color-graphite: #2D2D2D;
+    --color-silver: #C0C0C0;
+    --color-platinum: #E5E5E5;
+    
+    /* Accent Colors - Artivista Soul */
+    --color-clay: #C8A882;           /* Warm earth */
+    --color-rust: #B86F50;            /* Terracotta */
+    --color-sage: #9CAF88;            /* Soft green */
+    --color-indigo: #4A5568;          /* Deep blue-grey */
+    --color-ochre: #D4A574;           /* Golden earth */
+    
+    /* Functional */
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+    --color-info: #3B82F6;
+    
+    /* Overlays & Glassmorphism */
+    --glass-white: rgba(255, 255, 255, 0.85);
+    --glass-dark: rgba(26, 26, 26, 0.85);
+    --overlay-light: rgba(250, 248, 245, 0.95);
+    --overlay-dark: rgba(26, 26, 26, 0.95);
+    
+    /* Shadows - Layered Depth */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.20);
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+    
+    /* Gradients - Elegant Transitions */
+    --gradient-silk: linear-gradient(135deg, var(--color-cream) 0%, var(--color-platinum) 100%);
+    --gradient-sunset: linear-gradient(135deg, var(--color-ochre) 0%, var(--color-rust) 100%);
+    --gradient-earth: linear-gradient(135deg, var(--color-clay) 0%, var(--color-sage) 100%);
+    --gradient-depth: linear-gradient(180deg, transparent 0%, rgba(26, 26, 26, 0.6) 100%);
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 2. TYPOGRAPHY 2026 - EDITORIAL EXCELLENCE
+   ────────────────────────────────────────────────────────── */
+
+:root {
+    /* Font Families */
+    --font-display: 'Playfair Display', serif;  /* Elegancia clásica */
+    --font-body: 'Inter', sans-serif;           /* Modernidad legible */
+    --font-mono: 'JetBrains Mono', monospace;   /* Detalles técnicos */
+    
+    /* Font Sizes - Fluid Scale */
+    --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+    --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --text-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
+    --text-4xl: clamp(2.25rem, 1.8rem + 2.25vw, 3rem);
+    --text-5xl: clamp(3rem, 2.4rem + 3vw, 4rem);
+    --text-6xl: clamp(3.75rem, 3rem + 3.75vw, 5rem);
+    
+    /* Line Heights */
+    --leading-tight: 1.2;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
+    
+    /* Letter Spacing */
+    --tracking-tighter: -0.05em;
+    --tracking-tight: -0.025em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.025em;
+    --tracking-wider: 0.05em;
+    --tracking-widest: 0.1em;
+}
+
+/* Typography Classes */
+.h1-display {
+    font-family: var(--font-display);
+    font-size: var(--text-6xl);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tighter);
+}
+
+.h2-display {
+    font-family: var(--font-display);
+    font-size: var(--text-5xl);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+}
+
+.body-elegant {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    font-weight: 300;
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 3. SPACING & LAYOUT - GOLDEN RATIO
+   ────────────────────────────────────────────────────────── */
+
+:root {
+    /* Spacing Scale - Fibonacci / Golden Ratio */
+    --space-1: 0.25rem;    /* 4px */
+    --space-2: 0.5rem;     /* 8px */
+    --space-3: 0.75rem;    /* 12px */
+    --space-4: 1rem;       /* 16px */
+    --space-5: 1.5rem;     /* 24px */
+    --space-6: 2rem;       /* 32px */
+    --space-8: 3rem;       /* 48px */
+    --space-10: 4rem;      /* 64px */
+    --space-12: 6rem;      /* 96px */
+    --space-16: 8rem;      /* 128px */
+    --space-20: 12rem;     /* 192px */
+    
+    /* Container Widths */
+    --container-xs: 20rem;     /* 320px */
+    --container-sm: 24rem;     /* 384px */
+    --container-md: 28rem;     /* 448px */
+    --container-lg: 32rem;     /* 512px */
+    --container-xl: 36rem;     /* 576px */
+    --container-2xl: 42rem;    /* 672px */
+    --container-3xl: 48rem;    /* 768px */
+    --container-4xl: 56rem;    /* 896px */
+    --container-5xl: 64rem;    /* 1024px */
+    --container-6xl: 72rem;    /* 1152px */
+    --container-7xl: 80rem;    /* 1280px */
+    
+    /* Breakpoints */
+    --bp-sm: 640px;
+    --bp-md: 768px;
+    --bp-lg: 1024px;
+    --bp-xl: 1280px;
+    --bp-2xl: 1536px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 4. ANIMATION SYSTEM - FLUID MOTION
+   ────────────────────────────────────────────────────────── */
+
+:root {
+    /* Timing Functions - Premium Easing */
+    --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Durations */
+    --duration-instant: 100ms;
+    --duration-fast: 200ms;
+    --duration-base: 300ms;
+    --duration-slow: 500ms;
+    --duration-slower: 700ms;
+    --duration-slowest: 1000ms;
+}
+
+/* Reveal Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Animation Classes */
+.animate-in {
+    animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+.animate-in-delay-1 {
+    animation: fadeInUp var(--duration-slow) var(--ease-out-expo) 100ms forwards;
+}
+
+.animate-in-delay-2 {
+    animation: fadeInUp var(--duration-slow) var(--ease-out-expo) 200ms forwards;
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 5. GLASSMORPHISM - FROSTED GLASS EFFECTS
+   ────────────────────────────────────────────────────────── */
+
+.glass {
+    background: var(--glass-white);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-lg);
+}
+
+.glass-dark {
+    background: var(--glass-dark);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-xl);
+}
+
+.glass-card {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.7) 100%
+    );
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 1rem;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all var(--duration-base) var(--ease-out-expo);
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 6. MICRO-INTERACTIONS - DELIGHTFUL DETAILS
+   ────────────────────────────────────────────────────────── */
+
+.btn-premium {
+    position: relative;
+    padding: var(--space-4) var(--space-8);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-cream);
+    background: var(--color-graphite);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--duration-base) var(--ease-out-expo);
+}
+
+.btn-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+    );
+    transition: left var(--duration-slower) var(--ease-out-expo);
+}
+
+.btn-premium:hover::before {
+    left: 100%;
+}
+
+.btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-premium:active {
+    transform: translateY(0);
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 7. IMAGE EFFECTS - PREMIUM TRANSFORMS
+   ────────────────────────────────────────────────────────── */
+
+.img-reveal {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-reveal img {
+    transition: transform var(--duration-slower) var(--ease-out-expo);
+}
+
+.img-reveal:hover img {
+    transform: scale(1.05);
+}
+
+.img-reveal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-depth);
+    opacity: 0;
+    transition: opacity var(--duration-base) var(--ease-out-expo);
+}
+
+.img-reveal:hover::after {
+    opacity: 1;
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 8. LOADING EXPERIENCE - ARTISTIC PRELOADER
+   ────────────────────────────────────────────────────────── */
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity var(--duration-slow) var(--ease-out-expo);
+}
+
+.loader-container.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--color-platinum);
+    border-top-color: var(--color-graphite);
+    border-radius: 50%;
+    animation: spin 1s var(--ease-in-out-cubic) infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 9. UTILITY CLASSES - AWARD-WINNING HELPERS
+   ────────────────────────────────────────────────────────── */
+
+.container-premium {
+    max-width: var(--container-6xl);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.section-padding {
+    padding: var(--space-20) 0;
+}
+
+.text-gradient {
+    background: var(--gradient-sunset);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.smooth-scroll {
+    scroll-behavior: smooth;
+}
+
+/* ═════════════════════════════════════════════════════════════
+   END PREMIUM DESIGN SYSTEM
+   ════════════════════════════════════════════════════════════ */

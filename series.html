@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series — Naroa Gutiérrez Gil</title>
+    <meta name="description" content="Series artísticas de Naroa Gutiérrez Gil: Vaivenes, DiviNos, Cantinflowers, REPÓKER DE REINAS.">
+    
+    <!-- Brutaliste & Material Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/silent.css">
+    
+    <style>
+        /* Series Page Specific Styles */
+        .series-nav {
+            padding: 120px 32px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .series-nav h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 48px;
+            text-align: center;
+        }
+        .series-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 64px;
+        }
+        .series-menu a {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 12px 24px;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+        .series-menu a:hover,
+        .series-menu a.active {
+            background: var(--color-text);
+            color: var(--color-bg);
+            opacity: 1;
+        }
+        .series-content {
+            padding: 0 32px 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .series-section {
+            margin-bottom: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--color-border-light);
+        }
+        .series-section:first-child {
+            border-top: none;
+        }
+        .series-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 24px;
+        }
+        .series-header h2 {
+            font-size: 32px;
+            font-weight: 400;
+        }
+        .series-header .series-years {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+        .series-description {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+            max-width: 70ch;
+        }
+        .series-technique {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+        .series-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .series-gallery img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+        .series-gallery img:hover {
+            opacity: 0.85;
+        }
+        @media (max-width: 768px) {
+            .series-nav h1 {
+                font-size: 32px;
+            }
+            .series-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .series-header h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav visible">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">Naroa Gutiérrez Gil</a>
+            <ul class="nav-links">
+                <li><a href="/work.html">Obra</a></li>
+                <li><a href="/series.html" class="active">Series</a></li>
+                <li><a href="/exhibitions.html">Exhibiciones</a></li>
+                <li><a href="/bio.html">Bio</a></li>
+                <li><a href="/contact.html">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Series Navigation -->
+        <section class="series-nav">
+            <h1>Series</h1>
+            <nav class="series-menu">
+                <a href="#vaivenes" class="active">Vaivenes</a>
+                <a href="#divinos">DiviNos VaiVenes</a>
+                <a href="#repoker">REPÓKER DE REINAS</a>
+                <a href="#cantinflowers">Cantinflowers</a>
+                <a href="#minimainimou">minimainimou</a>
+            </nav>
+        </section>
+
+        <!-- Series Content -->
+        <div class="series-content">
+            
+            <!-- VAIVENES -->
+            <section id="vaivenes" class="series-section">
+                <header class="series-header">
+                    <h2>Vaivenes</h2>
+                    <span class="series-years">2019 — 2024</span>
+                </header>
+                <p class="series-technique">Técnica mixta · Ilustración · Collage</p>
+                <p class="series-description">
+                    Serie que materializa emociones a través de figuras icónicas de música, cine, literatura y televisión. 
+                    Cada retrato fue elegido porque refleja, literal o metafóricamente, los sentimientos que buscaba transmitir. 
+                    Desarrollada para expresar las turbulencias internas del ser humano y procesar desafíos personales, 
+                    especialmente durante la pandemia COVID-19.
+                </p>
+                <div class="series-gallery">
+                    <img src="/images/1701cc40-5809-410d-bcc2-e68b145dc739.webp" alt="Sueños Acuáticos">
+                    <img src="/images/604863ca-7c61-4e1c-90a4-d09ce3d9cc13.webp" alt="Amsterdam Dreams">
+                    <img src="/images/811dff51-cbc7-4ded-af8a-e92e6e7e430e.webp" alt="El Peso del Tiempo">
+                </div>
+            </section>
+
+            <!-- DIVINOS VAIVENES -->
+            <section id="divinos" class="series-section">
+                <header class="series-header">
+                    <h2>DiviNos VaiVenes</h2>
+                    <span class="series-years">2021</span>
+                </header>
+                <p class="series-technique">Acrílico · Cola · Texturas experimentales</p>
+                <p class="series-description">
+                    Fusión de creaciones plásticas que integra el concepto de "complementarios" en lugar de "opuestos". 
+                    Esta colección explora las capas múltiples de realidad, consciencia y la interconexión de todas las cosas. 
+                    Presentada en Politena Art Space, Bilbao.
+                </p>
+                <div class="series-gallery">
+                    <img src="/images/a820a8a1-cd28-41c0-b2eb-3cbcd99d3940.webp" alt="Guerrero Inocente">
+                    <img src="/images/c1b568b2-ff61-456d-bf37-38dc37ad2f72.webp" alt="Geisha Contemporánea">
+                </div>
+            </section>
+
+            <!-- REPÓKER DE REINAS -->
+            <section id="repoker" class="series-section">
+                <header class="series-header">
+                    <h2>REPÓKER DE REINAS</h2>
+                    <span class="series-years">2022</span>
+                </header>
+                <p class="series-technique">Pintura</p>
+                <p class="series-description">
+                    Cinco obras que visualizan las turbulencias internas del ser humano a través de "facciones ilustres". 
+                    Presentada en Siarte Leku, Bilbao, esta serie representa un diálogo profundo con figuras que encarnan 
+                    estados emocionales universales.
+                </p>
+                <div class="series-gallery">
+                    <img src="/images/7b802cee-4cce-4ea0-b24d-8e9a22a40d6f.webp" alt="Azúcar - Homenaje a Celia Cruz">
+                </div>
+            </section>
+
+            <!-- CANTINFLOWERS -->
+            <section id="cantinflowers" class="series-section">
+                <header class="series-header">
+                    <h2>Cantinflowers</h2>
+                    <span class="series-years">2020 — 2021</span>
+                </header>
+                <p class="series-technique">Acrílico · Cola · Texturas novedosas</p>
+                <p class="series-description">
+                    Serie desarrollada durante la pandemia, donde experimenté con acrílico y cola para lograr texturas 
+                    completamente nuevas. Parte de la exposición "DiviNos VaiVenes", estas obras representan un momento 
+                    de introspección y descubrimiento técnico.
+                </p>
+            </section>
+
+            <!-- MINIMAINIMOU -->
+            <section id="minimainimou" class="series-section">
+                <header class="series-header">
+                    <h2>minimainimou</h2>
+                    <span class="series-years">2022 — Presente</span>
+                </header>
+                <p class="series-technique">Collage digital · Ilustraciones · GIFs · Animaciones</p>
+                <p class="series-description">
+                    Proyecto independiente dedicado a creaciones artísticas digitales. Incluye colaboraciones en videoclips, 
+                    portadas de álbumes y animaciones para artistas como Sally Rous. Una extensión del trabajo plástico 
+                    hacia el mundo digital y el movimiento.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Scripts: Ritual Digital Language -->
+    <script src="/js/dust.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/material.js"></script>
+    <script src="/js/ritual.js"></script>
+    <script src="/js/rupture.js"></script>
+</body>
+</html>
