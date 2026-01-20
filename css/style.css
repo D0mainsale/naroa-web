@@ -500,9 +500,8 @@ body::before {
 
 /* Portfolio Grid — DISRUPTIVO */
 .portfolio-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    /* display: flex; removed - handled by premium css */
+    /* flex-wrap: wrap; removed */
     padding: 2rem 0;
     justify-content: center;
     content-visibility: auto;
@@ -515,7 +514,7 @@ body::before {
     color: var(--text);
     position: relative;
     /* Anti-grid: tamaños variables */
-    flex: 0 0 calc(25% - 2rem);
+    /* Flex sizing removed for CSS Grid */
     /* Entrada ritual: invisible hasta revelación */
     opacity: 0;
     filter: blur(15px);
@@ -532,18 +531,12 @@ body::before {
     transform: translateY(0);
 }
 
-/* Anti-grid: variación de tamaños */
-.portfolio-card:nth-child(5n+1) { flex: 0 0 calc(40% - 2rem); }
-.portfolio-card:nth-child(5n+3) { flex: 0 0 calc(30% - 2rem); transform: translateY(40px); }
-.portfolio-card:nth-child(5n+4) { flex: 0 0 calc(35% - 2rem); }
-.portfolio-card:nth-child(5n+5) { flex: 0 0 calc(20% - 2rem); }
-.portfolio-card.revealed:nth-child(5n+3) { transform: translateY(40px); }
+/* Anti-grid rules removed to support Premium Masonry Grid */
+/* .portfolio-card:nth-child rules removed */
 
 /* FEATURED: Las mejores obras arriba y más grandes */
-.portfolio-card.featured {
-    flex: 0 0 calc(50% - 2rem) !important;
-    order: -1;
-}
+/* Featured card sizing removed to maintain uniform grid */
+/* .portfolio-card.featured { flex: ... } removed */
 
 .portfolio-card.featured .card-image {
     aspect-ratio: 3/4;

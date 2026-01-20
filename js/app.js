@@ -57,6 +57,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         portfolio.renderGrid();
     });
     
+    router.register('/portfolio/:id', (params) => {
+        hideMicro();
+        portfolio.showObra(params.id);
+    });
+    
     router.register('/process', () => {
         hideMicro();
         portfolio.renderProcess();

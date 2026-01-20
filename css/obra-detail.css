@@ -1,0 +1,227 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ * OBRA DETAIL - Lightbox Premium para Vista Individual
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* Overlay del lightbox */
+.obra-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.obra-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Contenedor principal */
+.obra-lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.obra-lightbox.active .obra-lightbox-content {
+    transform: scale(1) translateY(0);
+}
+
+/* Imagen principal */
+.obra-lightbox-image {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* Info de la obra */
+.obra-lightbox-info {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.obra-lightbox-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 400;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.02em;
+}
+
+.obra-lightbox-album {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Botón cerrar */
+.obra-lightbox-close {
+    position: absolute;
+    top: -60px;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.obra-lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.obra-lightbox-close svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    stroke-width: 2;
+}
+
+/* Navegación */
+.obra-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.obra-lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.obra-lightbox-nav svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    stroke-width: 2;
+    fill: none;
+}
+
+.obra-lightbox-prev {
+    left: -100px;
+}
+
+.obra-lightbox-next {
+    right: -100px;
+}
+
+/* Galería de miniaturas del álbum */
+.obra-lightbox-thumbnails {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.obra-lightbox-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+}
+
+.obra-lightbox-thumb:hover {
+    opacity: 0.8;
+}
+
+.obra-lightbox-thumb.active {
+    opacity: 1;
+    border-color: white;
+}
+
+/* Contador */
+.obra-lightbox-counter {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .obra-lightbox-nav {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .obra-lightbox-prev {
+        left: 10px;
+    }
+    
+    .obra-lightbox-next {
+        right: 10px;
+    }
+    
+    .obra-lightbox-close {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .obra-lightbox-counter {
+        top: 20px;
+        left: 20px;
+    }
+    
+    .obra-lightbox-thumbnails {
+        display: none;
+    }
+    
+    .obra-lightbox-image {
+        max-height: 60vh;
+    }
+}
+
+/* Animación de carga */
+.obra-lightbox-image.loading {
+    opacity: 0.3;
+    filter: blur(10px);
+}
+
+.obra-lightbox-image.loaded {
+    opacity: 1;
+    filter: blur(0);
+    transition: opacity 0.4s ease, filter 0.4s ease;
+}

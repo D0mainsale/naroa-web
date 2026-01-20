@@ -97,6 +97,7 @@
     <link rel="stylesheet" href="css/ritual.css">
     <link rel="stylesheet" href="css/bitacora-premium.css">
     <link rel="stylesheet" href="css/portfolio-premium.css">
+    <link rel="stylesheet" href="css/obra-detail.css">
 </head>
 <body>
     <!-- SEO invisible para crawlers y accesibilidad -->
@@ -159,24 +160,7 @@
         <!-- Controles Dinámicos Premium -->
         <div class="portfolio-controls">
             <div class="controls-left">
-                <div class="search-box">
-                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.35-4.35"/>
-                    </svg>
-                    <input 
-                        type="text" 
-                        id="obras-search" 
-                        placeholder="Buscar obras..." 
-                        class="search-input"
-                    >
-                    <button class="search-clear" id="search-clear" style="display: none;" aria-label="Limpiar búsqueda">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <line x1="18" y1="6" x2="6" y2="18"/>
-                            <line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
-                    </button>
-                </div>
+
                 <select id="material-filter" class="filter-select">
                     <option value="all">Todos los materiales</option>
                     <option value="grafito">Grafito</option>
@@ -483,6 +467,28 @@
         <!-- Tablero del juego de la oca -->
         <section id="archive-gallery" class="ritual-board" aria-label="Tablero del ritual - Juego de la Oca"></section>
     </main>
+
+    <!-- Lightbox de Obra Individual -->
+    <div id="obra-lightbox" class="obra-lightbox" aria-hidden="true">
+        <div class="obra-lightbox-content">
+            <span class="obra-lightbox-counter"></span>
+            <button class="obra-lightbox-close" aria-label="Cerrar">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button class="obra-lightbox-nav obra-lightbox-prev" aria-label="Anterior">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <img class="obra-lightbox-image" src="" alt="">
+            <button class="obra-lightbox-nav obra-lightbox-next" aria-label="Siguiente">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <div class="obra-lightbox-info">
+                <h2 class="obra-lightbox-title"></h2>
+                <p class="obra-lightbox-album"></p>
+            </div>
+            <div class="obra-lightbox-thumbnails"></div>
+        </div>
+    </div>
 
     <!-- Cursor personalizado -->
     <div id="cursor" class="cursor" aria-hidden="true"></div>

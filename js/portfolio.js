@@ -35,7 +35,7 @@ class Portfolio {
                         const realName = albumNamesMap[albumId];
                         
                         // Si NO hay nombre real, usar albumId (no inventar)
-                        const albumName = realName || `Álbum ${albumId}`;
+                        const albumName = realName || '';
                         
                         album.images.forEach((img, ii) => {
                             allImages.push({
@@ -57,6 +57,7 @@ class Portfolio {
             this.shuffleArray(allImages);
             
             this.obras = allImages.slice(0, 40);
+            this.filteredObras = null; // Reset filters
 
             // Cargar blog
             const blogRes = await fetch('data/blog.json');
@@ -90,7 +91,9 @@ class Portfolio {
         const baseCoords = { lat: 43.2630, lng: -2.9350 };
         const materials = ['Grafito sobre papel', 'Carbón y mica', 'Acrílico sobre lienzo', 'Técnica mixta', 'Mica sobre verjurado'];
         
-        this.obras.forEach((obra, idx) => {
+        const obrasToRender = this.filteredObras || this.obras;
+        
+        obrasToRender.forEach((obra, idx) => {
             const card = document.createElement('a');
             card.href = `#/portfolio/${obra.id}`;
             card.className = 'portfolio-card';
@@ -98,10 +101,7 @@ class Portfolio {
             card.dataset.reveal = '';
             card.dataset['3dCard'] = ''; // Para el efecto 3D
             
-            // Las primeras 4 obras son FEATURED (mejores arriba)
-            if (idx < 4) {
-                card.classList.add('featured');
-            }
+            // Todas las tarjetas con tamaño uniforme
             
             // Variación de coordenadas para cada obra
             const lat = (baseCoords.lat + (Math.random() - 0.5) * 0.01).toFixed(4);
@@ -225,5 +225,114 @@ class Portfolio {
                 </article>
             `;
         }).join('');
+    }
+    
+    // === LIGHTBOX DE OBRA INDIVIDUAL ===
+    showObra(obraId) {
+        const obra = this.obras.find(o => o.id === obraId);
+        if (!obra) {
+            console.warn('Obra no encontrada:', obraId);
+            return;
+        }
+        
+        const lightbox = document.getElementById('obra-lightbox');
+        if (!lightbox) return;
+        
+        const img = lightbox.querySelector('.obra-lightbox-image');
+        const title = lightbox.querySelector('.obra-lightbox-title');
+        const album = lightbox.querySelector('.obra-lightbox-album');
+        const counter = lightbox.querySelector('.obra-lightbox-counter');
+        const thumbsContainer = lightbox.querySelector('.obra-lightbox-thumbnails');
+        
+        // Índice actual
+        const currentIndex = this.obras.findIndex(o => o.id === obraId);
+        this.currentObraIndex = currentIndex;
+        
+        // Cargar imagen
+        img.classList.add('loading');
+        img.src = obra.imagen;
+        img.alt = obra.titulo;
+        img.onload = () => img.classList.replace('loading', 'loaded');
+        
+        // Info
+        title.textContent = obra.titulo;
+        album.textContent = obra.albumName || '';
+        counter.textContent = `${currentIndex + 1} / ${this.obras.length}`;
+        
+        // Miniaturas del mismo álbum
+        const albumObras = this.obras.filter(o => o.albumId === obra.albumId);
+        thumbsContainer.innerHTML = albumObras.map(o => `
+            <img class="obra-lightbox-thumb ${o.id === obraId ? 'active' : ''}" 
+                 src="${o.imagen}" 
+                 alt="${o.titulo}"
+                 data-id="${o.id}">
+        `).join('');
+        
+        // Click en miniaturas
+        thumbsContainer.querySelectorAll('.obra-lightbox-thumb').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                this.showObra(thumb.dataset.id);
+            });
+        });
+        
+        // Mostrar lightbox
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        
+        // Event listeners
+        this.setupLightboxEvents(lightbox);
+    }
+    
+    setupLightboxEvents(lightbox) {
+        const closeBtn = lightbox.querySelector('.obra-lightbox-close');
+        const prevBtn = lightbox.querySelector('.obra-lightbox-prev');
+        const nextBtn = lightbox.querySelector('.obra-lightbox-next');
+        
+        // Limpiar listeners anteriores
+        const newCloseBtn = closeBtn.cloneNode(true);
+        closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+        newCloseBtn.addEventListener('click', () => this.closeLightbox());
+        
+        const newPrevBtn = prevBtn.cloneNode(true);
+        prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+        newPrevBtn.addEventListener('click', () => this.navigateObra(-1));
+        
+        const newNextBtn = nextBtn.cloneNode(true);
+        nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+        newNextBtn.addEventListener('click', () => this.navigateObra(1));
+        
+        // Click fuera para cerrar
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) this.closeLightbox();
+        });
+        
+        // Teclas
+        this.handleKeydown = (e) => {
+            if (e.key === 'Escape') this.closeLightbox();
+            if (e.key === 'ArrowLeft') this.navigateObra(-1);
+            if (e.key === 'ArrowRight') this.navigateObra(1);
+        };
+        document.addEventListener('keydown', this.handleKeydown);
+    }
+    
+    navigateObra(direction) {
+        const newIndex = this.currentObraIndex + direction;
+        if (newIndex >= 0 && newIndex < this.obras.length) {
+            this.showObra(this.obras[newIndex].id);
+        }
+    }
+    
+    closeLightbox() {
+        const lightbox = document.getElementById('obra-lightbox');
+        if (!lightbox) return;
+        
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', this.handleKeydown);
+        
+        // Volver al portfolio
+        window.location.hash = '/portfolio';
     }
 }

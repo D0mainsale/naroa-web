@@ -31,15 +31,22 @@ class PortfolioDynamicControls {
         this.countDisplay = document.getElementById('obras-count');
         this.clearButton = document.getElementById('search-clear');
         
-        if (!this.searchInput) return; // No estamos en la página de portfolio
+        // Si no hay ningún control, no estamos en la página de portfolio
+        if (!this.materialFilter && !this.sortSelect) return;
         
-        // Event listeners
-        this.searchInput.addEventListener('input', (e) => {
-            this.handleSearchInput(e);
-            this.handleSearch(e);
-        });
-        this.materialFilter.addEventListener('change', (e) => this.handleFilter(e));
-        this.sortSelect.addEventListener('change', (e) => this.handleSort(e));
+        // Event listeners (solo si existen los elementos)
+        if (this.searchInput) {
+            this.searchInput.addEventListener('input', (e) => {
+                this.handleSearchInput(e);
+                this.handleSearch(e);
+            });
+        }
+        if (this.materialFilter) {
+            this.materialFilter.addEventListener('change', (e) => this.handleFilter(e));
+        }
+        if (this.sortSelect) {
+            this.sortSelect.addEventListener('change', (e) => this.handleSort(e));
+        }
         
         // Clear button
         if (this.clearButton) {
@@ -55,7 +62,9 @@ class PortfolioDynamicControls {
     }
     
     clearSearch() {
-        this.searchInput.value = '';
+        if (this.searchInput) {
+            this.searchInput.value = '';
+        }
         if (this.clearButton) this.clearButton.style.display = 'none';
         this.filterAndRender('');
     }
@@ -78,12 +87,12 @@ class PortfolioDynamicControls {
     filterAndRender(searchTerm = '', material = 'all') {
         if (!this.portfolio || !this.portfolio.obras) return;
         
-        const currentSearch = searchTerm || this.searchInput.value.trim().toLowerCase();
-        const currentMaterial = material || this.materialFilter.value;
+        const currentSearch = searchTerm || (this.searchInput ? this.searchInput.value.trim().toLowerCase() : '');
+        const currentMaterial = material !== 'all' ? material : (this.materialFilter ? this.materialFilter.value : 'all');
         
         let filtered = [...this.portfolio.obras];
         
-        // Filtrar por búsqueda
+        // Filtrar por búsqueda (solo si hay término de búsqueda)
         if (currentSearch) {
             filtered = filtered.filter(obra => 
                 obra.titulo.toLowerCase().includes(currentSearch)
