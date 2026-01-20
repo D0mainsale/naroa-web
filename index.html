@@ -162,7 +162,35 @@
                 <a href="#/about" class="nav-link">About</a>
             </nav>
         </header>
-        <section id="portfolio-grid" class="portfolio-grid" aria-label="Galería de obras"></section>
+        
+        <!-- Contenido semántico para SEO/GEO (reemplazado por JS dinámicamente) -->
+        <section id="portfolio-grid" class="portfolio-grid" aria-label="Galería de obras">
+            <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
+                <meta itemprop="creator" content="Naroa Gutiérrez Gil">
+                <meta itemprop="artMedium" content="Grafito sobre papel">
+                <h3 itemprop="name">DiviNos VaiVenes 01</h3>
+                <p itemprop="description">Retrato hiperrealista en grafito. Las dicotomías blanco/negro señalan nuestra naturaleza más allá de la identificación corpórea.</p>
+            </article>
+            <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
+                <meta itemprop="creator" content="Naroa Gutiérrez Gil">
+                <meta itemprop="artMedium" content="Carbón y mica">
+                <h3 itemprop="name">Grafito y Mica 01</h3>
+                <p itemprop="description">Técnica mixta sobre verjurado. La mica hilando el abrazo entre la caverna y el cielo.</p>
+            </article>
+            <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
+                <meta itemprop="creator" content="Naroa Gutiérrez Gil">
+                <meta itemprop="artMedium" content="Acrílico sobre lienzo">
+                <h3 itemprop="name">Retratos Hiperrealistas 01</h3>
+                <p itemprop="description">Retrato de iconos del cine y la televisión. Una intensa comunicación silenciosa, comunión visual inmersiva.</p>
+            </article>
+            <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
+                <meta itemprop="creator" content="Naroa Gutiérrez Gil">
+                <meta itemprop="artMedium" content="Técnica mixta">
+                <h3 itemprop="name">Serie del Error 01</h3>
+                <p itemprop="description">El error como método. Donde el trazo falla aparece la esencia que anima nuestra carne y huesos.</p>
+            </article>
+        </section>
+        
         <footer class="portfolio-footer">
             <a href="#/" class="back-home">← Volver al inicio</a>
         </footer>
@@ -233,7 +261,48 @@
                 <a href="#/about" class="nav-link">About</a>
             </nav>
         </header>
-        <section id="bitacora-list" class="bitacora-list" aria-label="Entradas del blog"></section>
+        
+        <!-- Contenido semántico para SEO/GEO (reemplazado por JS dinámicamente) -->
+        <section id="bitacora-list" class="bitacora-list" aria-label="Entradas del blog">
+            <article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
+                <meta itemprop="author" content="Naroa Gutiérrez Gil">
+                <time itemprop="datePublished" datetime="2026-01-15" class="post-date">15 de enero de 2026</time>
+                <h2 itemprop="headline" class="post-title">Muestra «DiviNos VaiVenes» en Politena, espacio de arte</h2>
+                <p itemprop="description" class="post-excerpt">"El 2026 quiero que sea un año de abrazos: abrazar a seres queridos, acoger a nuevos amigos y conciliar a mis luces y tinieblas."</p>
+                <div itemprop="articleBody" class="post-content">A veces me pregunto cómo afectaría a nuestro día a día si, en lugar de referirnos a las polaridades como "contrarios", lo hiciéramos como "complementarios". La realidad que habitamos, más que contradecirse, se complementa. «DiviNos VaiVenes» es un laberinto de espejos donde nuestra alma entra en juego.</div>
+                <div class="post-tags">
+                    <span class="post-tag">#Exposición</span>
+                    <span class="post-tag">#DiviNos</span>
+                    <span class="post-tag">#Politena</span>
+                </div>
+            </article>
+            
+            <article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
+                <meta itemprop="author" content="Naroa Gutiérrez Gil">
+                <time itemprop="datePublished" datetime="2024-01-12" class="post-date">12 de enero de 2024</time>
+                <h2 itemprop="headline" class="post-title">El ReCreo: Espacio de Creación para recreArte</h2>
+                <p itemprop="description" class="post-excerpt">"Un islote para abrazar tu verdadero ser ante la asfixia de las reglas."</p>
+                <div itemprop="articleBody" class="post-content">Vivimos en una sociedad plagada de reglas que nos alejan del viaje interno que supone conocernos. El ReCreo es un espacio de creación para grandes y txikis, donde poder recreArte y abrazar tu verdadero ser. Pintura, dibujo, técnicas mixtas... trae tus bártulos y a jugar.</div>
+                <div class="post-tags">
+                    <span class="post-tag">#ReCreo</span>
+                    <span class="post-tag">#Taller</span>
+                    <span class="post-tag">#Creación</span>
+                </div>
+            </article>
+            
+            <article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
+                <meta itemprop="author" content="Naroa Gutiérrez Gil">
+                <time itemprop="datePublished" datetime="2022-10-04" class="post-date">4 de octubre de 2022</time>
+                <h2 itemprop="headline" class="post-title">Walking Gallery Bilbao: por Amor al Arte</h2>
+                <p itemprop="description" class="post-excerpt">"El arte sale a las calles de Bilbao."</p>
+                <div itemprop="articleBody" class="post-content">Walking Gallery Bilbao es un formato donde el arte sale de las galerías y ocupa las calles. Los comercios se convierten en espacios expositivos temporales, el arte se mezcla con la vida cotidiana.</div>
+                <div class="post-tags">
+                    <span class="post-tag">#WalkingGallery</span>
+                    <span class="post-tag">#Bilbao</span>
+                </div>
+            </article>
+        </section>
+        
         <footer class="portfolio-footer">
             <a href="#/" class="back-home">← Volver al inicio</a>
         </footer>
