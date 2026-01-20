@@ -1,0 +1,26 @@
+[
+    {
+        "id": "divinos-vaivenes",
+        "date": "2026-01-15",
+        "title": "DiviNos VaiVenes",
+        "excerpt": "Nuestras oscuridades contienen chispas de luz y nuestra sangre pepitas de oro.",
+        "content": "Las dicotomías blanco/negro y rojo/dorado, señalan nuestra naturaleza más allá de la identificación corpórea. Nuestras oscuridades contienen chispas de luz y nuestra sangre pepitas de oro. No olvidemos que somos eso: la esencia divina que anima nuestra carne y huesos.\n\nTécnicas mixtas como la pintura acrílica, los lápices de colores y el mineral de mica conforman estas obras, hilando el abrazo entre la caverna y el cielo. Entre luz y falla, entretejiendo alma y glitch.",
+        "tags": ["Exposición", "Mica", "Glitch"]
+    },
+    {
+        "id": "el-recreo",
+        "date": "2024-01-12",
+        "title": "El ReCreo: Espacio de recreArte",
+        "excerpt": "Un islote para abrazar tu verdadero ser ante la asfixia de las reglas.",
+        "content": "Vivimos en una sociedad plagada de reglas que nos alejan del exquisito viaje interno que supone conocernos y reconocernos en lo que hacemos. El ReCreo es un islote: un espacio de creación donde poder recreArte y abrazar tu verdadero ser.\n\nLa idea primordial es trazar tomas de conciencia que te conecten con esta esencia que en ti habita. Irte viendo, conociendo y reconociendo mediante el disfrute de la variable creativa que tú escojas. Tú ya sabes todo, escarba en ti y encuentra tu tesoro.",
+        "tags": ["Filosofía", "Creación", "Juego"]
+    },
+    {
+        "id": "error-como-metodo",
+        "date": "2023-10-05",
+        "title": "El Error como Método",
+        "excerpt": "Lo que se rompe revela lo que importa. El accidente es revelación.",
+        "content": "Trabajo con el error como método y la espera como herramienta. El accidente no es algo a ocultar, sino una puerta. Cuando la materia se rompe, aparece la verdad de la sustancia. Mi obra explora el cuerpo como interfaz ritual entre lo íntimo y lo tecnológico, entre el trazo perfecto y el glitch necesario.",
+        "tags": ["Proceso", "Error", "Materia"]
+    }
+]

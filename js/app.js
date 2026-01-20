@@ -1,112 +1,103 @@
-// === APP.JS ===
+document.addEventListener('DOMContentLoaded', async () => {
+    
+    // === RITUAL SYSTEMS INIT ===
+    const dayNight = new DayNightCycle();
+    const glitcher = new GlitchText();
+    const decay = new WebDecay();
+    const handshake = new RitualHandshake();
+    const trail = new PigmentTrail();
+    const heartbeat = new HeartbeatCursor();
 
-document.addEventListener('DOMContentLoaded', () => {
-    const introScreen = document.getElementById('intro-screen');
-    const playBtn = document.getElementById('play-btn');
-    const noPlayBtn = document.getElementById('no-play-btn');
-    const archiveView = document.getElementById('archive-view');
-    const staticView = document.getElementById('static-view');
+    
+    // Cursor con interpolación (Lerp)
     const cursor = document.getElementById('cursor');
-
-    // Cursor
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    
+    document.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function animateCursor() {
+        const lerp = 0.1;
+        cursorX += (mouseX - cursorX) * lerp;
+        cursorY += (mouseY - cursorY) * lerp;
+        
+        if (cursor) {
+            cursor.style.transform = `translate(-50%, -50%) translate3d(${cursorX}px, ${cursorY}px, 0)`;
+        }
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    
+    // Portfolio
+    const portfolio = new Portfolio(router);
+    await portfolio.init();
+    
+    // Microtexto
+    const microText = document.getElementById('micro-text');
+    let microTimer = null;
+    
+    function showMicro() { if (microText) microText.classList.add('visible'); }
+    function hideMicro() { 
+        if (microText) microText.classList.remove('visible');
+        if (microTimer) clearTimeout(microTimer);
+    }
+    
+    // RUTAS
+    router.register('/', () => {
+        document.getElementById('home-view').classList.remove('hidden');
+        hideMicro();
+        microTimer = setTimeout(showMicro, 4000);
+    });
+    
+    router.register('/portfolio', () => {
+        hideMicro();
+        portfolio.renderGrid();
+    });
+    
+    router.register('/process', () => {
+        hideMicro();
+        portfolio.renderProcess();
     });
 
-    // Modo
-    playBtn.addEventListener('click', () => startMode('play'));
-    noPlayBtn.addEventListener('click', () => startMode('static'));
-
-    function startMode(mode) {
-        introScreen.style.opacity = '0';
-        setTimeout(() => {
-            introScreen.style.display = 'none';
-            if (mode === 'play') {
-                archiveView.classList.remove('hidden');
-                new RitualGame();
-                
-                // ✨ DISRUPTIVE FEATURES
-                new GlitchText();
-                new WebDecay();
-                new RitualHandshake();
-                new HeartbeatCursor();
-            } else {
-                loadStaticMode();
-            }
-        }, 300);
-    }
-
-    async function loadStaticMode() {
-        staticView.classList.remove('hidden');
-
-        try {
-            const response = await fetch('data/gallery.json');
-            const data = await response.json();
-            const allImages = [];
-            if (data.albums) {
-                data.albums.forEach(album => {
-                    if (album.images) allImages.push(...album.images);
-                });
-            }
-
-            // Mostrar 6 obras estáticas
-            const gallery = document.getElementById('static-gallery');
-            const shuffled = allImages.sort(() => Math.random() - 0.5).slice(0, 6);
-            
-            shuffled.forEach((src, i) => {
-                const img = document.createElement('div');
-                img.className = 'static-work';
-                img.style.backgroundImage = `url('${src}')`;
-                img.style.animationDelay = `${i * 0.2}s`;
-                gallery.appendChild(img);
+    router.register('/bitacora', () => {
+        hideMicro();
+        portfolio.renderBitacora();
+    });
+    
+    router.register('/retrato', () => {
+        hideMicro();
+        document.getElementById('retrato-view').classList.remove('hidden');
+    });
+    
+    router.register('/about', () => {
+        hideMicro();
+        portfolio.renderAbout();
+    });
+    
+    router.register('/ritual', () => {
+        hideMicro();
+        document.getElementById('ritual-view').classList.remove('hidden');
+        // El tablero se inicializa en js/ritual-board.js si existiera, 
+        // pero aquí activamos el modo Pop Colorista
+        document.documentElement.style.setProperty('--accent', 'var(--pop-magenta)');
+    });
+    
+    // Pre-cache de imágenes críticas al estar en idle
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            const critical = ['/images/og-image.jpg', '/images/naroa-artist.jpg'];
+            critical.forEach(src => {
+                const img = new Image();
+                img.src = src;
             });
-
-            // Imagen principal que cambia lentamente
-            const hero = document.getElementById('static-hero');
-            let heroIdx = 0;
-            const heroImages = allImages.sort(() => Math.random() - 0.5).slice(0, 10);
-            
-            const changeHero = () => {
-                hero.style.opacity = '0';
-                setTimeout(() => {
-                    hero.style.backgroundImage = `url('${heroImages[heroIdx]}')`;
-                    hero.style.opacity = '1';
-                    heroIdx = (heroIdx + 1) % heroImages.length;
-                }, 1000);
-            };
-            
-            changeHero();
-            setInterval(changeHero, 8000);
-
-            // Frases propias de Naroa
-            const quotes = [
-                "Nada es excluyente. La realidad se complementa.",
-                "El problema hecho trampolín.",
-                "Puro kintsugi.",
-                "Flores que rompen el asfalto.",
-                "Nuestras oscuridades contienen chispas de luz.",
-                "La esencia divina que anima nuestra carne y huesos.",
-                "Complementarios, no contrarios."
-            ];
-            
-            const whisper = document.getElementById('static-whisper');
-            let quoteIdx = 0;
-            
-            const changeQuote = () => {
-                whisper.style.opacity = '0';
-                setTimeout(() => {
-                    whisper.textContent = quotes[quoteIdx];
-                    whisper.style.opacity = '0.4';
-                    quoteIdx = (quoteIdx + 1) % quotes.length;
-                }, 500);
-            };
-            
-            changeQuote();
-            setInterval(changeQuote, 6000);
-
-        } catch (e) {
-            console.error(e);
-        }
+        });
     }
+
+    
+    // Init
+    router.handle();
+    console.log('🎭 Naroa.online — 3 capas');
 });

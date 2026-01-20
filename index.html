@@ -3,46 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naroa Gutiérrez Gil</title>
+    
+    <!-- SEO PRIMARIO -->
+    <title>Naroa Gutiérrez Gil — Artista Plástica · Retratos · Bilbao</title>
+    <meta name="description" content="Artista plástica de Bilbao especializada en retratos hiperrealistas, pintura y dibujo. Trabaja con grafito, carbón, mica y acrílico. El error como método, la espera como herramienta. Encargos personalizados desde 150€.">
+    <meta name="keywords" content="Naroa Gutiérrez Gil, artista plástica Bilbao, retratos por encargo, pintura hiperrealista, dibujo grafito, carbón, mica, arte contemporáneo País Vasco, encargos retratos personalizados, artista vasca">
+    <meta name="author" content="Naroa Gutiérrez Gil">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://naroa.online">
+    
+    <!-- OPEN GRAPH (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:title" content="Naroa Gutiérrez Gil — Artista Plástica · Retratos Hiperrealistas">
+    <meta property="og:description" content="El error como método, la espera como herramienta. Retratos personalizados en grafito, carbón y mica. Artista plástica de Bilbao.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://naroa.online">
+    <meta property="og:image" content="https://naroa.online/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Obra de Naroa Gutiérrez Gil — Retrato en grafito y mica">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Naroa Gutiérrez Gil">
+    
+    <!-- TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Naroa Gutiérrez Gil — Artista Plástica">
+    <meta name="twitter:description" content="Retratos hiperrealistas. Grafito, carbón, mica. El error como método. Bilbao.">
+    <meta name="twitter:image" content="https://naroa.online/images/og-image.jpg">
+    <meta name="twitter:image:alt" content="Retrato en grafito por Naroa Gutiérrez Gil">
+    
+    <!-- GEO/LOCAL SEO -->
+    <meta name="geo.region" content="ES-BI">
+    <meta name="geo.placename" content="Bilbao">
+    <meta name="geo.position" content="43.2630;-2.9350">
+    <meta name="ICBM" content="43.2630, -2.9350">
+    
+    <!-- JSON-LD Schema Completo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://naroa.online/#artist",
+        "name": "Naroa Gutiérrez Gil",
+        "alternateName": "Naroa Artivista",
+        "description": "Artista plástica bilbaína especializada en retrato hiperrealista y técnica mixta. Su obra explora el error como método y la espera como herramienta creativa.",
+        "url": "https://naroa.online",
+        "image": "https://naroa.online/images/naroa-artist.jpg",
+        "jobTitle": "Artista plástica",
+        "knowsAbout": ["Hiperrealismo", "Retrato", "Grafito", "Mineral de mica", "Arte contemporáneo vasco"],
+        "brand": {
+            "@type": "Brand",
+            "name": "Naroa Gutiérrez Gil",
+            "slogan": "El error como método. La espera como herramienta."
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios Artísticos",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Retratos por encargo",
+                        "description": "Retratos personalizados en grafito, carbón y técnicas mixtas."
+                    }
+                }
+            ]
+        },
+        "sameAs": [
+            "https://www.facebook.com/naroa.artista.plastica",
+            "https://www.instagram.com/naroa.artista",
+            "https://naroagutierrez.wordpress.com/"
+        ]
+    }
+    </script>
+    
+    <!-- WebSite Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Naroa Gutiérrez Gil",
+        "url": "https://naroa.online",
+        "description": "Portfolio y experiencia interactiva de la artista plástica Naroa Gutiérrez Gil",
+        "author": {"@id": "https://naroa.online/#artist"}
+    }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- SEO invisible para crawlers y accesibilidad -->
+    <div class="sr-only">
+        <h1>Naroa Gutiérrez Gil — Artista Plástica</h1>
+        <p>Artista plástica de Bilbao especializada en pintura, retrato y dibujo. Trabaja con grafito, carbón, acrílico y técnica mixta desde el error como método y la espera como herramienta.</p>
+        <p>Ofrece retratos por encargo: conversación, material, tiempo y entrega de obra original firmada.</p>
+        <nav aria-label="Navegación principal">
+            <a href="#/portfolio">Ver obras</a>
+            <a href="#/process">Proceso artístico</a>
+            <a href="#/retrato">Encargar retrato</a>
+            <a href="#/about">Sobre la artista</a>
+            <a href="#/ritual">Experiencia ritual</a>
+        </nav>
+    </div>
 
-    <!-- PANTALLA INICIAL -->
-    <section id="intro-screen" class="intro-screen">
-        <h1 class="intro-question">¿Juegas?</h1>
-        <div class="intro-options">
-            <button id="play-btn" class="intro-btn">Jugar</button>
-            <button id="no-play-btn" class="intro-btn">No jugar</button>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CAPA 1: HOME — Introducción + Contexto + Invitación
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section id="home-view" data-view="home" class="home-view">
+        <div class="home-content">
+            <!-- Contexto: quién soy -->
+            <header class="home-intro">
+                <p class="home-name">Naroa Gutiérrez Gil</p>
+                <p class="home-role">Artista plástica · Bilbao</p>
+            </header>
+            
+            <!-- Invitación: elige tu experiencia -->
+            <div class="home-choice">
+                <h2 class="intro-question">¿Juegas?</h2>
+                <p class="intro-context">Esta bitácora digital ofrece dos niveles de lectura: una aproximación directa a la obra o un tránsito ritual a través del tiempo y el error.</p>
+                <nav class="intro-options">
+                    <a href="#/ritual" class="intro-btn intro-btn--ritual" data-action="play">
+                        <span class="btn-label">Ritual</span>
+                        <span class="btn-hint">Descubre la obra mediante el azar</span>
+                    </a>
+                    <a href="#/portfolio" class="intro-btn intro-btn--portfolio" data-action="browse">
+                        <span class="btn-label">Obras</span>
+                        <span class="btn-hint">Navega el portfolio curado</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- Recompensa por esperar -->
+            <p id="micro-text" class="micro-text">Algunas obras solo aparecen para quienes esperan.</p>
+            
+            <!-- Statement artístico -->
+            <footer class="home-statement">
+                <blockquote>
+                    <p>«El error como método. La espera como herramienta.»</p>
+                </blockquote>
+            </footer>
         </div>
     </section>
 
-    <!-- TABLERO -->
-    <main id="archive-view" class="archive-view hidden">
-        <section id="archive-gallery" class="board-gallery">
-            <!-- Imágenes cargadas por JS -->
-        </section>
-    </main>
-
-    <!-- VISTA CONTEMPLATIVA (No jugar) -->
-    <main id="static-view" class="static-view hidden">
-        <div id="static-hero" class="static-hero"></div>
-        <div class="static-content">
-            <h1>Naroa Gutiérrez Gil</h1>
-            <p class="static-statement">Artista plástica · Bilbao</p>
-            <p id="static-whisper" class="static-whisper"></p>
-        </div>
-        <div id="static-gallery" class="static-gallery"></div>
-        <footer class="static-footer">
-            <a href="mailto:naroa@naroa.eu">naroa@naroa.eu</a>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CAPA 2: PORTFOLIO — Obras
+         ═══════════════════════════════════════════════════════════════════ -->
+    <main id="portfolio-view" data-view="portfolio" class="portfolio-view hidden">
+        <header class="portfolio-header">
+            <h1 class="portfolio-title">Naroa Gutiérrez Gil</h1>
+            <nav class="portfolio-nav" aria-label="Secciones del portfolio">
+                <a href="#/portfolio" class="nav-link active">Obras</a>
+                <a href="#/process" class="nav-link">Proceso</a>
+                <a href="#/bitacora" class="nav-link">Bitácora</a>
+                <a href="#/retrato" class="nav-link">¿Te retrato?</a>
+                <a href="#/about" class="nav-link">About</a>
+            </nav>
+        </header>
+        <section id="portfolio-grid" class="portfolio-grid" aria-label="Galería de obras"></section>
+        <footer class="portfolio-footer">
+            <a href="#/" class="back-home">← Volver al inicio</a>
         </footer>
     </main>
 
-    <!-- Cursor -->
-    <div id="cursor" class="cursor"></div>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CAPA 2: PROCESO — Cómo trabajo
+         ═══════════════════════════════════════════════════════════════════ -->
+    <main id="process-view" data-view="process" class="process-view hidden">
+        <header class="portfolio-header">
+            <h1 class="portfolio-title">Proceso</h1>
+            <nav class="portfolio-nav">
+                <a href="#/portfolio" class="nav-link">Obras</a>
+                <a href="#/process" class="nav-link active">Proceso</a>
+                <a href="#/bitacora" class="nav-link">Bitácora</a>
+                <a href="#/retrato" class="nav-link">¿Te retrato?</a>
+                <a href="#/about" class="nav-link">About</a>
+            </nav>
+        </header>
+        
+        <article class="process-intro">
+            <p class="process-statement">Mi proceso no es lineal. Es un «vaivén» entre luz y falla, entretejiendo <strong>alma</strong> y <strong>glitch</strong>.</p>
+        </article>
+        
+        <section class="process-blocks">
+            <article class="process-block">
+                <h2>Materia y Mica</h2>
+                <p>Grafito. Carbón. Mineral de mica. La materia no ilustra una idea: la anima. Nuestras oscuridades contienen chispas de luz.</p>
+                <p class="process-detail">Uso mica para hilvanar el abrazo entre la caverna y el cielo. El brillo mineral sobre el papel mate es una toma de conciencia.</p>
+            </article>
+            
+            <article class="process-block">
+                <h2>El Glitch</h2>
+                <p>El error como método. El accidente como revelación. No corrijo el pálpito: lo atiendo.</p>
+                <p class="process-detail">Donde el trazo falla, aparece la esencia divina que anima nuestra carne y huesos. La perfección es asfixia; el error es ReCreo.</p>
+            </article>
+            
+            <article class="process-block">
+                <h2>Repetición</h2>
+                <p>Volver a uno mismo hasta que solo quede el gozo. No dictar normas, sino comentar posibilidades.</p>
+                <p class="process-detail">Cada capa de pintura es un recordatorio de que somos algo más que nuestra identificación corpórea.</p>
+            </article>
+            
+            <article class="process-block">
+                <h2>Pálpito</h2>
+                <p>Seguir las indicaciones que nos susurra nuestro interior. Si el trayecto es de tu agrado, el gozo no caerá en ningún pozo.</p>
+                <p class="process-detail">Escuchar el ritmo interno del material. El dibujo no es una meta, es un islote donde poder recreArte.</p>
+            </article>
+        </section>
+        
+        <footer class="portfolio-footer">
+            <a href="#/retrato" class="process-cta">¿Quieres un retrato? →</a>
+            <a href="#/" class="back-home">← Volver al inicio</a>
+        </footer>
+    </main>
 
-    <script src="js/archive.js"></script>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CAPA 2: BITÁCORA — Reflexiones (Blog)
+         ═══════════════════════════════════════════════════════════════════ -->
+    <main id="bitacora-view" data-view="bitacora" class="bitacora-view hidden">
+        <header class="portfolio-header">
+            <h1 class="portfolio-title">Bitácora</h1>
+            <nav class="portfolio-nav">
+                <a href="#/portfolio" class="nav-link">Obras</a>
+                <a href="#/process" class="nav-link">Proceso</a>
+                <a href="#/bitacora" class="nav-link active">Bitácora</a>
+                <a href="#/retrato" class="nav-link">¿Te retrato?</a>
+                <a href="#/about" class="nav-link">About</a>
+            </nav>
+        </header>
+        <section id="bitacora-list" class="bitacora-list" aria-label="Entradas del blog"></section>
+        <footer class="portfolio-footer">
+            <a href="#/" class="back-home">← Volver al inicio</a>
+        </footer>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CAPA 2: RETRATO — Encargos
+         ═══════════════════════════════════════════════════════════════════ -->
+    <main id="retrato-view" data-view="retrato" class="retrato-view hidden">
+        <header class="portfolio-header">
+            <h1 class="portfolio-title">¿Te retrato?</h1>
+            <nav class="portfolio-nav">
+                <a href="#/portfolio" class="nav-link">Obras</a>
+                <a href="#/process" class="nav-link">Proceso</a>
+                <a href="#/bitacora" class="nav-link">Bitácora</a>
+                <a href="#/retrato" class="nav-link active">¿Te retrato?</a>
+                <a href="#/about" class="nav-link">About</a>
+            </nav>
+        </header>
+        
+        <article class="retrato-content">
+            <p class="retrato-statement">No es una foto. Es una conversación en papel.</p>
+            <p>Cada retrato es un proceso. Hablamos. Escucho. Observo. El resultado no es cómo te ves, sino cómo estás.</p>
+            
+            <section class="retrato-section">
+                <h2>El proceso</h2>
+                <ol class="retrato-steps">
+                    <li><strong>Conversación</strong> — Cuéntame por qué buscas este retrato.</li>
+                    <li><strong>Brújula integrada</strong> — Buscamos la referencia que te haga sonreír ante la vida.</li>
+                    <li><strong>Material</strong> — Grafito, carbón, mica o acrílico. Busco la chispa de luz en la oscuridad.</li>
+                    <li><strong>Tiempo</strong> — El bendito regalo de crearnos. 2 a 4 semanas.</li>
+                    <li><strong>Entrega</strong> — Obra original que es un islote de paz.</li>
+                </ol>
+            </section>
+            
+            <section class="retrato-section">
+                <h2>Formatos y precios</h2>
+                <div class="retrato-options">
+                    <div class="retrato-option">
+                        <h3>Íntimo</h3>
+                        <p class="retrato-size">A4 (21×30 cm)</p>
+                        <p class="retrato-price">desde 150€</p>
+                    </div>
+                    <div class="retrato-option">
+                        <h3>Personal</h3>
+                        <p class="retrato-size">A3 (30×42 cm)</p>
+                        <p class="retrato-price">desde 250€</p>
+                    </div>
+                    <div class="retrato-option">
+                        <h3>Presencia</h3>
+                        <p class="retrato-size">50×70 cm</p>
+                        <p class="retrato-price">desde 400€</p>
+                    </div>
+                </div>
+                <p class="retrato-note">Encuentro en el olimpo de las cosas bellas.</p>
+            </section>
+            
+            <div class="retrato-cta">
+                <p>¿Empezamos?</p>
+                <a href="mailto:naroa@naroa.eu?subject=Quiero un retrato" class="retrato-btn">Escríbeme</a>
+            </div>
+        </article>
+        
+        <footer class="portfolio-footer">
+            <a href="#/" class="back-home">← Volver al inicio</a>
+        </footer>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CAPA 2: ABOUT — Quién soy
+         ═══════════════════════════════════════════════════════════════════ -->
+    <main id="about-view" data-view="about" class="about-view hidden">
+        <header class="portfolio-header">
+            <h1 class="portfolio-title">About</h1>
+            <nav class="portfolio-nav">
+                <a href="#/portfolio" class="nav-link">Obras</a>
+                <a href="#/process" class="nav-link">Proceso</a>
+                <a href="#/bitacora" class="nav-link">Bitácora</a>
+                <a href="#/retrato" class="nav-link">¿Te retrato?</a>
+                <a href="#/about" class="nav-link active">About</a>
+            </nav>
+        </header>
+        
+        <article class="about-content">
+            <h2>Naroa Gutiérrez Gil</h2>
+            <p class="about-location">Artista plástica · Bilbao</p>
+            
+            <div class="about-bio">
+                <p>Pinto. Dibujo. Retrato.</p>
+                <p>Trabajo principalmente con <strong>grafito</strong>, <strong>carbón</strong> y <strong>acrílico</strong>. Mi obra explora el cuerpo y el rostro como territorios de presencia.</p>
+                <p>No busco el parecido superficial. Busco lo que permanece cuando se va la pose.</p>
+            </div>
+            
+            <div class="about-statement">
+                <blockquote>
+                    <p>«Nada es excluyente. La realidad se complementa.»</p>
+                </blockquote>
+                <p>Esta frase guía mi práctica. El error y la intención. La espera y la acción. El retrato fiel y el gesto libre.</p>
+            </div>
+            
+            <div class="about-method">
+                <h3>Método</h3>
+                <p>Trabajo desde el <strong>error como método</strong> y la <strong>espera como herramienta</strong>. No todos los accidentes se corrigen. No todo el tiempo se llena.</p>
+            </div>
+            
+            <div class="about-contact">
+                <h3>Contacto</h3>
+                <p><a href="mailto:naroa@naroa.eu">naroa@naroa.eu</a></p>
+                <p><a href="https://www.facebook.com/naroa.artista.plastica" target="_blank" rel="noopener">Facebook</a></p>
+            </div>
+        </article>
+        
+        <footer class="portfolio-footer">
+            <a href="#/" class="back-home">← Volver al inicio</a>
+        </footer>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CAPA 3: RITUAL — El juego como archivo
+         ═══════════════════════════════════════════════════════════════════ -->
+    <main id="ritual-view" data-view="ritual" class="ritual-view hidden">
+        <div id="ritual-intro-overlay" class="ritual-overlay">
+            <div class="ritual-statement-box">
+                <h2>El Archivo como Ritual</h2>
+                <p>Navegar mi obra mediante el azar es un acto de escucha. Cada casilla es un encuentro; cada error, una revelación. <br><strong>Tira el dado para transitar el silencio.</strong></p>
+                <button onclick="document.getElementById('ritual-intro-overlay').classList.add('hidden')" class="ritual-start-btn">Entrar al Ritual</button>
+            </div>
+        </div>
+        
+        <nav class="ritual-controls">
+            <a href="#/portfolio" class="ritual-exit">Salir del ritual</a>
+            <button id="ritual-mute" class="ritual-mute" aria-label="Silenciar audio">🔊</button>
+        </nav>
+        
+        <div class="ritual-intro" id="ritual-intro">
+            <p class="ritual-welcome">Bienvenida al ritual.</p>
+            <p>Este no es un portfolio convencional. Es un juego que revela obras ocultas.</p>
+            <p class="ritual-instruction">Tira el dado. Avanza. Descubre.</p>
+            <button id="ritual-start" class="ritual-start-btn">Comenzar</button>
+        </div>
+        
+        <section id="ritual-board" class="ritual-board" aria-label="Tablero del ritual"></section>
+        
+        <div class="ritual-hud">
+            <div class="hud-stat">
+                <span class="hud-label">Posición</span>
+                <span id="hud-position" class="hud-value">0</span>
+            </div>
+            <div class="hud-stat">
+                <span class="hud-label">Obras descubiertas</span>
+                <span id="hud-discovered" class="hud-value">0</span>
+            </div>
+        </div>
+        
+        <button id="ritual-dice" class="ritual-dice" aria-label="Tirar dado">
+            <span class="dice-face">⚄</span>
+        </button>
+    </main>
+
+    <!-- Cursor personalizado -->
+    <div id="cursor" class="cursor" aria-hidden="true"></div>
+
+    <script src="js/router.js"></script>
+    <script src="js/portfolio.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
