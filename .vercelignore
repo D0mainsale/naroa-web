@@ -1,0 +1,12 @@
+# Exclude heavy image folders from Vercel deployment
+images/raw_albums/
+
+# Exclude Python scripts (not needed in production)
+scripts/download_facebook_albums.py
+scripts/extract_album_names.py
+scripts/extract_album_names_bulk.py
+
+# Exclude development artifacts
+v1-evolution-archive/
+_archive/
+.DS_Store
