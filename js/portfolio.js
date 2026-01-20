@@ -11,14 +11,28 @@ class Portfolio {
             const res = await fetch('data/gallery.json');
             const data = await res.json();
             const allImages = [];
+            
+            // Nombres descriptivos de series basados en el índice del álbum
+            const seriesNames = [
+                'DiviNos VaiVenes', 'Grafito y Mica', 'Retratos Hiperrealistas',
+                'Técnica Mixta', 'Carbón sobre Papel', 'Serie del Error',
+                'Materia y Memoria', 'Kintsugi Visual', 'Interfaces Rituales',
+                'Cuerpos e Interferencias', 'Glitch Analógico', 'Fracturas Doradas',
+                'Espera como Herramienta', 'Imperfección Perfecta', 'Almas en Tránsito',
+                'Lo Roto Reluce', 'Complementarios', 'Piel y Pigmento',
+                'Rostros del Silencio', 'Retratos Íntimos'
+            ];
+            
             if (data.albums) {
                 data.albums.forEach((album, ai) => {
                     if (album.images) {
+                        const seriesName = seriesNames[ai % seriesNames.length];
                         album.images.forEach((img, ii) => {
                             allImages.push({
                                 id: `obra-${ai}-${ii}`,
-                                titulo: album.name || `Obra ${ii + 1}`,
+                                titulo: `${seriesName} ${String(ii + 1).padStart(2, '0')}`,
                                 imagen: img,
+                                albumIndex: ai,
                                 ritual: Math.random() > 0.7
                             });
                         });

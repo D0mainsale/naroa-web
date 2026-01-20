@@ -79,10 +79,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     router.register('/ritual', () => {
         hideMicro();
-        document.getElementById('ritual-view').classList.remove('hidden');
-        // El tablero se inicializa en js/ritual-board.js si existiera, 
-        // pero aquí activamos el modo Pop Colorista
+        const ritualView = document.getElementById('ritual-view');
+        ritualView.classList.remove('hidden');
+        
+        // Activar modo Pop Colorista
         document.documentElement.style.setProperty('--accent', 'var(--pop-magenta)');
+        
+        // Inicializar Juego de la Oca (si existe la clase)
+        if (typeof JuegoOca !== 'undefined' && !window.ritualGameInstance) {
+            // Limpiar galería anterior si existe
+            const gallery = document.getElementById('archive-gallery');
+            if (gallery) gallery.innerHTML = '';
+            
+            // Crear nueva instancia del juego
+            window.ritualGameInstance = new JuegoOca();
+            console.log('🦆 Juego de la Oca iniciado');
+        }
     });
     
     // Pre-cache de imágenes críticas al estar en idle
