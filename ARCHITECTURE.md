@@ -45,7 +45,7 @@ Router Pattern:
 
 ## 🧩 **Módulos Principales**
 
-### **Core Systems** (`js/`)
+### **Core Systems** (`js/core/`)
 
 #### **router.js** - Sistema de Rutas
 - Hash-based routing
@@ -59,7 +59,8 @@ Router Pattern:
 - Event listeners globales
 - Pre-cache de assets críticos
 
-### **Features** (`js/`)
+### **Features** (`js/features/`)
+
 
 #### **portfolio.js** - Portfolio Curado
 ```javascript
@@ -132,7 +133,7 @@ CatalogoSystem {
 }
 ```
 
-### **Systems** (`js/`)
+### **Systems** (`js/systems/`)
 
 #### **ritual-systems.js** - Sistemas Rituales
 ```javascript
