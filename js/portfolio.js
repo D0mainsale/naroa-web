@@ -166,14 +166,41 @@ class Portfolio {
         const list = document.getElementById('bitacora-list');
         view.classList.remove('hidden');
         list.innerHTML = '';
+        
+        // Header de la bitácora
+        if (!document.querySelector('.bitacora-header')) {
+            const header = document.createElement('header');
+            header.className = 'bitacora-header';
+            header.innerHTML = `
+                <h1 class="bitacora-title">Bitácora</h1>
+                <p class="bitacora-subtitle">Reflexiones sobre el proceso creativo</p>
+            `;
+            view.insertBefore(header, list);
+        }
 
         this.blogPosts.forEach((post, i) => {
+            // Calcular tiempo de lectura
+            const words = post.content.split(' ').length;
+            const readTime = Math.max(1, Math.ceil(words / 200));
+            
+            // Formatear fecha
+            const date = new Date(post.date);
+            const formattedDate = date.toLocaleDateString('es-ES', { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric' 
+            });
+            
             const article = document.createElement('article');
             article.className = 'blog-post';
-            article.style.animationDelay = `${i * 0.1}s`;
+            article.style.animationDelay = `${i * 0.15}s`;
             article.innerHTML = `
-                <time class="post-date">${post.date}</time>
+                <div class="post-meta">
+                    <time class="post-date">${formattedDate}</time>
+                    <span class="post-reading-time">${readTime} min lectura</span>
+                </div>
                 <h2 class="post-title">${post.title}</h2>
+                <p class="post-excerpt">"${post.excerpt}"</p>
                 <div class="post-content">${post.content.replace(/\n/g, '<br>')}</div>
                 <div class="post-tags">
                     ${post.tags.map(tag => `<span class="post-tag">#${tag}</span>`).join('')}
