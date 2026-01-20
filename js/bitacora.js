@@ -116,19 +116,6 @@ class BitacoraSystem {
                         </div>
                     </div>
                     
-                    ${nextPost ? `
-                        <!-- FEATURE 14: Next Post Preview -->
-                        <div class="post-next-preview">
-                            <span class="next-label">Siguiente →</span>
-                            <div class="next-post">
-                                ${nextPost.image ? `<img src="${nextPost.image}" alt="${nextPost.title}">` : ''}
-                                <div class="next-info">
-                                    <h3>${nextPost.title}</h3>
-                                    <p>${nextPost.excerpt.substring(0, 80)}...</p>
-                                </div>
-                            </div>
-                        </div>
-                    ` : ''}
                 </div>
                 
                 <!-- FEATURE 5: Separador Visual -->
