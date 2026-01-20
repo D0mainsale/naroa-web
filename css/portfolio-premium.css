@@ -201,17 +201,7 @@
     border-color: rgba(200, 168, 130, 0.4);
 }
 
-/* Featured Cards - Bigger */
-.portfolio-card.featured {
-    grid-column: span 1;
-}
-
-@media (min-width: 1024px) {
-    .portfolio-card.featured:first-child {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-}
+/* All cards same size - uniform grid */
 
 /* Card Image with Reveal Effect */
 .card-image {
