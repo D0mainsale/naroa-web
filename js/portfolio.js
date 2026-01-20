@@ -12,7 +12,19 @@ class Portfolio {
             const data = await res.json();
             const allImages = [];
             
-            // Nombres descriptivos de series basados en el índice del álbum
+            // Intentar cargar nombres reales de álbumes desde Facebook
+            let albumNamesMap = {};
+            try {
+                const namesRes = await fetch('data/album-names.json');
+                if (namesRes.ok) {
+                    albumNamesMap = await namesRes.json();
+                    console.log('✅ Nombres reales de álbumes cargados desde Facebook');
+                }
+            } catch (e) {
+                console.log('ℹ️ album-names.json no disponible, usando nombres generados');
+            }
+            
+            // Nombres descriptivos de series (fallback)
             const seriesNames = [
                 'DiviNos VaiVenes', 'Grafito y Mica', 'Retratos Hiperrealistas',
                 'Técnica Mixta', 'Carbón sobre Papel', 'Serie del Error',
@@ -26,12 +38,17 @@ class Portfolio {
             if (data.albums) {
                 data.albums.forEach((album, ai) => {
                     if (album.images) {
-                        const seriesName = seriesNames[ai % seriesNames.length];
+                        // Usar nombre real si existe, sino usar nombre generado
+                        const albumId = album.albumId;
+                        const realName = albumNamesMap[albumId];
+                        const seriesName = realName || seriesNames[ai % seriesNames.length];
+                        
                         album.images.forEach((img, ii) => {
                             allImages.push({
                                 id: `obra-${ai}-${ii}`,
                                 titulo: `${seriesName} ${String(ii + 1).padStart(2, '0')}`,
                                 imagen: img,
+                                albumId: albumId,
                                 albumIndex: ai,
                                 ritual: Math.random() > 0.7
                             });
