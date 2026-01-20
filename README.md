@@ -50,7 +50,6 @@ naroa-web/
 
 - **Instagram:** [@naroa_art](https://www.instagram.com/naroa_art/)
 - **Blog:** [naroagutierrez.wordpress.com](https://naroagutierrez.wordpress.com/)
-- **Artelista:** [Perfil oficial](https://www.artelista.com/en/artist/naroagutierrezgil.html)
 
 ## 📝 Licencia
 
