@@ -67,11 +67,15 @@ class Portfolio {
         }
     }
     
+    
     renderGrid() {
         const view = document.getElementById('portfolio-view');
         const grid = document.getElementById('portfolio-grid');
         view.classList.remove('hidden');
         grid.innerHTML = '';
+        
+        // Aplicar clase premium al grid
+        grid.classList.add('portfolio-grid-premium');
         
         // Coordenadas del taller (Bilbao)
         const baseCoords = { lat: 43.2630, lng: -2.9350 };
@@ -82,6 +86,8 @@ class Portfolio {
             card.href = `#/portfolio/${obra.id}`;
             card.className = 'portfolio-card';
             card.dataset.index = idx;
+            card.dataset.reveal = '';
+            card.dataset['3dCard'] = ''; // Para el efecto 3D
             
             // Las primeras 4 obras son FEATURED (mejores arriba)
             if (idx < 4) {
@@ -94,8 +100,11 @@ class Portfolio {
             const material = materials[idx % materials.length];
             
             card.innerHTML = `
-                <figure class="card-image">
+                <figure class="card-image img-reveal">
                     <img src="${obra.imagen}" alt="${obra.titulo}" loading="lazy">
+                    <div class="card-overlay">
+                        <span class="view-work">Ver obra</span>
+                    </div>
                 </figure>
                 <div class="card-info">
                     <span class="card-coords">${lat}°N ${Math.abs(lng).toFixed(4)}°W</span>
@@ -112,6 +121,13 @@ class Portfolio {
         
         // Glitch aleatorio cada 30s
         this.initRandomGlitch();
+        
+        // Inicializar hover 3D effects (si el sistema ya está cargado)
+        setTimeout(() => {
+            if (typeof Card3D !== 'undefined') {
+                new Card3D();
+            }
+        }, 100);
     }
     
     initRevealObserver() {
