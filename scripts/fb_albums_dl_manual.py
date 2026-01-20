@@ -23,11 +23,12 @@ OUT_DIR = BASE_DIR / "images" / "raw_albums"
 
 START_URL = "https://www.facebook.com/naroa.artista.plastica/photos_albums"
 MAX_SCROLLS_ALBUMS = 120
-MAX_SCROLLS_PHOTOS = 10  # Reduced scrolling since we only need a few
+MAX_SCROLLS_PHOTOS = 15  # Increased for more photos
 SCROLL_PAUSE_SEC = 0.4
 MAX_NO_NEW_ROUNDS = 3
 CONCURRENCY = 40
-MAX_PHOTOS_PER_ALBUM = 6  # Limit photos per album
+MAX_PHOTOS_PER_ALBUM = 2  # Solo 2 fotos por álbum
+SKIP_EXISTING_ALBUMS = True  # Skip albums already downloaded
 
 def sanitize(s: str) -> str:
     s = re.sub(r"[^\w\-.]+", "_", s, flags=re.UNICODE)
@@ -304,10 +305,19 @@ async def main():
                 print(f"⚠️ Error loading metadata: {e}")
         
         all_total = 0
+        skipped_count = 0
         for n, album_url in enumerate(albums, 1):
             aid = album_id_from_url(album_url) or f"album_{n:03d}"
             # Usar ruta absoluta para evitar ambigüedad
             album_folder = OUT_DIR / sanitize(aid)
+
+            # Skip if already downloaded
+            if SKIP_EXISTING_ALBUMS and album_folder.exists():
+                existing_files = list(album_folder.glob("*.jpg")) + list(album_folder.glob("*.png")) + list(album_folder.glob("*.webp"))
+                if len(existing_files) >= 1:  # Consider downloaded if has at least 1 image
+                    skipped_count += 1
+                    print(f"⏭️  ({n}/{len(albums)}) Skip: {aid} ({len(existing_files)} imgs ya descargadas)")
+                    continue
 
             print(f"\n[2/3] ({n}/{len(albums)}) Álbum: {aid}")
             try:

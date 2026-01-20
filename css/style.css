@@ -367,50 +367,54 @@ body::before {
 
 .intro-options {
     display: flex;
-    gap: 2rem;
+    gap: 4rem;
     justify-content: center;
 }
 
 .intro-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
     text-decoration: none;
     color: var(--text);
-    transition: transform 0.3s var(--ease);
+    transition: all 0.3s var(--ease);
+    position: relative;
 }
 
 .btn-label {
-    font-size: 0.8rem;
-    padding: 1rem 3rem;
-    border: 1px solid var(--text);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    transition: all 0.3s var(--ease);
-}
-
-.btn-hint {
-    font-size: 0.6rem;
-    opacity: 0.4;
-    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 300;
     letter-spacing: 0.1em;
-    transition: opacity 0.3s;
+    transition: all 0.3s var(--ease);
+    position: relative;
 }
 
-.intro-btn:hover .btn-label {
+/* Underline animation */
+.btn-label::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
     background: var(--text);
-    color: var(--bg);
-    transform: translateY(-5px);
+    transition: width 0.3s var(--ease);
 }
 
+.intro-btn:hover .btn-label::after {
+    width: 100%;
+}
+
+/* Sí - subtle red accent on hover */
 .intro-btn--ritual:hover .btn-label {
-    background: var(--red);
-    border-color: var(--red);
-    color: #fff;
+    color: var(--red);
 }
 
-.intro-btn:hover .btn-hint { opacity: 0.8; }
+.intro-btn--ritual:hover .btn-label::after {
+    background: var(--red);
+}
+
+/* Depende - stays neutral */
+.intro-btn--portfolio:hover .btn-label {
+    opacity: 0.6;
+}
 
 .micro-text {
     margin-top: 5rem;
