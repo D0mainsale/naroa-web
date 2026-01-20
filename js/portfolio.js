@@ -56,7 +56,7 @@ class Portfolio {
                     }
                 });
             }
-            this.obras = allImages.slice(0, 20);
+            this.obras = allImages.slice(0, 40);
 
             // Cargar blog
             const blogRes = await fetch('data/blog.json');
