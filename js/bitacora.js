@@ -47,7 +47,7 @@ class BitacoraSystem {
                     </div>
                     
                     <h2 class="post-title glitch-hover">
-                        <a href="#/bitacora/${post.id}">${post.title}</a>
+                        ${post.title}
                     </h2>
                     
                     <p class="post-excerpt">"${post.excerpt}"</p>
@@ -120,13 +120,13 @@ class BitacoraSystem {
                         <!-- FEATURE 14: Next Post Preview -->
                         <div class="post-next-preview">
                             <span class="next-label">Siguiente →</span>
-                            <a href="#/bitacora/${nextPost.id}" class="next-post">
+                            <div class="next-post">
                                 ${nextPost.image ? `<img src="${nextPost.image}" alt="${nextPost.title}">` : ''}
                                 <div class="next-info">
                                     <h3>${nextPost.title}</h3>
                                     <p>${nextPost.excerpt.substring(0, 80)}...</p>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     ` : ''}
                 </div>
@@ -297,7 +297,7 @@ class BitacoraSystem {
     renderGrid(list) {
         list.className = 'bitacora-list view-grid';
         list.innerHTML = this.filteredPosts.map((post, i) => `
-            <article class="blog-post-card" onclick="location.href='#/bitacora/${post.id}'" style="animation-delay: ${i * 0.1}s">
+            <article class="blog-post-card" style="animation-delay: ${i * 0.1}s">
                 ${post.image ? `<img src="${post.image}" alt="${post.title}">` : ''}
                 <div class="card-content">
                     <time>${new Date(post.date).getFullYear()}</time>
@@ -325,13 +325,13 @@ class BitacoraSystem {
                 <h2 class="year-label">${year}</h2>
                 <div class="timeline-posts">
                     ${byYear[year].map(post => `
-                        <a href="#/bitacora/${post.id}" class="timeline-item">
+                        <div class="timeline-item">
                             <time>${new Date(post.date).toLocaleDateString('es-ES', {month: 'short', day: 'numeric'})}</time>
                             <h3>${post.title}</h3>
                             <div class="timeline-tags">
                                 ${post.tags.slice(0, 2).map(tag => `<span>#${tag}</span>`).join('')}
                             </div>
-                        </a>
+                        </div>
                     `).join('')}
                 </div>
             </div>
