@@ -24,32 +24,27 @@ class Portfolio {
                 console.log('ℹ️ album-names.json no disponible, usando nombres generados');
             }
             
-            // Nombres descriptivos de series (fallback)
-            const seriesNames = [
-                'DiviNos VaiVenes', 'Grafito y Mica', 'Retratos Hiperrealistas',
-                'Técnica Mixta', 'Carbón sobre Papel', 'Serie del Error',
-                'Materia y Memoria', 'Kintsugi Visual', 'Interfaces Rituales',
-                'Cuerpos e Interferencias', 'Glitch Analógico', 'Fracturas Doradas',
-                'Espera como Herramienta', 'Imperfección Perfecta', 'Almas en Tránsito',
-                'Lo Roto Reluce', 'Complementarios', 'Piel y Pigmento',
-                'Rostros del Silencio', 'Retratos Íntimos'
-            ];
+            // Nombres descriptivos de series (fallback SOLO si no hay nombre real)
+            const defaultName = 'Sin título';
             
             if (data.albums) {
                 data.albums.forEach((album, ai) => {
                     if (album.images) {
-                        // Usar nombre real si existe, sino usar nombre generado
+                        // Usar SOLO nombre real de Facebook
                         const albumId = album.albumId;
                         const realName = albumNamesMap[albumId];
-                        const seriesName = realName || seriesNames[ai % seriesNames.length];
+                        
+                        // Si NO hay nombre real, usar albumId (no inventar)
+                        const albumName = realName || `Álbum ${albumId}`;
                         
                         album.images.forEach((img, ii) => {
                             allImages.push({
                                 id: `obra-${ai}-${ii}`,
-                                titulo: `${seriesName} ${String(ii + 1).padStart(2, '0')}`,
+                                titulo: albumName, // SOLO el nombre real, sin números
                                 imagen: img,
                                 albumId: albumId,
                                 albumIndex: ai,
+                                imageIndex: ii, // índice dentro del álbum
                                 ritual: Math.random() > 0.7
                             });
                         });
