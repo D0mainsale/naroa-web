@@ -1,60 +1,225 @@
-# Naroa Gutiérrez Gil - Portfolio Web
+# 🎨 Naroa Gutiérrez Gil - Portfolio Website
 
-Portfolio oficial de **Naroa Gutiérrez Gil**, artista plástica de Bilbao.
+Portfolio web profesional de la artista plástica Naroa Gutiérrez Gil, con galería interactiva de 352 obras, bitácora editorial y sistemas premium.
 
-🌐 **Live:** [naroa.online](https://naroa.online)
+## 🌐 **Live Site**
+- **Producción:** https://www.naroa.online
+- **Vercel:** https://naroa-web.vercel.app
 
-## 🎨 Características
+## 🚀 **Quick Start**
 
-- ✨ Diseño minimalista inspirado en Bianca Censori
-- 🖼️ Galería de obras en alta calidad
-- 📝 Integración del blog WordPress
-- 📱 Completamente responsive
-- ⚡ Animaciones suaves y micro-interacciones
-- 🎯 Cursor personalizado
-- 💨 Glassmorphism y efectos modernos
+```bash
+# Desarrollo local
+npx serve -p 3000
 
-## 🛠️ Tecnologías
+# Visitar
+http://localhost:3000
+```
 
-- HTML5
-- CSS3 (Vanilla - sin frameworks)
-- JavaScript (Vanilla)
-- Google Fonts (Inter + Cormorant Garamond)
-
-## 📂 Estructura
+## 📂 **Estructura del Proyecto**
 
 ```
 naroa-web/
-├── index.html          # Página principal
-├── styles.css          # Estilos completos
-└── images/            # Obras de alta calidad
-    ├── 1701cc40-5809-410d-bcc2-e68b145dc739.png
-    ├── 604863ca-7c61-4e1c-90a4-d09ce3d9cc13.png
-    ├── 7b802cee-4cce-4ea0-b24d-8e9a22a40d6f.png
-    ├── 811dff51-cbc7-4ded-af8a-e92e6e7e430e.png
-    ├── a820a8a1-cd28-41c0-b2eb-3cbcd99d3940.png
-    └── c1b568b2-ff61-456d-bf37-38dc37ad2f72.png
+├── css/                     # Estilos
+│   ├── style.css           # Estilos base
+│   ├── ritual.css          # Sistema ritual
+│   ├── bitacora-premium.css # Bitácora
+│   └── galeria-premium.css  # Galería
+├── js/                      # JavaScript
+│   ├── core/
+│   │   ├── router.js       # Sistema de rutas
+│   │   └── app.js          # Inicialización
+│   ├── features/
+│   │   ├── portfolio.js    # Portfolio curado
+│   │   ├── bitacora.js     # Blog/Bitácora
+│   │   ├── galeria.js      # Galería 352 imágenes
+│   │   ├── press-kit.js    # Press kit digital
+│   │   ├── eventos-obra-dia.js # Calendario
+│   │   └── catalogo.js     # Catálogo de venta
+│   └── systems/
+│       ├── ritual-systems.js # Sistemas rituales
+│       └── archive.js       # Archivo
+├── images/                  # Imágenes
+│   ├── raw_albums/         # 53 álbumes originales (352 imgs)
+│   ├── optimized/          # WebP optimizadas
+│   └── thumbnails/         # Thumbnails 400px
+├── data/                    # Datos JSON
+│   ├── blog.json           # 12 posts bitácora
+│   ├── album-names.json    # 211 álbumes mapeados
+│   └── images-index.json   # Índice de 352 imágenes
+├── scripts/                 # Utilidades
+│   ├── generate-images-index.js
+│   ├── optimize-images.js
+│   └── download_facebook_albums.py
+├── index.html              # Página principal
+├── galeria.html            # Galería standalone
+└── vercel.json             # Config deployment
 ```
 
-## 🎭 Secciones
+## ✨ **Features**
 
-1. **Hero** - Presentación artística con cita del blog
-2. **Obras** - Galería de 6 obras principales
-3. **Diario** - Posts del blog WordPress integrados
-4. **Sobre Mí** - Biografía y estadísticas
-5. **Exposiciones** - Timeline histórica
-6. **El ReCreo** - Espacio creativo destacado
-7. **Contacto** - Enlaces sociales
+### **1. Portfolio Curado**
+- Obras seleccionadas con metadatos
+- Vista grid responsive
+- Schema.org markup para SEO
 
-## 🔗 Enlaces
+### **2. Bitácora Premium** (15 features)
+- 12 posts con imágenes auténticas de WordPress
+- 3 vistas: List, Grid, Timeline
+- Búsqueda y filtros por tags
+- Pull-out quotes visuales
+- Share buttons (X, Facebook, WhatsApp)
 
-- **Instagram:** [@naroa_art](https://www.instagram.com/naroa_art/)
-- **Blog:** [naroagutierrez.wordpress.com](https://naroagutierrez.wordpress.com/)
+### **3. Galería Interactiva** (NUEVA)
+- **352 imágenes** de 53 álbumes de Facebook
+- Grid masonry responsive
+- Filtros por álbum/serie
+- Búsqueda en tiempo real
+- Lightbox con navegación
+- Lazy loading
 
-## 📝 Licencia
+### **4. Series Temáticas**
+- DiviNos VaiVenes (2026)
+- Vaivenes (2019-2023)
+- Espejos del Alma (2015-2020)
+- Walking Gallery (2021-2023)
 
-© 2026 Naroa Gutiérrez Gil. Todos los derechos reservados.
+### **5. Timeline Visual**
+- Trayectoria artística 2015-2026
+- Exposiciones individuales y colectivas
+- Intervenciones urbanas
+- Layout zigzag alternado
+
+### **6. Press Kit Digital**
+- Bio profesional (versión corta/larga)
+- CV artístico completo
+- Artist Statement
+- Imágenes alta resolución
+- Contacto de prensa
+
+### **7. Calendario de Eventos**
+- Eventos actuales y próximos
+- Integración Google Calendar
+- Sistema de recordatorios
+- Tipos: exposiciones, talleres, ferias
+
+### **8. Obra del Día**
+- Rotación automática diaria
+- Compartir en RRSS
+- Links a serie completa
+
+### **9. Catálogo de Venta**
+- Originales + Prints + Comisiones
+- Contacto directo Email/WhatsApp
+- Modal de detalles
+- Info de envío
+
+### **10. Sistema Ritual**
+- Juego de la Oca para explorar obra
+- Partículas flotantes
+- Atmósfera inmersiva
+- Modo silencio
+
+## 🛠️ **Scripts Disponibles**
+
+```bash
+# Generar índice de imágenes
+node scripts/generate-images-index.js
+
+# Optimizar imágenes (WebP + thumbnails)
+node scripts/optimize-images.js
+
+# Descargar álbumes de Facebook (requiere token)
+export FB_ACCESS_TOKEN='tu_token'
+python3 scripts/download_facebook_albums.py
+```
+
+## 📊 **Optimización**
+
+- **352 imágenes** optimizadas a WebP
+- Thumbnails 400px para galería
+- Lazy loading de imágenes
+- Preconnect a Google Fonts
+- Service Worker ready
+
+## 🎯 **SEO & Performance**
+
+- Schema.org markup completo
+- Open Graph tags
+- JSON-LD para artista
+- Meta tags optimizados
+- Responsive images
+- Geolocalización (Bilbao)
+
+## 📱 **Responsive Design**
+
+- Mobile-first approach
+- Breakpoints: 768px, 1024px, 1400px
+- Touch-friendly interactions
+- Optimized for all devices
+
+## 🔧 **Tecnologías**
+
+- **Frontend:** Vanilla JS (ES6+)
+- **Estilos:** CSS3 con variables
+- **Routing:** Hash-based SPA
+- **Build:** None (static site)
+- **Deploy:** Vercel
+- **Optimización:** ImageMagick, Sharp
+
+## 📝 **Datos**
+
+- **211 álbumes** mapeados de Facebook
+- **53 álbumes** descargados localmente
+- **352 imágenes** indexadas y optimizadas
+- **12 posts** en Bitácora con imágenes WordPress
+
+## 🚢 **Deployment**
+
+```bash
+# Auto-deploy con git push
+git add .
+git commit -m "Update"
+git push
+
+# Vercel detecta automáticamente y despliega
+```
+
+## 🏗️ **Development**
+
+```bash
+# Clonar
+git clone https://github.com/D0mainsale/naroa-web.git
+cd naroa-web
+
+# Servir localmente
+npx serve -p 3000
+
+# Ver en navegador
+open http://localhost:3000
+```
+
+## 📖 **Documentación Adicional**
+
+- [EXPANSION-SUMMARY.md](./EXPANSION-SUMMARY.md) - Resumen de features implementadas
+- [/knowledge/naroa_bitacora_upgrade_2026/](./knowledge/) - Knowledge Items
+
+## 👤 **Artista**
+
+**Naroa Gutiérrez Gil**
+- 📍 Bilbao, País Vasco
+- 🎨 Artista Plástica
+- 🖌️ Especialidad: Retratos, Técnica Mixta
+- 📧 naroa@naroa.eu
+- 🌐 [naroa.online](https://www.naroa.online)
+
+## 📄 **Licencia**
+
+© 2026 Naroa Gutiérrez Gil. All rights reserved.
 
 ---
 
-**Artivista · Técnica Mixta · Bilbao**
+**Última actualización:** 20 Enero 2026  
+**Versión:** 2.0.0  
+**Total líneas de código:** ~5,000+  
+**Status:** ✅ Production Ready
