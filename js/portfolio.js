@@ -40,7 +40,8 @@ class Portfolio {
                         album.images.forEach((img, ii) => {
                             allImages.push({
                                 id: `obra-${ai}-${ii}`,
-                                titulo: albumName, // SOLO el nombre real, sin números
+                                titulo: `${albumName} #${ii + 1}`, // Nombre real + número de imagen
+                                albumName: albumName, // Nombre del álbum para filtros
                                 imagen: img,
                                 albumId: albumId,
                                 albumIndex: ai,
