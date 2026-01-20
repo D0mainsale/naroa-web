@@ -210,6 +210,7 @@
     right: 0;
     bottom: 0;
     background: rgba(0,0,0,0.95);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -238,6 +239,7 @@
     cursor: pointer;
     transition: all 0.3s;
     font-size: 1.5rem;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -492,3 +494,13 @@
         transform: translateY(0);
     }
 }
+
+/* Utility classes for timeline */
+.timeline-header {
+    margin-bottom: 80px;
+}
+
+.timeline-meta {
+    margin-top: 16px;
+}
+

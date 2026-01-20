@@ -38,16 +38,26 @@ class Portfolio {
                         const albumName = realName || '';
                         
                         album.images.forEach((img, ii) => {
-                            allImages.push({
-                                id: `obra-${ai}-${ii}`,
-                                titulo: `${albumName} #${ii + 1}`, // Nombre real + número de imagen
-                                albumName: albumName, // Nombre del álbum para filtros
-                                imagen: img,
-                                albumId: albumId,
-                                albumIndex: ai,
-                                imageIndex: ii, // índice dentro del álbum
-                                ritual: Math.random() > 0.7
-                            });
+                        // Título: Nombre real si existe, sino "Sin título"
+                        let titulo;
+                        if (realName && realName.trim()) {
+                            // Todas las obras del álbum comparten el mismo nombre
+                            titulo = realName;
+                        } else {
+                            // "Sin título" para obras sin nombre de álbum
+                            titulo = 'Sin título';
+                        }
+                        
+                        allImages.push({
+                            id: `obra-${ai}-${ii}`,
+                            titulo: titulo,
+                            albumName: albumName, // Nombre del álbum para filtros
+                            imagen: img,
+                            albumId: albumId,
+                            albumIndex: ai,
+                            imageIndex: ii, // índice dentro del álbum
+                            ritual: Math.random() > 0.7
+                        });
                         });
                     }
                 });
