@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Obra | Naroa Gutiérrez Gil</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explora la obra completa de Naroa Gutiérrez Gil: 211 álbumes, series DiviNos VaiVenes, Espejos del Alma, Vaivenes y más.">
+    <meta name="keywords" content="naroa gutiérrez, artista plástica, arte contemporáneo, bilbao, retratos">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Galería de Obra | Naroa Gutiérrez Gil">
+    <meta property="og:description" content="211 álbumes de arte contemporáneo">
+    <meta property="og:image" content="https://www.naroa.online/images/og-image.jpg">
+    <meta property="og:url" content="https://www.naroa.online/#/galeria">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/galeria-premium.css">
+</head>
+<body>
+    
+    <!-- Galería Principal -->
+    <section id="galeria-container" class="galeria-container">
+        <div class="galeria-header">
+            <h1>Galería de Obra</h1>
+            <p class="results-count">Cargando...</p>
+        </div>
+        
+        <!-- Grid will be injected by JS -->
+        <div class="galeria-grid"></div>
+    </section>
+    
+    <!-- Series Showcase -->
+    <section id="series-showcase" class="series-showcase">
+        <div class="galeria-header">
+            <h1>Series Temáticas</h1>
+            <p>Colecciones conceptuales de obra</p>
+        </div>
+        
+        <div class="series-grid">
+            <div class="series-card" onclick="galeriaSystem.filterByAlbum('DIVINOS_VAIVENES')">
+                <div class="series-card-image">
+                    <img src="/images/series/divinos-vaivenes.jpg" alt="DiviNos VaiVenes">
+                </div>
+                <div class="series-card-content">
+                    <h3>DiviNos VaiVenes</h3>
+                    <p>Un laberinto de espejos donde nuestra alma entra en juego. Baile de salón compuesto por retratos de iconos del cine, la canción o la televisión.</p>
+                    <div class="series-card-meta">
+                        <span>2026</span>
+                        <span>Politena</span>
+                        <span>Retratos</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="series-card" onclick="galeriaSystem.filterBySearch('Vaivenes')">
+                <div class="series-card-image">
+                    <img src="/images/series/vaivenes.jpg" alt="Vaivenes">
+                </div>
+                <div class="series-card-content">
+                    <h3>Vaivenes</h3>
+                    <p>Exploración de las polaridades como complementarios. Un viaje entre luces y sombras, encuentros y despedidas.</p>
+                    <div class="series-card-meta">
+                        <span>2019-2023</span>
+                        <span>Multiplicidad</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="series-card" onclick="galeriaSystem.filterBySearch('Espejos')">
+                <div class="series-card-image">
+                    <img src="/images/series/espejos-alma.jpg" alt="Espejos del Alma">
+                </div>
+                <div class="series-card-content">
+                    <h3>Espejos del Alma</h3>
+                    <p>Retratos que reflejan la esencia interior. Miradas que atraviesan el lienzo y tocan lo más profundo.</p>
+                    <div class="series-card-meta">
+                        <span>2015-2020</span>
+                        <span>ICASV</span>
+                        <span>Serie clásica</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="series-card" onclick="galeriaSystem.filterBySearch('Walking Gallery')">
+                <div class="series-card-image">
+                    <img src="/images/series/walking-gallery.jpg" alt="Walking Gallery">
+                </div>
+                <div class="series-card-content">
+                    <h3>Walking Gallery</h3>
+                    <p>Arte que sale a la calle. Intervenciones urbanas que transforman el espacio público en galería viva.</p>
+                    <div class="series-card-meta">
+                        <span>2021-2023</span>
+                        <span>Bilbao</span>
+                        <span>Urbano</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Timeline Visual -->
+    <section id="timeline-visual" class="timeline-visual">
+        <div class="galeria-header" style="margin-bottom: 80px;">
+            <h1>Trayectoria Artística</h1>
+            <p>Línea temporal de exposiciones y hitos</p>
+        </div>
+        
+        <!-- 2026 -->
+        <div class="timeline-year-section">
+            <div class="timeline-year-label">2026</div>
+            <div class="timeline-events">
+                <div class="timeline-event">
+                    <div class="timeline-event-content">
+                        <h4>Muestra «DiviNos VaiVenes» en Politena</h4>
+                        <p>Exposición individual. Laberinto de espejos e iconos pop en pizarra. Vuelta a casa y tejado que guarece.</p>
+                        <div class="series-card-meta" style="margin-top: 16px;">
+                            <span>Enero</span>
+                            <span>Individual</span>
+                        </div>
+                    </div>
+                    <div class="timeline-event-image">
+                        <img src="https://naroagutierrez.wordpress.com/wp-content/uploads/2026/01/1-2.jpg" alt="DiviNos VaiVenes">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2025 -->
+        <div class="timeline-year-section">
+            <div class="timeline-year-label">2025</div>
+            <div class="timeline-events">
+                <div class="timeline-event">
+                    <div class="timeline-event-content">
+                        <h4>Azoka en Lataska, Sopela</h4>
+                        <p>Market de Artesanía y Arte. Arte con aroma costero y sabor a hogar en espacio gastronómico cultural.</p>
+                        <div class="series-card-meta" style="margin-top: 16px;">
+                            <span>Mayo</span>
+                            <span>Colectiva</span>
+                        </div>
+                    </div>
+                    <div class="timeline-event-image">
+                        <img src="https://naroagutierrez.wordpress.com/wp-content/uploads/2025/05/1lataska-lata-grande3.jpg" alt="Azoka Lataska">
+                    </div>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="timeline-event-content">
+                        <h4>Udaberriko Jaia - Festival de Primavera</h4>
+                        <p>Feria de Artesanía organizada por Meñakoz Kultur Elkartea en Sopelana. Arte, sol y sal.</p>
+                        <div class="series-card-meta" style="margin-top: 16px;">
+                            <span>Mayo</span>
+                            <span>Festival</span>
+                        </div>
+                    </div>
+                    <div class="timeline-event-image">
+                        <img src="/images/raw_albums/531476414998451/000003_475449441_1268838811262204_2492729812146607558_n.jpg" alt="Udaberriko Jaia">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2022 -->
+        <div class="timeline-year-section">
+            <div class="timeline-year-label">2022</div>
+            <div class="timeline-events">
+                <div class="timeline-event">
+                    <div class="timeline-event-content">
+                        <h4>Walking Gallery Bilbao</h4>
+                        <p>Galería ambulante por las calles de Bilbao. Arte urbano que transforma el espacio público.</p>
+                        <div class="series-card-meta" style="margin-top: 16px;">
+                            <span>Octubre</span>
+                            <span>Intervención</span>
+                        </div>
+                    </div>
+                    <div class="timeline-event-image">
+                        <img src="https://naroagutierrez.wordpress.com/wp-content/uploads/2022/10/walking-gallery-bilbao.jpg" alt="Walking Gallery">
+                    </div>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="timeline-event-content">
+                        <h4>Bwall GIRLS - Emakumeen arteaN</h4>
+                        <p>Exposición colectiva de arte femenino. Harilka y alagrafos en técnica mixta.</p>
+                        <div class="series-card-meta" style="margin-top: 16px;">
+                            <span>Nov-Dic</span>
+                            <span>Colectiva</span>
+                        </div>
+                    </div>
+                    <div class="timeline-event-image">
+                        <img src="https://naroagutierrez.wordpress.com/wp-content/uploads/2022/11/4-alagrafos-jpg-ok.jpg" alt="Bwall GIRLS">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2019 -->
+        <div class="timeline-year-section">
+            <div class="timeline-year-label">2019</div>
+            <div class="timeline-events">
+                <div class="timeline-event">
+                    <div class="timeline-event-content">
+                        <h4>VAIVENES en el Copper Deli Museo</h4>
+                        <p>Exposición individual icónica. Primera muestra de la serie Vaivenes que definiría su estilo.</p>
+                        <div class="series-card-meta" style="margin-top: 16px;">
+                            <span>Noviembre</span>
+                            <span>Individual</span>
+                        </div>
+                    </div>
+                    <div class="timeline-event-image">
+                        <img src="https://naroagutierrez.wordpress.com/wp-content/uploads/2019/11/vaivenes-sin-inauguracic3b3n.jpg" alt="VAIVENES Copper">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="/js/galeria.js"></script>
+</body>
+</html>
