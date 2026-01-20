@@ -1,0 +1,32 @@
+{
+  "barro": {
+    "name": "Barro",
+    "texture": "polvo",
+    "images": []
+  },
+  "tela": {
+    "name": "Tela", 
+    "texture": "fibra",
+    "images": []
+  },
+  "hierro": {
+    "name": "Hierro",
+    "texture": "oxido",
+    "images": []
+  },
+  "sombra": {
+    "name": "Sombra",
+    "texture": "grieta",
+    "images": []
+  },
+  "ruido": {
+    "name": "Ruido",
+    "texture": "polvo",
+    "images": []
+  },
+  "papel": {
+    "name": "Papel",
+    "texture": "fibra",
+    "images": []
+  }
+}

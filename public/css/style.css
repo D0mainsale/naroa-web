@@ -1,0 +1,950 @@
+/* === NAROA.ONLINE — 3 Capas === */
+:root {
+    --font: 'Inter', -apple-system, sans-serif;
+    --bg: #f4f3f0;
+    --text: #1a1a1a;
+    --muted: rgba(26,26,26,0.5);
+    --red: #c93030;
+    --accent: #d4cfc3;
+    --ease: cubic-bezier(0.23, 1, 0.32, 1);
+    /* POP HYPERREALISM PALETTE */
+    --pop-magenta: #ff2d6a;
+    --pop-cyan: #00e5ff;
+    --pop-yellow: #ffea00;
+    --pop-violet: #8b5cf6;
+    
+    /* Semantic aliases for consistency */
+    --color-text: var(--text);
+    --color-bg: var(--bg);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    cursor: none;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Hilos Tensados (Decorative Grid) */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 10vw 10vh;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.hidden { display: none !important; }
+
+/* SEO invisible */
+.sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+/* BITÁCORA - ESTILO MAGAZINE PREMIUM */
+.bitacora-view {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, transparent 0%, rgba(201, 48, 48, 0.02) 100%);
+}
+
+.bitacora-header {
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.bitacora-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent, #c93030), transparent);
+}
+
+.bitacora-title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 100;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    background: linear-gradient(135deg, var(--color-text) 0%, rgba(201, 48, 48, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bitacora-subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.5;
+    letter-spacing: 0.15em;
+    font-style: italic;
+}
+
+.bitacora-list {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+/* PRIMER POST - DESTACADO */
+.blog-post:first-child {
+    background: linear-gradient(135deg, rgba(201, 48, 48, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(201, 48, 48, 0.15);
+    padding: 48px;
+    border-radius: 24px;
+}
+
+.blog-post:first-child .post-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--accent, #c93030) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.blog-post:first-child .post-excerpt {
+    font-size: 1.3rem;
+    border-left-color: var(--accent, #c93030);
+    border-left-width: 3px;
+}
+
+/* BLOG POST CARD */
+.blog-post {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.blog-post::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0%;
+    background: linear-gradient(180deg, var(--accent, #c93030) 0%, rgba(201, 48, 48, 0.3) 100%);
+    transition: height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.blog-post::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(201, 48, 48, 0.05) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+.blog-post:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(201, 48, 48, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2), 0 0 40px rgba(201, 48, 48, 0.05);
+}
+
+.blog-post:hover::before {
+    height: 100%;
+}
+
+.blog-post:hover::after {
+    opacity: 1;
+}
+
+/* POST HEADER */
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.post-date {
+    font-size: 0.7rem;
+    font-weight: 500;
+    opacity: 0.4;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.post-reading-time {
+    font-size: 0.65rem;
+    opacity: 0.3;
+    padding-left: 16px;
+    border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+.post-number {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    opacity: 0.15;
+    font-variant-numeric: tabular-nums;
+}
+
+.post-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    line-height: 1.25;
+    transition: all 0.4s;
+}
+
+.blog-post:hover .post-title {
+    color: var(--accent, #c93030);
+    transform: translateX(8px);
+}
+
+.post-excerpt {
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.55;
+    margin-bottom: 24px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(255,255,255,0.08);
+    line-height: 1.6;
+}
+
+.post-content {
+    font-size: 0.95rem;
+    line-height: 2;
+    font-weight: 300;
+    opacity: 0.7;
+    white-space: pre-wrap;
+    margin-bottom: 28px;
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.post-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(transparent, var(--color-bg, #0a0a0f));
+    pointer-events: none;
+}
+
+.post-content strong {
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+/* TAGS */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.post-tag {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 8px 16px;
+    background: rgba(201, 48, 48, 0.08);
+    border: 1px solid rgba(201, 48, 48, 0.15);
+    border-radius: 30px;
+    color: rgba(244, 243, 240, 0.7);
+    transition: all 0.3s;
+    cursor: default;
+}
+
+.post-tag:hover {
+    background: rgba(201, 48, 48, 0.2);
+    border-color: rgba(201, 48, 48, 0.4);
+    color: var(--color-text);
+    transform: translateY(-2px);
+}
+
+/* POST FOOTER */
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.read-more {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.read-more:hover {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .bitacora-view { padding: 60px 20px; }
+    .post-title { font-size: 1.5rem; }
+}
+
+/* Cursor */
+.cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    will-change: transform;
+}
+
+/* === CAPA 1: HOME === */
+.home-view {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg);
+}
+
+.home-content { text-align: center; }
+
+.intro-question {
+    font-size: clamp(3rem, 12vw, 8rem);
+    font-weight: 100;
+    margin-bottom: 2rem;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+}
+
+.intro-context {
+    font-weight: 300;
+    margin-bottom: 3rem;
+    opacity: 0.7;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+.intro-options {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+}
+
+.intro-btn {
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s var(--ease);
+    position: relative;
+}
+
+.btn-label {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    transition: all 0.3s var(--ease);
+    position: relative;
+}
+
+/* Underline animation */
+.btn-label::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--text);
+    transition: width 0.3s var(--ease);
+}
+
+.intro-btn:hover .btn-label::after {
+    width: 100%;
+}
+
+/* Sí - subtle red accent on hover */
+.intro-btn--ritual:hover .btn-label {
+    color: var(--red);
+}
+
+.intro-btn--ritual:hover .btn-label::after {
+    background: var(--red);
+}
+
+/* Depende - stays neutral */
+.intro-btn--portfolio:hover .btn-label {
+    opacity: 0.6;
+}
+
+.micro-text {
+    margin-top: 5rem;
+    font-size: 0.7rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    opacity: 0;
+    transition: opacity 3s;
+}
+
+.micro-text.visible { opacity: 0.4; }
+
+.home-statement {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    padding: 0 2rem;
+}
+
+.home-statement blockquote {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 0.5;
+    animation: fadeInUp 2s var(--ease) 1s backwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === CAPA 2: PORTFOLIO === */
+.portfolio-view, .process-view, .about-view {
+    min-height: 100vh;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.portfolio-header {
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.portfolio-title {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.portfolio-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.15s;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--text); }
+
+.nav-link.active::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--red);
+    margin-top: 4px;
+}
+
+/* Portfolio Grid — DISRUPTIVO */
+.portfolio-grid {
+    /* display: flex; removed - handled by premium css */
+    /* flex-wrap: wrap; removed */
+    padding: 2rem 0;
+    justify-content: center;
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+}
+
+.portfolio-card {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    position: relative;
+    /* Anti-grid: tamaños variables */
+    /* Flex sizing removed for CSS Grid */
+    /* Entrada ritual: invisible hasta revelación */
+    opacity: 0;
+    filter: blur(15px);
+    transform: translateY(30px);
+    transition: 
+        opacity 1.2s var(--ease),
+        filter 1.2s var(--ease),
+        transform 1.2s var(--ease);
+}
+
+.portfolio-card.revealed {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* Anti-grid rules removed to support Premium Masonry Grid */
+/* .portfolio-card:nth-child rules removed */
+
+/* FEATURED: Las mejores obras arriba y más grandes */
+/* Featured card sizing removed to maintain uniform grid */
+/* .portfolio-card.featured { flex: ... } removed */
+
+.portfolio-card.featured .card-image {
+    aspect-ratio: 3/4;
+}
+
+.portfolio-card.featured .card-title {
+    font-size: 1.3rem;
+}
+
+/* POP HOVER ACCENT */
+.portfolio-card.featured:hover .card-info {
+    background: linear-gradient(135deg, var(--pop-magenta), var(--pop-violet));
+    color: white;
+}
+
+.portfolio-card.featured:hover .card-coords,
+.portfolio-card.featured:hover .card-material {
+    color: rgba(255,255,255,0.8);
+}
+
+.card-image {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    margin-bottom: 0.8rem;
+    background: rgba(0,0,0,0.03);
+    position: relative;
+}
+
+.card-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: filter 0.6s var(--ease), transform 0.8s var(--ease);
+}
+
+/* HOVER-TO-FADE: la imagen se desvanece, el título emerge */
+.portfolio-card:hover .card-image img {
+    filter: grayscale(1) blur(4px);
+    transform: scale(1.02);
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s var(--ease);
+}
+
+.portfolio-card:hover .card-info {
+    background: var(--pop-magenta);
+    color: white;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.portfolio-card:hover .card-coords,
+.portfolio-card:hover .card-material {
+    color: rgba(255,255,255,0.8);
+}
+
+/* Títulos como coordenadas/materia */
+.card-coords {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    font-family: monospace;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.card-material {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.ritual-indicator { color: var(--red); font-size: 0.6rem; }
+
+/* GLITCH EFFECT */
+@keyframes glitch {
+    0% { transform: translate(0); filter: none; }
+    20% { transform: translate(-3px, 2px); filter: hue-rotate(90deg); }
+    40% { transform: translate(3px, -2px); filter: saturate(2); }
+    60% { transform: translate(-2px, -3px); filter: hue-rotate(-90deg); }
+    80% { transform: translate(2px, 3px); filter: contrast(1.5); }
+    100% { transform: translate(0); filter: none; }
+}
+
+.portfolio-card.glitching .card-image img {
+    animation: glitch 0.2s ease;
+}
+
+@media (max-width: 1024px) {
+    .portfolio-card { flex: 0 0 calc(45% - 2rem) !important; }
+}
+
+@media (max-width: 768px) {
+    .portfolio-card { flex: 0 0 100% !important; }
+}
+
+/* Process */
+.process-blocks {
+    display: grid;
+    gap: 3rem;
+    max-width: 700px;
+}
+
+.process-block h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.process-block p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.process-block.animate-in {
+    animation: slideUp 0.5s ease backwards;
+}
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } }
+
+/* About */
+.about-content { max-width: 600px; }
+
+.about-content h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+}
+
+.about-location {
+    color: var(--muted);
+    margin-bottom: 2rem;
+}
+
+.about-statement p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.about-contact a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--muted);
+}
+
+.about-contact a:hover { color: var(--red); border-color: var(--red); }
+
+/* Footer */
+.portfolio-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.back-home {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.back-home:hover { color: var(--text); }
+
+/* === CAPA 3: RITUAL === */
+.ritual-view {
+    min-height: 100vh;
+    padding: 4rem 1rem 120px;
+    background: linear-gradient(180deg, #f8f7f4, #e5e3dd);
+}
+
+.ritual-controls {
+    position: fixed;
+    top: 1rem; right: 1rem;
+    display: flex;
+    gap: 1rem;
+    z-index: 1000;
+}
+
+.ritual-exit {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+.ritual-exit:hover { color: var(--text); border-color: var(--text); }
+
+.ritual-mute {
+    background: none;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 0.5rem;
+    cursor: none;
+}
+
+.ritual-board {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: rgba(255,255,255,0.5);
+    border-radius: 16px;
+}
+
+.ritual-hud {
+    position: fixed;
+    top: 1rem; left: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px);
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.hud-stat { text-align: center; }
+
+.hud-label {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+}
+
+.hud-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--red);
+}
+
+.ritual-dice {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px; height: 70px;
+    background: var(--bg);
+    border: 2px solid var(--text);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: none;
+    z-index: 1000;
+    transition: all 0.15s;
+}
+
+.ritual-dice:hover {
+    transform: translateX(-50%) translateY(-3px);
+    border-color: var(--red);
+}
+
+.dice-face { font-size: 2.5rem; }
+
+/* Ritual Overlay */
+.ritual-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(244, 243, 240, 0.95);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    text-align: center;
+    padding: 2rem;
+}
+
+.ritual-statement-box {
+    max-width: 500px;
+    animation: fadeInUp 1s var(--ease);
+}
+
+.ritual-statement-box h2 {
+    font-size: 2rem;
+    font-weight: 200;
+    margin-bottom: 2rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.ritual-statement-box p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    color: var(--muted);
+}
+
+.ritual-start-btn {
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    cursor: none;
+    transition: all 0.3s var(--ease);
+}
+
+.ritual-start-btn:hover {
+    background: var(--red);
+    transform: translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .ritual-board { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* === ¿TE RETRATO? === */
+.retrato-view {
+    min-height: 100vh;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease;
+}
+
+.retrato-content { max-width: 600px; }
+
+.retrato-statement {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.retrato-content > p { line-height: 1.7; margin-bottom: 2rem; }
+
+.retrato-content h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 2rem 0 1rem;
+}
+
+.retrato-steps { list-style: none; counter-reset: step; }
+
+.retrato-steps li {
+    counter-increment: step;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.retrato-steps li::before {
+    content: counter(step) ".";
+    color: var(--red);
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.retrato-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+}
+
+.retrato-option {
+    padding: 1.5rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.retrato-option:hover { border-color: var(--red); }
+.retrato-option h3 { font-size: 1rem; font-weight: 400; margin-bottom: 0.5rem; }
+.retrato-option p { font-size: 0.85rem; color: var(--muted); }
+
+.retrato-cta { margin-top: 3rem; text-align: center; }
+.retrato-cta p { font-size: 1.2rem; margin-bottom: 1rem; }
+
+.retrato-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--text);
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: all 0.2s;
+}
+
+.retrato-btn:hover { background: var(--red); }
