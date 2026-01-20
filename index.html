@@ -155,6 +155,37 @@
             </nav>
         </header>
         
+        
+        <!-- Controles Dinámicos Premium -->
+        <div class="portfolio-controls">
+            <div class="controls-left">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="obras-search" 
+                        placeholder="Buscar obras..." 
+                        class="search-input"
+                    >
+                </div>
+                <select id="material-filter" class="filter-select">
+                    <option value="all">Todos los materiales</option>
+                    <option value="grafito">Grafito</option>
+                    <option value="carbon">Carbón</option>
+                    <option value="acrilico">Acrílico</option>
+                    <option value="mixta">Técnica mixta</option>
+                    <option value="mica">Mica</option>
+                </select>
+            </div>
+            <div class="controls-right">
+                <span id="obras-count" class="obras-count">40 obras</span>
+                <select id="obras-sort" class="filter-select">
+                    <option value="default">Por defecto</option>
+                    <option value="title-asc">Título A-Z</option>
+                    <option value="title-desc">Título Z-A</option>
+                </select>
+            </div>
+        </div>
+        
         <!-- Contenido semántico para SEO/GEO (reemplazado por JS dinámicamente) -->
         <section id="portfolio-grid" class="portfolio-grid" aria-label="Galería de obras">
             <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
@@ -450,6 +481,7 @@
     <script src="js/ritual-systems.js"></script>
     <script src="js/bitacora.js"></script>
     <script src="js/portfolio.js"></script>
+    <script src="js/portfolio-dynamic.js"></script>
     <script src="js/archive.js"></script>
     <script src="js/press-kit.js"></script>
     <script src="js/eventos-obra-dia.js"></script>
