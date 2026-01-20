@@ -259,6 +259,111 @@ class HeartbeatCursor {
     }
 }
 
+// === ATMOSPHERIC PARTICLES SYSTEM ===
+class RitualParticles {
+    constructor(containerId = 'ritual-particles') {
+        this.container = document.getElementById(containerId);
+        if (!this.container) return;
+        
+        this.particleCount = window.innerWidth < 768 ? 20 : 40;
+        this.init();
+    }
+    
+    init() {
+        for (let i = 0; i < this.particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.setProperty('--duration', `${6 + Math.random() * 8}s`);
+            particle.style.setProperty('--delay', `${Math.random() * 5}s`);
+            this.container.appendChild(particle);
+        }
+    }
+    
+    destroy() {
+        if (this.container) {
+            this.container.innerHTML = '';
+        }
+    }
+}
+
+// === AMBIENT SOUND SYSTEM ===
+class RitualAmbience {
+    constructor() {
+        this.audioContext = null;
+        this.isPlaying = false;
+        this.nodes = [];
+    }
+    
+    init() {
+        if (this.audioContext) return;
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    playAmbient() {
+        if (!this.audioContext) this.init();
+        if (this.isPlaying) return;
+        
+        // Crear drone ambiente sutil
+        const osc1 = this.audioContext.createOscillator();
+        const osc2 = this.audioContext.createOscillator();
+        const gain = this.audioContext.createGain();
+        const filter = this.audioContext.createBiquadFilter();
+        
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(55, this.audioContext.currentTime); // A1
+        
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(82.41, this.audioContext.currentTime); // E2
+        
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(200, this.audioContext.currentTime);
+        
+        gain.gain.setValueAtTime(0, this.audioContext.currentTime);
+        gain.gain.linearRampToValueAtTime(0.03, this.audioContext.currentTime + 3);
+        
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.audioContext.destination);
+        
+        osc1.start();
+        osc2.start();
+        
+        this.nodes = [osc1, osc2, gain];
+        this.isPlaying = true;
+    }
+    
+    stop() {
+        if (!this.isPlaying) return;
+        
+        this.nodes.forEach(node => {
+            if (node.stop) node.stop();
+        });
+        this.nodes = [];
+        this.isPlaying = false;
+    }
+    
+    toggle() {
+        this.isPlaying ? this.stop() : this.playAmbient();
+        return this.isPlaying;
+    }
+}
+
+// === GLOBAL INITIALIZERS ===
+window.initRitualParticles = function() {
+    if (!window.ritualParticles) {
+        window.ritualParticles = new RitualParticles();
+    }
+};
+
+window.initRitualAmbience = function() {
+    if (!window.ritualAmbience) {
+        window.ritualAmbience = new RitualAmbience();
+    }
+    return window.ritualAmbience;
+};
+
 // Exportar globalmente
 window.PigmentTrail = PigmentTrail;
 window.DayNightCycle = DayNightCycle;
@@ -267,3 +372,6 @@ window.GlitchText = GlitchText;
 window.WebDecay = WebDecay;
 window.RitualHandshake = RitualHandshake;
 window.HeartbeatCursor = HeartbeatCursor;
+window.RitualParticles = RitualParticles;
+window.RitualAmbience = RitualAmbience;
+

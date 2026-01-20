@@ -92,6 +92,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ritual.css">
 </head>
 <body>
     <!-- SEO invisible para crawlers y accesibilidad -->
@@ -351,45 +352,33 @@
     </main>
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         CAPA 3: RITUAL — El juego como archivo
+         CAPA 3: RITUAL — El juego como archivo vivo
          ═══════════════════════════════════════════════════════════════════ -->
     <main id="ritual-view" data-view="ritual" class="ritual-view hidden">
+        <!-- Sistema de partículas flotantes -->
+        <div class="ritual-particles" id="ritual-particles"></div>
+        
+        <!-- Overlay de entrada ceremonial -->
         <div id="ritual-intro-overlay" class="ritual-overlay">
             <div class="ritual-statement-box">
                 <h2>El Archivo como Ritual</h2>
-                <p>Navegar mi obra mediante el azar es un acto de escucha. Cada casilla es un encuentro; cada error, una revelación. <br><strong>Tira el dado para transitar el silencio.</strong></p>
-                <button onclick="document.getElementById('ritual-intro-overlay').classList.add('hidden')" class="ritual-start-btn">Entrar al Ritual</button>
+                <p>Navegar mi obra mediante el azar es un acto de escucha.<br>
+                   Cada casilla es un encuentro. Cada error, una revelación.<br><br>
+                   <strong>Tira el dado para transitar el silencio.</strong></p>
+                <button onclick="document.getElementById('ritual-intro-overlay').classList.add('hidden'); window.initRitualParticles && window.initRitualParticles();" class="ritual-start-btn">
+                    <span>Entrar al Ritual</span>
+                </button>
             </div>
         </div>
         
+        <!-- Controles superiores -->
         <nav class="ritual-controls">
-            <a href="#/portfolio" class="ritual-exit">Salir del ritual</a>
+            <a href="#/portfolio" class="ritual-exit">← Salir del ritual</a>
             <button id="ritual-mute" class="ritual-mute" aria-label="Silenciar audio">🔊</button>
         </nav>
         
-        <div class="ritual-intro" id="ritual-intro">
-            <p class="ritual-welcome">Bienvenida al ritual.</p>
-            <p>Este no es un portfolio convencional. Es un juego que revela obras ocultas.</p>
-            <p class="ritual-instruction">Tira el dado. Avanza. Descubre.</p>
-            <button id="ritual-start" class="ritual-start-btn">Comenzar</button>
-        </div>
-        
-        <section id="ritual-board" class="ritual-board" aria-label="Tablero del ritual"></section>
-        
-        <div class="ritual-hud">
-            <div class="hud-stat">
-                <span class="hud-label">Posición</span>
-                <span id="hud-position" class="hud-value">0</span>
-            </div>
-            <div class="hud-stat">
-                <span class="hud-label">Obras descubiertas</span>
-                <span id="hud-discovered" class="hud-value">0</span>
-            </div>
-        </div>
-        
-        <button id="ritual-dice" class="ritual-dice" aria-label="Tirar dado">
-            <span class="dice-face">⚄</span>
-        </button>
+        <!-- Tablero del juego de la oca -->
+        <section id="archive-gallery" class="ritual-board" aria-label="Tablero del ritual - Juego de la Oca"></section>
     </main>
 
     <!-- Cursor personalizado -->
