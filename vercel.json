@@ -12,6 +12,15 @@
       ]
     },
     {
+      "source": "/js/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
       "source": "/(.*).css",
       "headers": [
         {
@@ -22,6 +31,15 @@
     }
   ],
   "rewrites": [
+    { "source": "/js/core/(.*)", "destination": "/js/core/$1" },
+    { "source": "/js/features/(.*)", "destination": "/js/features/$1" },
+    { "source": "/js/systems/(.*)", "destination": "/js/systems/$1" },
+    { "source": "/js/effects/(.*)", "destination": "/js/effects/$1" },
+    { "source": "/js/utils/(.*)", "destination": "/js/utils/$1" },
+    { "source": "/js/(.*)", "destination": "/js/$1" },
+    { "source": "/css/(.*)", "destination": "/css/$1" },
+    { "source": "/images/(.*)", "destination": "/images/$1" },
+    { "source": "/data/(.*)", "destination": "/data/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
