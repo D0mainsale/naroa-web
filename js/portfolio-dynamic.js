@@ -29,13 +29,35 @@ class PortfolioDynamicControls {
         this.materialFilter = document.getElementById('material-filter');
         this.sortSelect = document.getElementById('obras-sort');
         this.countDisplay = document.getElementById('obras-count');
+        this.clearButton = document.getElementById('search-clear');
         
         if (!this.searchInput) return; // No estamos en la página de portfolio
         
         // Event listeners
-        this.searchInput.addEventListener('input', (e) => this.handleSearch(e));
+        this.searchInput.addEventListener('input', (e) => {
+            this.handleSearchInput(e);
+            this.handleSearch(e);
+        });
         this.materialFilter.addEventListener('change', (e) => this.handleFilter(e));
         this.sortSelect.addEventListener('change', (e) => this.handleSort(e));
+        
+        // Clear button
+        if (this.clearButton) {
+            this.clearButton.addEventListener('click', () => this.clearSearch());
+        }
+    }
+    
+    handleSearchInput(e) {
+        // Mostrar/ocultar botón clear
+        if (this.clearButton) {
+            this.clearButton.style.display = e.target.value ? 'flex' : 'none';
+        }
+    }
+    
+    clearSearch() {
+        this.searchInput.value = '';
+        if (this.clearButton) this.clearButton.style.display = 'none';
+        this.filterAndRender('');
     }
     
     handleSearch(e) {
