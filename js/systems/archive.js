@@ -355,25 +355,43 @@ class JuegoOca {
         
         dice.classList.add('rolling');
         const diceSymbols = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-        let rolls = 0;
-        
+
+        // Animate dice rolling
+        let ticks = 0;
         const rollInterval = setInterval(() => {
             face.textContent = diceSymbols[Math.floor(Math.random() * 6)];
-            rolls++;
-            if (rolls >= 12) {
+            ticks++;
+            if (ticks > 10) {
                 clearInterval(rollInterval);
-                this.diceValue = Math.floor(Math.random() * 6) + 1;
-                face.textContent = diceSymbols[this.diceValue - 1];
-                valueEl.textContent = `+${this.diceValue}`;
+                
+                // 10% chance of golden ratio result
+                const isGoldenRoll = Math.random() < 0.1;
+                
+                if (isGoldenRoll) {
+                    // φ⁻¹ = 0.618
+                    this.diceValue = 0.618;
+                    face.textContent = 'φ⁻¹';
+                    face.style.fontSize = 'var(--font-lg)';
+                    valueEl.textContent = '+0.618';
+                    valueEl.style.color = 'var(--ritual-gold, #ffd700)';
+                } else {
+                    // Normal 1-6 result
+                    this.diceValue = Math.floor(Math.random() * 6) + 1;
+                    face.textContent = diceSymbols[this.diceValue - 1];
+                    face.style.fontSize = '';
+                    valueEl.textContent = `+${this.diceValue}`;
+                    valueEl.style.color = '';
+                }
+                
                 dice.classList.remove('rolling');
-                this.state.totalRolls++;
-                this.movePlayer();
+                this.state.totalRolls++; // Keep this line from original
+                setTimeout(() => this.move(), 500);
             }
-        }, 60);
+        }, 100); // Changed interval time
     }
 
-    movePlayer() {
-        const oldPos = this.state.position;
+    move() { // Renamed from movePlayer
+        const oldPos = this.state.position; // Changed from this.currentPos
         let newPos = oldPos + this.diceValue;
         
         if (newPos > 63) {
