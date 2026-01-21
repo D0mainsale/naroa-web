@@ -1,22 +1,27 @@
 #!/bin/bash
-# Naroa Web - Deploy Script
-# Usage: ./scripts/deploy.sh "commit message"
-
 set -e
 
-echo "🔄 Regenerando índice de imágenes..."
-node scripts/images/generate-images-index.js 2>/dev/null || echo "⚠️  Índice no regenerado (opcional)"
+echo "🚀 Deploying Naroa Web..."
 
-echo "📦 Añadiendo cambios..."
-git add -A
+# Step 1: Regenerate image indexes
+echo "📸 Regenerating image indexes..."
+node scripts/generate-images-index.js
 
-if [ -z "$1" ]; then
-    git commit -m "chore: update"
+# Step 2: Fetch latest data from Notion CMS (if configured)
+if [ -f .env ]; then
+  echo "🔄 Fetching artwork data from Notion..."
+  node scripts/fetch-notion.js || echo "⚠️  Notion fetch skipped (not configured)"
 else
-    git commit -m "$1"
+  echo "⚠️  No .env file found, skipping Notion fetch"
 fi
 
-echo "🚀 Desplegando a Vercel..."
-git push origin main
+# Step 3: Git operations
+echo "📦 Committing changes..."
+git add -A
+git commit -m "deploy: auto-sync $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
 
-echo "✅ Deploy completado! Verifica en https://naroa.online"
+echo "🚢 Pushing to remote..."
+git push
+
+echo "✅ Deploy complete! Vercel will rebuild automatically."
+online"

@@ -1,0 +1,332 @@
+/**
+ * BLOQUES SEMÁNTICOS CON RITMOS DIFERENCIADOS
+ * Basado en la proporción áurea para jerarquía visual clara
+ */
+
+/* ========================================
+   BLOQUE "SÍ" - Ritmo Directo y Rápido
+   ======================================== */
+
+.block-yes {
+  /* Espaciado compacto (ritmo rápido) */
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  
+  /* Visuales directos */
+  background: linear-gradient(135deg, rgba(230, 57, 70, 0.1) 0%, rgba(230, 57, 70, 0.05) 100%);
+  border-left: 4px solid #e63946;
+  border-radius: 4px;
+  
+  /* Tipografía directa */
+  font-family: 'Inter', sans-serif;
+}
+
+.block-yes__label {
+  /* Etiqueta superior */
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #e63946;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+
+.block-yes__title {
+  /* Título directo y contundente */
+  font-size: var(--font-xl);
+  line-height: var(--line-tight);
+  font-weight: 700;
+  color: white;
+  margin-bottom: var(--space-sm);
+}
+
+.block-yes__content {
+  /* Contenido con ritmo rápido */
+  font-size: var(--font-base);
+  line-height: var(--line-normal);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.block-yes__content p {
+  margin-bottom: var(--space-sm);
+}
+
+.block-yes__microcopy {
+  /* Microcopy explicativo */
+  font-size: var(--font-xs);
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  margin-top: var(--space-xs);
+  padding-left: var(--space-md);
+  border-left: 2px solid rgba(230, 57, 70, 0.3);
+}
+
+/* ========================================
+   BLOQUE "DEPENDE" - Ritmo Lento y Reflexivo
+   ======================================== */
+
+.block-maybe {
+  /* Espaciado amplio (ritmo lento) */
+  padding: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+  
+  /* Visuales sutiles */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  
+  /* Tipografía elegante */
+  font-family: 'Playfair Display', serif;
+}
+
+.block-maybe__label {
+  /* Etiqueta superior más sutil */
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  margin-bottom: var(--space-md);
+  display: block;
+  font-family: 'Inter', sans-serif;
+}
+
+.block-maybe__title {
+  /* Título reflexivo */
+  font-size: var(--font-2xl);
+  line-height: var(--line-loose);
+  font-weight: 400;
+  color: white;
+  margin-bottom: var(--space-lg);
+  font-style: italic;
+}
+
+.block-maybe__content {
+  /* Contenido con ritmo lento para respirar */
+  font-size: var(--font-md);
+  line-height: var(--line-loose);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Inter', sans-serif;
+}
+
+.block-maybe__content p {
+  margin-bottom: var(--space-lg);
+}
+
+.block-maybe__microcopy {
+  /* Microcopy más elaborado */
+  font-size: var(--font-sm);
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border-left: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   VARIANTES DE ÉNFASIS
+   ======================================== */
+
+/* Bloque SÍ con énfasis extra */
+.block-yes--strong {
+  background: linear-gradient(135deg, rgba(230, 57, 70, 0.2) 0%, rgba(230, 57, 70, 0.1) 100%);
+  border-left-width: 6px;
+  box-shadow: 0 4px 16px rgba(230, 57, 70, 0.2);
+}
+
+/* Bloque DEPENDE con énfasis extra */
+.block-maybe--emphasized {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   LISTAS DENTRO DE BLOQUES
+   ======================================== */
+
+/* Lista en bloque SÍ - compacta */
+.block-yes ul,
+.block-yes ol {
+  margin: var(--space-sm) 0;
+  padding-left: var(--space-lg);
+}
+
+.block-yes li {
+  margin-bottom: var(--space-xs);
+  line-height: var(--line-normal);
+}
+
+/* Lista en bloque DEPENDE - espaciada */
+.block-maybe ul,
+.block-maybe ol {
+  margin: var(--space-lg) 0;
+  padding-left: var(--space-xl);
+}
+
+.block-maybe li {
+  margin-bottom: var(--space-md);
+  line-height: var(--line-loose);
+}
+
+/* ========================================
+   ICONOS VISUALES
+   ======================================== */
+
+.block-yes__icon,
+.block-maybe__icon {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: var(--space-md);
+  font-size: var(--font-xl);
+}
+
+.block-yes__icon {
+  background: rgba(230, 57, 70, 0.2);
+  color: #e63946;
+}
+
+.block-yes__icon::before {
+  content: "✓";
+}
+
+.block-maybe__icon {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.block-maybe__icon::before {
+  content: "~";
+  font-style: italic;
+}
+
+/* ========================================
+   ACCIONES EN BLOQUES
+   ======================================== */
+
+.block-yes__action,
+.block-maybe__action {
+  margin-top: var(--space-md);
+}
+
+.block-yes__action button,
+.block-yes__action .btn {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.block-yes__action button:hover {
+  background: #d62839;
+  transform: translateY(-2px);
+}
+
+.block-maybe__action button,
+.block-maybe__action .btn {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--font-base);
+  font-weight: 400;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.4s ease;
+}
+
+.block-maybe__action button:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   GRID DE BLOQUES MIXTOS
+   ======================================== */
+
+.blocks-grid {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: 1fr;
+}
+
+.blocks-grid--two-col {
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+/* Ratio áureo para bloques lado a lado */
+.blocks-grid--golden {
+  grid-template-columns: 1fr 1.618fr;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .block-yes {
+    padding: var(--space-md);
+  }
+  
+  .block-maybe {
+    padding: var(--space-lg);
+  }
+  
+  .block-maybe__title {
+    font-size: var(--font-xl);
+  }
+  
+  .blocks-grid--two-col,
+  .blocks-grid--golden {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   ANIMACIONES DE ENTRADA
+   ======================================== */
+
+.block-yes,
+.block-maybe {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: blockFadeIn 0.6s ease forwards;
+}
+
+.block-yes {
+  animation-duration: 0.4s; /* Más rápido = ritmo directo */
+}
+
+.block-maybe {
+  animation-duration: 0.8s; /* Más lento = ritmo reflexivo */
+}
+
+@keyframes blockFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Delay para múltiples bloques */
+.block-yes:nth-child(1) { animation-delay: 0s; }
+.block-yes:nth-child(2) { animation-delay: 0.1s; }
+.block-yes:nth-child(3) { animation-delay: 0.2s; }
+
+.block-maybe:nth-child(1) { animation-delay: 0s; }
+.block-maybe:nth-child(2) { animation-delay: 0.3s; }
+.block-maybe:nth-child(3) { animation-delay: 0.6s; }

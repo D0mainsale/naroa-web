@@ -1,0 +1,261 @@
+/**
+ * HERO FULLSCREEN - Primer Impacto Visual
+ * Regla: Primero impacto, luego contexto
+ */
+
+/* Hero Container */
+.hero-fullscreen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Hero Image - Pantalla completa */
+.hero-fullscreen__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: heroReveal 1.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  transform: scale(1.1);
+  filter: brightness(0.85) contrast(1.1);
+}
+
+@keyframes heroReveal {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Overlay sutil para legibilidad */
+.hero-fullscreen__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+/* Texto conceptual - Aparece DESPUÉS */
+.hero-fullscreen__text {
+  position: absolute;
+  bottom: var(--space-3xl);
+  left: var(--space-2xl);
+  right: var(--space-2xl);
+  z-index: 10;
+  
+  /* Invisible inicialmente */
+  opacity: 0;
+  transform: translateY(40px);
+  
+  /* Aparece con delay de 1.2s */
+  animation: textReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) 1.2s forwards;
+}
+
+@keyframes textReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título mínimo */
+.hero-fullscreen__title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--font-3xl);
+  font-weight: 400;
+  font-style: italic;
+  color: white;
+  margin: 0;
+  line-height: var(--line-tight);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtítulo ultra minimalista */
+.hero-fullscreen__subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--font-sm);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: var(--space-md);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Indicador de scroll (aparece último) */
+.hero-fullscreen__scroll-indicator {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  
+  opacity: 0;
+  animation: scrollIndicatorReveal 0.8s ease 2.5s forwards;
+}
+
+@keyframes scrollIndicatorReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+.scroll-indicator {
+  width: 30px;
+  height: 50px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 25px;
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.scroll-indicator::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  animation: scrollDot 2s infinite;
+}
+
+@keyframes scrollDot {
+  0%, 100% {
+    top: 8px;
+    opacity: 1;
+  }
+  50% {
+    top: 24px;
+    opacity: 0.5;
+  }
+}
+
+/* Carousel Navigation */
+.hero-fullscreen__carousel-nav {
+  position: absolute;
+  bottom: var(--space-2xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-sm);
+  z-index: 15;
+  
+  opacity: 0;
+  animation: navReveal 0.6s ease 2s forwards;
+}
+
+@keyframes navReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot.active {
+  background: white;
+  transform: scale(1.3);
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .hero-fullscreen__text {
+    bottom: var(--space-2xl);
+    left: var(--space-lg);
+    right: var(--space-lg);
+  }
+  
+  .hero-fullscreen__title {
+    font-size: var(--font-2xl);
+  }
+  
+  .hero-fullscreen__subtitle {
+    font-size: var(--font-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-fullscreen__title {
+    font-size: var(--font-xl);
+  }
+  
+  .hero-fullscreen__scroll-indicator {
+    bottom: var(--space-md);
+  }
+}
+
+/* Transición suave al hacer scroll */
+.hero-fullscreen.scrolled .hero-fullscreen__image {
+  transform: scale(1.05);
+  filter: brightness(0.7);
+}
+
+/* Parallax sutil en scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-fullscreen {
+    will-change: transform;
+  }
+}
+
+/* Loading state para la imagen */
+.hero-fullscreen__image.loading {
+  opacity: 0;
+}
+
+.hero-fullscreen__image.loaded {
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+/* Firma de artista (muy sutil, bottom right) */
+.hero-fullscreen__signature {
+  position: absolute;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  font-size: var(--font-xs);
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  z-index: 10;
+  opacity: 0;
+  animation: signatureReveal 0.6s ease 3s forwards;
+}
+
+@keyframes signatureReveal {
+  to {
+    opacity: 1;
+  }
+}
