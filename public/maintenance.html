@@ -30,6 +30,32 @@
             max-width: 600px;
             position: relative;
             z-index: 1;
+            background: rgba(0, 0, 0, 0.45);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border: 1px solid #333;
+            color: #fff;
+            background: rgba(196, 30, 58, 0.2);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+        }
+
+        .social-link:hover {
+            border-color: #c41e3a;
+            color: #fff;
+            background: rgba(196, 30, 58, 0.4);
         }
         
         h1 {
