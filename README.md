@@ -41,7 +41,7 @@ naroa-web/
 │       ├── ritual-systems.js # Sistemas rituales
 │       └── archive.js       # Archivo
 ├── images/                  # Imágenes
-│   ├── raw_albums/         # 53 álbumes originales (352 imgs)
+│   ├── raw_albums/         # 211 álbumes originales (352 imgs)
 │   ├── optimized/          # WebP optimizadas
 │   └── thumbnails/         # Thumbnails 400px
 ├── data/                    # Datos JSON
@@ -170,8 +170,8 @@ python3 scripts/download_facebook_albums.py
 
 ## 📝 **Datos**
 
-- **211 álbumes** mapeados de Facebook
-- **53 álbumes** descargados localmente
+- **211 álbumes** descargados de Facebook
+- **147 álbumes** mapeados con nombres descriptivos
 - **352 imágenes** indexadas y optimizadas
 - **12 posts** en Bitácora con imágenes WordPress
 

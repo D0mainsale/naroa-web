@@ -90,6 +90,13 @@ class Portfolio {
     
     
     renderGrid() {
+        // DISABLED: El nuevo sistema UnifiedObraSystem se encarga del portfolio
+        // Si unified-obra está activo, no hacer nada
+        if (window.unifiedObraSystem && window.unifiedObraSystem.dataLoaded) {
+            console.log('📦 Portfolio.renderGrid() cediendo control a UnifiedObraSystem');
+            return;
+        }
+        
         const view = document.getElementById('portfolio-view');
         const grid = document.getElementById('portfolio-grid');
         view.classList.remove('hidden');
