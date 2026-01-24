@@ -26,6 +26,7 @@ class UnifiedObraSystemV2 {
         this.dataLoaded = false;
         this.searchQuery = '';
         this.activeCategory = 'all';
+        this.showAllAlbums = false; // Daily rotation: false = show 12/day, true = all
         
         // Touch handling
         this.touchStartX = 0;
@@ -130,9 +131,39 @@ class UnifiedObraSystemV2 {
     }
     
     buildTimeline() {
+        // === DAILY ROTATION SYSTEM ===
+        // Show a rotating subset of albums each day instead of loading all
+        const ALBUMS_PER_DAY = 12;
+        
+        let albumsToShow;
+        
+        if (this.showAllAlbums) {
+            // User clicked "Ver todos" — show all
+            albumsToShow = this.albums;
+            console.log(`🎨 Mostrando TODOS los ${this.albums.length} álbumes`);
+        } else {
+            // Default: daily rotation
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            
+            const totalAlbums = this.albums.length;
+            const startIndex = (dayOfYear * ALBUMS_PER_DAY) % totalAlbums;
+            
+            albumsToShow = [];
+            for (let i = 0; i < Math.min(ALBUMS_PER_DAY, totalAlbums); i++) {
+                const index = (startIndex + i) % totalAlbums;
+                albumsToShow.push(this.albums[index]);
+            }
+            
+            console.log(`📅 Día ${dayOfYear}: mostrando ${albumsToShow.length} de ${totalAlbums} álbumes`);
+        }
+        
         this.timeline = [
-            ...this.albums.map(album => ({ type: 'album', data: album })),
-            ...this.blogPosts.map(post => ({ type: 'post', data: post }))
+            ...albumsToShow.map(album => ({ type: 'album', data: album })),
+            ...this.blogPosts.slice(0, this.showAllAlbums ? this.blogPosts.length : 3).map(post => ({ type: 'post', data: post }))
         ];
         this.filteredTimeline = [...this.timeline];
     }
@@ -196,6 +227,12 @@ class UnifiedObraSystemV2 {
     renderControls(container) {
         const controls = document.createElement('div');
         controls.className = 'gallery-controls';
+        
+        // Daily rotation info
+        const isShowingAll = this.showAllAlbums;
+        const displayCount = this.filteredTimeline.filter(i => i.type === 'album').length;
+        const totalCount = this.albums.length;
+        
         controls.innerHTML = `
             <div class="search-container">
                 <input type="text" 
@@ -215,8 +252,10 @@ class UnifiedObraSystemV2 {
                 `).join('')}
             </div>
             <div class="gallery-stats">
-                <span class="stat-count">${this.filteredTimeline.length}</span> obras
+                <span class="stat-count">${displayCount}</span> de ${totalCount} obras
+                ${!isShowingAll ? `<span class="daily-rotation">· 📅 selección del día</span>` : ''}
                 ${this.searchQuery ? `<span class="filter-active">· filtrado</span>` : ''}
+                ${!isShowingAll ? `<button class="load-all-btn">Ver todos →</button>` : ''}
             </div>
         `;
         
@@ -248,6 +287,17 @@ class UnifiedObraSystemV2 {
                 this.render();
             });
         });
+        
+        // "Ver todos" button — load all albums
+        const loadAllBtn = controls.querySelector('.load-all-btn');
+        if (loadAllBtn) {
+            loadAllBtn.addEventListener('click', () => {
+                this.showAllAlbums = true;
+                this.buildTimeline();
+                this.filterTimeline();
+                this.render();
+            });
+        }
     }
     
     createAlbumCard(album, index) {
@@ -716,6 +766,30 @@ class UnifiedObraSystemV2 {
             
             .filter-active {
                 color: var(--accent);
+            }
+            
+            .daily-rotation {
+                color: var(--accent);
+                font-style: italic;
+            }
+            
+            .load-all-btn {
+                display: inline-block;
+                margin-left: 12px;
+                padding: 6px 14px;
+                background: var(--accent-gradient);
+                color: white;
+                border: none;
+                border-radius: 16px;
+                font-size: 12px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .load-all-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
             }
             
             /* ═══════════════════════════════════════════════════════════════════
