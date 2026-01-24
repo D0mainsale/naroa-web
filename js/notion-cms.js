@@ -20,7 +20,19 @@ class NotionCMS {
         return false;
       }
       
-      this.artworks = await response.json();
+      const data = await response.json();
+      
+      // Handle both array format and { artworks: [...] } format
+      if (Array.isArray(data)) {
+        this.artworks = data;
+      } else if (data && Array.isArray(data.artworks)) {
+        this.artworks = data.artworks;
+      } else {
+        console.warn('⚠️ Unexpected JSON structure, expected array or { artworks: [...] }');
+        this.artworks = [];
+        return false;
+      }
+      
       this.loaded = true;
       console.log(`✅ Loaded ${this.artworks.length} artworks from Notion CMS`);
       return true;
@@ -98,14 +110,10 @@ class NotionCMS {
     // BETTER: empty it only if we have data to show, to allow SEO fallback
     container.innerHTML = '';
 
-    // Render each artwork as a card
+    // Render each artwork as a card (no category filter - show all)
     this.artworks.forEach((art, index) => {
-      // Filter for portfolio category if needed, OR relies on fetch script filtering?
-      // fetch script fetches everything. We should filter here.
-      if (art.category && art.category.includes('Portfolio')) {
-          const card = this.createCard(art, index);
-          container.appendChild(card);
-      }
+      const card = this.createCard(art, index);
+      container.appendChild(card);
     });
 
     console.log(`🎨 Rendered ${this.artworks.length} portfolio cards`);

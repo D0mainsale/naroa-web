@@ -1,9 +1,9 @@
-/* ===================================
-   CLEAN UI - FLOATING BUTTONS CONSOLIDATION
-   Hides secondary floating buttons for cleaner experience
-   =================================== */
+/* ═══════════════════════════════════════════════════════════════════
+   CLEAN UI v3.0 - SIMPLIFIED FLOATING BUTTONS
+   Solo UN botón CTA principal + Spotify discreto
+   ═══════════════════════════════════════════════════════════════════ */
 
-/* Hide excessive floating buttons - keep only essential ones */
+/* ═══ HIDE ALL EXCESSIVE BUTTONS ═══ */
 .ai-whisper-toggle,
 .ai-assistant-toggle,
 .silence-toggle,
@@ -13,74 +13,164 @@
 .huella-digital,
 .materia-toggle,
 .studio-mode-toggle,
-.contemplation-toggle {
+.contemplation-toggle,
+#studio-audio-toggle,
+#immersive-toggle,
+.immersive-controls,
+.naroa-ai-toggle,
+.studio-toggle-btn,
+.studio-toggle,
+.estudio-toggle {
     display: none !important;
     opacity: 0 !important;
     pointer-events: none !important;
+    visibility: hidden !important;
 }
 
-/* Keep essential buttons but reorganize */
-.commission-trigger {
-    bottom: 20px !important;
-    right: 20px !important;
-    left: auto !important;
-    z-index: 1000 !important;
-}
-
-/* Agendar button - stack below commission */
+/* ═══ HIDE "AGENDAR" - Unificado en commission-trigger ═══ */
 #cal-booking-button,
+.cal-floating-btn,
 .booking-trigger,
 [onclick*="Cal"] {
-    bottom: 75px !important;
-    right: 20px !important;
-    left: auto !important;
-    z-index: 999 !important;
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
 }
 
-/* Hide all bottom-left floaters */
-[style*="bottom"][style*="left"]:not(.nav):not(.menu):not(nav):not(header) {
-    /* Let them live but reduce visual clutter */
+/* ═══════════════════════════════════════════════════════════════════
+   SINGLE CTA BUTTON - "Solicitar Encargo" unified
+   Bottom-left, premium style
+   ═══════════════════════════════════════════════════════════════════ */
+
+.commission-trigger {
+    position: fixed !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    right: auto !important;
+    z-index: 9990 !important;
+    
+    /* Premium glassmorphism style */
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(50, 50, 50, 0.9)) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 30px !important;
+    padding: 14px 24px !important;
+    
+    /* Text */
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    
+    /* Shadow & effects */
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Cleaner floating button style */
-.commission-trigger,
-.booking-trigger {
-    backdrop-filter: blur(10px) !important;
-    background: rgba(0, 0, 0, 0.8) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-    transition: all 0.3s ease !important;
+.commission-trigger:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    background: linear-gradient(135deg, rgba(40, 40, 40, 0.98), rgba(60, 60, 60, 0.95)) !important;
 }
 
-.commission-trigger:hover,
-.booking-trigger:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4) !important;
+/* ═══════════════════════════════════════════════════════════════════
+   SPOTIFY PLAYER - Discreto encima del CTA
+   ═══════════════════════════════════════════════════════════════════ */
+
+.spotify-player-container {
+    position: fixed !important;
+    bottom: 85px !important;
+    left: 24px !important;
+    right: auto !important;
+    z-index: 9989 !important;
 }
 
-/* Hide the "En construcción" footer section if it appears */
+/* ═══════════════════════════════════════════════════════════════════
+   "SÍ" y "DEPENDE" - SOLO en HOME VIEW
+   Ocultar en todas las demás vistas
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Hide intro options when NOT on home view */
+body:not([data-view="home"]) .intro-options,
+body:not([data-view="home"]) .home-choice,
+.portfolio-view .intro-options,
+.process-view .intro-options,
+.bitacora-view .intro-options,
+.retrato-view .intro-options,
+.about-view .intro-options,
+.ritual-view .intro-options,
+.tienda-view .intro-options,
+.retrospecter-view .intro-options,
+.portfolio-view .home-choice,
+.process-view .home-choice,
+.bitacora-view .home-choice,
+.retrato-view .home-choice,
+.about-view .home-choice,
+.ritual-view .home-choice,
+.tienda-view .home-choice,
+.retrospecter-view .home-choice {
+    display: none !important;
+}
+
+/* Ensure home-view shows its content */
+.home-view .intro-options,
+.home-view .home-choice,
+#home-view .intro-options,
+#home-view .home-choice {
+    display: flex !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HIDE BITÁCORA - Unified into Portfolio
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Hide all Bitácora navigation links */
+a[href="#/bitacora"],
+a[href*="bitacora"],
+.nav-link[href="#/bitacora"] {
+    display: none !important;
+}
+
+/* Hide the entire Bitácora view */
+#bitacora-view,
+.bitacora-view {
+    display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HIDDEN ELEMENTS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Hide construction notices */
 [href*="borjamoskv"],
 .under-construction,
 .construction-notice {
     display: none !important;
 }
 
-/* Reduce visual noise from status indicators */
-.exploration-progress,
-.progress-indicator,
-[class*="progress-bar"] {
-    opacity: 0.6 !important;
-    transform: scale(0.8) !important;
-}
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════ */
 
-/* Make the Estudio button more subtle */
-.studio-toggle,
-.estudio-toggle {
-    opacity: 0.7 !important;
-    transition: opacity 0.3s !important;
-}
-
-.studio-toggle:hover,
-.estudio-toggle:hover {
-    opacity: 1 !important;
+@media (max-width: 768px) {
+    .commission-trigger {
+        bottom: 16px !important;
+        left: 16px !important;
+        padding: 12px 20px !important;
+        font-size: 13px !important;
+    }
+    
+    .spotify-player-container {
+        bottom: 75px !important;
+        left: 16px !important;
+    }
 }
