@@ -453,6 +453,7 @@ class JuegoOca {
         hud.id = 'game-hud';
         hud.className = 'game-hud';
         const bestText = this.records.bestRolls ? `🏆 ${this.records.bestRolls}` : '-';
+        const unlockedCount = Object.values(this.ACHIEVEMENTS).filter(a => a.unlocked).length;
         hud.innerHTML = `
             <div class="hud-row">
                 <div class="hud-item">
@@ -470,6 +471,7 @@ class JuegoOca {
                 </div>
             </div>
             <div class="hud-buttons">
+                <button id="achievements-btn" class="hud-btn">🏅 ${unlockedCount}/8</button>
                 <button id="gallery-btn" class="hud-btn">🎨 Galería</button>
                 <button id="reset-btn" class="hud-btn">🔄 Nueva</button>
             </div>
@@ -478,6 +480,7 @@ class JuegoOca {
         
         document.getElementById('reset-btn').addEventListener('click', () => this.resetGame());
         document.getElementById('gallery-btn').addEventListener('click', () => this.showGallery());
+        document.getElementById('achievements-btn').addEventListener('click', () => this.showAchievementsPanel());
     }
 
     roll() {

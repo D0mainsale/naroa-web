@@ -1068,3 +1068,163 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+/* === SISTEMA DE LOGROS === */
+.achievement-notification {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(201, 48, 48, 0.15));
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 8000;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.achievement-notification.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.achievement-badge {
+    font-size: 2.5rem;
+    animation: badgePop 0.5s ease-out;
+}
+
+@keyframes badgePop {
+    0% { transform: scale(0) rotate(-180deg); }
+    50% { transform: scale(1.3) rotate(10deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.achievement-content {
+    text-align: left;
+}
+
+.achievement-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ritual-gold);
+    margin-bottom: 4px;
+}
+
+.achievement-notification .achievement-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--ritual-text);
+}
+
+.achievement-notification .achievement-desc {
+    font-size: 0.75rem;
+    color: var(--ritual-muted);
+}
+
+/* === PANEL DE LOGROS === */
+.achievements-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 15, 0.95);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 7500;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s;
+}
+
+.achievements-modal.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.achievements-content {
+    max-width: 600px;
+    width: 90%;
+}
+
+.achievements-content h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--ritual-gold);
+    margin-bottom: 2rem;
+}
+
+.achievements-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+.achievement-item.unlocked {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.achievement-item.locked {
+    opacity: 0.5;
+}
+
+.achievement-icon {
+    font-size: 2rem;
+    width: 50px;
+    text-align: center;
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-item .achievement-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ritual-text);
+    margin-bottom: 4px;
+}
+
+.achievement-item .achievement-desc {
+    font-size: 0.8rem;
+    color: var(--ritual-muted);
+}
+
+#close-achievements {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--ritual-text);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+
+#close-achievements:hover {
+    background: var(--ritual-glow);
+    border-color: var(--ritual-glow);
+}
