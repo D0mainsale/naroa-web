@@ -152,10 +152,11 @@ class UnifiedObraSystem {
         const container = document.getElementById('portfolio-grid');
         if (!container) return;
         
-        // Reset pagination
+        // Reset pagination - Start with fewer items for fast initial load
         this.currentPage = 0;
-        this.itemsPerPage = 24;  // Carga inicial
-        this.loadMoreCount = 12; // Items por carga adicional
+        this.itemsPerPage = 12;  // Fast initial load
+        this.loadMoreCount = 8;  // Smaller batches
+        this.allLoaded = false;
         
         container.innerHTML = '';
         container.className = 'unified-obra-grid';
@@ -168,6 +169,7 @@ class UnifiedObraSystem {
         
         console.log('🎨 Unified gallery initialized with infinite scroll');
     }
+
     
     loadMoreItems(container) {
         const startIndex = this.currentPage * (this.currentPage === 0 ? this.itemsPerPage : this.loadMoreCount);
@@ -265,13 +267,14 @@ class UnifiedObraSystem {
         card.className = 'unified-album-card';
         card.dataset.index = index;
         
-        // Use thumbnail for grid, store original for lightbox
+        // Use thumbnail for grid with blur-up effect
         const thumbSrc = this.getThumbnailPath(album.cover);
         
         card.innerHTML = `
             <div class="album-card-inner">
                 <div class="album-cover">
-                    <img src="${thumbSrc}" alt="${album.name}" loading="lazy" onerror="this.src='${album.cover}'">
+                    <div class="album-placeholder"></div>
+                    <img data-src="${thumbSrc}" data-fallback="${album.cover}" alt="${album.name}" class="album-img lazy">
                     <div class="album-overlay">
                         <div class="album-count">${album.count} ${album.count === 1 ? 'foto' : 'fotos'}</div>
                     </div>
@@ -282,11 +285,32 @@ class UnifiedObraSystem {
             </div>
         `;
 
+        // Setup lazy loading
+        this.setupLazyLoad(card.querySelector('.album-img'));
         
         card.addEventListener('click', () => this.openAlbum(album));
         
         return card;
     }
+    
+    setupLazyLoad(img) {
+        if (!this.lazyObserver) {
+            this.lazyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.onerror = () => { img.src = img.dataset.fallback; };
+                        img.onload = () => img.classList.add('loaded');
+                        this.lazyObserver.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '100px' });
+        }
+        
+        this.lazyObserver.observe(img);
+    }
+
     
     createBlogCard(post, index) {
         const card = document.createElement('div');
@@ -511,6 +535,23 @@ class UnifiedObraSystem {
                 overflow: hidden;
             }
             
+            /* Blur placeholder */
+            .album-placeholder {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 50%, #e0e0e0 100%);
+                background-size: 200% 200%;
+                animation: shimmer 1.5s infinite;
+            }
+            
+            @keyframes shimmer {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+            
             .album-cover img {
                 position: absolute;
                 top: 0;
@@ -518,8 +559,19 @@ class UnifiedObraSystem {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                transition: transform 0.4s ease;
+                transition: transform 0.4s ease, opacity 0.3s ease;
+                opacity: 0;
             }
+            
+            .album-cover img.loaded {
+                opacity: 1;
+            }
+            
+            .album-cover img.loaded + .album-placeholder,
+            .album-img.loaded ~ .album-placeholder {
+                display: none;
+            }
+
             
             .unified-album-card:hover .album-cover img {
                 transform: scale(1.05);
