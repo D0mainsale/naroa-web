@@ -102,28 +102,13 @@
     <!-- Fonts with display=swap for FOUT prevention -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/golden-typography.css">
-    <link rel="stylesheet" href="/css/premium-2026.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/ritual.css">
-    <link rel="stylesheet" href="/css/lunar-mode.css">
-    <link rel="stylesheet" href="/css/bitacora-premium.css">
-    <link rel="stylesheet" href="/css/portfolio-premium.css">
-    <link rel="stylesheet" href="/css/shop-premium.css">
-    <link rel="stylesheet" href="/css/galeria-premium.css">
-    <link rel="stylesheet" href="/css/hero-fullscreen.css">
-    <link rel="stylesheet" href="/css/semantic-blocks.css">
-    <link rel="stylesheet" href="/css/ai-whisper.css">
-    <link rel="stylesheet" href="/css/portrait-cta.css">
-    <link rel="stylesheet" href="/css/obra-detail.css">
-    <link rel="stylesheet" href="/css/naroa-ai.css">
-    <link rel="stylesheet" href="/css/smart-typography.css">
-    <link rel="stylesheet" href="/css/process-premium.css">
     
     <!-- OVERRIDE CSS (must be last for highest priority) -->
     <link rel="stylesheet" href="/css/no-vignette.css">
+    <link rel="stylesheet" href="/css/clean-ui.css">
     <link rel="stylesheet" href="/css/cursor-brush.css">
+    <link rel="stylesheet" href="/css/process-improvements.css">
+    <link rel="stylesheet" href="/css/dock.css">
 </head>
 <body>
     <!-- SEO invisible para crawlers y accesibilidad -->
@@ -152,15 +137,18 @@
             
             <!-- Solo la pregunta -->
             <div class="home-choice">
-                <h2 class="intro-question">¿Juegas?</h2>
+                <h2 class="intro-question">¿Quieres un retrato?</h2>
                 
-                <!-- Sí o Depende -->
+                <!-- Sí, Depende, Quiero Jugar -->
                 <nav class="intro-options">
-                    <a href="#/ritual" class="intro-btn intro-btn--ritual" data-action="play">
+                    <a href="#/retrato" class="intro-btn intro-btn--ritual" data-action="retrato">
                         <span class="btn-label">Sí</span>
                     </a>
                     <a href="#/portfolio" class="intro-btn intro-btn--portfolio" data-action="browse">
                         <span class="btn-label">Depende</span>
+                    </a>
+                    <a href="#/ritual" class="intro-btn intro-btn--play" data-action="play">
+                        <span class="btn-label">Quiero Jugar</span>
                     </a>
                 </nav>
             </div>
@@ -222,7 +210,6 @@
          ═══════════════════════════════════════════════════════════════════ -->
     <main id="process-view" data-view="process" class="process-view hidden">
         <header class="portfolio-header">
-            <h1 class="portfolio-title">Proceso</h1>
             <nav class="portfolio-nav">
                 <a href="#/portfolio" class="nav-link">Obras</a>
                 <a href="#/process" class="nav-link active">Proceso</a>
@@ -232,6 +219,18 @@
                 <a href="#/about" class="nav-link">About</a>
             </nav>
         </header>
+
+        <!-- 1. Hero Visual Inmersivo -->
+        <section class="process-hero">
+            <img src="/images/naroa-artist.jpg" alt="Naroa Gutiérrez trabajando en el estudio" class="process-hero-bg">
+            <div class="process-hero-content">
+                <h1 class="process-hero-title">El Proceso</h1>
+                <div class="process-hero-subtitle">
+                    El error como método
+                    <span>La espera como herramienta</span>
+                </div>
+            </div>
+        </section>
         
         <article class="process-intro">
             <p class="process-statement">Mi proceso <span class="twisted-text">no es lineal</span>. Es un «vaivén» entre luz y falla, entretejiendo <strong>alma</strong> y <strong>glitch</strong>.</p>
@@ -263,6 +262,35 @@
             </article>
         </section>
         
+        </section>
+
+        <!-- 3. Materiales Interactivos -->
+        <section class="process-materials">
+            <h2 class="materials-title">Materia Viva</h2>
+            <div class="materials-grid">
+                <div class="material-card" data-material="grafito">
+                    <div class="material-visual grafito-visual"></div>
+                    <h3>Grafito</h3>
+                    <p>La precisión del pensamiento.</p>
+                </div>
+                <div class="material-card" data-material="carbon">
+                    <div class="material-visual carbon-visual"></div>
+                    <h3>Carbón</h3>
+                    <p>La profundidad de la sombra.</p>
+                </div>
+                <div class="material-card" data-material="mica">
+                    <div class="material-visual mica-visual"></div>
+                    <h3>Mica</h3>
+                    <p>La luz que rompe la forma.</p>
+                </div>
+                <div class="material-card" data-material="acrilico">
+                    <div class="material-visual acrilico-visual"></div>
+                    <h3>Acrílico</h3>
+                    <p>El cuerpo del color.</p>
+                </div>
+            </div>
+        </section>
+        
         <!-- ═══════════════════════════════════════════════════════════════════
              ANTES/DESPUÉS — Slider Interactivo del Proceso Creativo
              ═══════════════════════════════════════════════════════════════════ -->
@@ -281,7 +309,12 @@
         </section>
         
         <footer class="portfolio-footer">
-            <a href="#/retrato" class="process-cta">¿Quieres un retrato? →</a>
+            <!-- 7. CTA Estratégico -->
+            <div class="process-cta-container">
+                <h2 class="process-cta-title">¿Quieres vivir este proceso?</h2>
+                <a href="#/retrato" class="btn-strategic">Encargar mi Retrato</a>
+            </div>
+            
             <a href="#/" class="back-home">← Volver al inicio</a>
         </footer>
     </main>
@@ -662,67 +695,70 @@
     <script src="/js/features/catalogo.js"></script>
     <script src="/js/features/galeria.js"></script>
 
+    <!-- Notion CMS Loader (Must be before features/app) -->
+    <script src="js/notion-cms.js?v=CMS_INTEGRATION_V2"></script>
+
     <!-- Core App (after features) -->
-    <script src="js/app.js?v=2026_reboot"></script>
+    <script src="js/app.js?v=SHADOW_KILL_V1"></script>
 
     <!-- Effects -->
-    <script src="js/premium-features.js?v=2026_reboot"></script>
-    <script src="js/ultra-premium.js?v=2026_reboot"></script>
-    <script src="js/lightbox.js?v=2026_reboot"></script>
-    <script src="js/dust.js?v=2026_reboot"></script>
-    <script src="js/rupture.js?v=2026_reboot"></script>
-    <script src="js/reading-progress.js?v=2026_reboot"></script>
+    <script src="js/premium-features.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/ultra-premium.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/lightbox.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/dust.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/rupture.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/reading-progress.js?v=SHADOW_KILL_V1"></script>
 
     <!-- GSAP Animations (Renamed & Busted) -->
-    <script src="js/anim-system.js?v=2026_reboot"></script>
+    <script src="js/anim-system.js?v=SHADOW_KILL_V1"></script>
 
     <!-- Notion CMS Loader -->
-    <script src="js/notion-cms.js?v=2026_reboot"></script>
+    <script src="js/notion-cms.js?v=CMS_INTEGRATION_V2" defer></script>
 
     <!-- Shop System -->
-    <script src="js/shop.js?v=2026_reboot"></script>
+    <script src="js/shop.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Wishlist System (Favorites) -->
-    <script src="js/features/wishlist.js?v=2026_quickwin"></script>
+    <script src="js/features/wishlist.js?v=SHADOW_KILL_V1"></script>
 
     <!-- Hero Fullscreen -->
-    <script src="js/hero-fullscreen.js?v=2026_reboot"></script>
+    <script src="js/hero-fullscreen.js?v=SHADOW_KILL_V1"></script>
 
     <!-- AI Whisper System -->
-    <script src="js/ai-whisper.js?v=2026_reboot"></script>
+    <script src="js/ai-whisper.js?v=SHADOW_KILL_V1"></script>
 
     <!-- Portrait CTA -->
-    <script src="js/portrait-cta.js?v=2026_reboot"></script>
+    <script src="js/portrait-cta.js?v=SHADOW_KILL_V1"></script>
 
     <!-- PILOT Real Cursor - DISABLED in favor of CSS brush cursor
-    <script src="js/pilot-cursor-real.js?v=2026_nextlevel"></script>
+    <script src="js/pilot-cursor-real.js?v=SHADOW_KILL_V1"></script>
     -->
 
     <!-- Welcome Ritual (First Visit Experience) -->
-    <script src="js/features/welcome-ritual.js?v=2026_nextlevel"></script>
+    <script src="js/features/welcome-ritual.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Animated Signature (Home Microinteraction) -->
-    <script src="js/features/animated-signature.js?v=2026_quickwin"></script>
+    <script src="js/features/animated-signature.js?v=SHADOW_KILL_V1"></script>
 
     <!-- Hidden Stories (Long-Hover Reveal) -->
-    <script src="js/features/hidden-stories.js?v=2026_nextlevel"></script>
+    <script src="js/features/hidden-stories.js?v=SHADOW_KILL_V1"></script>
 
     <!-- Ritual Games (Age-Based Interactive Games) -->
-    <script src="js/features/ritual-games.js?v=2026_nextlevel"></script>
+    <script src="js/features/ritual-games.js?v=SHADOW_KILL_V1"></script>
 
     <!-- ═══ NEXT-LEVEL 2026 Features ═══ -->
     
     <!-- Konami Code (Easter Egg Secret Gallery) -->
-    <script src="js/features/konami-code.js?v=2026_nextlevel"></script>
+    <script src="js/features/konami-code.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Paint Cursor (Artistic Brush Trail) -->
-    <script src="js/features/paint-cursor.js?v=2026_nextlevel"></script>
+    <script src="js/features/paint-cursor.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Exploration Progress (Gamification) -->
-    <script src="js/features/exploration-progress.js?v=2026_nextlevel"></script>
+    <script src="js/features/exploration-progress.js?v=SHADOW_KILL_V1"></script>
     
     <!-- AI Haiku Generator -->
-    <script src="js/features/ai-haiku.js?v=2026_nextlevel"></script>
+    <script src="js/features/ai-haiku.js?v=SHADOW_KILL_V1"></script>
 
     <!-- Process Blocks Observer -->
     <script>
@@ -741,60 +777,83 @@
       });
     </script>
 
-    <!-- Naroa AI Assistant (Gemini Combo) -->
-    <script src="js/naroa-ai.js?v=2026_reboot"></script>
+    <!-- Unified Dock (Control Center) -->
+    <script src="js/features/dock.js?v=DOCK_V1"></script>
+    
+    <!-- ✨ VALERIA VIRTUAL - Asistente Espectacular -->
+    <script src="js/valeria-virtual.js?v=VALERIA_V1"></script>
 
     <!-- Ritual Enhanced v3.0 -->
-    <script src="js/ritual-enhanced.js?v=2026_reboot"></script>
+    <script src="js/ritual-enhanced.js?v=SHADOW_KILL_V1"></script>
 
     <!-- ═══════════════════════════════════════════════════════════════════
          NEXT-LEVEL FEATURES v2026
          ═══════════════════════════════════════════════════════════════════ -->
     
     <!-- Studio Mode (Ambient Sound + Dynamic Lighting) -->
-    <script src="js/features/studio-mode.js?v=2026_mega"></script>
+    <script src="js/features/studio-mode.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Gaze Follow (Portraits Follow Cursor) -->
-    <script src="js/features/gaze-follow.js?v=2026_mega"></script>
+    <script src="js/features/gaze-follow.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Before/After Slider (Sketch → Final) -->
-    <script src="js/features/before-after-slider.js?v=2026_mega"></script>
+    <script src="js/features/before-after-slider.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Audio-Visual Synesthesia (Hover → Sound) -->
-    <script src="js/features/audio-synesthesia.js?v=2026_mega"></script>
+    <script src="js/features/audio-synesthesia.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Keyboard Navigation (Vim Keys + Shortcuts) -->
-    <script src="js/features/keyboard-nav.js?v=2026_mega"></script>
+    <script src="js/features/keyboard-nav.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Cal.com Booking (Online Appointments) -->
-    <script src="js/features/cal-booking.js?v=2026_mega"></script>
+    <script src="js/features/cal-booking.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Blockchain CoA (NFT Certificates) -->
-    <script src="js/features/blockchain-coa.js?v=2026_mega"></script>
+    <script src="js/features/blockchain-coa.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Portfolio Creative (Masonry, Scatter, Stack, Magnetic Effects) -->
-    <script src="js/features/portfolio-creative.js?v=2026_creative"></script>
+    <script src="js/features/portfolio-creative.js?v=SHADOW_KILL_V1"></script>
     
     <!-- UNIFIED GALLERY (3D Museum + Tactile Interaction) -->
-    <script src="js/features/gallery-unified.js?v=2026_unified"></script>
+    <script src="js/features/gallery-unified.js?v=SHADOW_KILL_V1"></script>
+    
+    <!-- 🎨 UNIFIED OBRA SYSTEM (Albums + Bitácora) — Facebook-style -->
+    <script src="js/features/unified-obra.js?v=UNIFIED_V1"></script>
     
     <!-- ═══ PREMIUM CONVERSION FEATURES 2026 ═══ -->
     
     <!-- Testimonials Premium (Dynamic Carousel) -->
-    <script src="js/features/testimonials-premium.js?v=2026_premium"></script>
+    <script src="js/features/testimonials-premium.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Commission Workflow (Step-by-Step Order Form) -->
-    <script src="js/features/commission-workflow.js?v=2026_premium"></script>
+    <script src="js/features/commission-workflow.js?v=SHADOW_KILL_V1"></script>
     
     <!-- AR Wall Preview (See Art on Your Wall) -->
-    <script src="js/features/ar-wall-preview.js?v=2026_premium"></script>
+    <script src="js/features/ar-wall-preview.js?v=SHADOW_KILL_V1"></script>
+    
+    <!-- Instagram Feed Widget -->
+    <link rel="stylesheet" href="css/instagram-feed.css">
+    <script src="js/features/instagram-feed.js"></script>
+
+    <!-- i18n System -->
+    <script src="js/i18n.js"></script>
+
+    <!-- Immersive Experience (Mica Particles + Ink Trails + Studio Audio) -->
+    <script src="js/immersive-experience.js?v=SHADOW_KILL_V1"></script>
+    
+    <!-- Spotify Ambient Music Player -->
+    <script src="js/features/spotify-player.js?v=SPOTIFY_V1"></script>
 
     <!-- PWA Registration -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/js/service-worker.js')
-            .then(reg => console.log('✅ SW Registered (Rebooted)', reg))
+            .then(reg => {
+                // Force update on reload
+                reg.update();
+                console.log('✅ SW Registered & Updating (Shadow Killer)', reg);
+            })
             .catch(err => console.error('❌ SW Fail', err));
         });
       }
