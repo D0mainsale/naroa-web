@@ -471,9 +471,8 @@ class PILOTRealCursor {
     }
     
     animate() {
-        // Clear with fade effect
-        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        // Clear canvas completely (transparent background)
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         // Smooth follow
         this.lerp.x += (this.mouse.x - this.lerp.x) * this.lerpFactor;

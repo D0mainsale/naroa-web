@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "author": "Siarte Leku",
+    "role": "Galería de Arte",
+    "location": "Bilbao",
+    "avatar": "🎨",
+    "quote": "Siempre inspiradora. Su obra es un abrazo visual, una posada emocional donde el espectador puede soltar lastre y reposar.",
+    "rating": 5,
+    "highlight": "abrazo visual",
+    "date": "2025"
+  },
+  {
+    "id": 2,
+    "author": "Politena",
+    "role": "Espacio Gastronómico y Cultural",
+    "location": "Basauri",
+    "avatar": "🍷",
+    "quote": "DiviNos VaiVenes fue una invitación a mimar el paladar y el bienestar simultáneamente. Arte que se integra en la vida cotidiana.",
+    "rating": 5,
+    "highlight": "mimar el paladar",
+    "date": "2026"
+  },
+  {
+    "id": 3,
+    "author": "Walking Gallery Bilbao",
+    "role": "Iniciativa de Arte Urbano",
+    "location": "Bilbao",
+    "avatar": "🚶",
+    "quote": "El arte como nexo de unión entre las gentes, un botiquín de primeros auxilios que democratiza el acceso a la cultura visual.",
+    "rating": 5,
+    "highlight": "botiquín de primeros auxilios",
+    "date": "2025"
+  },
+  {
+    "id": 4,
+    "author": "Josune Muñoz",
+    "role": "Crítica Literaria Feminista",
+    "location": "Skolastika",
+    "avatar": "✍️",
+    "quote": "Una intervención cultural seria que democratiza el acceso a la cultura, más allá de una simple performance lúdica.",
+    "rating": 5,
+    "highlight": "intervención cultural seria",
+    "date": "2025"
+  },
+  {
+    "id": 5,
+    "author": "Eva Jiménez Parra",
+    "role": "Colaboradora Artística",
+    "location": "Bilbao",
+    "avatar": "🎭",
+    "quote": "Su versatilidad para dialogar con estéticas muy diferentes, desde el naif hasta el contrapunto gráfico, es excepcional.",
+    "rating": 5,
+    "highlight": "versatilidad",
+    "date": "2025"
+  },
+  {
+    "id": 6,
+    "author": "Jon & Patricia",
+    "role": "Comunidad Makers - instaartesania",
+    "location": "Bilbao",
+    "avatar": "🛠️",
+    "quote": "Una prescriptora cultural y constructora de comunidad que transita sin prejuicios entre el Arte con mayúsculas y la artesanía de diseño.",
+    "rating": 5,
+    "highlight": "constructora de comunidad",
+    "date": "2025"
+  },
+  {
+    "id": 7,
+    "author": "Borja Moskv",
+    "role": "Autor del Estudio Crítico",
+    "location": "Bilbao",
+    "avatar": "📚",
+    "quote": "La Dualidad del Artista: navega entre el retrato hiperrealista de iconos populares y la libertad expresiva de la abstracción matérica. ReCreArte como pilar fundamental para la democratización del arte.",
+    "rating": 5,
+    "highlight": "Dualidad del Artista",
+    "date": "2026"
+  },
+  {
+    "id": 8,
+    "author": "Celia Cuevas",
+    "role": "Artista y Maker",
+    "location": "Bilbao",
+    "avatar": "💎",
+    "quote": "Penicilina para las grietas del alma moderna. El problema hecho trampolín hacia la incoherencia brillante.",
+    "rating": 5,
+    "highlight": "Penicilina para el alma",
+    "date": "2025"
+  }
+]

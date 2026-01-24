@@ -1,7 +1,7 @@
 /**
  * GALLERY 3D PREMIUM — Museo Virtual Inmersivo
  * Experiencia museística completa con Three.js
- * v2.0.0 - 2026-01-24 — Major Upgrade
+ * v2.1.0 - 2026-01-24 — Audio Inmersivo + Tour Guiado
  */
 
 class Gallery3DPremium {
@@ -37,7 +37,22 @@ class Gallery3DPremium {
         this.dustParticles = null;
         this.ambientSound = null;
         
-        console.log('🏛️ Gallery 3D Premium loaded');
+        // Audio System v2.1
+        this.audioContext = null;
+        this.footstepSounds = [];
+        this.footstepIndex = 0;
+        this.lastFootstepTime = 0;
+        this.footstepInterval = 400; // ms between steps
+        this.isMoving = false;
+        this.masterGain = null;
+        
+        // Tour Guide System
+        this.tourActive = false;
+        this.tourIndex = 0;
+        this.tourPositions = [];
+        this.tourSpeed = 2;
+        
+        console.log('🏛️ Gallery 3D Premium v2.1 loaded');
     }
     
     async init() {
@@ -100,6 +115,7 @@ class Gallery3DPremium {
                     <span class="separator">|</span>
                     <kbd>ESC</kbd> Salir
                 </div>
+                <button class="gallery3d-tour-btn" title="Tour Guiado">🎬 Tour</button>
                 <button class="gallery3d-close">✕</button>
             </div>
             <div class="gallery3d-canvas-wrapper">
@@ -138,6 +154,7 @@ class Gallery3DPremium {
         this.container.querySelector('.gallery3d-close').addEventListener('click', () => this.close());
         this.container.querySelector('.gallery3d-instructions').addEventListener('click', () => this.lockPointer());
         this.container.querySelector('.artwork-panel-close').addEventListener('click', () => this.hideArtworkPanel());
+        this.container.querySelector('.gallery3d-tour-btn').addEventListener('click', () => this.startTour());
     }
     
     async open() {
@@ -160,17 +177,19 @@ class Gallery3DPremium {
         await this.loadArtworks();
         this.buildMuseum();
         this.createAtmosphere();
+        this.setupTour();  // v2.1 Tour system
         
         clearInterval(progressInterval);
         progressBar.style.width = '100%';
         
-        setTimeout(() => {
+        setTimeout(async () => {
             loading.classList.add('hidden');
             this.isActive = true;
+            await this.initAudio();  // v2.1 Audio system
             this.animate();
         }, 300);
         
-        console.log('🏛️ Museum opened');
+        console.log('🏛️ Museum opened with audio');
     }
     
     close() {
@@ -187,6 +206,10 @@ class Gallery3DPremium {
             this.ambientSound.pause();
             this.ambientSound = null;
         }
+        
+        // Stop audio system v2.1
+        this.stopAudio();
+        this.tourActive = false;
         
         console.log('🏛️ Museum closed');
     }
@@ -861,6 +884,220 @@ class Gallery3DPremium {
         this.scene.add(this.dustParticles);
     }
     
+    // ════════════════════════════════════════════════════════════════
+    // AUDIO SYSTEM v2.1 - Inmersive Sound Experience
+    // ════════════════════════════════════════════════════════════════
+    
+    async initAudio() {
+        try {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            this.masterGain = this.audioContext.createGain();
+            this.masterGain.gain.value = 0.6;
+            this.masterGain.connect(this.audioContext.destination);
+            
+            // Generate procedural footstep sounds
+            this.generateFootstepSounds();
+            
+            // Start ambient music
+            this.startAmbientMusic();
+            
+            console.log('🎵 Audio system initialized');
+        } catch (err) {
+            console.warn('Audio not available:', err);
+        }
+    }
+    
+    generateFootstepSounds() {
+        // Create 4 different footstep variations procedurally
+        for (let i = 0; i < 4; i++) {
+            const duration = 0.15;
+            const sampleRate = this.audioContext.sampleRate;
+            const buffer = this.audioContext.createBuffer(1, duration * sampleRate, sampleRate);
+            const data = buffer.getChannelData(0);
+            
+            // Marble footstep: sharp click with slight reverb tail
+            const frequency = 800 + Math.random() * 400;
+            for (let j = 0; j < data.length; j++) {
+                const t = j / sampleRate;
+                const envelope = Math.exp(-t * 30);
+                const noise = (Math.random() - 0.5) * 0.3;
+                const click = Math.sin(2 * Math.PI * frequency * t) * Math.exp(-t * 50);
+                data[j] = (click + noise) * envelope * 0.4;
+            }
+            
+            this.footstepSounds.push(buffer);
+        }
+    }
+    
+    playFootstep() {
+        if (!this.audioContext || this.audioContext.state === 'suspended') return;
+        
+        const now = Date.now();
+        if (now - this.lastFootstepTime < this.footstepInterval) return;
+        this.lastFootstepTime = now;
+        
+        const source = this.audioContext.createBufferSource();
+        source.buffer = this.footstepSounds[this.footstepIndex % this.footstepSounds.length];
+        this.footstepIndex++;
+        
+        const gain = this.audioContext.createGain();
+        gain.gain.value = 0.15 + Math.random() * 0.1;
+        
+        source.connect(gain);
+        gain.connect(this.masterGain);
+        source.start();
+    }
+    
+    startAmbientMusic() {
+        // Create subtle generative ambient drone
+        const createDrone = (freq, volume) => {
+            const osc = this.audioContext.createOscillator();
+            const gain = this.audioContext.createGain();
+            const filter = this.audioContext.createBiquadFilter();
+            
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            
+            filter.type = 'lowpass';
+            filter.frequency.value = 200;
+            filter.Q.value = 1;
+            
+            gain.gain.value = 0;
+            
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(this.masterGain);
+            
+            osc.start();
+            
+            // Fade in slowly
+            gain.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 3);
+            
+            // Subtle pitch variation
+            const lfo = this.audioContext.createOscillator();
+            const lfoGain = this.audioContext.createGain();
+            lfo.frequency.value = 0.05 + Math.random() * 0.05;
+            lfoGain.gain.value = freq * 0.01;
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+            lfo.start();
+            
+            return { osc, gain, lfo };
+        };
+        
+        // Ambient chord: C2, E2, G2 very quiet
+        this.ambientDrones = [
+            createDrone(65.41, 0.04),  // C2
+            createDrone(82.41, 0.03),  // E2
+            createDrone(98.00, 0.02)   // G2
+        ];
+    }
+    
+    stopAudio() {
+        if (this.ambientDrones) {
+            this.ambientDrones.forEach(drone => {
+                drone.gain.gain.linearRampToValueAtTime(0, this.audioContext.currentTime + 1);
+                setTimeout(() => {
+                    drone.osc.stop();
+                    drone.lfo.stop();
+                }, 1500);
+            });
+        }
+        if (this.audioContext) {
+            setTimeout(() => this.audioContext.close(), 2000);
+        }
+    }
+    
+    // ════════════════════════════════════════════════════════════════
+    // TOUR GUIDE SYSTEM - Automated Museum Experience
+    // ════════════════════════════════════════════════════════════════
+    
+    setupTour() {
+        // Define tour waypoints in front of each artwork
+        this.tourPositions = [
+            { x: 0, z: 30, lookAt: { x: 0, y: 4.5, z: -40 }, label: 'Bienvenido al museo' },
+            { x: -this.roomWidth/2 + 8, z: -23, lookAt: { x: -this.roomWidth/2, y: 4.5, z: -23 }, label: 'DiviNos VaiVenes' },
+            { x: -this.roomWidth/2 + 8, z: 7, lookAt: { x: -this.roomWidth/2, y: 4.5, z: 7 }, label: 'Serie del Error' },
+            { x: this.roomWidth/2 - 8, z: 7, lookAt: { x: this.roomWidth/2, y: 4.5, z: 7 }, label: 'Iconos Pop' },
+            { x: this.roomWidth/2 - 8, z: -23, lookAt: { x: this.roomWidth/2, y: 4.5, z: -23 }, label: 'Vaivenes' },
+            { x: 0, z: -30, lookAt: { x: 0, y: 4.5, z: -40 }, label: 'Retratos y Espejos del Alma' }
+        ];
+    }
+    
+    startTour() {
+        if (!this.isActive) return;
+        
+        this.tourActive = true;
+        this.tourIndex = 0;
+        
+        // Unlock mouse for tour
+        if (this.controls?.isLocked) {
+            this.controls.unlock();
+        }
+        
+        this.showTourNotification('🎬 Tour guiado iniciado');
+        this.moveTourToNext();
+    }
+    
+    stopTour() {
+        this.tourActive = false;
+        this.showTourNotification('Tour finalizado - ¡Explora libremente!');
+    }
+    
+    moveTourToNext() {
+        if (!this.tourActive || this.tourIndex >= this.tourPositions.length) {
+            this.stopTour();
+            return;
+        }
+        
+        const target = this.tourPositions[this.tourIndex];
+        this.showTourNotification(target.label);
+        
+        const startPos = this.camera.position.clone();
+        const endPos = new THREE.Vector3(target.x, 4.5, target.z);
+        const duration = 3000; // 3 seconds per move
+        const startTime = Date.now();
+        
+        const animateTour = () => {
+            if (!this.tourActive) return;
+            
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+            
+            // Interpolate position
+            this.camera.position.lerpVectors(startPos, endPos, eased);
+            
+            // Look at artwork
+            this.camera.lookAt(target.lookAt.x, target.lookAt.y, target.lookAt.z);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animateTour);
+            } else {
+                // Pause at artwork for viewing
+                setTimeout(() => {
+                    this.tourIndex++;
+                    this.moveTourToNext();
+                }, 4000);
+            }
+        };
+        
+        animateTour();
+    }
+    
+    showTourNotification(text) {
+        let notif = this.container.querySelector('.gallery3d-tour-notif');
+        if (!notif) {
+            notif = document.createElement('div');
+            notif.className = 'gallery3d-tour-notif';
+            this.container.appendChild(notif);
+        }
+        notif.textContent = text;
+        notif.classList.add('visible');
+        
+        setTimeout(() => notif.classList.remove('visible'), 3000);
+    }
+    
     bindEvents() {
         document.addEventListener('keydown', (e) => this.onKeyDown(e));
         document.addEventListener('keyup', (e) => this.onKeyUp(e));
@@ -991,6 +1228,12 @@ class Gallery3DPremium {
             this.controls.moveRight(-this.velocity.x * delta);
             this.controls.moveForward(-this.velocity.z * delta);
             
+            // v2.1 Footstep sounds
+            const isMoving = this.moveForward || this.moveBackward || this.moveLeft || this.moveRight;
+            if (isMoving) {
+                this.playFootstep();
+            }
+            
             // Keep eye level
             this.controls.getObject().position.y = 4.5;
             
@@ -1112,6 +1355,48 @@ class Gallery3DPremium {
             
             .gallery3d-controls-info .separator {
                 opacity: 0.3;
+            }
+            
+            /* Tour Button v2.1 */
+            .gallery3d-tour-btn {
+                background: linear-gradient(135deg, rgba(184, 134, 11, 0.3) 0%, rgba(184, 134, 11, 0.1) 100%);
+                border: 1px solid rgba(184, 134, 11, 0.5);
+                color: #f4f3f0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                cursor: pointer;
+                font-size: 0.85rem;
+                transition: all 0.3s;
+                margin-right: 1rem;
+            }
+            
+            .gallery3d-tour-btn:hover {
+                background: linear-gradient(135deg, rgba(184, 134, 11, 0.5) 0%, rgba(184, 134, 11, 0.3) 100%);
+                transform: scale(1.05);
+            }
+            
+            /* Tour Notification v2.1 */
+            .gallery3d-tour-notif {
+                position: absolute;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%) translateY(20px);
+                background: rgba(10, 10, 10, 0.9);
+                border: 1px solid rgba(184, 134, 11, 0.4);
+                color: #f4f3f0;
+                padding: 1rem 2rem;
+                border-radius: 12px;
+                font-size: 1.1rem;
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 200;
+                backdrop-filter: blur(10px);
+            }
+            
+            .gallery3d-tour-notif.visible {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
             }
             
             .gallery3d-close {
