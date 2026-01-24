@@ -7,7 +7,7 @@ class WelcomeRitual {
     constructor() {
         this.storageKey = 'naroa_welcomed_v4'; // Nueva versión para forzar mostrar
         this.hasVisited = localStorage.getItem(this.storageKey);
-        this.duration = 9000; // 9 segundos para la experiencia completa
+        this.duration = 5000; // 5 segundos para la experiencia completa
         
         // Check if we should play the ritual
         if (!this.hasVisited) {
@@ -111,7 +111,7 @@ class WelcomeRitual {
         setTimeout(() => {
             overlay.querySelector('.ritual-name').classList.add('fade-away');
             overlay.querySelector('.ritual-tagline').classList.add('fade-away');
-        }, 4000);
+        }, 2000);
         
         // Show ¿JUEGAS????? 
         setTimeout(() => {
@@ -121,14 +121,14 @@ class WelcomeRitual {
             // Animate each character
             const chars = question.querySelectorAll('.question-char');
             chars.forEach((char, i) => {
-                char.style.animationDelay = `${i * 0.1}s`;
+                char.style.animationDelay = `${i * 0.08}s`;
             });
-        }, 4500);
+        }, 2500);
         
-        // Show options (Sí / Depende)
+        // Show options (Sí / Depende) - appear after question animation
         setTimeout(() => {
             overlay.querySelector('.ritual-options').classList.add('visible');
-        }, 6500);
+        }, 3500);
         
         // Button handlers
         overlay.querySelectorAll('.ritual-btn').forEach(btn => {
@@ -385,18 +385,20 @@ class WelcomeRitual {
             /* Options */
             .ritual-options {
                 position: absolute;
-                bottom: -150px;
+                bottom: 15%;
                 left: 50%;
-                transform: translateX(-50%);
+                transform: translateX(-50%) translateY(30px);
                 display: flex;
                 gap: 3rem;
                 opacity: 0;
-                transition: opacity 0.8s ease, transform 0.5s ease;
+                pointer-events: none;
+                transition: opacity 0.6s ease, transform 0.6s ease;
             }
             
             .ritual-options.visible {
                 opacity: 1;
-                bottom: -80px;
+                transform: translateX(-50%) translateY(0);
+                pointer-events: auto;
             }
             
             .ritual-btn {

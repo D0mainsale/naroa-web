@@ -1,0 +1,248 @@
+/* === LUNAR MODE - Modo Luna Llena === */
+/* Estética mística y etérea durante luna llena real */
+
+/* === Variables Lunares === */
+:root {
+    --lunar-bg: #0d0d1a;
+    --lunar-bg-gradient: linear-gradient(180deg, #0d0d1a 0%, #1a1a2e 50%, #0f0f1f 100%);
+    --lunar-text: #e8e6ff;
+    --lunar-text-muted: rgba(232, 230, 255, 0.6);
+    --lunar-accent: #8b7dff;
+    --lunar-accent-glow: rgba(139, 125, 255, 0.4);
+    --lunar-silver: #c0c0d0;
+    --lunar-moonlight: rgba(255, 255, 240, 0.08);
+}
+
+/* === Modo Luna Llena Activo === */
+html.full-moon-mode {
+    /* Override de variables principales */
+    --bg: var(--lunar-bg);
+    --text: var(--lunar-text);
+    --muted: var(--lunar-text-muted);
+    --accent: var(--lunar-accent);
+    --color-bg: var(--lunar-bg);
+    --color-text: var(--lunar-text);
+}
+
+html.full-moon-mode body {
+    background: var(--lunar-bg-gradient);
+    color: var(--lunar-text);
+    transition: background 1.5s ease, color 1s ease;
+}
+
+/* Grid decorativo más sutil de noche */
+html.full-moon-mode body::before {
+    background-image: 
+        linear-gradient(to right, rgba(139, 125, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(139, 125, 255, 0.03) 1px, transparent 1px);
+    opacity: 0.5;
+}
+
+/* === Efectos en Imágenes === */
+html.full-moon-mode .card-image img,
+html.full-moon-mode .portfolio-card img,
+html.full-moon-mode .gallery-item img {
+    filter: brightness(1.05) saturate(0.85) contrast(1.1);
+    box-shadow: 
+        0 0 30px rgba(139, 125, 255, 0.15),
+        0 0 60px rgba(255, 255, 240, 0.05);
+    transition: filter 0.5s ease, box-shadow 0.5s ease;
+}
+
+html.full-moon-mode .card-image img:hover,
+html.full-moon-mode .portfolio-card:hover img {
+    filter: brightness(1.15) saturate(0.9) contrast(1.15);
+    box-shadow: 
+        0 0 40px rgba(139, 125, 255, 0.25),
+        0 0 80px rgba(255, 255, 240, 0.1);
+}
+
+/* === Tipografía Luminosa === */
+html.full-moon-mode h1,
+html.full-moon-mode h2,
+html.full-moon-mode .portfolio-title,
+html.full-moon-mode .bitacora-title {
+    text-shadow: 0 0 30px rgba(139, 125, 255, 0.3);
+}
+
+html.full-moon-mode .intro-question {
+    background: linear-gradient(135deg, var(--lunar-text) 0%, var(--lunar-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+/* === Botones y Links === */
+html.full-moon-mode .intro-btn .btn-label {
+    color: var(--lunar-text);
+}
+
+html.full-moon-mode .intro-btn .btn-label::after {
+    background: var(--lunar-accent);
+}
+
+html.full-moon-mode .intro-btn--ritual:hover .btn-label {
+    color: var(--lunar-accent);
+}
+
+html.full-moon-mode .nav-link {
+    color: var(--lunar-text-muted);
+}
+
+html.full-moon-mode .nav-link:hover,
+html.full-moon-mode .nav-link.active {
+    color: var(--lunar-text);
+}
+
+html.full-moon-mode .nav-link.active::after {
+    background: var(--lunar-accent);
+}
+
+/* === Portfolio Cards === */
+html.full-moon-mode .portfolio-card:hover .card-info {
+    background: linear-gradient(135deg, var(--lunar-accent), #6b5ddf);
+}
+
+html.full-moon-mode .portfolio-card.featured:hover .card-info {
+    background: linear-gradient(135deg, #9b8dff, var(--lunar-accent));
+}
+
+/* === Home View === */
+html.full-moon-mode .home-view {
+    background: var(--lunar-bg-gradient);
+}
+
+html.full-moon-mode .home-statement blockquote {
+    color: var(--lunar-text-muted);
+}
+
+html.full-moon-mode .micro-text {
+    color: var(--lunar-text-muted);
+}
+
+/* === Cursor === */
+html.full-moon-mode .cursor {
+    background: var(--lunar-accent);
+    box-shadow: 0 0 15px var(--lunar-accent-glow);
+}
+
+/* === Ritual View === */
+html.full-moon-mode .ritual-view {
+    background: linear-gradient(180deg, #0f0f1f, #1a1a2e, #0d0d1a);
+}
+
+html.full-moon-mode .ritual-board {
+    background: rgba(139, 125, 255, 0.05);
+    border: 1px solid rgba(139, 125, 255, 0.1);
+}
+
+html.full-moon-mode .ritual-hud {
+    background: rgba(13, 13, 26, 0.9);
+    border: 1px solid rgba(139, 125, 255, 0.2);
+}
+
+html.full-moon-mode .hud-value {
+    color: var(--lunar-accent);
+}
+
+/* === Bitácora === */
+html.full-moon-mode .bitacora-view {
+    background: linear-gradient(180deg, transparent 0%, rgba(139, 125, 255, 0.03) 100%);
+}
+
+html.full-moon-mode .blog-post {
+    background: rgba(139, 125, 255, 0.03);
+    border-color: rgba(139, 125, 255, 0.1);
+}
+
+html.full-moon-mode .blog-post:hover {
+    background: rgba(139, 125, 255, 0.06);
+    border-color: rgba(139, 125, 255, 0.2);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(139, 125, 255, 0.1);
+}
+
+html.full-moon-mode .blog-post::before {
+    background: linear-gradient(180deg, var(--lunar-accent) 0%, rgba(139, 125, 255, 0.3) 100%);
+}
+
+html.full-moon-mode .post-tag {
+    background: rgba(139, 125, 255, 0.1);
+    border-color: rgba(139, 125, 255, 0.2);
+    color: var(--lunar-text-muted);
+}
+
+html.full-moon-mode .post-tag:hover {
+    background: rgba(139, 125, 255, 0.2);
+    border-color: rgba(139, 125, 255, 0.4);
+    color: var(--lunar-text);
+}
+
+/* === Estrellas de Fondo (Sutil) === */
+html.full-moon-mode body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+        radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 60%, rgba(255, 255, 255, 0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 10%, rgba(255, 255, 255, 0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 40%, rgba(255, 255, 255, 0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 80%, rgba(255, 255, 255, 0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 85%, rgba(255, 255, 255, 0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 15%, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+    animation: twinkle 8s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.4; }
+    100% { opacity: 0.7; }
+}
+
+/* === Halo Lunar (Efecto gloria) === */
+html.full-moon-mode::before {
+    content: '';
+    position: fixed;
+    top: -20vh;
+    right: -10vw;
+    width: 60vw;
+    height: 60vh;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 240, 0.08) 0%,
+        rgba(139, 125, 255, 0.03) 40%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* === Transiciones Suaves === */
+html.full-moon-mode * {
+    transition-duration: 0.5s;
+}
+
+/* === Indicador Lunar (styles adicionales) === */
+.lunar-indicator {
+    animation: lunarFloat 4s ease-in-out infinite;
+}
+
+@keyframes lunarFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-5px) scale(1.05); }
+}
+
+/* === Media Queries === */
+@media (prefers-reduced-motion: reduce) {
+    html.full-moon-mode body::after {
+        animation: none;
+        opacity: 0.5;
+    }
+    
+    .lunar-indicator {
+        animation: none;
+    }
+}
