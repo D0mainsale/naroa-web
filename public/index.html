@@ -105,8 +105,6 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/golden-typography.css">
     <link rel="stylesheet" href="/css/premium-2026.css">
-    <link rel="stylesheet" href="/css/no-vignette.css">
-    <link rel="stylesheet" href="/css/cursor-brush.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/ritual.css">
     <link rel="stylesheet" href="/css/lunar-mode.css">
@@ -122,6 +120,10 @@
     <link rel="stylesheet" href="/css/naroa-ai.css">
     <link rel="stylesheet" href="/css/smart-typography.css">
     <link rel="stylesheet" href="/css/process-premium.css">
+    
+    <!-- OVERRIDE CSS (must be last for highest priority) -->
+    <link rel="stylesheet" href="/css/no-vignette.css">
+    <link rel="stylesheet" href="/css/cursor-brush.css">
 </head>
 <body>
     <!-- SEO invisible para crawlers y accesibilidad -->
@@ -692,8 +694,9 @@
     <!-- Portrait CTA -->
     <script src="js/portrait-cta.js?v=2026_reboot"></script>
 
-    <!-- PILOT Real Cursor (4 colores + ink blots) -->
+    <!-- PILOT Real Cursor - DISABLED in favor of CSS brush cursor
     <script src="js/pilot-cursor-real.js?v=2026_nextlevel"></script>
+    -->
 
     <!-- Welcome Ritual (First Visit Experience) -->
     <script src="js/features/welcome-ritual.js?v=2026_nextlevel"></script>
