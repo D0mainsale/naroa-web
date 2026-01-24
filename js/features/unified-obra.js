@@ -102,6 +102,39 @@ class UnifiedObraSystem {
         }
     }
     
+    // === IMAGE PATH HELPERS ===
+    
+    /**
+     * Convert image path to optimized WebP thumbnail (for grid view)
+     */
+    getThumbnailPath(originalPath) {
+        if (!originalPath) return '/images/placeholder.jpg';
+        
+        // Replace /images/ with /images/thumbnails/
+        // And change extension to .webp
+        const thumbPath = originalPath
+            .replace('/images/', '/images/thumbnails/')
+            .replace(/\.(jpg|jpeg|png)$/i, '.webp');
+        
+        return thumbPath;
+    }
+    
+    /**
+     * Convert image path to optimized WebP (for lightbox view)
+     */
+    getOptimizedPath(originalPath) {
+        if (!originalPath) return '/images/placeholder.jpg';
+        
+        // Replace /images/ with /images/optimized/
+        // And change extension to .webp
+        const optPath = originalPath
+            .replace('/images/', '/images/optimized/')
+            .replace(/\.(jpg|jpeg|png)$/i, '.webp');
+        
+        return optPath;
+    }
+
+    
     buildTimeline() {
         // Combine albums and blog posts in chronological order
         // Albums don't have dates, so we'll put them first
@@ -232,10 +265,13 @@ class UnifiedObraSystem {
         card.className = 'unified-album-card';
         card.dataset.index = index;
         
+        // Use thumbnail for grid, store original for lightbox
+        const thumbSrc = this.getThumbnailPath(album.cover);
+        
         card.innerHTML = `
             <div class="album-card-inner">
                 <div class="album-cover">
-                    <img src="${album.cover}" alt="${album.name}" loading="lazy">
+                    <img src="${thumbSrc}" alt="${album.name}" loading="lazy" onerror="this.src='${album.cover}'">
                     <div class="album-overlay">
                         <div class="album-count">${album.count} ${album.count === 1 ? 'foto' : 'fotos'}</div>
                     </div>
@@ -245,6 +281,7 @@ class UnifiedObraSystem {
                 </div>
             </div>
         `;
+
         
         card.addEventListener('click', () => this.openAlbum(album));
         
@@ -380,12 +417,15 @@ class UnifiedObraSystem {
             thumb.className = 'lightbox-thumbnail';
             if (index === 0) thumb.classList.add('active');
             
-            thumb.innerHTML = `<img src="${img.path}" alt="${album.name} ${index + 1}" loading="lazy">`;
+            // Use thumbnails for the scroll bar
+            const thumbSrc = this.getThumbnailPath(img.path);
+            thumb.innerHTML = `<img src="${thumbSrc}" alt="${album.name} ${index + 1}" loading="lazy" onerror="this.src='${img.path}'">`;
             thumb.addEventListener('click', () => this.showImage(index));
             
             container.appendChild(thumb);
         });
     }
+
     
     showImage(index) {
         if (!this.currentAlbum) return;
@@ -397,7 +437,11 @@ class UnifiedObraSystem {
         
         const lightbox = document.getElementById('unified-lightbox');
         const imgEl = lightbox.querySelector('.lightbox-image');
-        imgEl.src = images[index].path;
+        
+        // Use optimized WebP with fallback to original
+        const optimizedSrc = this.getOptimizedPath(images[index].path);
+        imgEl.src = optimizedSrc;
+        imgEl.onerror = () => { imgEl.src = images[index].path; };
         
         // Update active thumbnail
         const thumbs = lightbox.querySelectorAll('.lightbox-thumbnail');
@@ -414,6 +458,7 @@ class UnifiedObraSystem {
         lightbox.querySelector('.lightbox-prev').disabled = index === 0;
         lightbox.querySelector('.lightbox-next').disabled = index === images.length - 1;
     }
+
     
     navigateLightbox(delta) {
         this.showImage(this.currentImageIndex + delta);
