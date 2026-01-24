@@ -1,0 +1,33 @@
+/* ═══════════════════════════════════════════════════════════════════
+   NO-VIGNETTE OVERRIDE - Elimina efectos de sombreado en bordes
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Desactivar el marco del body (silent.css) */
+body::before,
+body::after {
+    display: none !important;
+}
+
+/* Desactivar overlays oscuros de bordes en vistas */
+.ritual-view::before,
+.process-view::before,
+.portfolio-view::before {
+    display: none !important;
+}
+
+/* Mantener fondos limpios sin gradientes de sombra */
+.home-view,
+.portfolio-view,
+.process-view,
+.bitacora-view,
+.retrato-view,
+.about-view,
+.retrospecter-view,
+.tienda-view {
+    background: var(--bg, #f4f3f0) !important;
+}
+
+/* Asegurar que no haya box-shadow en contenedores principales */
+[data-view] {
+    box-shadow: none !important;
+}
