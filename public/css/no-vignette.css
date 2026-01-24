@@ -9,7 +9,9 @@ body::after {
     display: none !important;
     content: none !important;
     background: none !important;
+    background-image: none !important;
     opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 /* Desactivar overlays oscuros de bordes en vistas */
@@ -29,14 +31,20 @@ body::after {
 .retrospecter-view::after,
 .retrato-view::before,
 .retrato-view::after,
+.tienda-view::before,
+.tienda-view::after,
 main::before,
 main::after,
 html::before,
-html::after {
+html::after,
+section::before,
+section::after {
     display: none !important;
     content: none !important;
     background: none !important;
+    background-image: none !important;
     opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 /* Fondos limpios sin gradientes de sombra */
@@ -51,7 +59,8 @@ body,
 .retrospecter-view,
 .tienda-view,
 .ritual-view {
-    background: var(--bg, #f4f3f0) !important;
+    background: #f4f3f0 !important;
+    background-color: #f4f3f0 !important;
     background-image: none !important;
 }
 
@@ -59,13 +68,55 @@ body,
 [data-view],
 main,
 section,
-.view {
+.view,
+body,
+html {
     box-shadow: none !important;
 }
 
-/* Eliminar cualquier radial-gradient de borde */
-*::before,
-*::after {
+/* ANTI-VIGNETTE: Bloquear TODOS los inset box-shadows que crean vignettes */
+* {
     box-shadow: none !important;
 }
+
+/* Excepciones para UI elements que necesitan sombra */
+.portfolio-card,
+.blog-post,
+.glass,
+.glass-card,
+.ritual-btn,
+button,
+.btn,
+.nav-link,
+.modal,
+.lightbox,
+input,
+.shop-card,
+.commission-trigger,
+.studio-toggle-btn,
+.studio-controls {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+}
+
+.portfolio-card:hover,
+.blog-post:hover,
+button:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
+}
+
+/* Eliminar cualquier filtro global */
+body,
+html,
+main,
+[data-view] {
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+/* Studio mode: también limpiar */
+body.studio-mode-active::before,
+body.studio-mode-active::after {
+    display: none !important;
+}
+
 
