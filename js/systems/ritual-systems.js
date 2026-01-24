@@ -6,9 +6,10 @@ class PigmentTrail {
     constructor() {
         this.particles = [];
         this.currentColor = '#d03030';
-        this.canvas = document.createElement('canvas');
-        this.canvas.id = 'pigment-canvas';
-        Object.assign(this.canvas.style, {
+        // Canvas desactivado para evitar sombreado
+        // this.canvas = document.createElement('canvas');
+        // this.canvas.id = 'pigment-canvas';
+        /* Object.assign(this.canvas.style, {
             position: 'fixed',
             top: '0',
             left: '0',
@@ -17,7 +18,7 @@ class PigmentTrail {
             pointerEvents: 'none',
             zIndex: '9998'
         });
-        document.body.appendChild(this.canvas);
+        document.body.appendChild(this.canvas); */
         
         this.ctx = this.canvas.getContext('2d');
         this.resize();
