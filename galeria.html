@@ -21,6 +21,79 @@
 <body>
     
     <!-- Galería Principal -->
+    <!-- Museo Virtual 3D Button -->
+    <button id="museo-virtual-btn" class="museo-virtual-btn" onclick="openMuseoVirtual()">
+        <span class="museo-icon">🏛️</span>
+        <span class="museo-text">Museo Virtual 3D</span>
+    </button>
+    
+    <style>
+        .museo-virtual-btn {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 28px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(212, 175, 55, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pulseGlow 3s infinite;
+        }
+        
+        .museo-virtual-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(212, 175, 55, 0.25);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+        
+        .museo-icon {
+            font-size: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .museo-text {
+            background: linear-gradient(90deg, #fff, #D4AF37, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(212, 175, 55, 0.1); }
+            50% { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 50px rgba(212, 175, 55, 0.2); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        @media (max-width: 768px) {
+            .museo-virtual-btn {
+                top: auto;
+                bottom: 30px;
+                right: 20px;
+                padding: 14px 20px;
+            }
+            .museo-text { display: none; }
+        }
+    </style>
+    
     <section id="galeria-container" class="galeria-container">
         <div class="galeria-header">
             <h1>Galería de Obra</h1>
@@ -217,5 +290,6 @@
     </section>
     
     <script src="/js/galeria.js"></script>
+    <script src="/js/museo-virtual-3d.js"></script>
 </body>
 </html>
