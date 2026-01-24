@@ -1,0 +1,125 @@
+/* === INSTAGRAM FEED STYLES === */
+
+.instagram-feed {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.insta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.insta-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.insta-profile a {
+    text-decoration: none;
+    color: var(--text-primary, #fff);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.insta-icon {
+    font-size: 1.2rem;
+}
+
+.insta-followers {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #888);
+    margin-left: 1.7rem;
+}
+
+.insta-follow-btn {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--text-primary, #fff);
+    color: var(--text-primary, #fff);
+    text-decoration: none;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.insta-follow-btn:hover {
+    background: var(--text-primary, #fff);
+    color: #000;
+}
+
+.insta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.insta-post {
+    display: block;
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.insta-post:hover {
+    transform: scale(1.02);
+}
+
+.insta-image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.insta-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.insta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.insta-post:hover .insta-overlay {
+    opacity: 1;
+}
+
+.insta-likes {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .insta-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

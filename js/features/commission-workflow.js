@@ -19,7 +19,7 @@ class CommissionWorkflow {
   createTriggerButton() {
     const btn = document.createElement('button');
     btn.className = 'commission-trigger';
-    btn.innerHTML = '🎨 Solicitar Encargo';
+    btn.innerHTML = '💬 Hablemos';
     btn.addEventListener('click', () => this.openModal());
     document.body.appendChild(btn);
   }

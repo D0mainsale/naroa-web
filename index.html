@@ -102,24 +102,6 @@
     <!-- Fonts with display=swap for FOUT prevention -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/golden-typography.css">
-    <link rel="stylesheet" href="/css/premium-2026.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/ritual.css">
-    <link rel="stylesheet" href="/css/lunar-mode.css">
-    <link rel="stylesheet" href="/css/bitacora-premium.css">
-    <link rel="stylesheet" href="/css/portfolio-premium.css">
-    <link rel="stylesheet" href="/css/shop-premium.css">
-    <link rel="stylesheet" href="/css/galeria-premium.css">
-    <link rel="stylesheet" href="/css/hero-fullscreen.css">
-    <link rel="stylesheet" href="/css/semantic-blocks.css">
-    <link rel="stylesheet" href="/css/ai-whisper.css">
-    <link rel="stylesheet" href="/css/portrait-cta.css">
-    <link rel="stylesheet" href="/css/obra-detail.css">
-    <link rel="stylesheet" href="/css/naroa-ai.css">
-    <link rel="stylesheet" href="/css/smart-typography.css">
-    <link rel="stylesheet" href="/css/process-premium.css">
     
     <!-- OVERRIDE CSS (must be last for highest priority) -->
     <link rel="stylesheet" href="/css/no-vignette.css">
@@ -153,15 +135,18 @@
             
             <!-- Solo la pregunta -->
             <div class="home-choice">
-                <h2 class="intro-question">¿Juegas?</h2>
+                <h2 class="intro-question">¿Quieres un retrato?</h2>
                 
-                <!-- Sí o Depende -->
+                <!-- Sí, Depende, Quiero Jugar -->
                 <nav class="intro-options">
-                    <a href="#/ritual" class="intro-btn intro-btn--ritual" data-action="play">
+                    <a href="#/retrato" class="intro-btn intro-btn--ritual" data-action="retrato">
                         <span class="btn-label">Sí</span>
                     </a>
                     <a href="#/portfolio" class="intro-btn intro-btn--portfolio" data-action="browse">
                         <span class="btn-label">Depende</span>
+                    </a>
+                    <a href="#/ritual" class="intro-btn intro-btn--play" data-action="play">
+                        <span class="btn-label">Quiero Jugar</span>
                     </a>
                 </nav>
             </div>
@@ -793,8 +778,18 @@
     <!-- AR Wall Preview (See Art on Your Wall) -->
     <script src="js/features/ar-wall-preview.js?v=SHADOW_KILL_V1"></script>
     
+    <!-- Instagram Feed Widget -->
+    <link rel="stylesheet" href="css/instagram-feed.css">
+    <script src="js/features/instagram-feed.js"></script>
+
+    <!-- i18n System -->
+    <script src="js/i18n.js"></script>
+
     <!-- Immersive Experience (Mica Particles + Ink Trails + Studio Audio) -->
     <script src="js/immersive-experience.js?v=SHADOW_KILL_V1"></script>
+    
+    <!-- Spotify Ambient Music Player -->
+    <script src="js/features/spotify-player.js?v=SPOTIFY_V1"></script>
 
     <!-- PWA Registration -->
     <script>

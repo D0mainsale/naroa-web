@@ -1,0 +1,35 @@
+{
+    "nav": {
+        "obras": "Works",
+        "proceso": "Process",
+        "bitacora": "Journal",
+        "retrato": "Portraits",
+        "about": "About",
+        "contacto": "Contact"
+    },
+    "home": {
+        "title": "Naroa Gutiérrez Gil",
+        "subtitle": "There is no error. Only waiting.",
+        "enter": "Enter"
+    },
+    "portfolio": {
+        "filters": {
+            "all": "All",
+            "drawings": "Drawing",
+            "paintings": "Painting",
+            "mixed": "Mixed Media"
+        },
+        "view_work": "View work"
+    },
+    "about": {
+        "title": "Naroa Gutiérrez Gil",
+        "location": "Visual Artist · Bilbao",
+        "bio_1": "I paint. I draw. I portray.",
+        "bio_2": "I work mainly with graphite, charcoal, and acrylic. My work explores the body and the face as territories of presence.",
+        "bio_3": "I do not seek superficial resemblance. I seek what remains when the pose is gone.",
+        "quote": "Nothing is exclusive. Reality complements itself.",
+        "method_title": "Method",
+        "method_text": "I work from error as a method and waiting as a tool. Not all accidents are corrected. Not all time is filled.",
+        "contact_title": "Contact"
+    }
+}

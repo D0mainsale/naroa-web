@@ -417,6 +417,15 @@ body {
     opacity: 0.6;
 }
 
+/* Quiero Jugar - playful cyan accent */
+.intro-btn--play:hover .btn-label {
+    color: var(--pop-cyan, #00e5ff);
+}
+
+.intro-btn--play:hover .btn-label::after {
+    background: var(--pop-cyan, #00e5ff);
+}
+
 .micro-text {
     margin-top: 5rem;
     font-size: 0.7rem;

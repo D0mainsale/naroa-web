@@ -1,0 +1,1282 @@
+[
+  {
+    "id": "artwork-1",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/551743489638410_000003_475705885_1271253574354061_140875574346411685_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": true,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-24T13:48:34.376Z"
+  },
+  {
+    "id": "artwork-2",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1087704452708975_000006_489280660_1325578518921566_6264335671039186687_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": true,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-23T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-3",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/504443464368413_000001_474463508_1264046218408130_3560778518074001688_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": true,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-22T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-4",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/719159769563447_000001_480868240_1293522792127139_2444374782254566067_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": true,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-21T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-5",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/460454262100667_000004_473574083_1256984195780999_5534850846947222318_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": true,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-20T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-6",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/482448626567897_000002_473559651_1257721775707241_209396205646700077_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": true,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-19T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-7",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/527097305436362_000002_475428478_1268829437929808_4575439159476660232_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": true,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-18T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-8",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/527097305436362_000003_475468000_1268829661263119_1758202332730407529_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": true,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-17T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-9",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/1577827357030013_000006_615443765_1577822577030491_9008867371114744175_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-16T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-10",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/1038960572845321_000004_509971720_30064484389866220_1290417681904045059_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-15T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-11",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/790135652465858_000005_484049223_1304926650986753_2853241099664621639_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-14T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-12",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1045418860270868_000001_488206279_1324201122392639_7414820400872876817_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-13T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-13",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/643083640504394_000005_480980869_1288179735994778_6208627704746177542_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-12T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-14",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/2548476735227023_000005_61322125_2779388168802544_6800531983899295744_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-11T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-15",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/853524166127006_000001_485141007_1310753923737359_3104141236670420796_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-10T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-16",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/659334275545997_000004_480658898_1289542875858464_8956104395281947645_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-09T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-17",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1571125317700217_000010_615154884_1571121211033961_3612088655531397320_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-08T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-18",
+    "title": "Serie Sin Nombre",
+    "year": 2021,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/991952032284218_000001_487392518_1321090332703718_4751522310433406341_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-07T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-19",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/790135652465858_000006_484330273_1304926677653417_5702029026417249808_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-06T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-20",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/719159769563447_000002_481076463_1293522738793811_3445657370828023414_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-05T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-21",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/688859365926821_000002_480996005_1291707808975304_8076901786128194872_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-04T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-22",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1571125317700217_000012_237690363_344567687022659_8404992880571450365_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-03T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-23",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/1562090265270389_000004_607414452_1562089661937116_4834388868843428127_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-02T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-24",
+    "title": "Serie Sin Nombre",
+    "year": 2021,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/492070265605733_000005_474571536_1263344661811619_4558432824618169447_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2026-01-01T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-25",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/765384181607672_000004_484135913_1301637181315700_7706829217248476801_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-31T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-26",
+    "title": "Serie Sin Nombre",
+    "year": 2021,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/643083640504394_000001_480724974_1288179769328108_7587776900328200161_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-30T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-27",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1571125317700217_000015_612952446_1571120751034007_5195332640811974228_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-29T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-28",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/1230045515141534_000006_489484537_1331701161642635_6500628806911940673_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-28T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-29",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/1087704452708975_000002_488657320_1325578285588256_3335706667624461392_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-27T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-30",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/1571125317700217_000006_614567970_1571121064367309_5077644638141471254_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-26T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-31",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/1562090265270389_000008_237690363_344567687022659_8404992880571450365_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-25T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-32",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/602472237898868_000001_477875190_1279373150208770_8878597921531906562_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-24T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-33",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/1571125317700217_000013_237690363_344567687022659_8404992880571450365_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-23T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-34",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/613837923428966_000006_479470367_1281017270044358_3192073184300561820_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-22T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-35",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/1552149902931092_000003_600320441_1552126162933466_3328859033995211845_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-21T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-36",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/1552149902931092_000011_601340023_1552126202933462_7815927344957967258_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-20T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-37",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1562090265270389_000005_607894014_1562089411937141_5595355156256147042_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-19T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-38",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/482448626567897_000006_473700153_1257721619040590_9148282274074499186_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-18T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-39",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/1577827357030013_000001_616035859_1577822453697170_3937842745320602184_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-17T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-40",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/1069042964575124_000004_618974711_1817181738991286_8893117674904998322_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-16T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-41",
+    "title": "Serie Sin Nombre",
+    "year": 2021,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/531476414998451_000003_475449441_1268838811262204_2492729812146607558_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-15T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-42",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/540247684121324_000002_475700511_1270518967760855_850734577765292780_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-14T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-43",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/765384181607672_000002_482350251_1301637354649016_2206531471013906869_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-13T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-44",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/1178665556946197_000001_489336513_1329374058542012_7073354640095502275_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-12T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-45",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/527097305436362_000006_475659897_1268829364596482_7240051355966376999_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-11T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-46",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/765384181607672_000006_237690363_344567687022659_8404992880571450365_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-10T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-47",
+    "title": "Serie Sin Nombre",
+    "year": 2021,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1066297131516374_000002_488250303_1325000455646039_4144029820272853480_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-09T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-48",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/1087704452708975_000004_488687312_1325578208921597_6636057628059744705_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-08T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-49",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/669668994512525_000001_480773846_1290303029115782_5312805418493392198_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-07T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-50",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/800361614776595_000005_484172734_1305541504258601_9085301855363574380_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-06T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-51",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/602472237898868_000002_479549690_1279373483542070_5633489052294789601_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-05T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-52",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1543127323833350_000002_594418272_1543116190501130_5721351708259875045_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-04T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-53",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/2548476735227023_000004_53591674_2598358510238845_6772539706346307584_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-03T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-54",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/858798248932931_000002_485146965_1310962513716500_757827337779249441_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-02T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-55",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/1045418860270868_000004_237690363_344567687022659_8404992880571450365_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-12-01T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-56",
+    "title": "Serie Sin Nombre",
+    "year": 2021,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/602472237898868_000004_237690363_344567687022659_8404992880571450365_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-30T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-57",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/790135652465858_000001_480241215_1304926497653435_6724649773996940041_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-29T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-58",
+    "title": "Serie Sin Nombre",
+    "year": 2021,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/1552149902931092_000007_598927632_1552126099600139_4670037144713227110_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-28T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-59",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/659334275545997_000006_480768611_1289543092525109_4806119895284601900_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-27T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-60",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/1004454256295953_000004_509359388_30058334493814543_3160548621326495111_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-26T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-61",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/540247684121324_000005_475784036_1270519321094153_4424898960243174736_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-25T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-62",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1562090265270389_000007_237690363_344567687022659_8404992880571450365_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-24T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-63",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/1562090265270389_000006_608992681_1562089558603793_2090916782110925029_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-23T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-64",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/551743489638410_000004_475746781_1271253564354062_659804717656236940_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-22T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-65",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/669668994512525_000002_480925083_1290303132449105_7642164105919708021_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-21T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-66",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/1066297131516374_000005_488574463_1325000482312703_8199249235149888754_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-20T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-67",
+    "title": "Serie Sin Nombre",
+    "year": 2021,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/776919880454102_000005_237690363_344567687022659_8404992880571450365_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-19T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-68",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/819542002858556_000004_484545971_1308256297320455_5967771959733783932_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-18T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-69",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/1111052607040826_000003_488904810_1326493332163418_8036600761455551925_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-17T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-70",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/853524166127006_000006_485364434_1310754353737316_2962468695968104132_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-16T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-71",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/1111052607040826_000001_488801818_1326493758830042_9047190515717355076_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-15T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-72",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/1239082297571189_000002_490267574_1331948971617854_6764410257823932590_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-14T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-73",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/1087704452708975_000005_488796679_1325578235588261_5715482077081745800_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-13T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-74",
+    "title": "Serie Sin Nombre",
+    "year": 2023,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/688859365926821_000001_480817948_1291707912308627_6011167171861805876_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-12T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-75",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/1111052607040826_000006_488967773_1326493552163396_1902808937391512601_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-11T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-76",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Grafito sobre papel",
+    "dimensions": "30x40 cm",
+    "image": "/images/optimized/606818890797536_000004_477038231_1279972973482121_1870196376492119269_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-10T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-77",
+    "title": "Serie Sin Nombre",
+    "year": 2020,
+    "medium": "Carbón y mica",
+    "dimensions": "50x70 cm",
+    "image": "/images/optimized/540247684121324_000006_475843466_1270518954427523_5634305523574172732_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-09T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-78",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Acrílico sobre lienzo",
+    "dimensions": "100x80 cm",
+    "image": "/images/optimized/719159769563447_000004_481765449_1293522728793812_5229072284323551464_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-08T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-79",
+    "title": "Serie Sin Nombre",
+    "year": 2022,
+    "medium": "Técnica mixta",
+    "dimensions": "A3",
+    "image": "/images/optimized/504443464368413_000003_474479183_1264046491741436_8058780271182124191_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-07T13:48:34.382Z"
+  },
+  {
+    "id": "artwork-80",
+    "title": "Serie Sin Nombre",
+    "year": 2024,
+    "medium": "Mica sobre verjurado",
+    "dimensions": "70x100 cm",
+    "image": "/images/optimized/659334275545997_000001_480495795_1289544115858340_1944725438461368942_n.webp",
+    "description": "Obra de la serie Serie Sin Nombre",
+    "category": "Portfolio",
+    "featured": false,
+    "tags": [
+      "Serie",
+      "Retrato"
+    ],
+    "created_at": "2025-11-06T13:48:34.382Z"
+  }
+]

@@ -8,66 +8,31 @@ class Portfolio {
     
     async init() {
         try {
-            const res = await fetch('data/gallery.json');
-            const data = await res.json();
-            const allImages = [];
+            // Load optimized image index (2800+ images)
+            const res = await fetch('data/images-index.json');
+            const allImagesRaw = await res.json();
             
-            // Intentar cargar nombres reales de álbumes desde Facebook
-            let albumNamesMap = {};
-            try {
-                const namesRes = await fetch('data/album-names.json');
-                if (namesRes.ok) {
-                    albumNamesMap = await namesRes.json();
-                    console.log('✅ Nombres reales de álbumes cargados desde Facebook');
-                }
-            } catch (e) {
-                console.log('ℹ️ album-names.json no disponible, usando nombres generados');
-            }
-            
-            // Nombres descriptivos de series (fallback SOLO si no hay nombre real)
-            const defaultName = 'Sin título';
-            
-            if (data.albums) {
-                data.albums.forEach((album, ai) => {
-                    if (album.images) {
-                        // Usar SOLO nombre real de Facebook
-                        const albumId = album.albumId;
-                        const realName = albumNamesMap[albumId];
-                        
-                        // Si NO hay nombre real, usar albumId (no inventar)
-                        const albumName = realName || '';
-                        
-                        album.images.forEach((img, ii) => {
-                        // Título: Nombre real si existe, sino "Sin título"
-                        let titulo;
-                        if (realName && realName.trim()) {
-                            // Todas las obras del álbum comparten el mismo nombre
-                            titulo = realName;
-                        } else {
-                            // "Sin título" para obras sin nombre de álbum
-                            titulo = 'Sin título';
-                        }
-                        
-                        allImages.push({
-                            id: `obra-${ai}-${ii}`,
-                            titulo: titulo,
-                            albumName: albumName, // Nombre del álbum para filtros
-                            imagen: img,
-                            albumId: albumId,
-                            albumIndex: ai,
-                            imageIndex: ii, // índice dentro del álbum
-                            ritual: Math.random() > 0.7
-                        });
-                        });
-                    }
-                });
-            }
+            // Map to internal structure
+            const allImages = allImagesRaw.map(img => ({
+                id: img.id,
+                titulo: img.albumName, // Use album name as title for now
+                albumName: img.albumName,
+                imagen: img.path,
+                albumId: img.albumId,
+                albumIndex: 0, // Not strictly needed anymore but good for compat
+                imageIndex: img.index,
+                ritual: Math.random() > 0.9 // 10% chance of ritual effect
+            }));
             
             // 🎲 SHUFFLE ALEATORIO - Cada visita es única
             this.shuffleArray(allImages);
             
+            // Limit initial load to 300 to avoid DOM overload, but keep the rest if needed
             this.obras = allImages.slice(0, 306);
-            this.filteredObras = null; // Reset filters
+            this.allObras = allImages; // Store all for potential infinite scroll later
+            this.filteredObras = null;
+
+            console.log(`✅ Portfolio loaded: ${this.obras.length} of ${allImages.length} images`);
 
             // Cargar blog
             const blogRes = await fetch('data/blog.json');

@@ -1,0 +1,42 @@
+{
+    "profile": {
+        "username": "naroa.artista",
+        "url": "https://www.instagram.com/naroa.artista",
+        "followers": "1.2k",
+        "bio": "Artista plástica. Bilbao. El error como método."
+    },
+    "posts": [
+        {
+            "id": "post-01",
+            "url": "https://www.instagram.com/p/C2_Example1/",
+            "image": "/images/instagram/insta-01.jpg",
+            "caption": "En el taller. La luz de la tarde sobre el grafito. #art #studio #bilbao",
+            "likes": 124,
+            "date": "2024-01-20"
+        },
+        {
+            "id": "post-02",
+            "url": "https://www.instagram.com/p/C2_Example2/",
+            "image": "/images/instagram/insta-02.jpg",
+            "caption": "Detalle de 'DiviNos VaiVenes'. Mica y carbón. #drawing #portrait",
+            "likes": 89,
+            "date": "2024-01-18"
+        },
+        {
+            "id": "post-03",
+            "url": "https://www.instagram.com/p/C2_Example3/",
+            "image": "/images/instagram/insta-03.jpg",
+            "caption": "Proceso de la nueva serie. El error nos guía. #wip #artistsoninstagram",
+            "likes": 205,
+            "date": "2024-01-15"
+        },
+        {
+            "id": "post-04",
+            "url": "https://www.instagram.com/p/C2_Example4/",
+            "image": "/images/instagram/insta-04.jpg",
+            "caption": "Exposición en Politena. Gracias a todos por venir! 🖤",
+            "likes": 310,
+            "date": "2024-01-10"
+        }
+    ]
+}

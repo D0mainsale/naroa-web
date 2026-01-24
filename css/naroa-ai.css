@@ -219,12 +219,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  /* Modern browsers */
+  /* Firefox 64+, Chrome 121+ (progressive enhancement) */
   scrollbar-width: thin;
   scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
 }
 
-/* WebKit fallback for Safari and older Chrome */
+/* WebKit scrollbar styling (Safari, older Chrome/Edge) */
 .ai-panel-messages::-webkit-scrollbar {
   width: 6px;
 }

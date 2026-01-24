@@ -1,0 +1,35 @@
+{
+    "nav": {
+        "obras": "Obrak",
+        "proceso": "Prozesua",
+        "bitacora": "Bitakora",
+        "retrato": "Erretratua?",
+        "about": "Niri buruz",
+        "contacto": "Kontaktua"
+    },
+    "home": {
+        "title": "Naroa Gutiérrez Gil",
+        "subtitle": "Ez dago akatsik. Itxaronaldia soilik.",
+        "enter": "Sartu"
+    },
+    "portfolio": {
+        "filters": {
+            "all": "Dena",
+            "drawings": "Marrazkia",
+            "paintings": "Pintura",
+            "mixed": "Teknika mistoa"
+        },
+        "view_work": "Obra ikusi"
+    },
+    "about": {
+        "title": "Naroa Gutiérrez Gil",
+        "location": "Artista plastikoa · Bilbo",
+        "bio_1": "Pintatzen dut. Marrazten dut. Erretratuak egiten ditut.",
+        "bio_2": "Batez ere grafito, ikatz eta akrilikoarekin lan egiten dut. Nire lanak gorputza eta aurpegia presentzia-lurralde gisa aztertzen ditu.",
+        "bio_3": "Ez dut azaleko antzekotasunik bilatzen. Jarrera desagertzen denean geratzen dena bilatzen dut.",
+        "quote": "Ezer ez da baztertzailea. Errealitateak elkar osatzen du.",
+        "method_title": "Metodoa",
+        "method_text": "Akatsa metodo gisa eta itxaronaldia tresna gisa erabiliz lan egiten dut. Istripu guztiak ez dira zuzentzen. Denbora guztia ez da betetzen.",
+        "contact_title": "Kontaktua"
+    }
+}

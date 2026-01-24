@@ -1,0 +1,35 @@
+{
+    "nav": {
+        "obras": "Obras",
+        "proceso": "Proceso",
+        "bitacora": "Bitácora",
+        "retrato": "¿Te retrato?",
+        "about": "Sobre mí",
+        "contacto": "Contacto"
+    },
+    "home": {
+        "title": "Naroa Gutiérrez Gil",
+        "subtitle": "No hay error. Solo espera.",
+        "enter": "Entrar"
+    },
+    "portfolio": {
+        "filters": {
+            "all": "Todo",
+            "drawings": "Dibujo",
+            "paintings": "Pintura",
+            "mixed": "Mixta"
+        },
+        "view_work": "Ver obra"
+    },
+    "about": {
+        "title": "Naroa Gutiérrez Gil",
+        "location": "Artista plástica · Bilbao",
+        "bio_1": "Pinto. Dibujo. Retrato.",
+        "bio_2": "Trabajo principalmente con grafito, carbón y acrílico. Mi obra explora el cuerpo y el rostro como territorios de presencia.",
+        "bio_3": "No busco el parecido superficial. Busco lo que permanece cuando se va la pose.",
+        "quote": "Nada es excluyente. La realidad se complementa.",
+        "method_title": "Método",
+        "method_text": "Trabajo desde el error como método y la espera como herramienta. No todos los accidentes se corrigen. No todo el tiempo se llena.",
+        "contact_title": "Contacto"
+    }
+}

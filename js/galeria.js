@@ -12,48 +12,46 @@ class GaleriaSystem {
     }
 
     async init() {
-        await this.loadAlbums();
-        await this.loadImages();
+        await this.loadData();
         this.initSearchBar();
         this.initFilterButtons();
         this.initLightbox();
         this.render();
     }
 
-    async loadAlbums() {
-        const response = await fetch('/data/album-names.json');
-        this.albums = await response.json();
-    }
-
-    async loadImages() {
-        // Escanear todos los álbumes y recopilar imágenes
-        const albumIds = Object.keys(this.albums).filter(k => k !== 'DIVINOS_VAIVENES');
-        
-        for (const albumId of albumIds) {
-            const albumName = this.albums[albumId];
-            const albumPath = `/images/raw_albums/${albumId}`;
+    async loadData() {
+        try {
+            // Load all indexed images
+            const response = await fetch('/data/images-index.json');
+            this.allImages = await response.json();
             
-            // Intentar cargar hasta 20 imágenes por álbum
-            // (ajustable según rendimiento)
-            for (let i = 1; i <= 20; i++) {
-                const imageName = `00000${i}`.slice(-6);
-                const variations = [
-                    `${imageName}_*.jpg`,
-                    `${imageName}_*.png`
-                ];
-                
-                // Por simplicidad, asumimos un patrón común
-                // En producción, generaríamos el JSON de índice
-                this.allImages.push({
-                    albumId,
-                    albumName,
-                    path: `${albumPath}/${imageName}_image.jpg`, // placeholder
-                    index: i
-                });
-            }
+            // Extract unique albums from images for filters
+            // We use a Map to keep the first occurrence's albumName (or we could count them)
+            const albumMap = new Map();
+            this.allImages.forEach(img => {
+                if (!albumMap.has(img.albumId)) {
+                    albumMap.set(img.albumId, {
+                        id: img.albumId,
+                        name: img.albumName,
+                        count: 0
+                    });
+                }
+                albumMap.get(img.albumId).count++;
+            });
+            
+            this.albums = Object.fromEntries(
+                Array.from(albumMap.values()).map(a => [a.id, a.name])
+            );
+            
+            this.filteredImages = [...this.allImages];
+            console.log(`✅ Gallery loaded: ${this.allImages.length} images from ${albumMap.size} albums`);
+            
+        } catch (error) {
+            console.error('❌ Error loading gallery data:', error);
+            // Fallback empty
+            this.allImages = [];
+            this.filteredImages = [];
         }
-        
-        this.filteredImages = [...this.allImages];
     }
 
     initSearchBar() {
@@ -77,9 +75,17 @@ class GaleriaSystem {
     }
 
     initFilterButtons() {
-        const albums = Object.entries(this.albums)
+        // Count images per album
+        const albumCounts = {};
+        this.allImages.forEach(img => {
+            albumCounts[img.albumId] = (albumCounts[img.albumId] || 0) + 1;
+        });
+
+        // Sort albums by image count (descending)
+        const sortedAlbums = Object.entries(this.albums)
             .filter(([id]) => id !== 'DIVINOS_VAIVENES')
-            .slice(0, 20); // Top 20 álbumes para filtros
+            .sort(([idA], [idB]) => (albumCounts[idB] || 0) - (albumCounts[idA] || 0))
+            .slice(0, 20); // Top 20 albums
         
         const filterContainer = document.createElement('div');
         filterContainer.className = 'galeria-filters';
@@ -87,8 +93,8 @@ class GaleriaSystem {
             <button class="filter-btn active" data-album="all">
                 Todos (${this.allImages.length})
             </button>
-            ${albums.map(([id, name]) => {
-                const count = this.allImages.filter(img => img.albumId === id).length;
+            ${sortedAlbums.map(([id, name]) => {
+                const count = albumCounts[id] || 0;
                 return `
                     <button class="filter-btn" data-album="${id}">
                         ${name} (${count})
@@ -97,6 +103,10 @@ class GaleriaSystem {
             }).join('')}
         `;
         
+        // Remove existing if any (to avoid duplicates on re-init)
+        const existing = document.querySelector('.galeria-filters');
+        if (existing) existing.remove();
+
         document.querySelector('#galeria-container').prepend(filterContainer);
         
         document.querySelectorAll('.filter-btn').forEach(btn => {

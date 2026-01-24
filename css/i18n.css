@@ -1,0 +1,47 @@
+/* === LANGUAGE SWITCHER STYLES === */
+
+.lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 2rem;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    opacity: 0.8;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #888);
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0 4px;
+    transition: color 0.3s ease;
+}
+
+.lang-btn:hover {
+    color: var(--text-primary, #fff);
+}
+
+.lang-btn.active {
+    color: var(--text-primary, #fff);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.lang-sep {
+    color: var(--text-secondary, #444);
+    font-size: 0.7rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .lang-switcher {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        margin-left: 0;
+        z-index: 1000;
+    }
+}
