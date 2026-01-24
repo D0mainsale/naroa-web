@@ -1,21 +1,47 @@
 /* ═══════════════════════════════════════════════════════════════════
-   NO-VIGNETTE OVERRIDE - Elimina efectos de sombreado en bordes
+   NO-VIGNETTE OVERRIDE - Elimina TODOS los efectos de sombreado
+   Carga este archivo ÚLTIMO para máxima prioridad
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Desactivar el marco del body (silent.css) */
+/* Desactivar TODOS los pseudo-elementos del body */
 body::before,
 body::after {
     display: none !important;
+    content: none !important;
+    background: none !important;
+    opacity: 0 !important;
 }
 
 /* Desactivar overlays oscuros de bordes en vistas */
 .ritual-view::before,
+.ritual-view::after,
 .process-view::before,
-.portfolio-view::before {
+.process-view::after,
+.portfolio-view::before,
+.portfolio-view::after,
+.home-view::before,
+.home-view::after,
+.about-view::before,
+.about-view::after,
+.bitacora-view::before,
+.bitacora-view::after,
+.retrospecter-view::before,
+.retrospecter-view::after,
+.retrato-view::before,
+.retrato-view::after,
+main::before,
+main::after,
+html::before,
+html::after {
     display: none !important;
+    content: none !important;
+    background: none !important;
+    opacity: 0 !important;
 }
 
-/* Mantener fondos limpios sin gradientes de sombra */
+/* Fondos limpios sin gradientes de sombra */
+html,
+body,
 .home-view,
 .portfolio-view,
 .process-view,
@@ -23,11 +49,23 @@ body::after {
 .retrato-view,
 .about-view,
 .retrospecter-view,
-.tienda-view {
+.tienda-view,
+.ritual-view {
     background: var(--bg, #f4f3f0) !important;
+    background-image: none !important;
 }
 
-/* Asegurar que no haya box-shadow en contenedores principales */
-[data-view] {
+/* Sin box-shadow en contenedores principales */
+[data-view],
+main,
+section,
+.view {
     box-shadow: none !important;
 }
+
+/* Eliminar cualquier radial-gradient de borde */
+*::before,
+*::after {
+    box-shadow: none !important;
+}
+
