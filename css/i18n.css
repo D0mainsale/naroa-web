@@ -1,12 +1,29 @@
 /* === LANGUAGE SWITCHER STYLES === */
 
 .lang-switcher {
-    display: inline-flex;
+    position: fixed;
+    bottom: 30px;
+    left: 24px;
+    z-index: 9990; /* Just above Spotify player wrapper but below toggle */
+    display: flex;
     align-items: center;
-    margin-left: 2rem;
-    font-size: 0.8rem;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-size: 0.75rem;
     font-family: 'Inter', sans-serif;
-    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.lang-switcher:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
 }
 
 .lang-btn {
