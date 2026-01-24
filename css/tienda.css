@@ -1,0 +1,50 @@
+/**
+ * TIENDA VIEW STYLES
+ * Estilos específicos para la vista de tienda
+ */
+
+.tienda-view {
+    min-height: 100vh;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease;
+}
+
+.tienda-intro {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.tienda-statement {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 200;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--color-text, #1a1a1a);
+}
+
+.tienda-intro > p:last-child {
+    color: var(--color-muted, #666);
+    line-height: 1.6;
+}
+
+/* Product Grid Enhancement */
+.shop-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .tienda-view {
+        padding: 1.5rem;
+    }
+    
+    .shop-products-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}

@@ -103,12 +103,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/golden-typography.css">
     <link rel="stylesheet" href="/css/premium-2026.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/ritual.css">
     <link rel="stylesheet" href="/css/bitacora-premium.css">
     <link rel="stylesheet" href="/css/portfolio-premium.css">
+    <link rel="stylesheet" href="/css/shop-premium.css">
+    <link rel="stylesheet" href="/css/galeria-premium.css">
+    <link rel="stylesheet" href="/css/hero-fullscreen.css">
+    <link rel="stylesheet" href="/css/semantic-blocks.css">
+    <link rel="stylesheet" href="/css/ai-whisper.css">
+    <link rel="stylesheet" href="/css/portrait-cta.css">
     <link rel="stylesheet" href="/css/obra-detail.css">
+    <link rel="stylesheet" href="/css/naroa-ai.css">
+    <link rel="stylesheet" href="/css/smart-typography.css">
+    <link rel="stylesheet" href="/css/process-premium.css">
 </head>
 <body>
     <!-- SEO invisible para crawlers y accesibilidad -->
@@ -168,28 +178,6 @@
         </header>
         
         
-        <!-- Controles Dinámicos Premium -->
-        <div class="portfolio-controls">
-            <div class="controls-left">
-
-                <select id="material-filter" class="filter-select" title="Filtrar por material">
-                    <option value="all">Todos los materiales</option>
-                    <option value="grafito">Grafito</option>
-                    <option value="carbon">Carbón</option>
-                    <option value="acrilico">Acrílico</option>
-                    <option value="mixta">Técnica mixta</option>
-                    <option value="mica">Mica</option>
-                </select>
-            </div>
-            <div class="controls-right">
-                <span id="obras-count" class="obras-count">40 obras</span>
-                <select id="obras-sort" class="filter-select" title="Ordenar obras">
-                    <option value="default">Por defecto</option>
-                    <option value="title-asc">Título A-Z</option>
-                    <option value="title-desc">Título Z-A</option>
-                </select>
-            </div>
-        </div>
         
         <!-- Contenido semántico para SEO/GEO (reemplazado por JS dinámicamente) -->
         <section id="portfolio-grid" class="portfolio-grid" aria-label="Galería de obras">
@@ -234,39 +222,57 @@
                 <a href="#/portfolio" class="nav-link">Obras</a>
                 <a href="#/process" class="nav-link active">Proceso</a>
                 <a href="#/bitacora" class="nav-link">Bitácora</a>
+                <a href="#/tienda" class="nav-link">Tienda</a>
                 <a href="#/retrato" class="nav-link">¿Te retrato?</a>
                 <a href="#/about" class="nav-link">About</a>
             </nav>
         </header>
         
         <article class="process-intro">
-            <p class="process-statement">Mi proceso no es lineal. Es un «vaivén» entre luz y falla, entretejiendo <strong>alma</strong> y <strong>glitch</strong>.</p>
+            <p class="process-statement">Mi proceso <span class="twisted-text">no es lineal</span>. Es un «vaivén» entre luz y falla, entretejiendo <strong>alma</strong> y <strong>glitch</strong>.</p>
         </article>
         
         <section class="process-blocks">
-            <article class="process-block">
+            <article class="process-block" data-number="01">
                 <h2>Materia y Mica</h2>
                 <p>Grafito. Carbón. Mineral de mica. La materia no ilustra una idea: la anima. Nuestras oscuridades contienen chispas de luz.</p>
                 <p class="process-detail">Uso mica para hilvanar el abrazo entre la caverna y el cielo. El brillo mineral sobre el papel mate es una toma de conciencia.</p>
             </article>
             
-            <article class="process-block">
+            <article class="process-block" data-number="02">
                 <h2>El Glitch</h2>
                 <p>El error como método. El accidente como revelación. No corrijo el pálpito: lo atiendo.</p>
                 <p class="process-detail">Donde el trazo falla, aparece la esencia divina que anima nuestra carne y huesos. La perfección es asfixia; el error es ReCreo.</p>
             </article>
             
-            <article class="process-block">
+            <article class="process-block" data-number="03">
                 <h2>Repetición</h2>
                 <p>Volver a uno mismo hasta que solo quede el gozo. No dictar normas, sino comentar posibilidades.</p>
                 <p class="process-detail">Cada capa de pintura es un recordatorio de que somos algo más que nuestra identificación corpórea.</p>
             </article>
             
-            <article class="process-block">
+            <article class="process-block" data-number="04">
                 <h2>Pálpito</h2>
                 <p>Seguir las indicaciones que nos susurra nuestro interior. Si el trayecto es de tu agrado, el gozo no caerá en ningún pozo.</p>
                 <p class="process-detail">Escuchar el ritmo interno del material. El dibujo no es una meta, es un islote donde poder recreArte.</p>
             </article>
+        </section>
+        
+        <!-- ═══════════════════════════════════════════════════════════════════
+             ANTES/DESPUÉS — Slider Interactivo del Proceso Creativo
+             ═══════════════════════════════════════════════════════════════════ -->
+        <section class="process-transformation" aria-label="Transformación del boceto a obra final">
+            <h2 class="transformation-title">Del Boceto a la Obra Final</h2>
+            <p class="transformation-subtitle">Desliza para descubrir la transformación</p>
+            
+            <div class="before-after-container" data-before-after>
+                <img src="/images/optimized/853524166127006_000002_485142581_1310753963737355_5413431824173292980_n.webp" alt="Primera fase del proceso - trazos iniciales" data-before>
+                <img src="/images/optimized/853524166127006_000001_485141007_1310753923737359_3104141236670420796_n.webp" alt="Obra finalizada - resultado completo" data-after>
+            </div>
+            
+            <p class="transformation-note">
+                <em>«El boceto contiene el pálpito original. La obra final es su desarrollo consciente.»</em>
+            </p>
         </section>
         
         <footer class="portfolio-footer">
@@ -450,6 +456,38 @@
     </main>
 
     <!-- ═══════════════════════════════════════════════════════════════════
+         CAPA 2: TIENDA — Obras originales y láminas
+         ═══════════════════════════════════════════════════════════════════ -->
+    <main id="tienda-view" data-view="tienda" class="tienda-view hidden">
+        <header class="portfolio-header">
+            <h1 class="portfolio-title">Tienda</h1>
+            <nav class="portfolio-nav">
+                <a href="#/portfolio" class="nav-link">Obras</a>
+                <a href="#/process" class="nav-link">Proceso</a>
+                <a href="#/bitacora" class="nav-link">Bitácora</a>
+                <a href="#/tienda" class="nav-link active">Tienda</a>
+                <a href="#/retrato" class="nav-link">¿Te retrato?</a>
+                <a href="#/about" class="nav-link">About</a>
+            </nav>
+        </header>
+        
+        <article class="tienda-intro">
+            <p class="tienda-statement">Cada pieza es una conversación entre luz y sombra.</p>
+            <p>Obras originales, láminas numeradas y encargos personalizados. Todo sale del taller con manos que respiran.</p>
+        </article>
+        
+        <!-- Product Grid (populated by shop.js) -->
+        <section id="shop-products" class="shop-products-grid" aria-label="Productos disponibles">
+            <!-- Los productos se cargan dinámicamente -->
+        </section>
+        
+        <footer class="portfolio-footer">
+            <a href="#/retrato" class="process-cta">¿Quieres un retrato personalizado? →</a>
+            <a href="#/" class="back-home">← Volver al inicio</a>
+        </footer>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
          CAPA 3: RITUAL — El juego como archivo vivo
          ═══════════════════════════════════════════════════════════════════ -->
     <main id="ritual-view" data-view="ritual" class="ritual-view hidden">
@@ -528,14 +566,109 @@
     <script src="/js/features/galeria.js"></script>
 
     <!-- Core App (after features) -->
-    <script src="/js/core/app.js"></script>
+    <script src="js/app.js?v=2026_reboot"></script>
 
     <!-- Effects -->
-    <script src="/js/effects/premium-features.js"></script>
-    <script src="/js/effects/ultra-premium.js"></script>
-    <script src="/js/effects/lightbox.js"></script>
-    <script src="/js/effects/dust.js"></script>
-    <script src="/js/effects/rupture.js"></script>
+    <script src="js/premium-features.js?v=2026_reboot"></script>
+    <script src="js/ultra-premium.js?v=2026_reboot"></script>
+    <script src="js/lightbox.js?v=2026_reboot"></script>
+    <script src="js/dust.js?v=2026_reboot"></script>
+    <script src="js/rupture.js?v=2026_reboot"></script>
+    <script src="js/reading-progress.js?v=2026_reboot"></script>
+
+    <!-- GSAP Animations (Renamed & Busted) -->
+    <script src="js/anim-system.js?v=2026_reboot"></script>
+
+    <!-- Notion CMS Loader -->
+    <script src="js/notion-cms.js?v=2026_reboot"></script>
+
+    <!-- Shop System -->
+    <script src="js/shop.js?v=2026_reboot"></script>
+
+    <!-- Hero Fullscreen -->
+    <script src="js/hero-fullscreen.js?v=2026_reboot"></script>
+
+    <!-- AI Whisper System -->
+    <script src="js/ai-whisper.js?v=2026_reboot"></script>
+
+    <!-- Portrait CTA -->
+    <script src="js/portrait-cta.js?v=2026_reboot"></script>
+
+    <!-- PILOT Real Cursor (4 colores + ink blots) -->
+    <script src="js/pilot-cursor-real.js?v=2026_nextlevel"></script>
+
+    <!-- Welcome Ritual (First Visit Experience) -->
+    <script src="js/features/welcome-ritual.js?v=2026_nextlevel"></script>
+
+    <!-- Hidden Stories (Long-Hover Reveal) -->
+    <script src="js/features/hidden-stories.js?v=2026_nextlevel"></script>
+
+    <!-- Ritual Games (Age-Based Interactive Games) -->
+    <script src="js/features/ritual-games.js?v=2026_nextlevel"></script>
+
+    <!-- Process Blocks Observer -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const processBlocks = document.querySelectorAll('.process-block');
+        if (processBlocks.length > 0) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+              }
+            });
+          }, { threshold: 0.2 });
+          processBlocks.forEach(block => observer.observe(block));
+        }
+      });
+    </script>
+
+    <!-- Naroa AI Assistant (Gemini Combo) -->
+    <script src="js/naroa-ai.js?v=2026_reboot"></script>
+
+    <!-- Ritual Enhanced v3.0 -->
+    <script src="js/ritual-enhanced.js?v=2026_reboot"></script>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         NEXT-LEVEL FEATURES v2026
+         ═══════════════════════════════════════════════════════════════════ -->
+    
+    <!-- Studio Mode (Ambient Sound + Dynamic Lighting) -->
+    <script src="js/features/studio-mode.js?v=2026_mega"></script>
+    
+    <!-- Gaze Follow (Portraits Follow Cursor) -->
+    <script src="js/features/gaze-follow.js?v=2026_mega"></script>
+    
+    <!-- Before/After Slider (Sketch → Final) -->
+    <script src="js/features/before-after-slider.js?v=2026_mega"></script>
+    
+    <!-- Audio-Visual Synesthesia (Hover → Sound) -->
+    <script src="js/features/audio-synesthesia.js?v=2026_mega"></script>
+    
+    <!-- Keyboard Navigation (Vim Keys + Shortcuts) -->
+    <script src="js/features/keyboard-nav.js?v=2026_mega"></script>
+    
+    <!-- Cal.com Booking (Online Appointments) -->
+    <script src="js/features/cal-booking.js?v=2026_mega"></script>
+    
+    <!-- Blockchain CoA (NFT Certificates) -->
+    <script src="js/features/blockchain-coa.js?v=2026_mega"></script>
+    
+    <!-- Portfolio Creative (Masonry, Scatter, Stack, Magnetic Effects) -->
+    <script src="js/features/portfolio-creative.js?v=2026_creative"></script>
+    
+    <!-- UNIFIED GALLERY (3D Museum + Tactile Interaction) -->
+    <script src="js/features/gallery-unified.js?v=2026_unified"></script>
+
+    <!-- PWA Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/js/service-worker.js')
+            .then(reg => console.log('✅ SW Registered (Rebooted)', reg))
+            .catch(err => console.error('❌ SW Fail', err));
+        });
+      }
+    </script>
 </body>
 </html>
-

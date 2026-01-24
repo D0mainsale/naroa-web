@@ -8,45 +8,66 @@
    ────────────────────────────────────────────────────────── */
 
 :root {
-    /* Primary Palette - Minimalist Luxe */
-    --color-cream: #FAF8F5;
-    --color-charcoal: #1A1A1A;
-    --color-graphite: #2D2D2D;
-    --color-silver: #C0C0C0;
-    --color-platinum: #E5E5E5;
+    /* ═══ NATURE DISTILLED 2026 - PRIMARY PALETTE ═══ */
+    /* Cloud Dancer Foundation */
+    --color-cloud-dancer: #F4F3F0;   /* Pantone 11-4201 */
+    --color-cream: #FAF8F5;           /* Lighter variant */
+    --color-linen: #F9F6F2;           /* Warmer cream */
     
-    /* Accent Colors - Artivista Soul */
-    --color-clay: #C8A882;           /* Warm earth */
-    --color-rust: #B86F50;            /* Terracotta */
-    --color-sage: #9CAF88;            /* Soft green */
-    --color-indigo: #4A5568;          /* Deep blue-grey */
+    /* Charcoal & Neutrals */
+    --color-charcoal: #1A1A1A;        /* Deep black */
+    --color-graphite: #2D2D2D;        /* Softer black */
+    --color-silver: #C0C0C0;          /* Mid grey */
+    --color-platinum: #E5E5E5;        /* Light grey */
+    
+    /* ═══ EARTH TONES - ORGANIC PALETTE ═══ */
+    /* Clay Family */
+    --color-clay-light: #D4A574;      /* Pale clay */
+    --color-clay-medium: #C8A882;     /* Warm earth (original) */
+    --color-clay-dark: #A67C52;       /* Deep terracotta */
+    
+    /* Earth Spectrum */
+    --color-earth-warm: #8B7355;      /* Warm brown */
+    --color-earth-cool: #6B5D52;      /* Cool stone */
     --color-ochre: #D4A574;           /* Golden earth */
+    --color-rust: #B86F50;            /* Terracotta accent */
     
-    /* Functional */
+    /* Natural Accents */
+    --color-sage: #9CAF88;            /* Soft green */
+    --color-moss: #7A8D6F;            /* Deeper green */
+    --color-indigo: #4A5568;          /* Deep blue-grey */
+    --color-dusk: #8B7E94;            /* Lavender grey */
+    
+    /* ═══ FUNCTIONAL COLORS ═══ */
     --color-success: #10B981;
     --color-warning: #F59E0B;
     --color-error: #EF4444;
     --color-info: #3B82F6;
     
-    /* Overlays & Glassmorphism */
+    /* ═══ OVERLAYS & GLASSMORPHISM ═══ */
     --glass-white: rgba(255, 255, 255, 0.85);
     --glass-dark: rgba(26, 26, 26, 0.85);
+    --glass-earth: rgba(200, 168, 130, 0.15);  /* NEW: Clay tint */
     --overlay-light: rgba(250, 248, 245, 0.95);
     --overlay-dark: rgba(26, 26, 26, 0.95);
+    --overlay-earth: rgba(212, 165, 116, 0.08);  /* NEW: Organic tint */
     
-    /* Shadows - Layered Depth */
+    /* ═══ SHADOWS - LAYERED DEPTH ═══ */
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
     --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.20);
     --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-organic: 0 4px 12px rgba(138, 115, 85, 0.15);  /* NEW: Warm shadow */
     
-    /* Gradients - Elegant Transitions */
+    /* ═══ GRADIENTS - ELEGANT TRANSITIONS ═══ */
     --gradient-silk: linear-gradient(135deg, var(--color-cream) 0%, var(--color-platinum) 100%);
     --gradient-sunset: linear-gradient(135deg, var(--color-ochre) 0%, var(--color-rust) 100%);
-    --gradient-earth: linear-gradient(135deg, var(--color-clay) 0%, var(--color-sage) 100%);
+    --gradient-earth: linear-gradient(135deg, var(--color-clay-medium) 0%, var(--color-sage) 100%);
     --gradient-depth: linear-gradient(180deg, transparent 0%, rgba(26, 26, 26, 0.6) 100%);
+    --gradient-clay: linear-gradient(135deg, var(--color-clay-light) 0%, var(--color-clay-dark) 100%);
+    --gradient-nature: linear-gradient(135deg, var(--color-earth-warm) 0%, var(--color-moss) 100%);
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -413,6 +434,169 @@
     scroll-behavior: smooth;
 }
 
+/* ──────────────────────────────────────────────────────────
+   ▸ 10. NATURE DISTILLED - ORGANIC TEXTURES
+   ────────────────────────────────────────────────────────── */
+
+/* Paper Grain Overlay - Subtle tactility */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    mix-blend-mode: multiply;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.03) 2px,
+            rgba(0, 0, 0, 0.03) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.02) 2px,
+            rgba(0, 0, 0, 0.02) 4px
+        ),
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(212, 165, 116, 0.02) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(138, 115, 85, 0.02) 0%,
+            transparent 50%
+        );
+    /* Simulates organic paper fibers */
+    background-size: 100% 100%, 100% 100%, 200% 200%, 200% 200%;
+}
+
+/* Optional: Disable on mobile for performance */
+@media (max-width: 768px) {
+    body::after {
+        display: none;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────
+   ▸ 11. PROCESS REVELATION - HOVER STORYTELLING
+   ────────────────────────────────────────────────────────── */
+
+/* Dual-Image Card System */
+.card-image {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Process Layer - Bottom (hidden by default) */
+.card-image-process {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    /* Slight desaturation + blur for "sketch" feel */
+    filter: grayscale(0.4) blur(0.5px) brightness(1.1);
+    opacity: 1;
+}
+
+/* Final Artwork Layer - Top (visible by default) */
+.card-image-final {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    transition: 
+        opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+        filter 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Hover State: Final artwork fades out, revealing process */
+.portfolio-card:hover .card-image-final {
+    opacity: 0;
+    transform: scale(1.05);
+    filter: blur(4px);
+}
+
+/* Process layer subtly zooms in on hover */
+.portfolio-card:hover .card-image-process {
+    transform: scale(1.02);
+    filter: grayscale(0.2) blur(0px) brightness(1);
+    transition: 
+        transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.2s,
+        filter 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
+}
+
+/* Overlay hint text */
+.portfolio-card .card-overlay {
+    z-index: 3;
+}
+
+/* Optional: Add a subtle "Proceso" label when process is revealed */
+.portfolio-card:hover .card-image::after {
+    content: 'Proceso';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 4;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 6px 12px;
+    background: rgba(212, 165, 116, 0.9);
+    color: var(--color-charcoal);
+    border-radius: 4px;
+    opacity: 0;
+    transform: translateY(-5px);
+    animation: processLabelReveal 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+}
+
+@keyframes processLabelReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Performance: Use will-change for smoother animations */
+.card-image-final,
+.card-image-process {
+    will-change: transform, opacity, filter;
+}
+
+/* Reset will-change after animation (performance) */
+.portfolio-card:not(:hover) .card-image-final,
+.portfolio-card:not(:hover) .card-image-process {
+    will-change: auto;
+}
+
+/* Mobile: Disable hover effect for touch devices */
+@media (hover: none) {
+    .portfolio-card:hover .card-image-final {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+    
+    .portfolio-card:hover .card-image-process {
+        transform: none;
+    }
+    
+    .portfolio-card:hover .card-image::after {
+        display: none;
+    }
+}
+
 /* ═════════════════════════════════════════════════════════════
    END PREMIUM DESIGN SYSTEM
    ════════════════════════════════════════════════════════════ */
+
+

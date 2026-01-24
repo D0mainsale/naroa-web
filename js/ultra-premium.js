@@ -82,10 +82,24 @@ class PremiumCursor {
         this.cursorPos.y += (this.mousePos.y - this.cursorPos.y) * this.speed;
         
         this.dotPos.x += (this.mousePos.x - this.dotPos.x) * 0.3;
-        this.dotPos.y += (this.mousePos.y - this.dotPos.y) * 0.3;
+        this.dotPos.y += (this.mousePos.x - this.dotPos.y) * 0.3;
         
-        this.cursor.style.transform = `translate(${this.cursorPos.x - 20}px, ${this.cursorPos.y - 20}px)`;
+        // Update cursor position (preserve scale if active)
+        const baseTransform = `translate(${this.cursorPos.x - 20}px, ${this.cursorPos.y - 20}px)`;
+        if (this.activeContext) {
+            this.cursor.style.transform = `${baseTransform} scale(${this.activeContext.scale})`;
+        } else {
+            this.cursor.style.transform = baseTransform;
+        }
+        
         this.cursorDot.style.transform = `translate(${this.dotPos.x - 4}px, ${this.dotPos.y - 4}px)`;
+        
+        // Update icon position if visible
+        if (this.cursorIcon && this.cursorIcon.style.opacity !== '0') {
+            const iconX = this.cursorPos.x - 8;
+            const iconY = this.cursorPos.y - 8;
+            this.cursorIcon.style.transform = `translate(${iconX}px, ${iconY}px)`;
+        }
         
         requestAnimationFrame(() => this.animate());
     }
@@ -101,23 +115,132 @@ class PremiumCursor {
     }
     
     setupHoverStates() {
-        // Expand on links/buttons
-        const interactives = 'a, button, [data-cursor="pointer"]';
-        
-        document.addEventListener('mouseover', (e) => {
-            const target = e.target.closest(interactives);
-            if (target) {
-                this.cursor.style.transform += ' scale(1.5)';
-                this.cursor.style.borderColor = 'var(--color-rust)';
+        // Context-aware cursor icons and styles
+        this.contextRules = [
+            // Portfolio images - Magnify
+            {
+                selector: '.portfolio-image, .galeria-item img, [data-lightbox]',
+                icon: '🔍',
+                scale: 1.8,
+                color: 'var(--color-rust)'
+            },
+            // Artwork titles and artistic elements
+            {
+                selector: '[data-artwork-title], .obra-titulo, [data-art]',
+                icon: '🎨',
+                scale: 1.5,
+                color: '#D4AF37' // Gold
+            },
+            // Text content - Reading
+            {
+                selector: 'p, article, .bitacora-content, [data-text]',
+                icon: '📖',
+                scale: 1.2,
+                color: 'var(--color-graphite)'
+            },
+            // Links - Pointer
+            {
+                selector: 'a',
+                icon: '👆',
+                scale: 1.6,
+                color: 'var(--color-rust)'
+            },
+            // Interactive zones
+            {
+                selector: '[data-interactive], button, [role="button"]',
+                icon: '✨',
+                scale: 2.0,
+                color: '#FFD700' // Bright gold
+            },
+            // Video/media
+            {
+                selector: 'video, audio, [data-video]',
+                icon: '▶️',
+                scale: 1.7,
+                color: '#FF6B6B'
             }
-        });
+        ];
         
-        document.addEventListener('mouseout', (e) => {
-            const target = e.target.closest(interactives);
+        // Create icon element
+        this.cursorIcon = document.createElement('div');
+        this.cursorIcon.className = 'cursor-icon';
+        this.cursorIcon.style.cssText = `
+            position: fixed;
+            font-size: 16px;
+            pointer-events: none;
+            z-index: 10002;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            user-select: none;
+        `;
+        document.body.appendChild(this.cursorIcon);
+        
+        // Track active context
+        this.activeContext = null;
+        
+        // Event delegation for performance
+        document.addEventListener('mouseover', (e) => this.updateContext(e));
+        document.addEventListener('mouseout', (e) => this.resetContext(e));
+    }
+    
+    updateContext(e) {
+        // Find matching context rule
+        let matchedRule = null;
+        
+        for (const rule of this.contextRules) {
+            const target = e.target.closest(rule.selector);
             if (target) {
-                this.cursor.style.borderColor = 'var(--color-graphite)';
+                matchedRule = rule;
+                break;
             }
-        });
+        }
+        
+        if (matchedRule && matchedRule !== this.activeContext) {
+            this.activeContext = matchedRule;
+            this.applyCursorStyle(matchedRule);
+        }
+    }
+    
+    applyCursorStyle(rule) {
+        // Scale cursor
+        const baseTransform = `translate(${this.cursorPos.x - 20}px, ${this.cursorPos.y - 20}px)`;
+        this.cursor.style.transform = `${baseTransform} scale(${rule.scale})`;
+        this.cursor.style.borderColor = rule.color;
+        
+        // Show icon
+        if (rule.icon) {
+            this.cursorIcon.textContent = rule.icon;
+            this.cursorIcon.style.opacity = '1';
+            this.cursorIcon.style.color = rule.color;
+            
+            // Position icon at cursor center
+            const iconX = this.cursorPos.x - 8;
+            const iconY = this.cursorPos.y - 8;
+            this.cursorIcon.style.transform = `translate(${iconX}px, ${iconY}px)`;
+        }
+    }
+    
+    resetContext(e) {
+        // Check if we're still over ANY interactive element
+        let stillHovering = false;
+        for (const rule of this.contextRules) {
+            if (e.relatedTarget?.closest(rule.selector)) {
+                stillHovering = true;
+                break;
+            }
+        }
+        
+        if (!stillHovering) {
+            this.activeContext = null;
+            
+            // Reset to default
+            const baseTransform = `translate(${this.cursorPos.x - 20}px, ${this.cursorPos.y - 20}px)`;
+            this.cursor.style.transform = `${baseTransform} scale(1)`;
+            this.cursor.style.borderColor = 'var(--color-graphite)';
+            
+            // Hide icon
+            this.cursorIcon.style.opacity = '0';
+        }
     }
 }
 

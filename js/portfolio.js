@@ -66,7 +66,7 @@ class Portfolio {
             // 🎲 SHUFFLE ALEATORIO - Cada visita es única
             this.shuffleArray(allImages);
             
-            this.obras = allImages.slice(0, 40);
+            this.obras = allImages.slice(0, 306);
             this.filteredObras = null; // Reset filters
 
             // Cargar blog
@@ -120,7 +120,17 @@ class Portfolio {
             
             card.innerHTML = `
                 <figure class="card-image img-reveal">
-                    <img src="${obra.imagen}" alt="${obra.titulo}" loading="lazy">
+                    <!-- Process Layer (bottom) - Revealed on hover -->
+                    <img class="card-image-process" 
+                         src="${obra.imagen}" 
+                         alt="${obra.titulo} - Proceso" 
+                         loading="lazy"
+                         data-process-available="placeholder">
+                    <!-- Final Artwork Layer (top) -->
+                    <img class="card-image-final" 
+                         src="${obra.imagen}" 
+                         alt="${obra.titulo}" 
+                         loading="lazy">
                     <div class="card-overlay">
                         <span class="view-work">Ver obra</span>
                     </div>

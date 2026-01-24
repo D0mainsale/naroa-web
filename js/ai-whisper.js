@@ -5,7 +5,7 @@
 
 class AIWhisper {
   constructor() {
-    this.enabled = false;
+    this.enabled = true; // Activado por defecto
     this.interval = 42000; // 42 segundos (número áureo × 26)
     this.timer = null;
     this.synth = window.speechSynthesis;
@@ -99,21 +99,55 @@ class AIWhisper {
   }
 
   /**
-   * Setup voice (preferir voz femenina en español)
+   * Setup voice (voz humana dulce y suave)
+   * Prioriza voces conocidas por ser cálidas y naturales
    */
   setupVoice() {
     const voices = this.synth.getVoices();
     
-    // Priority: Spanish female voices
-    this.voice = voices.find(v => 
-      v.lang.includes('es') && v.name.includes('female')
-    ) || voices.find(v => 
-      v.lang.includes('es')
-    ) || voices.find(v => 
-      v.name.includes('female')
-    ) || voices[0];
+    // Voces premium conocidas por ser dulces y humanas
+    const sweetVoiceNames = [
+      'Mónica', 'Monica',           // macOS/iOS - muy cálida
+      'Paulina',                     // macOS/iOS - dulce mexicana
+      'Lucía', 'Lucia',              // Google - suave y clara
+      'Elena',                       // Windows - agradable
+      'Conchita',                    // Amazon Polly style
+      'Penélope', 'Penelope',        // Suave
+      'Lupe',                        // macOS - mexicana cálida
+      'Marisol',                     // Natural
+      'Google español',              // Neural voice
+      'Microsoft Helena',            // Windows neural
+      'Sabina'                       // Natural española
+    ];
     
-    console.log('🎙️ AI Whisper voice:', this.voice?.name);
+    // 1. Buscar voces premium dulces en español
+    this.voice = voices.find(v => 
+      v.lang.startsWith('es') && 
+      sweetVoiceNames.some(name => v.name.toLowerCase().includes(name.toLowerCase()))
+    );
+    
+    // 2. Si no hay premium, buscar cualquier voz neural/natural en español
+    if (!this.voice) {
+      this.voice = voices.find(v => 
+        v.lang.startsWith('es') && 
+        (v.name.includes('Neural') || v.name.includes('natural') || v.name.includes('Premium'))
+      );
+    }
+    
+    // 3. Fallback: cualquier voz femenina en español (evitar las robóticas)
+    if (!this.voice) {
+      this.voice = voices.find(v => 
+        v.lang.startsWith('es') && 
+        !v.name.includes('Jorge') && !v.name.includes('Diego') && !v.name.includes('Carlos')
+      );
+    }
+    
+    // 4. Último recurso: primera voz en español disponible
+    if (!this.voice) {
+      this.voice = voices.find(v => v.lang.startsWith('es')) || voices[0];
+    }
+    
+    console.log('🎙️ AI Whisper voice (dulce y suave):', this.voice?.name);
   }
 
   /**
@@ -140,11 +174,11 @@ class AIWhisper {
     
     const utterance = new SpeechSynthesisUtterance(text);
     
-    // Voice settings for whisper effect
+    // Voice settings: dulce, suave y humana
     utterance.voice = this.voice;
-    utterance.volume = 0.4;  // Muy bajo (susurro)
-    utterance.rate = 0.7;    // Lento (contemplativo)
-    utterance.pitch = 1.1;   // Ligeramente alto (etéreo)
+    utterance.volume = 0.75;  // Suave pero audible (íntimo, no grita)
+    utterance.rate = 0.65;    // Más lento (cálido y contemplativo)
+    utterance.pitch = 1.15;   // Tono más alto (dulce y femenino)
     utterance.lang = 'es-ES';
     
     // Visual feedback

@@ -111,7 +111,7 @@ class PortfolioDynamicControls {
         this.updateCount(filtered.length);
         
         // Re-renderizar
-        this.portfolio.filteredObras = filtered.slice(0, 40);
+        this.portfolio.filteredObras = filtered.slice(0, 306);
         this.portfolio.renderGrid();
     }
     

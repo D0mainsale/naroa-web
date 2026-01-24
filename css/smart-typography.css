@@ -1,0 +1,180 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ * SMART TYPOGRAPHY SCALE - FLUID RESPONSIVE SYSTEM
+ * Perfectly readable across all device sizes
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+:root {
+    /* Fluid typography scale using clamp() 
+       Formula: clamp(min, preferred, max)
+       Grows smoothly between 320px and 1920px viewports */
+    
+    --font-xs: clamp(0.75rem, 0.5rem + 0.5vw, 0.875rem);      /* 12px → 14px */
+    --font-sm: clamp(0.875rem, 0.75rem + 0.75vw, 1rem);       /* 14px → 16px */
+    --font-base: clamp(1rem, 0.875rem + 1vw, 1.125rem);       /* 16px → 18px */
+    --font-md: clamp(1.125rem, 1rem + 1.25vw, 1.375rem);      /* 18px → 22px */
+    --font-lg: clamp(1.375rem, 1.125rem + 1.75vw, 1.75rem);   /* 22px → 28px */
+    --font-xl: clamp(1.75rem, 1.375rem + 2.5vw, 2.25rem);     /* 28px → 36px */
+    --font-2xl: clamp(2.25rem, 1.75rem + 3.5vw, 3rem);        /* 36px → 48px */
+    --font-3xl: clamp(3rem, 2.25rem + 5vw, 4rem);             /* 48px → 64px */
+    
+    /* Line heights (proportional to font size) */
+    --line-tight: 1.2;
+    --line-normal: 1.5;
+    --line-relaxed: 1.75;
+    --line-loose: 2;
+}
+
+/* Base typography */
+body {
+    font-size: var(--font-base);
+    line-height: var(--line-normal);
+}
+
+/* Headings with fluid scaling */
+h1, .h1 {
+    font-size: var(--font-3xl);
+    line-height: var(--line-tight);
+    margin-bottom: clamp(1rem, 2vw, 2rem);
+}
+
+h2, .h2 {
+    font-size: var(--font-2xl);
+    line-height: var(--line-tight);
+    margin-bottom: clamp(0.875rem, 1.5vw, 1.5rem);
+}
+
+h3, .h3 {
+    font-size: var(--font-xl);
+    line-height: var(--line-tight);
+    margin-bottom: clamp(0.75rem, 1.25vw, 1.25rem);
+}
+
+h4, .h4 {
+    font-size: var(--font-lg);
+    line-height: var(--line-normal);
+    margin-bottom: clamp(0.625rem, 1vw, 1rem);
+}
+
+h5, .h5 {
+    font-size: var(--font-md);
+    line-height: var(--line-normal);
+}
+
+h6, .h6 {
+    font-size: var(--font-base);
+    line-height: var(--line-normal);
+    font-weight: 600;
+}
+
+/* Body text */
+p, .paragraph {
+    font-size: var(--font-base);
+    line-height: var(--line-relaxed);
+    margin-bottom: clamp(0.875rem, 1.25vw, 1.5rem);
+}
+
+/* Long-form content (articles, bitácora) */
+article p,
+.bitacora-content p,
+.process-detail {
+    font-size: var(--font-base);
+    line-height: var(--line-loose);
+    max-width: clamp(45ch, 65ch, 75ch); /* Optimal reading length */
+}
+
+/* Small text */
+small, .text-small {
+    font-size: var(--font-xs);
+    line-height: var(--line-normal);
+}
+
+/* Lead text (intro paragraphs) */
+.lead, .intro-text {
+    font-size: var(--font-md);
+    line-height: var(--line-relaxed);
+}
+
+/* Display text (hero, title) */
+.display {
+    font-size: var(--font-3xl);
+    line-height: 1.1;
+    letter-spacing: -0.02em; /* Tighter for large text */
+}
+
+/* Captions */
+.caption {
+    font-size: var(--font-xs);
+    line-height: var(--line-normal);
+    color: rgba(26, 26, 26, 0.6);
+}
+
+/* Blockquotes */
+blockquote {
+    font-size: var(--font-md);
+    line-height: var(--line-relaxed);
+    font-style: italic;
+    padding-left: clamp(1rem, 2vw, 2rem);
+    border-left: clamp(3px, 0.5vw, 5px) solid var(--color-rust, #BF5630);
+}
+
+/* Lists */
+li {
+    font-size: var(--font-base);
+    line-height: var(--line-relaxed);
+    margin-bottom: clamp(0.5rem, 0.75vw, 0.875rem);
+}
+
+/* Buttons and UI text */
+button, .btn {
+    font-size: var(--font-sm);
+    line-height: 1.2;
+}
+
+/* Navigation */
+nav a, .nav-link {
+    font-size: var(--font-sm);
+    line-height: 1.2;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+    /* Slightly tighter line heights on mobile for space */
+    p, article p {
+        line-height: var(--line-normal);
+    }
+    
+    /* Ensure headings don't get too large */
+    h1, .h1 {
+        max-font-size: 2.5rem;
+    }
+}
+
+/* Print styles - fixed sizes */
+@media print {
+    :root {
+        --font-xs: 0.75rem;
+        --font-sm: 0.875rem;
+        --font-base: 1rem;
+        --font-md: 1.125rem;
+        --font-lg: 1.375rem;
+        --font-xl: 1.75rem;
+        --font-2xl: 2.25rem;
+        --font-3xl: 3rem;
+    }
+}
+
+/* Accessibility - larger text for users who prefer it */
+@media (prefers-contrast: high) {
+    :root {
+        --font-base: clamp(1.125rem, 1rem + 1.25vw, 1.375rem); /* Slightly larger */
+    }
+}
+
+/* Dark mode adjustments (if implemented) */
+.dark-mode {
+    /* Slightly more line-height for better readability in dark */
+    --line-normal: 1.6;
+    --line-relaxed: 1.85;
+}

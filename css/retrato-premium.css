@@ -1,0 +1,402 @@
+/**
+ * RETRATO PREMIUM - Enhanced commission page
+ * Golden ratio scaling, visual examples, FAQ
+ */
+
+/* Retrato View Layout */
+.retrato-view {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f4f3f0 0%, #e8e7e0 100%);
+}
+
+/* Hero Section */
+.retrato-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+  background: linear-gradient(135deg, 
+    rgba(230, 57, 70, 0.05), 
+    rgba(139, 92, 246, 0.03));
+}
+
+.retrato-hero-content {
+  max-width: 800px;
+}
+
+.retrato-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--font-4xl); /* Áureo */
+  font-weight: 300;
+  font-style: italic;
+  color: #1a1818;
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-tight);
+}
+
+.retrato-hero-subtitle {
+  font-size: var(--font-xl); /* Áureo */
+  color: #e63946;
+  margin-bottom: var(--space-2xl);
+  font-weight: 500;
+}
+
+.retrato-hero-description {
+  font-size: var(--font-lg); /* Áureo */
+  line-height: var(--line-loose);
+  color: rgba(26, 24, 24, 0.8);
+  margin-bottom: var(--space-2xl);
+}
+
+/* Examples Gallery */
+.retrato-examples {
+  padding: var(--space-3xl) var(--space-xl);
+  background: white;
+}
+
+.retrato-examples-title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--font-2xl);
+  font-style: italic;
+  text-align: center;
+  color: #1a1818;
+  margin-bottom: var(--space-xl);
+}
+
+.retrato-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: calc(var(--space-xl) * 1.618); /* φ */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.retrato-example {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--space-md) * 0.75);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.retrato-example:hover {
+  transform: translateY(calc(var(--space-sm) * -1.618)); /* -φ */
+  box-shadow: 0 calc(var(--space-lg) * 1.618) calc(var(--space-2xl) * 1.618) rgba(0, 0, 0, 0.1);
+}
+
+.retrato-example img {
+  width: 100%;
+  aspect-ratio: 0.618; /* φ⁻¹ (portrait) */
+  object-fit: cover;
+  display: block;
+}
+
+.retrato-example-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, 
+    rgba(0, 0, 0, 0.9), 
+    transparent);
+  color: white;
+  padding: var(--space-lg);
+  font-size: var(--font-sm);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.retrato-example:hover .retrato-example-caption {
+  transform: translateY(0);
+}
+
+/* Process Section */
+.retrato-proceso {
+  padding: var(--space-3xl) var(--space-xl);
+  background: linear-gradient(135deg, #f9f8f6, #ede9e3);
+}
+
+.retrato-proceso-title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--font-2xl);
+  font-style: italic;
+  text-align: center;
+  color: #1a1818;
+  margin-bottom: var(--space-2xl);
+}
+
+.retrato-steps {
+  max-width: 900px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  counter-reset: step;
+}
+
+.retrato-steps li {
+  position: relative;
+  padding-left: calc(var(--space-3xl) * 1.272); /* √φ */
+  margin-bottom: calc(var(--space-xl) * 1.618); /* φ */
+  font-size: var(--font-md);
+  line-height: var(--line-loose);
+}
+
+.retrato-steps li::before {
+  content: counter(step);
+  counter-increment: step;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--space-2xl) * 1.618); /* φ */
+  height: calc(var(--space-2xl) * 1.618);
+  background: #e63946;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-lg);
+  font-weight: 600;
+}
+
+.retrato-steps strong {
+  color: #e63946;
+  font-weight: 600;
+}
+
+/* Pricing Options */
+.retrato-precios {
+  padding: var(--space-3xl) var(--space-xl);
+  background: white;
+}
+
+.retrato-precios-title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--font-2xl);
+  font-style: italic;
+  text-align: center;
+  color: #1a1818;
+  margin-bottom: var(--space-xl);
+}
+
+.retrato-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-xl);
+  max-width: 1000px;
+  margin: 0 auto var(--space-2xl);
+}
+
+.retrato-option {
+  background: linear-gradient(135deg, #f9f8f6, white);
+  border: 2px solid rgba(230, 57, 70, 0.1);
+  border-radius: calc(var(--space-md) * 1.272); /* √φ */
+  padding: calc(var(--space-xl) * 1.618); /* φ */
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.retrato-option:hover {
+  border-color: #e63946;
+  transform: scale(1.05);
+  box-shadow: 0 calc(var(--space-lg) * 1.618) calc(var(--space-2xl) * 1.618) rgba(230, 57, 70, 0.2);
+}
+
+.retrato-option-title {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: #e63946;
+  margin-bottom: var(--space-md);
+}
+
+.retrato-size {
+  font-size: var(--font-md);
+  color: rgba(26, 24, 24, 0.7);
+  margin-bottom: var(--space-sm);
+}
+
+.retrato-price {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: #1a1818;
+  margin-bottom: var(--space-md);
+}
+
+.retrato-option-features {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0 0 0;
+  font-size: var(--font-sm);
+  color: rgba(26, 24, 24, 0.7);
+}
+
+.retrato-option-features li {
+  padding: var(--space-xs) 0;
+}
+
+/* FAQ Section */
+.retrato-faq {
+  padding: var(--space-3xl) var(--space-xl);
+  background: linear-gradient(135deg, #f4f3f0, #e8e7e0);
+}
+
+.retrato-faq-title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--font-2xl);
+  font-style: italic;
+  text-align: center;
+  color: #1a1818;
+  margin-bottom: var(--space-2xl);
+}
+
+.retrato-faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.retrato-faq-item {
+  background: white;
+  border-radius: calc(var(--space-md) * 0.75);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  border-left: calc(var(--space-xs) * 1.618) solid #e63946; /* φ */
+}
+
+.retrato-faq-question {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: #1a1818;
+  margin-bottom: var(--space-md);
+}
+
+.retrato-faq-answer {
+  font-size: var(--font-sm);
+  line-height: var(--line-loose);
+  color: rgba(26, 24, 24, 0.8);
+}
+
+/* CTA Section */
+.retrato-cta-section {
+  padding: calc(var(--space-3xl) * 1.618) var(--space-xl); /* φ */
+  background: linear-gradient(135deg, 
+    rgba(230, 57, 70, 0.1), 
+    rgba(139, 92, 246, 0.05));
+  text-align: center;
+}
+
+.retrato-cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--font-2xl);
+  font-style: italic;
+  color: #1a1818;
+  margin-bottom: var(--space-lg);
+}
+
+.retrato-cta-description {
+  font-size: var(--font-md);
+  line-height: var(--line-loose);
+  color: rgba(26, 24, 24, 0.8);
+  max-width: 600px;
+  margin: 0 auto var(--space-2xl);
+}
+
+.retrato-cta-buttons {
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.retrato-btn {
+  display: inline-block;
+  padding: calc(var(--space-md) * 1.272) calc(var(--space-xl) * 1.618); /* √φ × φ */
+  background: #e63946;
+  color: white;
+  text-decoration: none;
+  font-size: var(--font-md);
+  font-weight: 600;
+  border-radius: calc(var(--space-md) * 0.618); /* φ⁻¹ */
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+}
+
+.retrato-btn:hover {
+  background: #d62839;
+  transform: translateY(-2px);
+  box-shadow: 0 calc(var(--space-md) * 1.618) calc(var(--space-xl) * 1.618) rgba(230, 57, 70, 0.3);
+}
+
+.retrato-btn--secondary {
+  background: transparent;
+  color: #e63946;
+  border: 2px solid #e63946;
+}
+
+.retrato-btn--secondary:hover {
+  background: rgba(230, 57, 70, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 calc(var(--space-md) * 1.618) calc(var(--space-xl) * 1.618) rgba(230, 57, 70, 0.2);
+}
+
+/* Trust indicators */
+.retrato-trust {
+  display: flex;
+  gap: var(--space-2xl);
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--space-2xl);
+  font-size: var(--font-sm);
+  color: rgba(26, 24, 24, 0.6);
+  flex-wrap: wrap;
+}
+
+.retrato-trust-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.retrato-trust-icon {
+  font-size: var(--font-lg);
+}
+
+/* Mobile  Responsive */
+@media (max-width: 768px) {
+  .retrato-hero {
+    min-height: 60vh;
+    padding: var(--space-2xl) var(--space-md);
+  }
+  
+  .retrato-hero-title {
+    font-size: var(--font-2xl);
+  }
+  
+  .retrato-hero-subtitle {
+    font-size: var(--font-md);
+  }
+  
+  .retrato-examples-grid,
+  .retrato-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .retrato-steps li {
+    padding-left: calc(var(--space-2xl) * 1.618);
+  }
+  
+  .retrato-cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Print styles */
+@media print {
+  .retrato-cta-section,
+  .portfolio-nav {
+    display: none !important;
+  }
+}
