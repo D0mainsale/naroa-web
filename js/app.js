@@ -1,27 +1,50 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
-    // === SHADOW KILLER - Eliminar sombras de extensiones del navegador ===
+    // === ULTRA SHADOW KILLER - Elimina TODO rastro de extensiones con sombras ===
     const killShadows = () => {
-        const shadowHost = document.getElementById('preact-border-shadow-host');
-        if (shadowHost) {
-            shadowHost.remove();
-            console.log('🗑️ Removed browser extension shadow overlay');
-        }
-        // También buscar otros posibles hosts de sombras
-        document.querySelectorAll('[id*="shadow-host"], [id*="border-shadow"]').forEach(el => el.remove());
+        // Lista de IDs conocidos de extensiones que inyectan sombras
+        const shadowIds = [
+            'preact-border-shadow-host',
+            'textcortex-shadow-host',
+            'sidebar-button',
+            'TEXTCORTEX-SHADOW-HOST'
+        ];
+        
+        shadowIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.remove();
+                console.log('🗑️ Killed shadow element:', id);
+            }
+        });
+        
+        // Buscar por patrones en ID
+        document.querySelectorAll('[id*="shadow-host"], [id*="border-shadow"], [id*="textcortex"], [popover]').forEach(el => {
+            if (el.id.toLowerCase().includes('shadow') || el.id.toLowerCase().includes('textcortex')) {
+                el.remove();
+            }
+        });
     };
+    
+    // Ejecutar inmediatamente
     killShadows();
-    // Observar por si se añade después
+    
+    // Ejecutar cada 500ms por si se vuelve a inyectar
+    setInterval(killShadows, 500);
+    
+    // Observar TODO el documento (no solo body)
     const shadowObserver = new MutationObserver(mutations => {
         mutations.forEach(m => {
             m.addedNodes.forEach(node => {
-                if (node.id && (node.id.includes('shadow-host') || node.id.includes('border-shadow'))) {
+                if (node.nodeType === 1 && node.id && 
+                    (node.id.includes('shadow') || node.id.includes('textcortex') || node.id.includes('border'))) {
                     node.remove();
+                    console.log('🗑️ Blocked shadow injection:', node.id);
                 }
             });
         });
     });
-    shadowObserver.observe(document.body, { childList: true, subtree: true });
+    shadowObserver.observe(document.documentElement, { childList: true, subtree: true });
     
     // === RITUAL SYSTEMS INIT ===
     const dayNight = new DayNightCycle();
