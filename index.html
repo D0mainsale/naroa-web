@@ -701,19 +701,18 @@
     <!-- Core App (after features) -->
     <script src="js/app.js?v=SHADOW_KILL_V1"></script>
 
-    <!-- Effects -->
-    <script src="js/premium-features.js?v=SHADOW_KILL_V1"></script>
-    <script src="js/ultra-premium.js?v=SHADOW_KILL_V1"></script>
+    <!-- Effects (defer for faster initial load) -->
+    <script src="js/premium-features.js?v=SHADOW_KILL_V1" defer></script>
+    <script src="js/ultra-premium.js?v=SHADOW_KILL_V1" defer></script>
     <script src="js/lightbox.js?v=SHADOW_KILL_V1"></script>
-    <script src="js/dust.js?v=SHADOW_KILL_V1"></script>
-    <script src="js/rupture.js?v=SHADOW_KILL_V1"></script>
-    <script src="js/reading-progress.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/dust.js?v=SHADOW_KILL_V1" defer></script>
+    <script src="js/rupture.js?v=SHADOW_KILL_V1" defer></script>
+    <script src="js/reading-progress.js?v=SHADOW_KILL_V1" defer></script>
 
     <!-- GSAP Animations (Renamed & Busted) -->
     <script src="js/anim-system.js?v=SHADOW_KILL_V1"></script>
 
-    <!-- Notion CMS Loader -->
-    <script src="js/notion-cms.js?v=CMS_INTEGRATION_V2" defer></script>
+    <!-- Notion CMS duplicate removed - already loaded on line 699 -->
 
     <!-- Shop System -->
     <script src="js/shop.js?v=SHADOW_KILL_V1"></script>
@@ -725,40 +724,40 @@
     <script src="js/hero-fullscreen.js?v=SHADOW_KILL_V1"></script>
 
     <!-- AI Whisper System -->
-    <script src="js/ai-whisper.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/ai-whisper.js?v=SHADOW_KILL_V1" defer></script>
 
     <!-- Portrait CTA -->
-    <script src="js/portrait-cta.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/portrait-cta.js?v=SHADOW_KILL_V1" defer></script>
 
     <!-- PILOT Real Cursor - DISABLED in favor of CSS brush cursor
     <script src="js/pilot-cursor-real.js?v=SHADOW_KILL_V1"></script>
     -->
 
     <!-- Welcome Ritual (First Visit Experience) -->
-    <script src="js/features/welcome-ritual.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/welcome-ritual.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Animated Signature (Home Microinteraction) -->
-    <script src="js/features/animated-signature.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/animated-signature.js?v=SHADOW_KILL_V1" defer></script>
 
     <!-- Hidden Stories (Long-Hover Reveal) -->
-    <script src="js/features/hidden-stories.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/hidden-stories.js?v=SHADOW_KILL_V1" defer></script>
 
     <!-- Ritual Games (Age-Based Interactive Games) -->
-    <script src="js/features/ritual-games.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/ritual-games.js?v=SHADOW_KILL_V1" defer></script>
 
     <!-- ═══ NEXT-LEVEL 2026 Features ═══ -->
     
     <!-- Konami Code (Easter Egg Secret Gallery) -->
-    <script src="js/features/konami-code.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/konami-code.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Paint Cursor (Artistic Brush Trail) -->
-    <script src="js/features/paint-cursor.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/paint-cursor.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Exploration Progress (Gamification) -->
-    <script src="js/features/exploration-progress.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/exploration-progress.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- AI Haiku Generator -->
-    <script src="js/features/ai-haiku.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/ai-haiku.js?v=SHADOW_KILL_V1" defer></script>
 
     <!-- Process Blocks Observer -->
     <script>
@@ -781,26 +780,26 @@
     <script src="js/features/dock.js?v=DOCK_V1"></script>
     
     <!-- ✨ VALERIA VIRTUAL - Asistente Espectacular -->
-    <script src="js/valeria-virtual.js?v=VALERIA_V1"></script>
+    <script src="js/valeria-virtual.js?v=VALERIA_V1" defer></script>
 
     <!-- Ritual Enhanced v3.0 -->
-    <script src="js/ritual-enhanced.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/ritual-enhanced.js?v=SHADOW_KILL_V1" defer></script>
 
     <!-- ═══════════════════════════════════════════════════════════════════
          NEXT-LEVEL FEATURES v2026
          ═══════════════════════════════════════════════════════════════════ -->
     
     <!-- Studio Mode (Ambient Sound + Dynamic Lighting) -->
-    <script src="js/features/studio-mode.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/studio-mode.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Gaze Follow (Portraits Follow Cursor) -->
-    <script src="js/features/gaze-follow.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/gaze-follow.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Before/After Slider (Sketch → Final) -->
     <script src="js/features/before-after-slider.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Audio-Visual Synesthesia (Hover → Sound) -->
-    <script src="js/features/audio-synesthesia.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/audio-synesthesia.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Keyboard Navigation (Vim Keys + Shortcuts) -->
     <script src="js/features/keyboard-nav.js?v=SHADOW_KILL_V1"></script>
@@ -809,7 +808,7 @@
     <script src="js/features/cal-booking.js?v=SHADOW_KILL_V1"></script>
     
     <!-- Blockchain CoA (NFT Certificates) -->
-    <script src="js/features/blockchain-coa.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/blockchain-coa.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Portfolio Creative (Masonry, Scatter, Stack, Magnetic Effects) -->
     <script src="js/features/portfolio-creative.js?v=SHADOW_KILL_V1"></script>
@@ -823,13 +822,13 @@
     <!-- ═══ PREMIUM CONVERSION FEATURES 2026 ═══ -->
     
     <!-- Testimonials Premium (Dynamic Carousel) -->
-    <script src="js/features/testimonials-premium.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/testimonials-premium.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Commission Workflow (Step-by-Step Order Form) -->
-    <script src="js/features/commission-workflow.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/commission-workflow.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- AR Wall Preview (See Art on Your Wall) -->
-    <script src="js/features/ar-wall-preview.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/features/ar-wall-preview.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Instagram Feed Widget -->
     <link rel="stylesheet" href="css/instagram-feed.css">
@@ -839,10 +838,10 @@
     <script src="js/i18n.js"></script>
 
     <!-- Immersive Experience (Mica Particles + Ink Trails + Studio Audio) -->
-    <script src="js/immersive-experience.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/immersive-experience.js?v=SHADOW_KILL_V1" defer></script>
     
     <!-- Spotify Ambient Music Player -->
-    <script src="js/features/spotify-player.js?v=SPOTIFY_V1"></script>
+    <script src="js/features/spotify-player.js?v=SPOTIFY_V1" defer></script>
 
     <!-- PWA Registration -->
     <script>
