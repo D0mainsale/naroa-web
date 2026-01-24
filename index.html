@@ -703,20 +703,15 @@
     <script src="/js/systems/archive.js" defer></script>
     <script src="/js/systems/ritual.js" defer></script>
 
-    <!-- Features -->
-    <script src="/js/features/bitacora.js" defer></script>
+    <!-- Features (Portfolio is the primary controller) -->
     <script src="/js/features/portfolio.js"></script>
-    <script src="/js/features/portfolio-dynamic.js"></script>
+    <script src="/js/features/bitacora.js" defer></script>
     <script src="/js/features/press-kit.js" defer></script>
-    <script src="/js/features/eventos-obra-dia.js" defer></script>
     <script src="/js/features/catalogo.js" defer></script>
     <script src="/js/features/galeria.js" defer></script>
 
-    <!-- Notion CMS Loader (Must be before features/app) -->
-    <script src="js/notion-cms.js?v=CMS_INTEGRATION_V2"></script>
-
-    <!-- Core App (after features) -->
-    <script src="js/app.js?v=SHADOW_KILL_V1"></script>
+    <!-- Core App (initializes Portfolio + Router) -->
+    <script src="/js/app.js?v=UNIFIED_V1"></script>
 
     <!-- Effects (defer for faster initial load) -->
     <script src="js/premium-features.js?v=SHADOW_KILL_V1" defer></script>

@@ -8,115 +8,42 @@ class Portfolio {
     
     async init() {
         try {
-            const res = await fetch('data/gallery.json');
-            const data = await res.json();
-            const allImages = [];
+            // Load optimized image index (2800+ images from Facebook archive)
+            const res = await fetch('/data/images-index.json');
+            const allImagesRaw = await res.json();
             
-            // Intentar cargar nombres reales de álbumes desde Facebook
-            let albumNamesMap = {};
-            try {
-                const namesRes = await fetch('data/album-names.json');
-                if (namesRes.ok) {
-                    albumNamesMap = await namesRes.json();
-                    console.log('✅ Nombres reales de álbumes cargados desde Facebook');
-                }
-            } catch (e) {
-                console.log('ℹ️ album-names.json no disponible, usando nombres generados');
-            }
-            
-            // Nombres descriptivos de series (fallback SOLO si no hay nombre real)
-            const defaultName = 'Sin título';
-            
-            if (data.albums) {
-                data.albums.forEach((album, ai) => {
-                    if (album.images) {
-                        // Usar SOLO nombre real de Facebook
-                        const albumId = album.albumId;
-                        const realName = albumNamesMap[albumId];
-                        
-                        // Si NO hay nombre real, usar albumId (no inventar)
-                        const albumName = realName || '';
-                        
-                        album.images.forEach((img, ii) => {
-                        // Título: Nombre real si existe, sino "Sin título"
-                        let titulo;
-                        if (realName && realName.trim()) {
-                            // Todas las obras del álbum comparten el mismo nombre
-                            titulo = realName;
-                        } else {
-                            // "Sin título" para obras sin nombre de álbum
-                            titulo = 'Sin título';
-                        }
-                        
-                        allImages.push({
-                            id: `obra-${ai}-${ii}`,
-                            titulo: titulo,
-                            albumName: albumName, // Nombre del álbum para filtros
-                            imagen: img,
-                            albumId: albumId,
-                            albumIndex: ai,
-                            imageIndex: ii, // índice dentro del álbum
-                            ritual: Math.random() > 0.7
-                        });
-                        });
-                    }
-                });
-            }
-            
-            // Series destacadas del documento crítico (RecreArte, Repóker de Reinas)
-            const featuredSeries = [
-                // Iconos y Retratos
-                '1004454256295953', // DiviNos VaiVenes - Entre Tantas Flores
-                '1038960572845321', // Amy Rocks
-                '1039704190842335', // Johnny Rocks  
-                '1066297131516374', // Hugo Box
-                '1041107699297275', // Marilyn Rocks
-                '1045418860270868', // James Rocks
-                '1641591095915596', // Mr. Fahrenheit (Freddie Mercury)
-                '1409550839119624', // Baroque Farrokh
-                // Walking Gallery & Exposiciones
-                '1026561114085267', // Walking Gallery Fair Saturday 2021
-                '643083640504394',  // Walking Gallery Bilbao 2022
-                '1840459186028785', // Walking Gallery Art Bowie
-                // Colecciones Especiales
-                '1087704452708975', // Ajenjo Cam
-                '2548476735227023', // Made in Greece
-                '1912952392112797', // Espejos del Alma
-                '3431632212974807', // Espejos del Alma 2
-                '1553116920501741', // Hello Darkness my Old Friend
-                '1884058398335530', // Holy Wood: REiDLATOS & aMOREs
-                '2282600815147951', // Holy Wood, White Windows
-                // Series de Reinas
-                '688859365926821',  // Tedas Queen
-                '819542002858556',  // Can-dy Queen
-                '2825983160809711', // Las RosaLas
-                '1934211596653543', // Wow, Lana
-                // Más series destacadas
-                '1753808018027236', // The Golden Couple & Balloons
-                '1523652204376153', // Audrey's Lightning
-                '1999297620144940', // Sunflower Catrina
-                '853524166127006',  // Multidimensional Love
-            ];
-            
-            // Separar obras destacadas de las demás
-            const featuredImages = allImages.filter(img => featuredSeries.includes(img.albumId));
-            const otherImages = allImages.filter(img => !featuredSeries.includes(img.albumId));
+            // Map to internal structure
+            const allImages = allImagesRaw.map(img => ({
+                id: img.id,
+                titulo: img.albumName || 'Sin título',
+                albumName: img.albumName,
+                imagen: img.path,
+                albumId: img.albumId,
+                imageIndex: img.index,
+                ritual: Math.random() > 0.9 // 10% ritual effect
+            }));
             
             // 🎲 SHUFFLE ALEATORIO - Cada visita es única
-            this.shuffleArray(featuredImages);
-            this.shuffleArray(otherImages);
+            this.shuffleArray(allImages);
             
-            // Featured primero, luego el resto (total: 80 obras)
-            const combinedImages = [...featuredImages, ...otherImages];
-            this.obras = combinedImages.slice(0, 306);
-            this.filteredObras = null; // Reset filters
+            // Limit to 306 for initial load (avoid DOM overload)
+            this.obras = allImages.slice(0, 306);
+            this.allObras = allImages;
+            this.filteredObras = null;
 
-            // Cargar blog
-            const blogRes = await fetch('data/blog.json');
-            this.blogPosts = await blogRes.json();
+            console.log(`✅ Portfolio loaded: ${this.obras.length} of ${allImages.length} images`);
+
+            // Load blog posts from static JSON
+            try {
+                const blogRes = await fetch('/data/blog.json');
+                this.blogPosts = await blogRes.json();
+            } catch (e) {
+                console.warn('Blog posts not loaded:', e);
+                this.blogPosts = [];
+            }
             
         } catch (e) {
-            console.error('Error cargando datos:', e);
+            console.error('Error loading portfolio data:', e);
         }
     }
     
@@ -131,6 +58,13 @@ class Portfolio {
     
     
     renderGrid() {
+        // DISABLED: El nuevo sistema UnifiedObraSystem se encarga del portfolio
+        // Si unified-obra está activo, no hacer nada
+        if (window.unifiedObraSystem && window.unifiedObraSystem.dataLoaded) {
+            console.log('📦 Portfolio.renderGrid() cediendo control a UnifiedObraSystem');
+            return;
+        }
+        
         const view = document.getElementById('portfolio-view');
         const grid = document.getElementById('portfolio-grid');
         view.classList.remove('hidden');

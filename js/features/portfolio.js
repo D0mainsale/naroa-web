@@ -8,74 +8,42 @@ class Portfolio {
     
     async init() {
         try {
-            // Check if NotionCMS is available
-            if (!window.notionCMS) {
-                console.error('❌ NotionCMS not found on window');
-                return;
-            }
-
-            // Load data from Notion
-            const success = await window.notionCMS.load();
-            if (!success) {
-                console.warn('⚠️ NotionCMS failed to load, falling back to empty state');
-            }
-
-            const notionArtworks = window.notionCMS.getAll();
-            const allImages = [];
-
-            // Map Notion data to Portfolio internal structure
-            notionArtworks.forEach((art, index) => {
-                // Only include items with an image
-                if (!art.image) return;
-
-                // Determine album/category
-                // If category is an array, take the first non-Portfolio tag, or default
-                let albumName = 'Sin título';
-                let albumId = 'misc'; 
-                
-                if (Array.isArray(art.category)) {
-                    const cats = art.category.filter(c => c !== 'Portfolio' && c !== 'Bitácora');
-                    if (cats.length > 0) albumName = cats[0];
-                } else if (art.category) {
-                    albumName = art.category;
-                }
-
-                // Create ID based on Notion ID or index
-                const id = art.id || `notion-${index}`;
-
-                allImages.push({
-                    id: id,
-                    titulo: art.title || 'Sin título',
-                    albumName: albumName,
-                    imagen: art.image,
-                    albumId: albumId, // We might want to map real IDs later if needed for filters
-                    description: art.description || '',
-                    medium: art.medium || '',
-                    year: art.year || '',
-                    ritual: Math.random() > 0.7 // Keep random ritual flag
-                });
-            });
+            // Load optimized image index (2800+ images from Facebook archive)
+            const res = await fetch('/data/images-index.json');
+            const allImagesRaw = await res.json();
             
-            console.log(`✅ Portfolio initialized with ${allImages.length} artworks from Notion`);
-
-            // Shuffle and assign to this.obras
-            this.shuffleArray(allImages);
-            this.obras = allImages;
-            this.filteredObras = null;
-
-            // Load blog posts from Notion as well
-            const blogPosts = window.notionCMS.getByCategory('Bitácora');
-            this.blogPosts = blogPosts.map(post => ({
-                title: post.title,
-                date: post.created_at || new Date().toISOString(),
-                excerpt: post.description || '',
-                content: post.content || post.description || '',
-                tags: post.tags || [],
-                image: post.image
+            // Map to internal structure
+            const allImages = allImagesRaw.map(img => ({
+                id: img.id,
+                titulo: img.albumName || 'Sin título',
+                albumName: img.albumName,
+                imagen: img.path,
+                albumId: img.albumId,
+                imageIndex: img.index,
+                ritual: Math.random() > 0.9 // 10% ritual effect
             }));
             
+            // 🎲 SHUFFLE ALEATORIO - Cada visita es única
+            this.shuffleArray(allImages);
+            
+            // Limit to 306 for initial load (avoid DOM overload)
+            this.obras = allImages.slice(0, 306);
+            this.allObras = allImages;
+            this.filteredObras = null;
+
+            console.log(`✅ Portfolio loaded: ${this.obras.length} of ${allImages.length} images`);
+
+            // Load blog posts from static JSON
+            try {
+                const blogRes = await fetch('/data/blog.json');
+                this.blogPosts = await blogRes.json();
+            } catch (e) {
+                console.warn('Blog posts not loaded:', e);
+                this.blogPosts = [];
+            }
+            
         } catch (e) {
-            console.error('Error initializing Portfolio with Notion data:', e);
+            console.error('Error loading portfolio data:', e);
         }
     }
     
