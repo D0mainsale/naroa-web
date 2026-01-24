@@ -32,7 +32,8 @@ body {
 }
 
 /* Hilos Tensados (Decorative Grid) */
-body::before {
+/* Hilos Tensados (Decorative Grid) - REMOVED to fix shadow issue */
+/* body::before {
     content: '';
     position: fixed;
     inset: 0;
@@ -42,7 +43,7 @@ body::before {
     background-size: 10vw 10vh;
     pointer-events: none;
     z-index: -1;
-}
+} */
 
 .hidden { display: none !important; }
 

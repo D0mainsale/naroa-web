@@ -1,4 +1,4 @@
-const CACHE_NAME = 'naroa-pwa-v2026-reboot';
+const CACHE_NAME = 'naroa-pwa-SHADOW_KILLER';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',

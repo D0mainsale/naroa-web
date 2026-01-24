@@ -439,7 +439,8 @@
    ────────────────────────────────────────────────────────── */
 
 /* Paper Grain Overlay - Subtle tactility */
-body::after {
+/* Paper Grain Overlay - REMOVED to fix shadow issue */
+/* body::after {
     content: '';
     position: fixed;
     inset: 0;
@@ -472,9 +473,8 @@ body::after {
             rgba(138, 115, 85, 0.02) 0%,
             transparent 50%
         );
-    /* Simulates organic paper fibers */
     background-size: 100% 100%, 100% 100%, 200% 200%, 200% 200%;
-}
+} */
 
 /* Optional: Disable on mobile for performance */
 @media (max-width: 768px) {
