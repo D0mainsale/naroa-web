@@ -1,4 +1,4 @@
-// === JUEGO DE LA OCA v2 - COMPLETO ===
+// === JUEGO DE LA OCA v3 - MEJORADO ===
 
 class JuegoOca {
     constructor() {
@@ -23,13 +23,25 @@ class JuegoOca {
         
         // Zonas de color
         this.ZONES = [
-            { start: 1, end: 15, color: '#e8f5e9', name: 'Inicio' },
-            { start: 16, end: 30, color: '#e3f2fd', name: 'Camino' },
-            { start: 31, end: 45, color: '#fff3e0', name: 'Pruebas' },
-            { start: 46, end: 63, color: '#fce4ec', name: 'Final' }
+            { start: 1, end: 15, color: '#e8f5e9', name: 'Primavera' },
+            { start: 16, end: 30, color: '#e3f2fd', name: 'Verano' },
+            { start: 31, end: 45, color: '#fff3e0', name: 'Otoño' },
+            { start: 46, end: 63, color: '#fce4ec', name: 'Invierno' }
         ];
         
-        // Frases poéticas de Naroa
+        // Sistema de logros
+        this.ACHIEVEMENTS = {
+            first_oca: { name: '🦆 Primera Oca', desc: 'Cae en tu primera oca', unlocked: false },
+            survivor: { name: '⚔️ Superviviente', desc: 'Sobrevive a la Calavera', unlocked: false },
+            speedrun: { name: '⚡ Velocista', desc: 'Gana en menos de 20 tiradas', unlocked: false },
+            explorer: { name: '🗺️ Explorador', desc: 'Descubre 50 casillas', unlocked: false },
+            collector: { name: '🎨 Coleccionista', desc: 'Descubre las 63 obras', unlocked: false },
+            lucky: { name: '🍀 Suertudo', desc: 'Saca tres 6 seguidos', unlocked: false },
+            patient: { name: '🧘 Paciente', desc: 'Sal del pozo sin quejarte', unlocked: false },
+            complete: { name: '👑 Maestro', desc: 'Completa el juego 5 veces', unlocked: false }
+        };
+        
+        // Frases poéticas de Naroa - Ampliadas
         this.FRASES = [
             "Nada es excluyente. La realidad se complementa.",
             "El problema hecho trampolín.",
@@ -50,11 +62,30 @@ class JuegoOca {
             "La fragilidad es fortaleza.",
             "Todo fluye, todo vuelve.",
             "El silencio también habla.",
-            "Renacer de las cenizas."
+            "Renacer de las cenizas.",
+            "Lo imperfecto es hermoso.",
+            "El oro repara las heridas.",
+            "Cada final es un comienzo.",
+            "La luz nace de la oscuridad.",
+            "Abraza tu sombra.",
+            "El vacío también es forma.",
+            "Bailar con las contradicciones.",
+            "La belleza está en el proceso.",
+            "Somos obras en construcción.",
+            "El alma no tiene bordes.",
+            "Cada cicatriz es un mapa.",
+            "Lo efímero es eterno.",
+            "El arte es alquimia.",
+            "Transformar plomo en oro.",
+            "La vida imita al arte."
         ];
+        
+        // Combos para logros
+        this.consecutiveSixes = 0;
         
         this.init();
     }
+
 
     loadState() {
         const saved = localStorage.getItem('naroa_oca');
@@ -68,11 +99,21 @@ class JuegoOca {
 
     loadRecords() {
         const saved = localStorage.getItem('naroa_records');
-        return saved ? JSON.parse(saved) : {
+        const records = saved ? JSON.parse(saved) : {
             bestRolls: null,
             gamesPlayed: 0,
-            allVisited: []
+            allVisited: [],
+            achievements: {}
         };
+        
+        // Merge saved achievements with defaults
+        Object.keys(this.ACHIEVEMENTS).forEach(key => {
+            if (records.achievements && records.achievements[key]) {
+                this.ACHIEVEMENTS[key].unlocked = true;
+            }
+        });
+        
+        return records;
     }
 
     saveState() {
@@ -80,6 +121,13 @@ class JuegoOca {
     }
 
     saveRecords() {
+        // Save achievement states
+        this.records.achievements = {};
+        Object.keys(this.ACHIEVEMENTS).forEach(key => {
+            if (this.ACHIEVEMENTS[key].unlocked) {
+                this.records.achievements[key] = true;
+            }
+        });
         localStorage.setItem('naroa_records', JSON.stringify(this.records));
     }
 
@@ -87,6 +135,90 @@ class JuegoOca {
         localStorage.removeItem('naroa_oca');
         location.reload();
     }
+
+    // === SISTEMA DE LOGROS ===
+    unlockAchievement(key) {
+        if (this.ACHIEVEMENTS[key] && !this.ACHIEVEMENTS[key].unlocked) {
+            this.ACHIEVEMENTS[key].unlocked = true;
+            this.saveRecords();
+            this.showAchievementNotification(this.ACHIEVEMENTS[key]);
+            this.playSound('achievement');
+        }
+    }
+
+    showAchievementNotification(achievement) {
+        let notification = document.getElementById('achievement-notification');
+        if (!notification) {
+            notification = document.createElement('div');
+            notification.id = 'achievement-notification';
+            notification.className = 'achievement-notification';
+            document.body.appendChild(notification);
+        }
+        
+        notification.innerHTML = `
+            <div class="achievement-badge">🏅</div>
+            <div class="achievement-content">
+                <div class="achievement-title">¡Logro Desbloqueado!</div>
+                <div class="achievement-name">${achievement.name}</div>
+                <div class="achievement-desc">${achievement.desc}</div>
+            </div>
+        `;
+        notification.classList.add('visible');
+        
+        setTimeout(() => notification.classList.remove('visible'), 4000);
+    }
+
+    checkAchievements() {
+        // Explorador - 50 casillas
+        if (this.records.allVisited.length >= 50) {
+            this.unlockAchievement('explorer');
+        }
+        
+        // Coleccionista - 63 obras
+        if (this.records.allVisited.length >= 63) {
+            this.unlockAchievement('collector');
+        }
+        
+        // Maestro - 5 partidas completadas
+        if (this.records.gamesPlayed >= 5) {
+            this.unlockAchievement('complete');
+        }
+    }
+
+    showAchievementsPanel() {
+        const modal = document.createElement('div');
+        modal.id = 'achievements-modal';
+        modal.className = 'achievements-modal';
+        
+        const unlockedCount = Object.values(this.ACHIEVEMENTS).filter(a => a.unlocked).length;
+        const totalCount = Object.keys(this.ACHIEVEMENTS).length;
+        
+        modal.innerHTML = `
+            <div class="modal-content achievements-content">
+                <h2>🏆 Logros (${unlockedCount}/${totalCount})</h2>
+                <div class="achievements-grid">
+                    ${Object.entries(this.ACHIEVEMENTS).map(([key, ach]) => `
+                        <div class="achievement-item ${ach.unlocked ? 'unlocked' : 'locked'}">
+                            <div class="achievement-icon">${ach.unlocked ? ach.name.split(' ')[0] : '🔒'}</div>
+                            <div class="achievement-info">
+                                <div class="achievement-name">${ach.unlocked ? ach.name.substring(2) : '???'}</div>
+                                <div class="achievement-desc">${ach.unlocked ? ach.desc : 'Pendiente de desbloquear'}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <button id="close-achievements">Cerrar</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        setTimeout(() => modal.classList.add('visible'), 50);
+        
+        document.getElementById('close-achievements').addEventListener('click', () => {
+            modal.classList.remove('visible');
+            setTimeout(() => modal.remove(), 300);
+        });
+    }
+
 
     // === AUDIO ===
     initAudio() {
@@ -139,7 +271,18 @@ class JuegoOca {
                 gain.gain.setValueAtTime(0.2, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
                 osc.start(); osc.stop(ctx.currentTime + 0.6);
+            },
+            achievement: () => {
+                osc.type = 'sine';
+                // Fanfare de logro
+                [392, 523, 659, 784].forEach((f, i) => {
+                    osc.frequency.setValueAtTime(f, ctx.currentTime + i * 0.08);
+                });
+                gain.gain.setValueAtTime(0.18, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                osc.start(); osc.stop(ctx.currentTime + 0.5);
             }
+
         };
         if (sounds[type]) sounds[type]();
     }
@@ -479,6 +622,7 @@ class JuegoOca {
             oca: () => {
                 this.playSound('oca');
                 this.showWhisper('🦆 ¡De oca a oca y tiro!');
+                this.unlockAchievement('first_oca'); // Primera oca
                 setTimeout(() => this.roll(), 1200);
             },
             puente: () => {
@@ -502,6 +646,8 @@ class JuegoOca {
                 this.playSound('bad');
                 this.turnosEspera = 2;
                 this.showWhisper('🕳️ ¡Pozo! Pierdes 2 turnos.');
+                // Patient achievement will be checked when exiting
+                this.inPozo = true;
             },
             laberinto: () => {
                 this.playSound('bad');
@@ -521,6 +667,7 @@ class JuegoOca {
             calavera: () => {
                 this.playSound('bad');
                 this.showWhisper('💀 ¡Muerte! Vuelves al inicio...');
+                this.survivedDeath = true; // Mark for survivor achievement
                 setTimeout(() => {
                     this.state.position = 1;
                     this.updatePosition();
@@ -531,6 +678,17 @@ class JuegoOca {
                 this.playSound('win');
                 this.state.gameComplete = true;
                 this.records.gamesPlayed++;
+                
+                // Check speedrun achievement
+                if (this.state.totalRolls < 20) {
+                    this.unlockAchievement('speedrun');
+                }
+                
+                // Check survivor achievement
+                if (this.survivedDeath) {
+                    this.unlockAchievement('survivor');
+                }
+                
                 if (!this.records.bestRolls || this.state.totalRolls < this.records.bestRolls) {
                     this.records.bestRolls = this.state.totalRolls;
                     this.showWhisper('🏆 ¡NUEVO RÉCORD!');
@@ -539,6 +697,7 @@ class JuegoOca {
                 }
                 this.saveRecords();
                 this.saveState();
+                this.checkAchievements(); // Check all achievements
                 document.getElementById('dice').classList.add('disabled');
                 document.getElementById('hud-best').textContent = `🏆 ${this.records.bestRolls}`;
                 this.showConfetti();
@@ -547,6 +706,7 @@ class JuegoOca {
         };
         if (actions[type]) actions[type]();
     }
+
 
     showConfetti() {
         const container = document.createElement('div');
