@@ -1,0 +1,47 @@
+/* ═══════════════════════════════════════════════════════════════════
+   CURSOR PLUMA - Pincel artístico como cursor
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Cursor SVG de pincel artístico */
+:root {
+    --cursor-brush: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 28 L8 24 L10 26 L6 30 Z' fill='%23D4A574'/%3E%3Cpath d='M8 24 L24 8 L26 10 L10 26 Z' fill='%238B7355'/%3E%3Cpath d='M24 8 L26 4 L30 2 L28 6 L26 10 Z' fill='%231a1a1a'/%3E%3Cellipse cx='27' cy='4' rx='3' ry='1.5' fill='%23c93030' transform='rotate(-45 27 4)'/%3E%3C/svg%3E") 0 32, auto;
+    
+    --cursor-brush-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 28 L8 24 L10 26 L6 30 Z' fill='%23D4A574'/%3E%3Cpath d='M8 24 L24 8 L26 10 L10 26 Z' fill='%238B7355'/%3E%3Cpath d='M24 8 L26 4 L30 2 L28 6 L26 10 Z' fill='%23c93030'/%3E%3Cellipse cx='27' cy='4' rx='3' ry='1.5' fill='%23ff4444' transform='rotate(-45 27 4)'/%3E%3C/svg%3E") 0 32, pointer;
+}
+
+/* Aplicar cursor a todo el documento */
+html,
+body {
+    cursor: var(--cursor-brush) !important;
+}
+
+/* Elementos interactivos: cursor con punta roja */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+.portfolio-card,
+.blog-post,
+.nav-link,
+.btn,
+[onclick],
+[data-action] {
+    cursor: var(--cursor-brush-pointer) !important;
+}
+
+/* Inputs: cursor de texto estándar */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea {
+    cursor: text !important;
+}
+
+/* Desactivar cursor personalizado de JS si existe */
+.cursor,
+#custom-cursor,
+.pilot-cursor {
+    display: none !important;
+}
