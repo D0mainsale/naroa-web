@@ -107,6 +107,7 @@
     <link rel="stylesheet" href="/css/no-vignette.css">
     <link rel="stylesheet" href="/css/clean-ui.css">
     <link rel="stylesheet" href="/css/cursor-brush.css">
+    <link rel="stylesheet" href="/css/process-improvements.css">
 </head>
 <body>
     <!-- SEO invisible para crawlers y accesibilidad -->
@@ -208,7 +209,6 @@
          ═══════════════════════════════════════════════════════════════════ -->
     <main id="process-view" data-view="process" class="process-view hidden">
         <header class="portfolio-header">
-            <h1 class="portfolio-title">Proceso</h1>
             <nav class="portfolio-nav">
                 <a href="#/portfolio" class="nav-link">Obras</a>
                 <a href="#/process" class="nav-link active">Proceso</a>
@@ -218,6 +218,18 @@
                 <a href="#/about" class="nav-link">About</a>
             </nav>
         </header>
+
+        <!-- 1. Hero Visual Inmersivo -->
+        <section class="process-hero">
+            <img src="/images/naroa-artist.jpg" alt="Naroa Gutiérrez trabajando en el estudio" class="process-hero-bg">
+            <div class="process-hero-content">
+                <h1 class="process-hero-title">El Proceso</h1>
+                <div class="process-hero-subtitle">
+                    El error como método
+                    <span>La espera como herramienta</span>
+                </div>
+            </div>
+        </section>
         
         <article class="process-intro">
             <p class="process-statement">Mi proceso <span class="twisted-text">no es lineal</span>. Es un «vaivén» entre luz y falla, entretejiendo <strong>alma</strong> y <strong>glitch</strong>.</p>
@@ -249,6 +261,35 @@
             </article>
         </section>
         
+        </section>
+
+        <!-- 3. Materiales Interactivos -->
+        <section class="process-materials">
+            <h2 class="materials-title">Materia Viva</h2>
+            <div class="materials-grid">
+                <div class="material-card" data-material="grafito">
+                    <div class="material-visual grafito-visual"></div>
+                    <h3>Grafito</h3>
+                    <p>La precisión del pensamiento.</p>
+                </div>
+                <div class="material-card" data-material="carbon">
+                    <div class="material-visual carbon-visual"></div>
+                    <h3>Carbón</h3>
+                    <p>La profundidad de la sombra.</p>
+                </div>
+                <div class="material-card" data-material="mica">
+                    <div class="material-visual mica-visual"></div>
+                    <h3>Mica</h3>
+                    <p>La luz que rompe la forma.</p>
+                </div>
+                <div class="material-card" data-material="acrilico">
+                    <div class="material-visual acrilico-visual"></div>
+                    <h3>Acrílico</h3>
+                    <p>El cuerpo del color.</p>
+                </div>
+            </div>
+        </section>
+        
         <!-- ═══════════════════════════════════════════════════════════════════
              ANTES/DESPUÉS — Slider Interactivo del Proceso Creativo
              ═══════════════════════════════════════════════════════════════════ -->
@@ -267,7 +308,12 @@
         </section>
         
         <footer class="portfolio-footer">
-            <a href="#/retrato" class="process-cta">¿Quieres un retrato? →</a>
+            <!-- 7. CTA Estratégico -->
+            <div class="process-cta-container">
+                <h2 class="process-cta-title">¿Quieres vivir este proceso?</h2>
+                <a href="#/retrato" class="btn-strategic">Encargar mi Retrato</a>
+            </div>
+            
             <a href="#/" class="back-home">← Volver al inicio</a>
         </footer>
     </main>
