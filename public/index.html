@@ -688,35 +688,37 @@
     <!-- Cursor personalizado -->
     <div id="cursor" class="cursor" aria-hidden="true"></div>
 
-    <!-- Core -->
+    <!-- ═══ MINIMAL SCRIPTS (Ultra-Fast Load) ═══ -->
+    
+    <!-- Core Router (required) -->
     <script src="/js/core/router.js"></script>
-    <script src="/js/core/nav.js"></script>
+    
+    <!-- Portfolio System (required for /portfolio) -->
+    <script src="/js/features/portfolio.js"></script>
+    
+    <!-- Main App (ties it together) -->
+    <script src="/js/app.js?v=ULTRA_FAST"></script>
+    
+    <!-- Lightbox (for clicking images) -->
+    <script src="/js/lightbox.js?v=ULTRA_FAST" defer></script>
 
-    <!-- Utils -->
+    <!-- 
+    ════════════════════════════════════════════════════════════════
+    DISABLED FOR PERFORMANCE (uncomment as needed)
+    ════════════════════════════════════════════════════════════════
+    <script src="/js/core/nav.js"></script>
     <script src="/js/utils/slider.js" defer></script>
     <script src="/js/utils/material.js" defer></script>
     <script src="/js/utils/wordpress-fetcher.js" defer></script>
-
-    <!-- Systems -->
     <script src="/js/systems/ritual-systems.js" defer></script>
-    <script src="/js/lunar-mode.js?v=2026_lunar" defer></script>
+    <script src="/js/lunar-mode.js" defer></script>
     <script src="/js/systems/archive.js" defer></script>
     <script src="/js/systems/ritual.js" defer></script>
-
-    <!-- Features (Portfolio is the primary controller) -->
-    <script src="/js/features/portfolio.js"></script>
     <script src="/js/features/bitacora.js" defer></script>
     <script src="/js/features/press-kit.js" defer></script>
     <script src="/js/features/catalogo.js" defer></script>
     <script src="/js/features/galeria.js" defer></script>
-
-    <!-- Core App (initializes Portfolio + Router) -->
-    <script src="/js/app.js?v=UNIFIED_V1"></script>
-
-    <!-- === ESSENTIAL SCRIPTS ONLY (Fast Load) === -->
-    
-    <!-- Lightbox (needed for portfolio click) -->
-    <script src="/js/lightbox.js?v=FAST_V1"></script>
+    -->
 
     <!-- Process Blocks Observer (inline, tiny) -->
     <script>
