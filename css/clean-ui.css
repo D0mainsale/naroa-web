@@ -1,0 +1,86 @@
+/* ===================================
+   CLEAN UI - FLOATING BUTTONS CONSOLIDATION
+   Hides secondary floating buttons for cleaner experience
+   =================================== */
+
+/* Hide excessive floating buttons - keep only essential ones */
+.ai-whisper-toggle,
+.ai-assistant-toggle,
+.silence-toggle,
+.audio-toggle,
+.exploration-progress,
+.wishlist-toggle,
+.huella-digital,
+.materia-toggle,
+.studio-mode-toggle,
+.contemplation-toggle {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Keep essential buttons but reorganize */
+.commission-trigger {
+    bottom: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+    z-index: 1000 !important;
+}
+
+/* Agendar button - stack below commission */
+#cal-booking-button,
+.booking-trigger,
+[onclick*="Cal"] {
+    bottom: 75px !important;
+    right: 20px !important;
+    left: auto !important;
+    z-index: 999 !important;
+}
+
+/* Hide all bottom-left floaters */
+[style*="bottom"][style*="left"]:not(.nav):not(.menu):not(nav):not(header) {
+    /* Let them live but reduce visual clutter */
+}
+
+/* Cleaner floating button style */
+.commission-trigger,
+.booking-trigger {
+    backdrop-filter: blur(10px) !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.commission-trigger:hover,
+.booking-trigger:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Hide the "En construcción" footer section if it appears */
+[href*="borjamoskv"],
+.under-construction,
+.construction-notice {
+    display: none !important;
+}
+
+/* Reduce visual noise from status indicators */
+.exploration-progress,
+.progress-indicator,
+[class*="progress-bar"] {
+    opacity: 0.6 !important;
+    transform: scale(0.8) !important;
+}
+
+/* Make the Estudio button more subtle */
+.studio-toggle,
+.estudio-toggle {
+    opacity: 0.7 !important;
+    transition: opacity 0.3s !important;
+}
+
+.studio-toggle:hover,
+.estudio-toggle:hover {
+    opacity: 1 !important;
+}

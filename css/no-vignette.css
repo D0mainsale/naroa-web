@@ -109,8 +109,8 @@ body,
 html,
 main,
 [data-view] {
-    filter: none !important;
     -webkit-filter: none !important;
+    filter: none !important;
 }
 
 /* Studio mode: también limpiar */
@@ -164,4 +164,29 @@ html, body {
 /* Ocultar cualquier elemento fixed con sombras inset azules */
 *[style*="inset"][style*="rgba(0, 102, 255)"] {
     display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CANVAS OVERLAY KILLER - Eliminar pigment-canvas y tension-layer
+   Estos canvas causan sombreado a pantalla completa
+   ═══════════════════════════════════════════════════════════════════ */
+
+#pigment-canvas,
+#tension-layer,
+canvas[style*="position: fixed"],
+canvas[style*="z-index: 999"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Asegurar que no haya más overlays ocultos */
+.pigment-trail,
+.tension-web,
+.noise-layer,
+.vignette-overlay,
+.atmospheric-layer {
+    display: none !important;
+    opacity: 0 !important;
 }

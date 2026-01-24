@@ -123,6 +123,7 @@
     
     <!-- OVERRIDE CSS (must be last for highest priority) -->
     <link rel="stylesheet" href="/css/no-vignette.css">
+    <link rel="stylesheet" href="/css/clean-ui.css">
     <link rel="stylesheet" href="/css/cursor-brush.css">
 </head>
 <body>
@@ -662,6 +663,9 @@
     <script src="/js/features/catalogo.js"></script>
     <script src="/js/features/galeria.js"></script>
 
+    <!-- Notion CMS Loader (Must be before features/app) -->
+    <script src="js/notion-cms.js?v=CMS_INTEGRATION_V2"></script>
+
     <!-- Core App (after features) -->
     <script src="js/app.js?v=SHADOW_KILL_V1"></script>
 
@@ -677,7 +681,7 @@
     <script src="js/anim-system.js?v=SHADOW_KILL_V1"></script>
 
     <!-- Notion CMS Loader -->
-    <script src="js/notion-cms.js?v=SHADOW_KILL_V1"></script>
+    <script src="js/notion-cms.js?v=CMS_INTEGRATION_V2" defer></script>
 
     <!-- Shop System -->
     <script src="js/shop.js?v=SHADOW_KILL_V1"></script>

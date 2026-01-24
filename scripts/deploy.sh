@@ -3,9 +3,9 @@ set -e
 
 echo "🚀 Deploying Naroa Web..."
 
-# Step 1: Regenerate image indexes
-echo "📸 Regenerating image indexes..."
-node scripts/generate-images-index.js
+# Step 1: Regenerate image indexes (Skipped - script pending)
+# echo "📸 Regenerating image indexes..."
+# node scripts/generate-images-index.js
 
 # Step 2: Fetch latest data from Notion CMS (if configured)
 if [ -f .env ]; then

@@ -81,7 +81,7 @@ class NotionCMS {
   /**
    * Render portfolio cards from Notion data
    */
-  renderPortfolio(containerId = 'portfolio') {
+  renderPortfolio(containerId = 'portfolio-grid') {
     const container = document.getElementById(containerId);
     if (!container) {
       console.warn(`Container #${containerId} not found`);
@@ -93,13 +93,19 @@ class NotionCMS {
       return;
     }
 
-    // Clear existing content
+    // Clear existing content (except semantic placeholder if needed)
+    // container.innerHTML = ''; 
+    // BETTER: empty it only if we have data to show, to allow SEO fallback
     container.innerHTML = '';
 
     // Render each artwork as a card
     this.artworks.forEach((art, index) => {
-      const card = this.createCard(art, index);
-      container.appendChild(card);
+      // Filter for portfolio category if needed, OR relies on fetch script filtering?
+      // fetch script fetches everything. We should filter here.
+      if (art.category && art.category.includes('Portfolio')) {
+          const card = this.createCard(art, index);
+          container.appendChild(card);
+      }
     });
 
     console.log(`🎨 Rendered ${this.artworks.length} portfolio cards`);
@@ -180,14 +186,22 @@ class NotionCMS {
   }
 
   /**
-   * Render bitácora entries from Notion data
+   * Render bitacora entries from Notion data
    */
-  renderBitacora(containerId = 'bitacora-entries') {
+  renderBitacora(containerId = 'bitacora-list') {
     const container = document.getElementById(containerId);
     if (!container) return;
 
+    // Filter for Bitacora category
+    const blogEntries = this.artworks.filter(art => art.category && art.category.includes('Bitácora'));
+
+    if (blogEntries.length === 0) {
+        // Leave default content if no dynamic entries
+        return;
+    }
+
     // Sort by date (newest first)
-    const sorted = [...this.artworks].sort((a, b) => 
+    const sorted = [...blogEntries].sort((a, b) => 
       new Date(b.created_at) - new Date(a.created_at)
     );
 
@@ -195,15 +209,14 @@ class NotionCMS {
 
     sorted.forEach(art => {
       const entry = document.createElement('article');
-      entry.className = 'bitacora-entry';
+      entry.className = 'blog-post';
       entry.innerHTML = `
-        <div class="entry-date">${this.formatDate(art.created_at)}</div>
-        <h3>${art.title}</h3>
-        ${art.description ? `<p>${art.description}</p>` : ''}
-        ${art.image ? `<img src="${art.image}" alt="${art.title}" loading="lazy">` : ''}
-        <div class="entry-meta">
-          ${art.year ? `<span class="year">${art.year}</span>` : ''}
-          ${art.medium ? `<span class="medium">${art.medium}</span>` : ''}
+        <time class="post-date">${this.formatDate(art.created_at)}</time>
+        <h2 class="post-title">${art.title}</h2>
+        ${art.description ? `<p class="post-excerpt">${art.description}</p>` : ''}
+        ${art.image ? `<div class="post-image"><img src="${art.image}" alt="${art.title}" loading="lazy"></div>` : ''}
+        <div class="post-tags">
+           ${(art.tags || []).map(tag => `<span class="post-tag">#${tag}</span>`).join('')}
         </div>
       `;
       container.appendChild(entry);
@@ -227,19 +240,33 @@ class NotionCMS {
 window.notionCMS = new NotionCMS();
 
 // Auto-load on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', async () => {
-  const loaded = await window.notionCMS.load();
-  
-  // If portfolio page, auto-render
-  if (loaded && window.location.hash.includes('portfolio')) {
-    window.notionCMS.renderPortfolio();
-  }
-  
-  // If bitácora page, auto-render
-  if (loaded && window.location.hash.includes('bitacora')) {
-    window.notionCMS.renderBitacora();
-  }
-});
+// Robust initialization
+// Auto-init is now handled by Portfolio.js calling window.notionCMS.load()
+// We keep the instance available on window.notionCMS
+
+/*
+// Robust initialization
+const init = async () => {
+    console.log('🚀 Notion CMS Initializing...');
+    const loaded = await window.notionCMS.load();
+    
+    // Check hash for immediate render
+    const hash = window.location.hash;
+    if (loaded && (hash.includes('portfolio') || hash === '' || hash === '#/')) {
+        window.notionCMS.renderPortfolio();
+    }
+    
+    if (loaded && hash.includes('bitacora')) {
+        window.notionCMS.renderBitacora();
+    }
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    // DOM already ready
+    init();
+}
 
 // Listen for route changes (SPA navigation)
 window.addEventListener('hashchange', async () => {
@@ -253,3 +280,4 @@ window.addEventListener('hashchange', async () => {
     window.notionCMS.renderBitacora();
   }
 });
+*/

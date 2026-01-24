@@ -58,19 +58,15 @@ class WelcomeRitual {
                 
                 <div class="ritual-tagline">Artista Plástica · Bilbao</div>
                 
-                <!-- Fase 2: ¿JUEGAS????? aparece después del nombre -->
+                <!-- Fase 2: ¿Juegas? aparece después del nombre -->
                 <div class="ritual-question">
                     <span class="question-char">¿</span>
                     <span class="question-char">J</span>
-                    <span class="question-char">U</span>
-                    <span class="question-char">E</span>
-                    <span class="question-char">G</span>
-                    <span class="question-char">A</span>
-                    <span class="question-char">S</span>
-                    <span class="question-char question-marks">?</span>
-                    <span class="question-char question-marks">?</span>
-                    <span class="question-char question-marks">?</span>
-                    <span class="question-char question-marks">?</span>
+                    <span class="question-char">u</span>
+                    <span class="question-char">e</span>
+                    <span class="question-char">g</span>
+                    <span class="question-char">a</span>
+                    <span class="question-char">s</span>
                     <span class="question-char question-marks">?</span>
                 </div>
                 

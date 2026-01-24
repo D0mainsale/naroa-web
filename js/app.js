@@ -1,38 +1,64 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
-    // === ULTRA// NUCLEAR SHADOW EXTERMINATOR
-// Aggressively removes external extension overlays detected by analysis
-(function() {
-    const KILL_LIST = [
-        'preact-border-shadow-host',
-        'textcortex-shadow-host',
-        'shadow-host',
-        'tensor-layer',
-        'tension-layer',
-        'pigment-canvas'
-    ];
+    // === NUCLEAR SHADOW EXTERMINATOR ===
+    // Aggressively removes external extension overlays and internal canvas shadows
+    (function() {
+        const KILL_LIST = [
+            'preact-border-shadow-host',
+            'textcortex-shadow-host',
+            'shadow-host',
+            'tension-layer',
+            'pigment-canvas'
+        ];
 
-    function exterminate() {
-        // ID based kill
-        KILL_LIST.forEach(id => {
-            const el = document.getElementById(id);
-                if (node.nodeType === 1 && node.id && 
-                    (node.id.includes('shadow') || node.id.includes('textcortex') || node.id.includes('border'))) {
-                    node.remove();
-                    console.log('🗑️ Blocked shadow injection:', node.id);
+        function exterminate() {
+            // ID based kill
+            KILL_LIST.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.remove();
+                    console.log('🗑️ Shadow killed:', id);
                 }
             });
+            
+            // Pattern kill
+            document.querySelectorAll('[id*="shadow-host"], [id*="textcortex"], [id*="extension"]').forEach(el => {
+                el.remove();
+            });
+        }
+        
+        // Run immediately
+        exterminate();
+        
+        // Run on interval
+        setInterval(exterminate, 2000);
+        
+        // Observe for new additions
+        const shadowObserver = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1 && node.id && 
+                        (node.id.includes('shadow') || node.id.includes('textcortex') || node.id.includes('border'))) {
+                        node.remove();
+                        console.log('🗑️ Blocked shadow injection:', node.id);
+                    }
+                });
+            });
         });
-    });
-    shadowObserver.observe(document.documentElement, { childList: true, subtree: true });
+        shadowObserver.observe(document.documentElement, { childList: true, subtree: true });
+    })();
+    
+    // === ROUTER INIT ===
+    const router = window.naroaRouter || new Router();
     
     // === RITUAL SYSTEMS INIT ===
     const dayNight = new DayNightCycle();
     const glitcher = new GlitchText();
     const decay = new WebDecay();
     const handshake = new RitualHandshake();
-    const trail = new PigmentTrail();
-    const heartbeat = new HeartbeatCursor();
+    // DISABLED: These create overlays that cause the shading issue
+    // const trail = new PigmentTrail();
+    // const heartbeat = new HeartbeatCursor();
 
     
     // Cursor con interpolación (Lerp)
