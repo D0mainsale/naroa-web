@@ -1,41 +1,21 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
-    // === ULTRA SHADOW KILLER - Elimina TODO rastro de extensiones con sombras ===
-    const killShadows = () => {
-        // Lista de IDs conocidos de extensiones que inyectan sombras
-        const shadowIds = [
-            'preact-border-shadow-host',
-            'textcortex-shadow-host',
-            'sidebar-button',
-            'TEXTCORTEX-SHADOW-HOST'
-        ];
-        
-        shadowIds.forEach(id => {
+    // === ULTRA// NUCLEAR SHADOW EXTERMINATOR
+// Aggressively removes external extension overlays detected by analysis
+(function() {
+    const KILL_LIST = [
+        'preact-border-shadow-host',
+        'textcortex-shadow-host',
+        'shadow-host',
+        'tensor-layer',
+        'tension-layer',
+        'pigment-canvas'
+    ];
+
+    function exterminate() {
+        // ID based kill
+        KILL_LIST.forEach(id => {
             const el = document.getElementById(id);
-            if (el) {
-                el.remove();
-                console.log('🗑️ Killed shadow element:', id);
-            }
-        });
-        
-        // Buscar por patrones en ID
-        document.querySelectorAll('[id*="shadow-host"], [id*="border-shadow"], [id*="textcortex"], [popover]').forEach(el => {
-            if (el.id.toLowerCase().includes('shadow') || el.id.toLowerCase().includes('textcortex')) {
-                el.remove();
-            }
-        });
-    };
-    
-    // Ejecutar inmediatamente
-    killShadows();
-    
-    // Ejecutar cada 500ms por si se vuelve a inyectar
-    setInterval(killShadows, 500);
-    
-    // Observar TODO el documento (no solo body)
-    const shadowObserver = new MutationObserver(mutations => {
-        mutations.forEach(m => {
-            m.addedNodes.forEach(node => {
                 if (node.nodeType === 1 && node.id && 
                     (node.id.includes('shadow') || node.id.includes('textcortex') || node.id.includes('border'))) {
                     node.remove();

@@ -123,16 +123,42 @@ body.studio-mode-active::after {
    BROWSER EXTENSION BLOCKER - Eliminar sombras inyectadas por extensiones
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Preact Border Shadow (extensiones de desarrollo) */
+/* Preact Border/* NUCLEAR SHADOW KILLER */
 #preact-border-shadow-host,
-[id*="border-shadow"],
+#textcortex-shadow-host,
 [id*="shadow-host"],
-[class*="animate-breathing"],
-[class*="border-shadow"] {
+[class*="shadow-host"],
+.textcortex-shadow-host,
+preact-border-shadow-host,
+textcortex-shadow-host {
     display: none !important;
-    visibility: hidden !important;
     opacity: 0 !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
     pointer-events: none !important;
+    position: absolute !important;
+    z-index: -9999 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    clip-path: polygon(0 0, 0 0, 0 0) !important;
+}
+
+/* Specific kill for the inner shadow div detected by subagent */
+.inset-0.fixed.animate-breathing,
+.inset-0.fixed.bg-black\/5 {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+body {
+    box-shadow: none !important;
+    background-image: none !important;
+}
+
+html, body {
+    /* Ensure no efficient scrolling friction remains */
+    overscroll-behavior: auto !important;
 }
 
 /* Ocultar cualquier elemento fixed con sombras inset azules */

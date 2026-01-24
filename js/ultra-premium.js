@@ -368,30 +368,7 @@ class DarkMode {
    ▸ 3. NOISE TEXTURE OVERLAY - PHOTOGRAPHIC GRAIN
    ────────────────────────────────────────────────────────── */
 
-class NoiseTexture {
-    constructor() {
-        this.init();
-    }
-    
-    init() {
-        const noise = document.createElement('div');
-        noise.className = 'noise-overlay';
-        noise.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' /%3E%3C/svg%3E");
-            animation: grain 8s steps(10) infinite;
-        `;
-        
-        document.body.appendChild(noise);
-    }
-}
+// NoiseTexture REMOVED for clarity
 
 /* ──────────────────────────────────────────────────────────
    ▸ 4. 3D CARD TRANSFORMS - DEPTH ON HOVER
@@ -577,8 +554,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // Dark Mode
     new DarkMode();
     
-    // Noise Texture
-    new NoiseTexture();
+    // Noise Texture - REMOVED
+    // new NoiseTexture();
     
     // 3D Cards
     new Card3D();
