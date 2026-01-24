@@ -1,11 +1,17 @@
 /* ═══════════════════════════════════════════════════════════════════
-   CLEAN UI v3.0 - SIMPLIFIED FLOATING BUTTONS
-   Solo UN botón CTA principal + Spotify discreto
+   CLEAN UI v4.0 - UNIFIED DOCK + SIMPLIFIED FLOATING
+   Nuevo Dock Unificado en la izquierda + CTA principal
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ═══ HIDE ALL EXCESSIVE BUTTONS ═══ */
+/* ═══ SHOW DOCK, HIDE OLD BUTTONS ═══ */
+#naroa-dock {
+    display: flex !important; /* Ensure dock is visible */
+}
+
+/* Hide all old excessive floating buttons */
 .ai-whisper-toggle,
 .ai-assistant-toggle,
+#ai-assistant-toggle,
 .silence-toggle,
 .audio-toggle,
 .exploration-progress,

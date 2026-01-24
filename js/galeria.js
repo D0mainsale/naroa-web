@@ -21,8 +21,14 @@ class GaleriaSystem {
 
     async loadData() {
         try {
-            // Load all indexed images
-            const response = await fetch('/data/images-index.json');
+            // Load all indexed images - usando ruta absoluta desde la raíz
+            const basePath = window.location.pathname.includes('/public/') ? '/..' : '';
+            const response = await fetch(`${basePath}/data/images-index.json`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
             this.allImages = await response.json();
             
             // Extract unique albums from images for filters

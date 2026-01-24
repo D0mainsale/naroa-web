@@ -1,0 +1,126 @@
+/* ═══════════════════════════════════════════════════════════════════
+   UNIFIED DOCK v1.0 - Left Side Control Center
+   Consolidates AI, Audio, and Navigation shortcuts
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+    --dock-width: 60px;
+    --dock-expanded-width: 240px;
+    --dock-bg: rgba(20, 20, 20, 0.85);
+    --dock-border: rgba(255, 255, 255, 0.08);
+    --dock-text: #e0e0e0;
+    --dock-accent: #ffffff;
+}
+
+#naroa-dock {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--dock-width);
+    background: var(--dock-bg);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--dock-border);
+    border-radius: 30px;
+    padding: 15px 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Hide on mobile by default or adjust position */
+@media (max-width: 768px) {
+    #naroa-dock {
+        left: 10px;
+        transform: translateY(-50%) scale(0.9);
+    }
+}
+
+.dock-item {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: var(--dock-text);
+    transition: all 0.3s ease;
+}
+
+.dock-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--dock-accent);
+}
+
+.dock-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--dock-accent);
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.dock-item svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.5;
+}
+
+/* Tooltip on hover */
+.dock-item::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 140%; /* Right side of the dock */
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    pointer-events: none;
+    opacity: 0;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    visibility: hidden;
+}
+
+.dock-item:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Separator line */
+.dock-separator {
+    width: 20px;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 5px 0;
+}
+
+/* AI Badge Mini */
+.ai-status-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 6px;
+    height: 6px;
+    background: #10b981; /* Green for active/ready */
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.dock-item.has-notification .ai-status-dot {
+    opacity: 1;
+    box-shadow: 0 0 8px #10b981;
+}

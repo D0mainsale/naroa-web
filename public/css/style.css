@@ -46,6 +46,40 @@ body::before {
 
 .hidden { display: none !important; }
 
+/* === VIEW VISIBILITY CONTROL === */
+/* Por defecto, todas las vistas están ocultas excepto HOME */
+.portfolio-view,
+.process-view,
+.bitacora-view,
+.retrato-view,
+.about-view,
+.retrospecter-view,
+.tienda-view,
+.ritual-view {
+    display: none;
+}
+
+/* HOME siempre visible por defecto */
+.home-view {
+    display: flex;
+}
+
+/* El router JS controlará la visibilidad usando .hidden */
+.portfolio-view:not(.hidden),
+.process-view:not(.hidden),
+.bitacora-view:not(.hidden),
+.retrato-view:not(.hidden),
+.about-view:not(.hidden),
+.retrospecter-view:not(.hidden),
+.tienda-view:not(.hidden),
+.ritual-view:not(.hidden) {
+    display: block;
+}
+
+.home-view.hidden {
+    display: none !important;
+}
+
 /* SEO invisible */
 .sr-only {
     position: absolute;
