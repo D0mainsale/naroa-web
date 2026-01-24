@@ -280,7 +280,8 @@ document.head.appendChild(dripStyle);
 
 // Initialize all effects
 document.addEventListener('DOMContentLoaded', () => {
-    new TensionWeb();
+    // TensionWeb disabled - was causing page shading
+    // new TensionWeb();
     new FrictionScroll();
     initFadeOnHover();
     
