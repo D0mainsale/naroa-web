@@ -241,107 +241,25 @@ class RitualGames {
     }
     
     // ═══════════════════════════════════════════════════════════
-    // JUEGO DE LA OCA ARTÍSTICO
+    // JUEGO DE LA OCA ARTÍSTICO - Usa la clase JuegoOca v3
     // ═══════════════════════════════════════════════════════════
     launchOca() {
-        const overlay = this.createGameOverlay('Juego de la Oca del Arte', '🦆');
-        const content = overlay.querySelector('.game-content');
+        // El juego de la oca usa la clase completa JuegoOca 
+        // que está en /js/systems/archive.js
+        // Incluye: 63 casillas con cuadros de Naroa, sistema de logros,
+        // efectos de sonido, frases poéticas, y más
         
-        // Create board
-        const casillas = this.generateOcaCasillas();
-        let position = 0;
-        
-        content.innerHTML = `
-            <div class="oca-board">
-                ${casillas.map((c, i) => `
-                    <div class="oca-casilla ${c.special ? 'special-' + c.special : ''}" data-pos="${i}">
-                        <span class="casilla-num">${i}</span>
-                        <span class="casilla-icon">${c.icon}</span>
-                    </div>
-                `).join('')}
-                <div class="oca-ficha" style="--pos: 0">🎨</div>
-            </div>
-            <div class="oca-controls">
-                <button class="oca-dice">🎲 Tirar dado</button>
-                <div class="oca-result"></div>
-            </div>
-            <div class="oca-message"></div>
-        `;
-        
-        const ficha = content.querySelector('.oca-ficha');
-        const diceBtn = content.querySelector('.oca-dice');
-        const result = content.querySelector('.oca-result');
-        const message = content.querySelector('.oca-message');
-        
-        diceBtn.addEventListener('click', () => {
-            const roll = Math.floor(Math.random() * 6) + 1;
-            result.textContent = `🎲 ${roll}`;
-            diceBtn.disabled = true;
-            
-            // Animate dice
-            diceBtn.classList.add('rolling');
-            setTimeout(() => {
-                diceBtn.classList.remove('rolling');
-                
-                // Move ficha
-                position = Math.min(position + roll, casillas.length - 1);
-                ficha.style.setProperty('--pos', position);
-                
-                // Show casilla message
-                const casilla = casillas[position];
-                message.innerHTML = `
-                    <strong>${casilla.icon} ${casilla.name}</strong>
-                    <p>${casilla.message}</p>
-                `;
-                
-                // Handle special casillas
-                if (casilla.special === 'oca') {
-                    message.innerHTML += '<p class="special-action">🦆 ¡De oca a oca y tiro porque me toca!</p>';
-                    setTimeout(() => {
-                        position = this.findNextOca(position, casillas);
-                        ficha.style.setProperty('--pos', position);
-                    }, 1500);
-                }
-                
-                diceBtn.disabled = false;
-                
-                // Check win
-                if (position >= casillas.length - 1) {
-                    message.innerHTML = `
-                        <strong>🎉 ¡GANASTE!</strong>
-                        <p>Has completado el recorrido artístico de Naroa</p>
-                    `;
-                    diceBtn.disabled = true;
-                }
-            }, 600);
-        });
-        
-        this.addOcaStyles();
-    }
-    
-    generateOcaCasillas() {
-        return [
-            { name: 'INICIO', icon: '🚀', message: 'Comienza tu viaje por el arte de Naroa' },
-            { name: 'El Primer Trazo', icon: '✏️', message: 'Todo comienza con una línea' },
-            { name: 'Retrato', icon: '👤', message: 'Cada rostro cuenta una historia' },
-            { name: 'OCA', icon: '🦆', special: 'oca', message: '¡De oca a oca!' },
-            { name: 'El Estudio', icon: '🎨', message: 'Donde nace la magia' },
-            { name: 'Puente', icon: '🌉', special: 'puente', message: 'Cruzas hacia nuevas ideas' },
-            { name: 'La Mica', icon: '💎', message: 'Brillo en lo cotidiano' },
-            { name: 'Materia', icon: '🪨', message: 'El óleo habla' },
-            { name: 'OCA', icon: '🦆', special: 'oca', message: '¡De oca a oca!' },
-            { name: 'Calavera', icon: '💀', special: 'calavera', message: '¡Vuelve al inicio!' },
-            { name: 'Bilbao', icon: '🏛️', message: 'La ciudad como musa' },
-            { name: 'La Pausa', icon: '☕', message: 'Reflexión creativa' },
-            { name: 'OCA', icon: '🦆', special: 'oca', message: '¡De oca a oca!' },
-            { name: 'El Glitch', icon: '⚡', message: 'Error hermoso' },
-            { name: 'Posada', icon: '🏨', special: 'posada', message: 'Descansa un turno' },
-            { name: 'Repetición', icon: '🔄', message: 'Lo mismo, pero distinto' },
-            { name: 'OCA', icon: '🦆', special: 'oca', message: '¡De oca a oca!' },
-            { name: 'Pálpito', icon: '❤️', message: 'El ritmo del artista' },
-            { name: 'La Luz', icon: '☀️', message: 'Ilumina todo' },
-            { name: 'FINAL', icon: '🏆', message: '¡Has completado el ritual!' }
-        ];
+        if (typeof JuegoOca === 'undefined') {
+            console.error('JuegoOca class not loaded. Loading...');
+            const script = document.createElement('script');
+            script.src = '/js/systems/archive.js';
+            script.onload = () => {
+                this.currentGame = new JuegoOca();
+            };
+            document.head.appendChild(script);
+        } else {
+            this.currentGame = new JuegoOca();
+        }
     }
     
     findNextOca(currentPos, casillas) {
@@ -350,6 +268,7 @@ class RitualGames {
         }
         return casillas.length - 1;
     }
+
     
     // ═══════════════════════════════════════════════════════════
     // MEMORIA DE CUADROS

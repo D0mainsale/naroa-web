@@ -2,6 +2,19 @@
 
 class JuegoOca {
     constructor() {
+        // Sistema de logros - DEBE ir antes de loadRecords()
+        this.ACHIEVEMENTS = {
+            first_oca: { name: '🦆 Primera Oca', desc: 'Cae en tu primera oca', unlocked: false },
+            survivor: { name: '⚔️ Superviviente', desc: 'Sobrevive a la Calavera', unlocked: false },
+            speedrun: { name: '⚡ Velocista', desc: 'Gana en menos de 20 tiradas', unlocked: false },
+            explorer: { name: '🗺️ Explorador', desc: 'Descubre 50 casillas', unlocked: false },
+            collector: { name: '🎨 Coleccionista', desc: 'Descubre las 63 obras', unlocked: false },
+            lucky: { name: '🍀 Suertudo', desc: 'Saca tres 6 seguidos', unlocked: false },
+            patient: { name: '🧘 Paciente', desc: 'Sal del pozo sin quejarte', unlocked: false },
+            complete: { name: '👑 Maestro', desc: 'Completa el juego 5 veces', unlocked: false }
+        };
+        
+        // Ahora sí podemos cargar estado y records
         this.state = this.loadState();
         this.records = this.loadRecords();
         this.allImages = [];
@@ -28,18 +41,6 @@ class JuegoOca {
             { start: 31, end: 45, color: '#fff3e0', name: 'Otoño' },
             { start: 46, end: 63, color: '#fce4ec', name: 'Invierno' }
         ];
-        
-        // Sistema de logros
-        this.ACHIEVEMENTS = {
-            first_oca: { name: '🦆 Primera Oca', desc: 'Cae en tu primera oca', unlocked: false },
-            survivor: { name: '⚔️ Superviviente', desc: 'Sobrevive a la Calavera', unlocked: false },
-            speedrun: { name: '⚡ Velocista', desc: 'Gana en menos de 20 tiradas', unlocked: false },
-            explorer: { name: '🗺️ Explorador', desc: 'Descubre 50 casillas', unlocked: false },
-            collector: { name: '🎨 Coleccionista', desc: 'Descubre las 63 obras', unlocked: false },
-            lucky: { name: '🍀 Suertudo', desc: 'Saca tres 6 seguidos', unlocked: false },
-            patient: { name: '🧘 Paciente', desc: 'Sal del pozo sin quejarte', unlocked: false },
-            complete: { name: '👑 Maestro', desc: 'Completa el juego 5 veces', unlocked: false }
-        };
         
         // Frases poéticas de Naroa - Ampliadas
         this.FRASES = [
@@ -85,6 +86,7 @@ class JuegoOca {
         
         this.init();
     }
+
 
 
     loadState() {
