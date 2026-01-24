@@ -16,17 +16,17 @@
 /* === Modo Luna Llena Activo === */
 html.full-moon-mode {
     /* Override de variables principales */
-    --bg: var(--lunar-bg);
-    --text: var(--lunar-text);
-    --muted: var(--lunar-text-muted);
-    --accent: var(--lunar-accent);
-    --color-bg: var(--lunar-bg);
-    --color-text: var(--lunar-text);
+    --bg: var(--lunar-bg) !important;
+    --text: var(--lunar-text) !important;
+    --muted: var(--lunar-text-muted) !important;
+    --accent: var(--lunar-accent) !important;
+    --color-bg: var(--lunar-bg) !important;
+    --color-text: var(--lunar-text) !important;
 }
 
 html.full-moon-mode body {
-    background: var(--lunar-bg-gradient);
-    color: var(--lunar-text);
+    background: var(--lunar-bg-gradient) !important;
+    color: var(--lunar-text) !important;
     transition: background 1.5s ease, color 1s ease;
 }
 
