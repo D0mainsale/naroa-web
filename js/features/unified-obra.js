@@ -119,19 +119,113 @@ class UnifiedObraSystem {
         const container = document.getElementById('portfolio-grid');
         if (!container) return;
         
+        // Reset pagination
+        this.currentPage = 0;
+        this.itemsPerPage = 24;  // Carga inicial
+        this.loadMoreCount = 12; // Items por carga adicional
+        
         container.innerHTML = '';
         container.className = 'unified-obra-grid';
         
-        this.timeline.forEach((item, index) => {
+        // Cargar primera página
+        this.loadMoreItems(container);
+        
+        // Setup infinite scroll
+        this.setupInfiniteScroll(container);
+        
+        console.log('🎨 Unified gallery initialized with infinite scroll');
+    }
+    
+    loadMoreItems(container) {
+        const startIndex = this.currentPage * (this.currentPage === 0 ? this.itemsPerPage : this.loadMoreCount);
+        const endIndex = startIndex + (this.currentPage === 0 ? this.itemsPerPage : this.loadMoreCount);
+        const itemsToLoad = this.timeline.slice(startIndex, endIndex);
+        
+        if (itemsToLoad.length === 0) {
+            this.allLoaded = true;
+            return;
+        }
+        
+        // Remove loading indicator if exists
+        const loader = container.querySelector('.load-more-indicator');
+        if (loader) loader.remove();
+        
+        itemsToLoad.forEach((item, i) => {
+            const globalIndex = startIndex + i;
             if (item.type === 'album') {
-                container.appendChild(this.createAlbumCard(item.data, index));
+                container.appendChild(this.createAlbumCard(item.data, globalIndex));
             } else if (item.type === 'post') {
-                container.appendChild(this.createBlogCard(item.data, index));
+                container.appendChild(this.createBlogCard(item.data, globalIndex));
             }
         });
         
-        console.log('🎨 Unified gallery rendered with', this.timeline.length, 'items');
+        this.currentPage++;
+        
+        // Add loading indicator if more items
+        if (endIndex < this.timeline.length) {
+            const loadIndicator = document.createElement('div');
+            loadIndicator.className = 'load-more-indicator';
+            loadIndicator.innerHTML = '<span class="loading-dots">Cargando más...</span>';
+            container.appendChild(loadIndicator);
+        }
+        
+        console.log(`📦 Loaded items ${startIndex}-${endIndex} of ${this.timeline.length}`);
     }
+    
+    setupInfiniteScroll(container) {
+        // Throttle scroll checks
+        let isLoading = false;
+        
+        const checkScroll = () => {
+            if (isLoading || this.allLoaded) return;
+            
+            const scrollY = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // Load more when 300px from bottom
+            if (scrollY + viewportHeight >= documentHeight - 300) {
+                isLoading = true;
+                this.loadMoreItems(container);
+                setTimeout(() => isLoading = false, 200);
+            }
+            
+            // Parallax effect
+            this.applyParallax();
+        };
+        
+        // Remove previous listener if exists
+        if (this.scrollHandler) {
+            window.removeEventListener('scroll', this.scrollHandler);
+        }
+        
+        this.scrollHandler = checkScroll;
+        window.addEventListener('scroll', checkScroll, { passive: true });
+    }
+    
+    applyParallax() {
+        const cards = document.querySelectorAll('.unified-album-card');
+        const viewportHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+        
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const cardCenter = rect.top + rect.height / 2;
+            const viewportCenter = viewportHeight / 2;
+            
+            // Only apply parallax to visible cards
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+                const offset = (cardCenter - viewportCenter) * 0.05;
+                const imgOffset = (cardCenter - viewportCenter) * -0.02;
+                
+                card.style.setProperty('--parallax-offset', offset);
+                card.style.setProperty('--parallax-img', imgOffset);
+                card.classList.add('parallax-active');
+            }
+        });
+    }
+
+
     
     createAlbumCard(album, index) {
         const card = document.createElement('div');
@@ -721,7 +815,88 @@ class UnifiedObraSystem {
                 transform: scale(1.05);
                 box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
             }
+            
+            /* ═══════════════════════════════════════════════════════
+               INFINITE SCROLL & LOADING
+               ═══════════════════════════════════════════════════════ */
+            
+            .load-more-indicator {
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: 40px;
+                color: #999;
+                font-size: 14px;
+            }
+            
+            .loading-dots {
+                display: inline-block;
+                animation: pulse 1.5s ease-in-out infinite;
+            }
+            
+            @keyframes pulse {
+                0%, 100% { opacity: 0.4; }
+                50% { opacity: 1; }
+            }
+            
+            /* Skeleton Loading for images */
+            .album-cover img,
+            .blog-card-image img {
+                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                background-size: 200% 100%;
+                animation: shimmer 1.5s infinite;
+            }
+            
+            @keyframes shimmer {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+            
+            /* ═══════════════════════════════════════════════════════
+               PARALLAX EFFECT
+               ═══════════════════════════════════════════════════════ */
+            
+            .unified-album-card,
+            .unified-blog-card {
+                transform: translateY(0);
+                transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+            }
+            
+            .unified-album-card.parallax-active {
+                transform: translateY(calc(var(--parallax-offset, 0) * 1px));
+            }
+            
+            .unified-album-card .album-cover img {
+                transform: scale(1.1) translateY(calc(var(--parallax-img, 0) * 1px));
+                transition: transform 0.1s linear;
+            }
+            
+            /* Staggered reveal animation */
+            .unified-album-card,
+            .unified-blog-card {
+                opacity: 0;
+                animation: fadeInUp 0.6s ease forwards;
+            }
+            
+            .unified-album-card:nth-child(1) { animation-delay: 0.05s; }
+            .unified-album-card:nth-child(2) { animation-delay: 0.1s; }
+            .unified-album-card:nth-child(3) { animation-delay: 0.15s; }
+            .unified-album-card:nth-child(4) { animation-delay: 0.2s; }
+            .unified-album-card:nth-child(5) { animation-delay: 0.25s; }
+            .unified-album-card:nth-child(6) { animation-delay: 0.3s; }
+            .unified-album-card:nth-child(n+7) { animation-delay: 0.35s; }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
         `;
+
         
         document.head.appendChild(style);
     }
