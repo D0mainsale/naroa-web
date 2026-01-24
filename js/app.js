@@ -1,5 +1,28 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
+    // === SHADOW KILLER - Eliminar sombras de extensiones del navegador ===
+    const killShadows = () => {
+        const shadowHost = document.getElementById('preact-border-shadow-host');
+        if (shadowHost) {
+            shadowHost.remove();
+            console.log('🗑️ Removed browser extension shadow overlay');
+        }
+        // También buscar otros posibles hosts de sombras
+        document.querySelectorAll('[id*="shadow-host"], [id*="border-shadow"]').forEach(el => el.remove());
+    };
+    killShadows();
+    // Observar por si se añade después
+    const shadowObserver = new MutationObserver(mutations => {
+        mutations.forEach(m => {
+            m.addedNodes.forEach(node => {
+                if (node.id && (node.id.includes('shadow-host') || node.id.includes('border-shadow'))) {
+                    node.remove();
+                }
+            });
+        });
+    });
+    shadowObserver.observe(document.body, { childList: true, subtree: true });
+    
     // === RITUAL SYSTEMS INIT ===
     const dayNight = new DayNightCycle();
     const glitcher = new GlitchText();

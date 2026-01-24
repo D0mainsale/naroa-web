@@ -119,4 +119,23 @@ body.studio-mode-active::after {
     display: none !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   BROWSER EXTENSION BLOCKER - Eliminar sombras inyectadas por extensiones
+   ═══════════════════════════════════════════════════════════════════ */
 
+/* Preact Border Shadow (extensiones de desarrollo) */
+#preact-border-shadow-host,
+[id*="border-shadow"],
+[id*="shadow-host"],
+[class*="animate-breathing"],
+[class*="border-shadow"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Ocultar cualquier elemento fixed con sombras inset azules */
+*[style*="inset"][style*="rgba(0, 102, 255)"] {
+    display: none !important;
+}
