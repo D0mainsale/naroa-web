@@ -409,7 +409,48 @@ class UnifiedObraSystem {
             if (e.key === 'ArrowLeft') this.navigateLightbox(-1);
             if (e.key === 'ArrowRight') this.navigateLightbox(1);
         });
+        
+        // Touch swipe navigation
+        this.setupTouchSwipe(lightbox);
     }
+    
+    setupTouchSwipe(lightbox) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        
+        const mainImage = lightbox.querySelector('.lightbox-main');
+        
+        mainImage.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        mainImage.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            this.handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
+        }, { passive: true });
+    }
+    
+    handleSwipe(startX, startY, endX, endY) {
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        const minSwipeDistance = 50;
+        
+        // Horizontal swipe (ignore if vertical movement is greater)
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+            if (deltaX > 0) {
+                // Swipe right → previous
+                this.navigateLightbox(-1);
+            } else {
+                // Swipe left → next
+                this.navigateLightbox(1);
+            }
+        }
+    }
+
     
     openAlbum(album) {
         this.currentAlbum = album;
