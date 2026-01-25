@@ -1,0 +1,442 @@
+/* === NAROA.ONLINE v5.0 — IMMERSIVE DESIGN SYSTEM === */
+/* Inspired by Bruno Simon, Naked City Films, IRONHILL */
+
+/* ============================================
+   DESIGN TOKENS: Graphite + Mica Palette
+   ============================================ */
+:root {
+    /* === CORE PALETTE (Graphite/Charcoal) === */
+    --graphite-deep: #0d0d0d;
+    --graphite-dark: #1a1a1a;
+    --graphite-medium: #2d2d2d;
+    --graphite-light: #444444;
+    --charcoal: #1e1e1e;
+    --paper-warm: #f4f3f0;
+    --paper-cold: #e8e7e3;
+
+    /* === MICA ACCENTS (Metallic Shimmer) === */
+    --mica-gold: #d4af37;
+    --mica-gold-glow: rgba(212, 175, 55, 0.3);
+    --mica-silver: #c0c0c0;
+    --mica-silver-glow: rgba(192, 192, 192, 0.3);
+    --mica-copper: #b87333;
+    --mica-pearl: #f0ebe3;
+
+    /* === SEMANTIC COLORS === */
+    --color-bg: var(--paper-warm);
+    --color-bg-dark: var(--graphite-deep);
+    --color-text: var(--graphite-dark);
+    --color-text-inverse: var(--paper-warm);
+    --color-accent: var(--mica-gold);
+    --color-accent-secondary: var(--mica-copper);
+    --color-muted: rgba(26, 26, 26, 0.5);
+    --color-border: rgba(26, 26, 26, 0.08);
+    --color-border-hover: rgba(212, 175, 55, 0.4);
+
+    /* === TYPOGRAPHY === */
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+    /* === SPACING (8pt grid) === */
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 1rem;     /* 16px */
+    --space-md: 1.5rem;   /* 24px */
+    --space-lg: 2rem;     /* 32px */
+    --space-xl: 3rem;     /* 48px */
+    --space-2xl: 4rem;    /* 64px */
+    --space-3xl: 6rem;    /* 96px */
+
+    /* === ANIMATIONS === */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+
+    --duration-instant: 100ms;
+    --duration-fast: 200ms;
+    --duration-base: 400ms;
+    --duration-slow: 800ms;
+    --duration-reveal: 1200ms;
+
+    /* === EFFECTS === */
+    --blur-sm: 4px;
+    --blur-md: 12px;
+    --blur-lg: 24px;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --shadow-dramatic: 0 20px 60px rgba(0, 0, 0, 0.2);
+    --shadow-mica: 0 0 40px var(--mica-gold-glow);
+
+    /* === Z-INDEX SCALE === */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-modal: 500;
+    --z-cursor: 9999;
+}
+
+/* ============================================
+   DARK MODE (Automatic: prefers-color-scheme)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: var(--graphite-deep);
+        --color-text: var(--paper-warm);
+        --color-muted: rgba(244, 243, 240, 0.5);
+        --color-border: rgba(244, 243, 240, 0.08);
+    }
+}
+
+/* Manual dark mode toggle class */
+.dark-mode {
+    --color-bg: var(--graphite-deep);
+    --color-text: var(--paper-warm);
+    --color-muted: rgba(244, 243, 240, 0.5);
+    --color-border: rgba(244, 243, 240, 0.08);
+}
+
+/* ============================================
+   TEXTURE OVERLAYS
+   ============================================ */
+
+/* Paper texture (subtle noise) */
+.texture-paper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Brush stroke overlay */
+.texture-brush::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(212, 175, 55, 0.02) 25%,
+        transparent 50%,
+        rgba(212, 175, 55, 0.02) 75%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Mica shimmer effect */
+.texture-mica {
+    position: relative;
+}
+
+.texture-mica::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at 30% 20%,
+        var(--mica-gold-glow) 0%,
+        transparent 40%
+    ),
+    radial-gradient(
+        ellipse at 70% 80%,
+        var(--mica-silver-glow) 0%,
+        transparent 40%
+    );
+    opacity: 0;
+    transition: opacity var(--duration-slow) var(--ease-smooth);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.texture-mica:hover::before {
+    opacity: 1;
+}
+
+/* ============================================
+   CONTROLLED GLITCH EFFECTS
+   ============================================ */
+@keyframes glitch-subtle {
+    0%, 100% { 
+        transform: translate(0); 
+        filter: none; 
+    }
+    10% { 
+        transform: translate(-1px, 1px); 
+        filter: hue-rotate(5deg); 
+    }
+    20% { 
+        transform: translate(1px, -1px); 
+    }
+    30% { 
+        transform: translate(0); 
+        filter: none; 
+    }
+}
+
+@keyframes glitch-chromatic {
+    0%, 100% {
+        text-shadow: none;
+    }
+    25% {
+        text-shadow: -2px 0 var(--mica-gold), 2px 0 var(--mica-copper);
+    }
+    50% {
+        text-shadow: 2px 0 var(--mica-gold), -2px 0 var(--mica-copper);
+    }
+    75% {
+        text-shadow: none;
+    }
+}
+
+.glitch-on-hover:hover {
+    animation: glitch-subtle 0.3s ease;
+}
+
+.glitch-chromatic:hover {
+    animation: glitch-chromatic 0.5s ease;
+}
+
+/* ============================================
+   GSAP/SCROLLTRIGGER ANIMATION CLASSES
+   ============================================ */
+
+/* Reveal from blur (GSAP will control these) */
+.reveal-blur {
+    opacity: 0;
+    filter: blur(15px);
+    transform: translateY(30px);
+    will-change: opacity, filter, transform;
+}
+
+.reveal-blur.is-active {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+    transition: 
+        opacity var(--duration-reveal) var(--ease-out-expo),
+        filter var(--duration-reveal) var(--ease-out-expo),
+        transform var(--duration-reveal) var(--ease-out-expo);
+}
+
+/* Fade in up */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: opacity, transform;
+}
+
+.fade-in-up.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 
+        opacity var(--duration-slow) var(--ease-out-expo),
+        transform var(--duration-slow) var(--ease-out-expo);
+}
+
+/* Stagger children (for GSAP stagger) */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Scale reveal */
+.scale-reveal {
+    opacity: 0;
+    transform: scale(0.95);
+    will-change: opacity, transform;
+}
+
+.scale-reveal.is-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: 
+        opacity var(--duration-base) var(--ease-out-expo),
+        transform var(--duration-base) var(--ease-elastic);
+}
+
+/* ============================================
+   GLASSMORPHISM CARDS
+   ============================================ */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    backdrop-filter: blur(var(--blur-md));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-mica);
+}
+
+/* Dark glass variant */
+.glass-card--dark {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   PREMIUM MICRO-INTERACTIONS
+   ============================================ */
+
+/* Magnetic button effect (works with GSAP) */
+.magnetic-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm) var(--space-lg);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    cursor: none;
+    transition: 
+        border-color var(--duration-fast),
+        color var(--duration-fast);
+}
+
+.magnetic-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+/* Underline animation */
+.link-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width var(--duration-base) var(--ease-out-expo);
+}
+
+.link-underline:hover::after {
+    width: 100%;
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal-blur,
+    .fade-in-up,
+    .scale-reveal {
+        opacity: 1;
+        filter: none;
+        transform: none;
+    }
+}
+
+/* Manual reduced motion toggle */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+/* ============================================
+   FEATURED EXHIBITION: DiviNos VaiVenes
+   ============================================ */
+.divinos-vaivenes-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--graphite-deep);
+    overflow: hidden;
+}
+
+.divinos-vaivenes-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        var(--mica-gold-glow) 0%,
+        transparent 60%
+    );
+    opacity: 0.4;
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+.divinos-vaivenes-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--paper-warm);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.divinos-vaivenes-subtitle {
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mica-gold);
+    margin-top: var(--space-md);
+}
+
+.divinos-vaivenes-location {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-top: var(--space-sm);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.text-accent { color: var(--color-accent); }
+.text-muted { color: var(--color-muted); }
+.bg-dark { background: var(--color-bg-dark); }
+.bg-light { background: var(--color-bg); }

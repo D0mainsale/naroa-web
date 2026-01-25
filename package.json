@@ -8,6 +8,10 @@
   },
   "dependencies": {
     "dotenv": "^16.3.1",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "gsap": "^3.12.5",
+    "three": "^0.160.0",
+    "howler": "^2.2.4",
+    "lottie-web": "^5.12.2"
   }
 }

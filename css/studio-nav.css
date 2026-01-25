@@ -1,0 +1,321 @@
+/* ============================================
+   NAROA v5.0 — FLOATING STUDIO NAVIGATION
+   Immersive floating menu inspired by Bruno Simon
+   ============================================ */
+
+/* Navigation Container - Floating Orb */
+.studio-nav {
+    position: fixed;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-sticky);
+    pointer-events: none;
+}
+
+.studio-nav-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(13, 13, 13, 0.85);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 50px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+        0 0 40px rgba(212, 175, 55, 0.1);
+    pointer-events: auto;
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.studio-nav-container:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+        0 0 60px rgba(212, 175, 55, 0.15);
+}
+
+/* Navigation Items */
+.studio-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: var(--paper-warm);
+    background: transparent;
+    border: none;
+    cursor: none;
+    position: relative;
+    transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.studio-nav-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mica-gold) 0%, var(--mica-copper) 100%);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all var(--duration-base) var(--ease-elastic);
+}
+
+.studio-nav-item:hover::before,
+.studio-nav-item.active::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.studio-nav-item:hover,
+.studio-nav-item.active {
+    color: var(--graphite-deep);
+}
+
+/* Icon styling */
+.studio-nav-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    z-index: 1;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Tooltip labels */
+.studio-nav-label {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--graphite-deep);
+    color: var(--paper-warm);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.studio-nav-label::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--graphite-deep);
+}
+
+.studio-nav-item:hover .studio-nav-label {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Divider */
+.studio-nav-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 var(--space-xs);
+}
+
+/* Central logo/home button */
+.studio-nav-home {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, var(--mica-gold) 0%, var(--mica-copper) 100%);
+    margin: 0 var(--space-xs);
+}
+
+.studio-nav-home::before {
+    display: none;
+}
+
+.studio-nav-home .studio-nav-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--graphite-deep);
+}
+
+/* Expanded state (when hovered) */
+.studio-nav-container.expanded {
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+}
+
+/* Mobile adaptation */
+@media (max-width: 768px) {
+    .studio-nav {
+        bottom: var(--space-sm);
+    }
+
+    .studio-nav-container {
+        gap: 4px;
+        padding: 8px 12px;
+    }
+
+    .studio-nav-item {
+        width: 40px;
+        height: 40px;
+    }
+
+    .studio-nav-home {
+        width: 44px;
+        height: 44px;
+    }
+
+    .studio-nav-label {
+        display: none;
+    }
+}
+
+/* Hide when in ritual mode */
+.ritual-active .studio-nav {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(20px);
+}
+
+/* ============================================
+   ACCESSIBILITY CONTROLS
+   ============================================ */
+.accessibility-controls {
+    position: fixed;
+    top: var(--space-md);
+    right: var(--space-md);
+    display: flex;
+    gap: var(--space-xs);
+    z-index: var(--z-sticky);
+}
+
+.accessibility-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(13, 13, 13, 0.6);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--paper-warm);
+    cursor: none;
+    transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.accessibility-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--mica-gold);
+}
+
+.accessibility-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+}
+
+/* Reduced motion indicator */
+.reduce-motion .accessibility-btn[data-action="reduce-motion"] {
+    background: var(--mica-gold);
+    color: var(--graphite-deep);
+}
+
+/* ============================================
+   BREADCRUMB TRAIL
+   ============================================ */
+.breadcrumb-trail {
+    position: fixed;
+    top: var(--space-md);
+    left: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    z-index: var(--z-sticky);
+}
+
+.breadcrumb-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--duration-fast);
+}
+
+.breadcrumb-link:hover {
+    color: var(--mica-gold);
+}
+
+.breadcrumb-separator {
+    opacity: 0.3;
+}
+
+.breadcrumb-current {
+    color: var(--color-text);
+}
+
+/* ============================================
+   ROOM TRANSITION OVERLAY
+   ============================================ */
+.room-transition-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--graphite-deep);
+    z-index: var(--z-modal);
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.room-transition-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.room-transition-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-weight: 300;
+    color: var(--paper-warm);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.room-transition-overlay.active .room-transition-title {
+    animation: roomTitleReveal 0.8s var(--ease-out-expo) forwards;
+}
+
+@keyframes roomTitleReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
