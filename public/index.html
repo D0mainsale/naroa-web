@@ -691,6 +691,19 @@
     <!-- Cursor personalizado -->
     <div id="cursor" class="cursor" aria-hidden="true"></div>
 
+    <!-- 🔥 KILL SERVICE WORKER - Limpiar cache antiguo -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+            regs.forEach(reg => reg.unregister());
+        });
+        caches.keys().then(keys => {
+            keys.forEach(key => caches.delete(key));
+        });
+        console.log('🗑️ Service Worker y caches eliminados');
+    }
+    </script>
+
     <!-- ═══ MINIMAL SCRIPTS (Ultra-Fast Load) ═══ -->
     
     <!-- Core Router (required) -->
