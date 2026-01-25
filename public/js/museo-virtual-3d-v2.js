@@ -1398,3 +1398,4 @@ window.MuseoVirtual3D = MuseoVirtual3DV2;
 
 console.log('🏛️ Museo Virtual 3D v2.0 loaded');
 // v2.0.1 - 1769300134
+// v2.0.1 - 1769300139
