@@ -1,0 +1,86 @@
+/* === PORTFOLIO DISRUPTIVO === */
+/* Zero bullshit. Solo imágenes. */
+
+/* Reset overlay madness */
+.ritual-overlay,
+.transition-overlay,
+.loading-screen,
+.dust-canvas,
+.rupture-canvas,
+.parallax-layer,
+[class*="overlay"]:not(.card-overlay) {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Full visibility */
+.album-card-v2,
+.album-card-inner,
+.album-image,
+.portfolio-card,
+.obra-card,
+.gallery-item {
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+    transform: none !important;
+}
+
+/* Clean grid */
+.obra-container,
+.gallery-grid,
+#portfolio-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 16px !important;
+    padding: 20px !important;
+    background: #0a0a0a !important;
+}
+
+/* Image cards */
+.album-card-v2,
+.portfolio-card {
+    aspect-ratio: 1 !important;
+    overflow: hidden !important;
+    border-radius: 8px !important;
+    background: #1a1a1a !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease !important;
+}
+
+.album-card-v2:hover,
+.portfolio-card:hover {
+    transform: scale(1.02) !important;
+}
+
+/* Images fill cards */
+.album-image,
+.portfolio-card img,
+.card-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+/* Kill all animations that slow things down */
+*,
+*::before,
+*::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.2s !important;
+}
+
+/* Hero simplificado */
+.hero-section,
+#intro-screen {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+}
+
+/* Navigation visible */
+nav, .nav, header {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
