@@ -133,7 +133,7 @@
     <!-- ✨ v5.0 IMMERSIVE DESIGN SYSTEM -->
     <link rel="stylesheet" href="/css/naroa-immersive.css">
     <link rel="stylesheet" href="/css/studio-nav.css">
-    
+    <link rel="stylesheet" href="/css/portfolio-hero.css">    
     <!-- 🖼️ ULTRA-MINIMAL FULLSCREEN PARALLAX -->
     <link rel="stylesheet" href="/css/ultra-minimal-fullscreen.css">
     
@@ -189,49 +189,158 @@
          CAPA 2: PORTFOLIO — Obras
          ═══════════════════════════════════════════════════════════════════ -->
     <main id="portfolio-view" data-view="portfolio" class="portfolio-view hidden">
-        <header class="portfolio-header">
-            <h1 class="portfolio-title">Naroa Gutiérrez Gil</h1>
-            <nav class="portfolio-nav" aria-label="Secciones del portfolio">
-                <a href="#/portfolio" class="nav-link active">Obras</a>
-                <a href="#/process" class="nav-link">Proceso</a>
-                <a href="#/bitacora" class="nav-link">Bitácora</a>
-                <a href="#/retrato" class="nav-link">¿Te retrato?</a>
-                <a href="#/about" class="nav-link">About</a>
-            </nav>
-        </header>
         
+        <!-- ═══════════════════════════════════════════════════════════════════
+             PORTFOLIO HERO — Featured Work: DiviNos VaiVenes
+             ═══════════════════════════════════════════════════════════════════ -->
+        <section class="portfolio-hero">
+            
+            <!-- Featured Artwork -->
+            <div class="portfolio-hero-artwork portfolio-reveal">
+                <img 
+                    src="/images/portfolio/divinos-vaivenes-01.jpg" 
+                    alt="DiviNos VaiVenes 01 — Retrato hiperrealista en grafito por Naroa Gutiérrez Gil" 
+                    class="portfolio-hero-image"
+                    loading="eager"
+                >
+            </div>
+            
+            <!-- Hero Content -->
+            <div class="portfolio-hero-content portfolio-reveal">
+                <p class="portfolio-hero-series">Serie Destacada</p>
+                <h1 class="portfolio-hero-title">DiviNos VaiVenes</h1>
+                <p class="portfolio-hero-subtitle">
+                    Las dicotomías blanco/negro señalan nuestra naturaleza más allá de la identificación corpórea. 
+                    El péndulo entre lo divino y lo humano.
+                </p>
+                <a href="#portfolio-grid" class="portfolio-hero-cta">
+                    Explorar Serie
+                    <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </a>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="portfolio-hero-scroll">
+                <span>Scroll</span>
+                <div class="portfolio-hero-scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             PORTFOLIO GRID — All Works
+             ═══════════════════════════════════════════════════════════════════ -->
+        <p class="portfolio-section-label">Obras</p>
         
-        
-        <!-- Contenido semántico para SEO/GEO (reemplazado por JS dinámicamente) -->
-        <section id="portfolio-grid" class="portfolio-grid" aria-label="Galería de obras">
-            <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
+        <section id="portfolio-grid" class="portfolio-grid-immersive" aria-label="Galería de obras">
+            
+            <!-- DiviNos VaiVenes 01 -->
+            <article class="portfolio-card-immersive" itemscope itemtype="https://schema.org/VisualArtwork">
+                <img 
+                    src="/images/portfolio/divinos-vaivenes-01.jpg" 
+                    alt="DiviNos VaiVenes 01" 
+                    class="portfolio-card-image"
+                    loading="lazy"
+                >
+                <div class="portfolio-card-overlay"></div>
+                <div class="portfolio-card-content">
+                    <p class="portfolio-card-series">DiviNos VaiVenes</p>
+                    <h3 class="portfolio-card-title" itemprop="name">VaiVén 01</h3>
+                    <p class="portfolio-card-medium" itemprop="artMedium">Grafito sobre papel</p>
+                </div>
                 <meta itemprop="creator" content="Naroa Gutiérrez Gil">
-                <meta itemprop="artMedium" content="Grafito sobre papel">
-                <h3 itemprop="name">DiviNos VaiVenes 01</h3>
-                <p itemprop="description">Retrato hiperrealista en grafito. Las dicotomías blanco/negro señalan nuestra naturaleza más allá de la identificación corpórea.</p>
             </article>
-            <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
+            
+            <!-- DiviNos VaiVenes 02 -->
+            <article class="portfolio-card-immersive" itemscope itemtype="https://schema.org/VisualArtwork">
+                <img 
+                    src="/images/portfolio/divinos-vaivenes-02.jpg" 
+                    alt="DiviNos VaiVenes 02" 
+                    class="portfolio-card-image"
+                    loading="lazy"
+                >
+                <div class="portfolio-card-overlay"></div>
+                <div class="portfolio-card-content">
+                    <p class="portfolio-card-series">DiviNos VaiVenes</p>
+                    <h3 class="portfolio-card-title" itemprop="name">VaiVén 02</h3>
+                    <p class="portfolio-card-medium" itemprop="artMedium">Grafito sobre papel</p>
+                </div>
                 <meta itemprop="creator" content="Naroa Gutiérrez Gil">
-                <meta itemprop="artMedium" content="Carbón y mica">
-                <h3 itemprop="name">Grafito y Mica 01</h3>
-                <p itemprop="description">Técnica mixta sobre verjurado. La mica hilando el abrazo entre la caverna y el cielo.</p>
             </article>
-            <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
+            
+            <!-- Grafito y Mica Series -->
+            <article class="portfolio-card-immersive" itemscope itemtype="https://schema.org/VisualArtwork">
+                <img 
+                    src="/images/portfolio/grafito-mica-01.jpg" 
+                    alt="Grafito y Mica 01" 
+                    class="portfolio-card-image"
+                    loading="lazy"
+                >
+                <div class="portfolio-card-overlay"></div>
+                <div class="portfolio-card-content">
+                    <p class="portfolio-card-series">Grafito y Mica</p>
+                    <h3 class="portfolio-card-title" itemprop="name">Mica 01</h3>
+                    <p class="portfolio-card-medium" itemprop="artMedium">Carbón y mica sobre verjurado</p>
+                </div>
                 <meta itemprop="creator" content="Naroa Gutiérrez Gil">
-                <meta itemprop="artMedium" content="Acrílico sobre lienzo">
-                <h3 itemprop="name">Retratos Hiperrealistas 01</h3>
-                <p itemprop="description">Retrato de iconos del cine y la televisión. Una intensa comunicación silenciosa, comunión visual inmersiva.</p>
             </article>
-            <article class="portfolio-card" itemscope itemtype="https://schema.org/VisualArtwork">
+            
+            <!-- Retratos Hiperrealistas -->
+            <article class="portfolio-card-immersive" itemscope itemtype="https://schema.org/VisualArtwork">
+                <img 
+                    src="/images/portfolio/retrato-hiperrealista-01.jpg" 
+                    alt="Retrato Hiperrealista 01" 
+                    class="portfolio-card-image"
+                    loading="lazy"
+                >
+                <div class="portfolio-card-overlay"></div>
+                <div class="portfolio-card-content">
+                    <p class="portfolio-card-series">Retratos</p>
+                    <h3 class="portfolio-card-title" itemprop="name">Hiperrealismo 01</h3>
+                    <p class="portfolio-card-medium" itemprop="artMedium">Acrílico sobre lienzo</p>
+                </div>
                 <meta itemprop="creator" content="Naroa Gutiérrez Gil">
-                <meta itemprop="artMedium" content="Técnica mixta">
-                <h3 itemprop="name">Serie del Error 01</h3>
-                <p itemprop="description">El error como método. Donde el trazo falla aparece la esencia que anima nuestra carne y huesos.</p>
             </article>
+            
+            <!-- Serie del Error -->
+            <article class="portfolio-card-immersive" itemscope itemtype="https://schema.org/VisualArtwork">
+                <img 
+                    src="/images/portfolio/serie-error-01.jpg" 
+                    alt="Serie del Error 01" 
+                    class="portfolio-card-image"
+                    loading="lazy"
+                >
+                <div class="portfolio-card-overlay"></div>
+                <div class="portfolio-card-content">
+                    <p class="portfolio-card-series">El Error como Método</p>
+                    <h3 class="portfolio-card-title" itemprop="name">Error 01</h3>
+                    <p class="portfolio-card-medium" itemprop="artMedium">Técnica mixta</p>
+                </div>
+                <meta itemprop="creator" content="Naroa Gutiérrez Gil">
+            </article>
+            
+            <!-- Grafito y Mica 02 -->
+            <article class="portfolio-card-immersive" itemscope itemtype="https://schema.org/VisualArtwork">
+                <img 
+                    src="/images/portfolio/grafito-mica-02.jpg" 
+                    alt="Grafito y Mica 02" 
+                    class="portfolio-card-image"
+                    loading="lazy"
+                >
+                <div class="portfolio-card-overlay"></div>
+                <div class="portfolio-card-content">
+                    <p class="portfolio-card-series">Grafito y Mica</p>
+                    <h3 class="portfolio-card-title" itemprop="name">Mica 02</h3>
+                    <p class="portfolio-card-medium" itemprop="artMedium">Grafito y mica</p>
+                </div>
+                <meta itemprop="creator" content="Naroa Gutiérrez Gil">
+            </article>
+            
         </section>
         
         <footer class="portfolio-footer">
-            <a href="#/" class="back-home">← Volver al inicio</a>
+            <a href="#/" class="portfolio-hero-cta">
+                ← Volver al inicio
+            </a>
         </footer>
     </main>
 
@@ -723,7 +832,7 @@
     <script src="/js/features/portfolio.js"></script>
     
     <!-- Main App (ties it together) -->
-    <script src="/js/app.js?v=ULTRA_FAST"></script>
+    <script src="/js/app.js?v=PORTFOLIO_HERO_FIX"></script>
     
     <!-- Lightbox (for clicking images) -->
     <script src="/js/lightbox.js?v=ULTRA_FAST" defer></script>
@@ -828,6 +937,12 @@
     
     <!-- Studio Navigation (Floating Orb) -->
     <script src="/js/studio-nav.js" defer></script>
+    
+    <!-- Mica Particle System (Three.js WebGL) -->
+    <script src="/js/mica-particles.js" defer></script>
+    
+    <!-- Artistic Cursor (Gold with trail) -->
+    <script src="/js/artistic-cursor.js" defer></script>
     
     <!-- 🖼️ ULTRA-MINIMAL FULLSCREEN PARALLAX -->
     <script src="/js/features/ultra-minimal-parallax.js" defer></script>

@@ -99,14 +99,57 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // RUTAS
     router.register('/', () => {
+        // Show ultra-minimal overlay experience
+        const ultraMinimal = document.getElementById('ultra-minimal-experience');
+        if (ultraMinimal) {
+            ultraMinimal.style.display = 'block';
+        }
+        
         document.getElementById('home-view').classList.remove('hidden');
         hideMicro();
         microTimer = setTimeout(showMicro, 4000);
     });
     
     router.register('/portfolio', () => {
+        console.log('🎨 PORTFOLIO ROUTE HANDLER EXECUTED');
         hideMicro();
-        portfolio.renderGrid();
+        
+        // Hide the ultra-minimal overlay experience
+        const ultraMinimal = document.getElementById('ultra-minimal-experience');
+        console.log('Ultra-minimal element:', ultraMinimal);
+        if (ultraMinimal) {
+            ultraMinimal.style.display = 'none';
+            console.log('✅ Ultra-minimal hidden');
+        }
+        
+        // Hide home view
+        const homeView = document.getElementById('home-view');
+        if (homeView) {
+            homeView.classList.add('hidden');
+        }
+        
+        // Show portfolio view
+        const portfolioView = document.getElementById('portfolio-view');
+        console.log('Portfolio element:', portfolioView);
+        if (portfolioView) {
+            portfolioView.classList.remove('hidden');
+            portfolioView.style.display = 'block';
+            console.log('✅ Portfolio shown');
+            
+            // Trigger reveal animations with GSAP if available
+            if (typeof gsap !== 'undefined') {
+                const reveals = portfolioView.querySelectorAll('.portfolio-reveal');
+                gsap.fromTo(reveals,
+                    { opacity: 0, y: 40 },
+                    { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out', delay: 0.2 }
+                );
+            }
+        }
+        
+        // Also render dynamic grid if needed
+        if (portfolio && portfolio.renderGrid) {
+            portfolio.renderGrid();
+        }
     });
     
     router.register('/portfolio/:id', (params) => {

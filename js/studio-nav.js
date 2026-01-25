@@ -239,62 +239,16 @@
     }
 
     /**
-     * Navigate to a path
+     * Navigate to a path (delegates to router for view switching)
      */
     function navigateTo(path) {
-        // Update hash
+        // Just update the hash - the existing router.js handles view switching
         window.location.hash = path;
         currentPath = path;
         
-        // Show/hide views based on path
-        showCorrectView(path);
-        
-        // Update navigation state
+        // Update navigation UI state (router handles view visibility)
         updateActiveState();
         updateBreadcrumb();
-    }
-
-    /**
-     * Show the correct view for the current path
-     */
-    function showCorrectView(path) {
-        // Map paths to view IDs
-        const pathToView = {
-            '#/': 'home-view',
-            '#/portfolio': 'portfolio-view',
-            '#/process': 'process-view',
-            '#/bitacora': 'bitacora-view',
-            '#/retrato': 'retrato-view',
-            '#/about': 'about-view',
-            '#/tienda': 'tienda-view',
-            '#/ritual': 'ritual-view',
-            '#/retrospecter': 'retrospecter-view'
-        };
-
-        const targetViewId = pathToView[path] || 'home-view';
-        
-        // Hide all views
-        document.querySelectorAll('[data-view]').forEach(view => {
-            view.classList.add('hidden');
-        });
-
-        // Show target view
-        const targetView = document.getElementById(targetViewId);
-        if (targetView) {
-            targetView.classList.remove('hidden');
-            
-            // Trigger GSAP animations if available
-            if (typeof gsap !== 'undefined' && !document.body.classList.contains('reduce-motion')) {
-                // Animate reveal-blur elements in the new view
-                const revealElements = targetView.querySelectorAll('.reveal-blur, .fade-in-up');
-                if (revealElements.length) {
-                    gsap.fromTo(revealElements,
-                        { opacity: 0, y: 20 },
-                        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' }
-                    );
-                }
-            }
-        }
     }
 
     /**
