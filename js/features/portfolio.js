@@ -58,7 +58,7 @@ class Portfolio {
     
     
     renderGrid() {
-        // 🔥 VERSIÓN DISRUPTIVA - Render directo sin dependencias
+        // 🔥 VERSIÓN ULTRA PREMIUM - Efectos WOW
         const view = document.getElementById('portfolio-view');
         const grid = document.getElementById('portfolio-grid');
         
@@ -70,49 +70,108 @@ class Portfolio {
         view.classList.remove('hidden');
         grid.innerHTML = '';
         
-        // Grid CSS limpio
+        // Grid CSS ULTRA PREMIUM
+        grid.className = 'portfolio-grid';
         grid.style.cssText = `
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 12px;
-            padding: 20px;
-            background: #0a0a0a;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            padding: 24px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1818 100%);
+            min-height: 100vh;
         `;
         
         const obrasToRender = this.filteredObras || this.obras;
-        console.log(`🎨 Renderizando ${obrasToRender.length} obras`);
+        console.log(`🎨 Renderizando ${obrasToRender.length} obras con efectos premium`);
         
         obrasToRender.forEach((obra, idx) => {
             const card = document.createElement('a');
             card.href = `#/portfolio/${obra.id}`;
+            card.className = 'portfolio-card';
+            
+            // Delay escalonado para animación staggered
+            const delay = Math.min(idx * 0.05, 0.6);
+            
             card.style.cssText = `
                 display: block;
-                aspect-ratio: 1;
+                position: relative;
+                aspect-ratio: 4/5;
                 overflow: hidden;
-                border-radius: 8px;
-                background: #1a1a1a;
+                border-radius: 12px;
+                background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
                 cursor: pointer;
-                transition: transform 0.2s;
+                animation: cardReveal 0.6s ease forwards;
+                animation-delay: ${delay}s;
+                opacity: 0;
+                transform: translateY(30px);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                border: 1px solid rgba(200, 168, 130, 0.1);
             `;
+            
+            // Badge especial para obras ritual
+            const badge = obra.ritual ? '<span class="card-badge">✧ Ritual</span>' : '';
             
             card.innerHTML = `
-                <img src="${obra.imagen}" 
-                     alt="${obra.titulo}" 
-                     loading="lazy"
-                     style="width: 100%; height: 100%; object-fit: cover;">
+                ${badge}
+                <div class="card-image" style="width:100%;height:100%;overflow:hidden;">
+                    <img src="${obra.imagen}" 
+                         alt="${obra.titulo}" 
+                         loading="lazy"
+                         style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s cubic-bezier(0.23,1,0.32,1);">
+                </div>
+                <div class="card-info" style="
+                    position:absolute;
+                    bottom:0;
+                    left:0;
+                    right:0;
+                    padding:1.25rem;
+                    background:linear-gradient(0deg,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0.6) 60%,transparent 100%);
+                    transform:translateY(100%);
+                    transition:transform 0.4s cubic-bezier(0.23,1,0.32,1);
+                ">
+                    <h3 class="card-title" style="color:#FAF8F5;font-size:0.95rem;font-weight:500;margin:0;">${obra.titulo}</h3>
+                    <p class="card-subtitle" style="color:rgba(200,168,130,0.9);font-size:0.75rem;font-style:italic;margin-top:0.25rem;">${obra.albumName || ''}</p>
+                </div>
             `;
             
+            // Hover effects premium
             card.addEventListener('mouseenter', () => {
-                card.style.transform = 'scale(1.03)';
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+                card.style.boxShadow = '0 20px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,168,130,0.3)';
+                const img = card.querySelector('img');
+                if (img) img.style.transform = 'scale(1.1)';
+                const info = card.querySelector('.card-info');
+                if (info) info.style.transform = 'translateY(0)';
             });
+            
             card.addEventListener('mouseleave', () => {
-                card.style.transform = 'scale(1)';
+                card.style.transform = '';
+                card.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+                const img = card.querySelector('img');
+                if (img) img.style.transform = '';
+                const info = card.querySelector('.card-info');
+                if (info) info.style.transform = 'translateY(100%)';
+            });
+            
+            // Click ripple effect
+            card.addEventListener('click', (e) => {
+                card.classList.add('clicked');
+                setTimeout(() => card.classList.remove('clicked'), 600);
             });
             
             grid.appendChild(card);
         });
         
-        console.log('✅ Portfolio renderizado');
+        // Cursor glow effect en el grid
+        grid.addEventListener('mousemove', (e) => {
+            const rect = grid.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            grid.style.setProperty('--mouse-x', `${x}%`);
+            grid.style.setProperty('--mouse-y', `${y}%`);
+        });
+        
+        console.log('✅ Portfolio PREMIUM renderizado con efectos WOW');
     }
     
     initRevealObserver() {
