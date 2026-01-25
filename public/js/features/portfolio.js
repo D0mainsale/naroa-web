@@ -58,90 +58,67 @@ class Portfolio {
     
     
     renderGrid() {
-        // DISABLED: El nuevo sistema UnifiedObraSystem se encarga del portfolio
-        // Si unified-obra está activo, no hacer nada
-        if (window.unifiedObraSystem && window.unifiedObraSystem.dataLoaded) {
-            console.log('📦 Portfolio.renderGrid() cediendo control a UnifiedObraSystem');
+        // 🔥 VERSIÓN DISRUPTIVA - Render directo sin dependencias
+        const view = document.getElementById('portfolio-view');
+        const grid = document.getElementById('portfolio-grid');
+        
+        if (!view || !grid) {
+            console.error('❌ Contenedores portfolio-view o portfolio-grid no encontrados');
             return;
         }
         
-        const view = document.getElementById('portfolio-view');
-        const grid = document.getElementById('portfolio-grid');
         view.classList.remove('hidden');
         grid.innerHTML = '';
         
-        // Aplicar clase premium al grid
-        grid.classList.add('portfolio-grid-premium');
-        
-        // Coordenadas del taller (Bilbao)
-        const baseCoords = { lat: 43.2630, lng: -2.9350 };
-        const materials = ['Grafito sobre papel', 'Carbón y mica', 'Acrílico sobre lienzo', 'Técnica mixta', 'Mica sobre verjurado'];
+        // Grid CSS limpio
+        grid.style.cssText = `
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+            padding: 20px;
+            background: #0a0a0a;
+        `;
         
         const obrasToRender = this.filteredObras || this.obras;
+        console.log(`🎨 Renderizando ${obrasToRender.length} obras`);
         
         obrasToRender.forEach((obra, idx) => {
             const card = document.createElement('a');
             card.href = `#/portfolio/${obra.id}`;
-            card.className = 'portfolio-card';
-            card.dataset.index = idx;
-            card.dataset.reveal = '';
-            card.dataset['3dCard'] = ''; // Para el efecto 3D
-            
-            // Todas las tarjetas con tamaño uniforme
-            
-            // Variación de coordenadas para cada obra
-            const lat = (baseCoords.lat + (Math.random() - 0.5) * 0.01).toFixed(4);
-            const lng = (baseCoords.lng + (Math.random() - 0.5) * 0.01).toFixed(4);
-            const material = materials[idx % materials.length];
+            card.style.cssText = `
+                display: block;
+                aspect-ratio: 1;
+                overflow: hidden;
+                border-radius: 8px;
+                background: #1a1a1a;
+                cursor: pointer;
+                transition: transform 0.2s;
+            `;
             
             card.innerHTML = `
-                <figure class="card-image img-reveal">
-                    <img src="${obra.imagen}" alt="${obra.titulo}" loading="lazy">
-                    <div class="card-overlay">
-                        <span class="view-work">Ver obra</span>
-                    </div>
-                </figure>
-                <div class="card-info">
-                    <span class="card-coords">${lat}°N ${Math.abs(lng).toFixed(4)}°W</span>
-                    <h3 class="card-title">${obra.titulo}</h3>
-                    <span class="card-material">${material}</span>
-                    ${obra.ritual ? '<span class="ritual-indicator">◉</span>' : ''}
-                </div>
+                <img src="${obra.imagen}" 
+                     alt="${obra.titulo}" 
+                     loading="lazy"
+                     style="width: 100%; height: 100%; object-fit: cover;">
             `;
+            
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'scale(1.03)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+            
             grid.appendChild(card);
         });
         
-        // IntersectionObserver para entrada ritual
-        this.initRevealObserver();
-        
-        // Glitch aleatorio cada 30s
-        this.initRandomGlitch();
-        
-        // Inicializar hover 3D effects (si el sistema ya está cargado)
-        setTimeout(() => {
-            if (typeof Card3D !== 'undefined') {
-                new Card3D();
-            }
-        }, 100);
+        console.log('✅ Portfolio renderizado');
     }
     
     initRevealObserver() {
-        const cards = document.querySelectorAll('.portfolio-card');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    // Delay escalonado para efecto "respiración"
-                    const delay = parseInt(entry.target.dataset.index) * 100;
-                    setTimeout(() => {
-                        entry.target.classList.add('revealed');
-                    }, delay);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '50px' });
-        
-        cards.forEach(card => observer.observe(card));
+        // Deshabilitado en versión disruptiva
     }
+    
     
     initRandomGlitch() {
         // Limpiar intervalo anterior si existe
