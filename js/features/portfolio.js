@@ -12,23 +12,16 @@ class Portfolio {
             const res = await fetch('/data/images-index.json');
             const allImagesRaw = await res.json();
             
-            // Map to internal structure - USAR IMÁGENES OPTIMIZADAS WEBP
-            const allImages = allImagesRaw.map(img => {
-                // Convertir ruta de raw_albums JPG a optimized WEBP
-                const filename = img.filename.replace(/\.jpg$/i, '.webp');
-                const optimizedPath = `/images/optimized/${img.albumId}_${filename}`;
-                
-                return {
-                    id: img.id,
-                    titulo: img.albumName || 'Sin título',
-                    albumName: img.albumName,
-                    imagen: optimizedPath,
-                    imagenOriginal: img.path, // Fallback a raw si webp no existe
-                    albumId: img.albumId,
-                    imageIndex: img.index,
-                    ritual: Math.random() > 0.9 // 10% ritual effect
-                };
-            });
+            // Map to internal structure - usar rutas originales de raw_albums
+            const allImages = allImagesRaw.map(img => ({
+                id: img.id,
+                titulo: img.albumName || 'Sin título',
+                albumName: img.albumName,
+                imagen: img.path, // Ruta original que funciona en localhost y producción
+                albumId: img.albumId,
+                imageIndex: img.index,
+                ritual: Math.random() > 0.9 // 10% ritual effect
+            }));
             
             // 🎲 SHUFFLE ALEATORIO - Cada visita es única
             this.shuffleArray(allImages);
@@ -38,7 +31,7 @@ class Portfolio {
             this.allObras = allImages;
             this.filteredObras = null;
 
-            console.log(`✅ Portfolio loaded: ${this.obras.length} of ${allImages.length} images (using optimized WEBP)`);
+            console.log(`✅ Portfolio loaded: ${this.obras.length} of ${allImages.length} images`);
 
             // Load blog posts from static JSON
             try {
