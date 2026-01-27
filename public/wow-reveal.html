@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naroa — Del polvo al alma</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0a0a;
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        /* Custom cursor - brush */
+        .cursor {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(184, 134, 11, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.1s, opacity 0.3s;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+        
+        .cursor.active {
+            transform: scale(2);
+            background: radial-gradient(circle, rgba(184,134,11,0.3) 0%, transparent 70%);
+        }
+
+        /* Main canvas container */
+        .reveal-container {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* The dark layer that gets "painted away" */
+        .darkness {
+            position: absolute;
+            inset: 0;
+            background: #0a0a0a;
+            z-index: 10;
+        }
+
+        /* Canvas for reveal effect */
+        #revealCanvas {
+            position: absolute;
+            inset: 0;
+            z-index: 11;
+        }
+
+        /* The artwork underneath */
+        .artwork-layer {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .artwork-layer.revealed {
+            opacity: 1;
+        }
+
+        .artwork-layer img {
+            max-width: 80%;
+            max-height: 80vh;
+            object-fit: contain;
+            filter: saturate(1.1);
+        }
+
+        /* Initial instruction */
+        .instruction {
+            position: fixed;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            z-index: 100;
+            transition: opacity 1s;
+            text-align: center;
+        }
+
+        .instruction.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .instruction span {
+            display: block;
+            font-size: 11px;
+            margin-top: 8px;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+
+        /* Pigment particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #B8860B;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+        }
+
+        /* Progress indicator */
+        .progress-ring {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            z-index: 100;
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .progress-ring .bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+
+        .progress-ring .progress {
+            stroke: #B8860B;
+            stroke-dasharray: 138;
+            stroke-dashoffset: 138;
+            transition: stroke-dashoffset 0.3s;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+
+        /* Final state - navigation appears */
+        .nav-reveal {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 1s ease 0.5s;
+            pointer-events: none;
+        }
+
+        .nav-reveal.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .nav-reveal a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-reveal a:hover {
+            color: #B8860B;
+        }
+
+        /* Title that appears */
+        .title-reveal {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            pointer-events: none;
+        }
+
+        .title-reveal.visible {
+            opacity: 1;
+        }
+
+        .title-reveal h1 {
+            color: #F5F0E8;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        .title-reveal p {
+            color: rgba(255,255,255,0.4);
+            font-size: 11px;
+            letter-spacing: 4px;
+            margin-top: 8px;
+        }
+
+        /* Ambient particles */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .ambient-particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(184, 134, 11, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- Progress ring -->
+    <svg class="progress-ring" viewBox="0 0 50 50">
+        <circle class="bg" cx="25" cy="25" r="22"/>
+        <circle class="progress" id="progressCircle" cx="25" cy="25" r="22"/>
+    </svg>
+
+    <!-- Title (hidden initially) -->
+    <div class="title-reveal" id="titleReveal">
+        <h1>Naroa</h1>
+        <p>Del polvo al alma</p>
+    </div>
+
+    <!-- Main reveal container -->
+    <div class="reveal-container">
+        <!-- Artwork underneath -->
+        <div class="artwork-layer" id="artworkLayer">
+            <img src="/public/images/optimized/1543127323833350_000003_594972277_1543116283834454_8672784625256696657_n.webp" alt="Obra de Naroa" id="artworkImage">
+        </div>
+        
+        <!-- Canvas for reveal effect -->
+        <canvas id="revealCanvas"></canvas>
+    </div>
+
+    <!-- Instruction -->
+    <div class="instruction" id="instruction">
+        Arrastra para revelar
+        <span>o mantén pulsado</span>
+    </div>
+
+    <!-- Navigation (hidden initially) -->
+    <nav class="nav-reveal" id="navReveal">
+        <a href="/galeria.html">Portfolio</a>
+        <a href="/process.html">Proceso</a>
+        <a href="#retrato">Encargo</a>
+        <a href="/contact.html">Contacto</a>
+    </nav>
+
+    <script>
+        // === CONFIGURATION ===
+        const REVEAL_THRESHOLD = 0.35; // 35% revealed to complete
+        const BRUSH_SIZE = 100;
+
+        // === ELEMENTS ===
+        const cursor = document.getElementById('cursor');
+        const canvas = document.getElementById('revealCanvas');
+        const ctx = canvas.getContext('2d');
+        const instruction = document.getElementById('instruction');
+        const artworkLayer = document.getElementById('artworkLayer');
+        const titleReveal = document.getElementById('titleReveal');
+        const navReveal = document.getElementById('navReveal');
+        const progressCircle = document.getElementById('progressCircle');
+
+        // === STATE ===
+        let isRevealing = false;
+        let revealedPixels = 0;
+        let totalPixels = 0;
+        let isComplete = false;
+        let mouseX = 0, mouseY = 0;
+
+        // === SETUP ===
+        function setup() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            totalPixels = canvas.width * canvas.height;
+
+            ctx.fillStyle = '#0a0a0a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            createAmbientParticles();
+            artworkLayer.classList.add('revealed');
+        }
+
+        function createAmbientParticles() {
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'ambient-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (8 + Math.random() * 12) + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                document.body.appendChild(particle);
+            }
+        }
+
+        // === REVEAL EFFECT ===
+        function reveal(x, y) {
+            if (isComplete) return;
+
+            ctx.globalCompositeOperation = 'destination-out';
+            
+            const gradient = ctx.createRadialGradient(x, y, 0, x, y, BRUSH_SIZE);
+            gradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
+            gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)');
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(x, y, BRUSH_SIZE, 0, Math.PI * 2);
+            ctx.fill();
+
+            createRevealParticles(x, y);
+            calculateReveal();
+        }
+
+        function createRevealParticles(x, y) {
+            for (let i = 0; i < 3; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 20 + Math.random() * 40;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+                
+                document.body.appendChild(particle);
+                
+                particle.animate([
+                    { opacity: 0.8, transform: 'translate(0, 0) scale(1)' },
+                    { opacity: 0, transform: `translate(${dx}px, ${dy - 30}px) scale(0)` }
+                ], {
+                    duration: 800 + Math.random() * 400,
+                    easing: 'ease-out'
+                }).onfinish = () => particle.remove();
+            }
+        }
+
+        function calculateReveal() {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let transparent = 0;
+            
+            for (let i = 3; i < imageData.data.length; i += 40) {
+                if (imageData.data[i] < 128) transparent++;
+            }
+            
+            const percentage = transparent / (imageData.data.length / 40);
+            updateProgress(percentage);
+            
+            if (percentage > REVEAL_THRESHOLD && !isComplete) {
+                completeReveal();
+            }
+        }
+
+        function updateProgress(percentage) {
+            const offset = 138 - (138 * percentage);
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        function completeReveal() {
+            isComplete = true;
+            
+            canvas.style.transition = 'opacity 2s ease';
+            canvas.style.opacity = '0';
+            
+            instruction.classList.add('hidden');
+            
+            setTimeout(() => {
+                titleReveal.classList.add('visible');
+            }, 500);
+            
+            setTimeout(() => {
+                navReveal.classList.add('visible');
+            }, 1000);
+
+            document.body.style.cursor = 'auto';
+            cursor.style.display = 'none';
+        }
+
+        // === EVENT LISTENERS ===
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = (e.clientX - 30) + 'px';
+            cursor.style.top = (e.clientY - 30) + 'px';
+            
+            if (isRevealing) {
+                reveal(e.clientX, e.clientY);
+            }
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (isComplete) return;
+            isRevealing = true;
+            cursor.classList.add('active');
+            instruction.classList.add('hidden');
+            reveal(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('mouseup', () => {
+            isRevealing = false;
+            cursor.classList.remove('active');
+        });
+
+        // Touch support
+        document.addEventListener('touchstart', (e) => {
+            if (isComplete) return;
+            isRevealing = true;
+            instruction.classList.add('hidden');
+            const touch = e.touches[0];
+            reveal(touch.clientX, touch.clientY);
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isRevealing || isComplete) return;
+            const touch = e.touches[0];
+            reveal(touch.clientX, touch.clientY);
+        });
+
+        document.addEventListener('touchend', () => {
+            isRevealing = false;
+        });
+
+        window.addEventListener('resize', () => {
+            if (!isComplete) setup();
+        });
+
+        // === INIT ===
+        setup();
+    </script>
+</body>
+</html>

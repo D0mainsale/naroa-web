@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHATUNGA — El Año del Color</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --color-progress: 0;
+            --bg: #000;
+            --text: #111;
+            --accent: #111;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: crosshair;
+            transition: background 2s ease;
+        }
+        
+        /* Canvas principal */
+        #main-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* Canvas de Naroa NPC */
+        #naroa-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        /* Canvas de la comunidad */
+        #community-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+        
+        /* UI */
+        .ui-layer {
+            position: relative;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .ui-layer > * {
+            pointer-events: auto;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--text);
+            transition: color 2s ease;
+        }
+        
+        .year-badge {
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            color: var(--text);
+        }
+        
+        /* Barra de progreso mini */
+        .mini-progress {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            z-index: 100;
+        }
+        
+        .mini-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1a1a1a, #c9a86c);
+            transition: width 1s ease;
+        }
+        
+        /* Paleta de colores del usuario */
+        .user-palette {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+        
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .color-btn:hover, .color-btn.active {
+            transform: scale(1.2);
+            border-color: #fff;
+        }
+        
+        .brush-size {
+            width: 40px;
+            height: 100px;
+            margin-top: 1rem;
+            appearance: none;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            writing-mode: vertical-lr;
+            direction: rtl;
+        }
+        
+        .brush-size::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        /* Panel de stats */
+        .stats-panel {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            z-index: 100;
+            min-width: 180px;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+        
+        .stat-label {
+            opacity: 0.6;
+        }
+        
+        .stat-value {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Naroa NPC */
+        .naroa-npc {
+            position: fixed;
+            width: 60px;
+            height: 90px;
+            z-index: 50;
+            pointer-events: none;
+            transition: left 4s ease-in-out, top 4s ease-in-out;
+        }
+        
+        .naroa-sprite {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #2a2a35 0%, #1a1a25 100%);
+            border-radius: 30px 30px 15px 15px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .naroa-head {
+            width: 35px;
+            height: 40px;
+            background: #d4a574;
+            border-radius: 50%;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .naroa-hair {
+            width: 42px;
+            height: 30px;
+            background: #1a1a1f;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .naroa-arm {
+            width: 6px;
+            height: 40px;
+            background: #d4a574;
+            position: absolute;
+            top: 15px;
+            right: -10px;
+            border-radius: 3px;
+            transform-origin: top center;
+            animation: paint-arm 1.5s ease-in-out infinite;
+        }
+        
+        .naroa-brush {
+            width: 4px;
+            height: 25px;
+            background: #5a3010;
+            position: absolute;
+            bottom: -20px;
+            left: 1px;
+            border-radius: 2px;
+        }
+        
+        .naroa-brush::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: -4px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 0 0 50% 50%;
+        }
+        
+        @keyframes paint-arm {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+        
+        .naroa-name {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+        
+        /* Panel de moderación (solo para Naroa/admin) */
+        .mod-panel {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            border: 1px solid #c9a86c;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            display: none;
+            gap: 1rem;
+            z-index: 200;
+        }
+        
+        .mod-panel.visible {
+            display: flex;
+        }
+        
+        .mod-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.85rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .mod-btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+        
+        .mod-btn.danger {
+            border-color: #ff4444;
+        }
+        
+        .mod-btn.danger:hover {
+            background: #ff4444;
+        }
+        
+        /* Mensajes flotantes */
+        .toast {
+            position: fixed;
+            bottom: 5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.9);
+            border: 1px solid var(--accent);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 300;
+        }
+        
+        .toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* Instrucciones */
+        .instructions {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 0.75rem;
+            color: var(--text);
+            opacity: 0.5;
+            text-align: right;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <!-- Capas de canvas -->
+    <canvas id="main-canvas"></canvas>
+    <canvas id="naroa-canvas"></canvas>
+    <canvas id="community-canvas"></canvas>
+    
+    <!-- Naroa NPC -->
+    <div class="naroa-npc" id="naroa-npc">
+        <div class="naroa-sprite">
+            <div class="naroa-hair"></div>
+            <div class="naroa-head"></div>
+            <div class="naroa-arm">
+                <div class="naroa-brush"></div>
+            </div>
+        </div>
+        <div class="naroa-name">NAROA</div>
+    </div>
+    
+    <!-- UI Layer -->
+    <div class="ui-layer">
+        <header>
+            <h1 class="logo">CHATUNGA</h1>
+            <div class="year-badge">
+                <span id="day-display">Día --</span> · 
+                <span id="color-display">--% color</span>
+            </div>
+        </header>
+        
+        <!-- Paleta del usuario -->
+        <div class="user-palette" id="user-palette">
+            <button class="color-btn active" data-color="#ffffff" style="background:#ffffff" title="Blanco"></button>
+            <button class="color-btn" data-color="#c9a86c" style="background:#c9a86c" title="Mica"></button>
+            <button class="color-btn" data-color="#8a6a5a" style="background:#8a6a5a" title="Tierra"></button>
+            <button class="color-btn" data-color="#5a5a8a" style="background:#5a5a8a" title="Violeta"></button>
+            <button class="color-btn" data-color="#5a8a6a" style="background:#5a8a6a" title="Verde"></button>
+            <button class="color-btn" data-color="#1a1a1f" style="background:#1a1a1f; border-color:#444" title="Negro"></button>
+            <input type="range" class="brush-size" id="brush-size" min="2" max="50" value="10" title="Tamaño del pincel">
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-panel">
+            <div class="stat-row">
+                <span class="stat-label">Día del año</span>
+                <span class="stat-value" id="stat-day">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Color revelado</span>
+                <span class="stat-value" id="stat-color">--%</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Trazos de Naroa</span>
+                <span class="stat-value" id="stat-naroa">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Trazos comunidad</span>
+                <span class="stat-value" id="stat-community">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Artistas hoy</span>
+                <span class="stat-value" id="stat-artists">--</span>
+            </div>
+        </div>
+        
+        <!-- Panel de moderación -->
+        <div class="mod-panel" id="mod-panel">
+            <button class="mod-btn" id="btn-approve">✓ Aprobar todo</button>
+            <button class="mod-btn" id="btn-undo">↩ Deshacer último</button>
+            <button class="mod-btn danger" id="btn-clear">✕ Limpiar comunidad</button>
+            <button class="mod-btn" id="btn-save">💾 Guardar estado</button>
+        </div>
+        
+        <div class="instructions">
+            Click y arrastra para pintar<br>
+            Elige color en la paleta izquierda<br>
+            <span style="color:var(--accent)">Ctrl+M</span> = Modo moderación
+        </div>
+    </div>
+    
+    <div class="mini-progress">
+        <div class="mini-progress-fill" id="progress-fill"></div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // 🎨 CHATUNGA — El Año del Color (Edición Colaborativa)
+        // ═══════════════════════════════════════════════════════════════
+        
+        class Chatunga {
+            constructor() {
+                // Canvas layers
+                this.mainCanvas = document.getElementById('main-canvas');
+                this.naroaCanvas = document.getElementById('naroa-canvas');
+                this.communityCanvas = document.getElementById('community-canvas');
+                
+                this.mainCtx = this.mainCanvas.getContext('2d');
+                this.naroaCtx = this.naroaCanvas.getContext('2d');
+                this.communityCtx = this.communityCanvas.getContext('2d');
+                
+                // State
+                this.isDrawing = false;
+                this.currentColor = '#ffffff';
+                this.brushSize = 10;
+                this.lastX = 0;
+                this.lastY = 0;
+                
+                // Stats
+                this.stats = {
+                    naroaStrokes: 0,
+                    communityStrokes: 0,
+                    artists: new Set()
+                };
+                
+                // Naroa NPC
+                this.naroaNpc = document.getElementById('naroa-npc');
+                this.naroaPosition = { x: 100, y: 100 };
+                
+                // Mod mode
+                this.isModMode = false;
+                
+                // History for undo
+                this.history = [];
+                
+                this.resize();
+                this.init();
+            }
+            
+            init() {
+                window.addEventListener('resize', () => this.resize());
+                
+                // Color palette
+                document.querySelectorAll('.color-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.currentColor = btn.dataset.color;
+                    });
+                });
+                
+                // Brush size
+                document.getElementById('brush-size').addEventListener('input', (e) => {
+                    this.brushSize = parseInt(e.target.value);
+                });
+                
+                // Drawing events
+                this.communityCanvas.addEventListener('mousedown', (e) => this.startDrawing(e));
+                this.communityCanvas.addEventListener('mousemove', (e) => this.draw(e));
+                this.communityCanvas.addEventListener('mouseup', () => this.stopDrawing());
+                this.communityCanvas.addEventListener('mouseout', () => this.stopDrawing());
+                
+                // Touch support
+                this.communityCanvas.addEventListener('touchstart', (e) => this.startDrawing(e.touches[0]));
+                this.communityCanvas.addEventListener('touchmove', (e) => { e.preventDefault(); this.draw(e.touches[0]); });
+                this.communityCanvas.addEventListener('touchend', () => this.stopDrawing());
+                
+                // Mod panel
+                document.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey && e.key === 'm') {
+                        e.preventDefault();
+                        this.toggleModMode();
+                    }
+                });
+                
+                document.getElementById('btn-approve').addEventListener('click', () => this.approveAll());
+                document.getElementById('btn-undo').addEventListener('click', () => this.undo());
+                document.getElementById('btn-clear').addEventListener('click', () => this.clearCommunity());
+                document.getElementById('btn-save').addEventListener('click', () => this.saveState());
+                
+                // Generate artist ID
+                this.artistId = localStorage.getItem('artistId') || this.generateId();
+                localStorage.setItem('artistId', this.artistId);
+                
+                // Initialize
+                this.updateForDay(this.getDayOfYear());
+                this.startNaroaNPC();
+                this.loadState();
+                
+                // Auto-save every minute
+                setInterval(() => this.autoSave(), 60000);
+            }
+            
+            generateId() {
+                return 'artist_' + Math.random().toString(36).substr(2, 9);
+            }
+            
+            getDayOfYear() {
+                const now = new Date();
+                const start = new Date(now.getFullYear(), 0, 0);
+                const diff = now - start;
+                return Math.floor(diff / (1000 * 60 * 60 * 24));
+            }
+            
+            updateForDay(day) {
+                const progress = day / 365;
+                
+                // Update CSS vars
+                const bgColor = this.interpolateColor('#000000', '#1a1a25', progress);
+                const textColor = this.interpolateColor('#222222', '#e8e6e1', progress * 1.5);
+                const accentColor = this.interpolateColor('#333333', '#c9a86c', progress);
+                
+                document.documentElement.style.setProperty('--bg', bgColor);
+                document.documentElement.style.setProperty('--text', textColor);
+                document.documentElement.style.setProperty('--accent', accentColor);
+                
+                // Update UI
+                document.getElementById('progress-fill').style.width = (progress * 100) + '%';
+                document.getElementById('day-display').textContent = `Día ${day}`;
+                document.getElementById('color-display').textContent = `${Math.round(progress * 100)}% color`;
+                document.getElementById('stat-day').textContent = day;
+                document.getElementById('stat-color').textContent = `${Math.round(progress * 100)}%`;
+                
+                // Paint base layer
+                this.paintBase(day);
+            }
+            
+            paintBase(day) {
+                const w = this.mainCanvas.width;
+                const h = this.mainCanvas.height;
+                const progress = day / 365;
+                
+                // Dark base
+                this.mainCtx.fillStyle = '#000';
+                this.mainCtx.fillRect(0, 0, w, h);
+                
+                // Add subtle color based on progress
+                const numElements = Math.floor(10 + progress * 40);
+                const palette = this.getPalette(progress);
+                
+                for (let i = 0; i < numElements; i++) {
+                    const color = palette[Math.floor(Math.random() * palette.length)];
+                    const x = Math.random() * w;
+                    const y = Math.random() * h;
+                    const size = 50 + Math.random() * (100 + progress * 150);
+                    const alpha = 0.03 + progress * 0.05;
+                    
+                    this.mainCtx.beginPath();
+                    this.mainCtx.fillStyle = this.hexToRgba(color, alpha);
+                    this.mainCtx.arc(x, y, size, 0, Math.PI * 2);
+                    this.mainCtx.fill();
+                }
+            }
+            
+            getPalette(progress) {
+                if (progress < 0.2) return ['#0a0a0c', '#101015', '#15151a'];
+                if (progress < 0.4) return ['#15151a', '#1a1a25', '#252535'];
+                if (progress < 0.6) return ['#252535', '#353545', '#c9a86c40'];
+                if (progress < 0.8) return ['#353545', '#454555', '#c9a86c60', '#8a6a5a'];
+                return ['#454555', '#555565', '#c9a86c', '#8a6a5a', '#5a5a8a'];
+            }
+            
+            // === DRAWING ===
+            startDrawing(e) {
+                this.isDrawing = true;
+                [this.lastX, this.lastY] = [e.clientX, e.clientY];
+                this.stats.artists.add(this.artistId);
+                this.saveHistoryState();
+            }
+            
+            draw(e) {
+                if (!this.isDrawing) return;
+                
+                this.communityCtx.beginPath();
+                this.communityCtx.strokeStyle = this.currentColor;
+                this.communityCtx.lineWidth = this.brushSize;
+                this.communityCtx.lineCap = 'round';
+                this.communityCtx.lineJoin = 'round';
+                this.communityCtx.globalAlpha = 0.8;
+                
+                this.communityCtx.moveTo(this.lastX, this.lastY);
+                this.communityCtx.lineTo(e.clientX, e.clientY);
+                this.communityCtx.stroke();
+                
+                [this.lastX, this.lastY] = [e.clientX, e.clientY];
+            }
+            
+            stopDrawing() {
+                if (this.isDrawing) {
+                    this.stats.communityStrokes++;
+                    this.updateStats();
+                }
+                this.isDrawing = false;
+            }
+            
+            // === NAROA NPC ===
+            startNaroaNPC() {
+                this.moveNaroa();
+                setInterval(() => this.moveNaroa(), 5000);
+                setInterval(() => this.naroaPaints(), 2000);
+            }
+            
+            moveNaroa() {
+                const margin = 100;
+                const x = margin + Math.random() * (window.innerWidth - margin * 2);
+                const y = margin + Math.random() * (window.innerHeight - margin * 2);
+                
+                this.naroaPosition = { x, y };
+                this.naroaNpc.style.left = x + 'px';
+                this.naroaNpc.style.top = y + 'px';
+            }
+            
+            naroaPaints() {
+                const progress = this.getDayOfYear() / 365;
+                const palette = this.getPalette(progress);
+                const color = palette[Math.floor(Math.random() * palette.length)];
+                
+                const x = this.naroaPosition.x + 40 + (Math.random() - 0.5) * 100;
+                const y = this.naroaPosition.y + 60 + (Math.random() - 0.5) * 100;
+                const size = 20 + Math.random() * (30 + progress * 50);
+                
+                this.naroaCtx.beginPath();
+                this.naroaCtx.fillStyle = this.hexToRgba(color, 0.15 + progress * 0.2);
+                this.naroaCtx.arc(x, y, size, 0, Math.PI * 2);
+                this.naroaCtx.fill();
+                
+                this.stats.naroaStrokes++;
+                this.updateStats();
+            }
+            
+            // === MODERATION ===
+            toggleModMode() {
+                this.isModMode = !this.isModMode;
+                document.getElementById('mod-panel').classList.toggle('visible', this.isModMode);
+                this.showToast(this.isModMode ? '🎨 Modo moderación activado' : 'Modo normal');
+            }
+            
+            saveHistoryState() {
+                const imageData = this.communityCtx.getImageData(0, 0, this.communityCanvas.width, this.communityCanvas.height);
+                this.history.push(imageData);
+                if (this.history.length > 20) this.history.shift();
+            }
+            
+            undo() {
+                if (this.history.length > 0) {
+                    const prevState = this.history.pop();
+                    this.communityCtx.putImageData(prevState, 0, 0);
+                    this.showToast('↩ Deshecho');
+                } else {
+                    this.showToast('No hay más historial');
+                }
+            }
+            
+            approveAll() {
+                // Merge community canvas into naroa canvas
+                this.naroaCtx.drawImage(this.communityCanvas, 0, 0);
+                this.communityCtx.clearRect(0, 0, this.communityCanvas.width, this.communityCanvas.height);
+                this.showToast('✓ Pintadas aprobadas y fusionadas');
+            }
+            
+            clearCommunity() {
+                this.saveHistoryState();
+                this.communityCtx.clearRect(0, 0, this.communityCanvas.width, this.communityCanvas.height);
+                this.showToast('✕ Canvas comunidad limpiado');
+            }
+            
+            saveState() {
+                const state = {
+                    naroa: this.naroaCanvas.toDataURL(),
+                    community: this.communityCanvas.toDataURL(),
+                    stats: {
+                        naroaStrokes: this.stats.naroaStrokes,
+                        communityStrokes: this.stats.communityStrokes,
+                        artists: Array.from(this.stats.artists)
+                    }
+                };
+                localStorage.setItem('chatungaState', JSON.stringify(state));
+                this.showToast('💾 Estado guardado');
+            }
+            
+            loadState() {
+                const saved = localStorage.getItem('chatungaState');
+                if (!saved) return;
+                
+                try {
+                    const state = JSON.parse(saved);
+                    
+                    // Load Naroa canvas
+                    const naroaImg = new Image();
+                    naroaImg.onload = () => this.naroaCtx.drawImage(naroaImg, 0, 0);
+                    naroaImg.src = state.naroa;
+                    
+                    // Load community canvas
+                    const communityImg = new Image();
+                    communityImg.onload = () => this.communityCtx.drawImage(communityImg, 0, 0);
+                    communityImg.src = state.community;
+                    
+                    // Load stats
+                    if (state.stats) {
+                        this.stats.naroaStrokes = state.stats.naroaStrokes || 0;
+                        this.stats.communityStrokes = state.stats.communityStrokes || 0;
+                        this.stats.artists = new Set(state.stats.artists || []);
+                        this.updateStats();
+                    }
+                } catch (e) {
+                    console.error('Error loading state:', e);
+                }
+            }
+            
+            autoSave() {
+                this.saveState();
+            }
+            
+            // === UTILITIES ===
+            updateStats() {
+                document.getElementById('stat-naroa').textContent = this.stats.naroaStrokes;
+                document.getElementById('stat-community').textContent = this.stats.communityStrokes;
+                document.getElementById('stat-artists').textContent = this.stats.artists.size;
+            }
+            
+            showToast(message) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('visible');
+                setTimeout(() => toast.classList.remove('visible'), 2000);
+            }
+            
+            interpolateColor(color1, color2, factor) {
+                const r1 = parseInt(color1.slice(1, 3), 16);
+                const g1 = parseInt(color1.slice(3, 5), 16);
+                const b1 = parseInt(color1.slice(5, 7), 16);
+                const r2 = parseInt(color2.slice(1, 3), 16);
+                const g2 = parseInt(color2.slice(3, 5), 16);
+                const b2 = parseInt(color2.slice(5, 7), 16);
+                const f = Math.min(factor, 1);
+                const r = Math.round(r1 + (r2 - r1) * f);
+                const g = Math.round(g1 + (g2 - g1) * f);
+                const b = Math.round(b1 + (b2 - b1) * f);
+                return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+            }
+            
+            hexToRgba(hex, alpha) {
+                const r = parseInt(hex.slice(1, 3), 16);
+                const g = parseInt(hex.slice(3, 5), 16);
+                const b = parseInt(hex.slice(5, 7), 16);
+                return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            }
+            
+            resize() {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                
+                [this.mainCanvas, this.naroaCanvas, this.communityCanvas].forEach(canvas => {
+                    canvas.width = w;
+                    canvas.height = h;
+                });
+                
+                this.paintBase(this.getDayOfYear());
+            }
+        }
+        
+        // ¡A pintar!
+        const chatunga = new Chatunga();
+    </script>
+</body>
+</html>

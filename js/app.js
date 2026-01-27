@@ -83,9 +83,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     animateCursor();
     
-    // Portfolio
+    // Portfolio instance (routes will use it, but init is non-blocking)
     const portfolio = new Portfolio(router);
-    await portfolio.init();
+    
+    // Initialize portfolio data asynchronously (non-blocking for routes)
+    portfolio.init().catch(err => {
+        console.warn('⚠️ Portfolio init failed (routes still work):', err.message);
+    });
     
     // Microtexto
     const microText = document.getElementById('micro-text');
@@ -97,13 +101,39 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (microTimer) clearTimeout(microTimer);
     }
     
-    // RUTAS
-    router.register('/', () => {
-        // Show ultra-minimal overlay experience
+    // === HELPER: Ocultar/Mostrar overlay inmersivo ===
+    function hideImmersiveOverlay() {
+        const ultraMinimal = document.getElementById('ultra-minimal-experience');
+        if (ultraMinimal) {
+            ultraMinimal.style.display = 'none';
+            ultraMinimal.style.visibility = 'hidden';
+            ultraMinimal.style.pointerEvents = 'none';
+        }
+        // También ocultar el home-view
+        const homeView = document.getElementById('home-view');
+        if (homeView) {
+            homeView.classList.add('hidden');
+        }
+        // Quitar clases de scroll snap del body
+        document.body.classList.remove('ultra-minimal', 'snap-scroll');
+    }
+    
+    function showImmersiveOverlay() {
         const ultraMinimal = document.getElementById('ultra-minimal-experience');
         if (ultraMinimal) {
             ultraMinimal.style.display = 'block';
+            ultraMinimal.style.visibility = 'visible';
+            ultraMinimal.style.pointerEvents = 'auto';
         }
+        // Restaurar clases de scroll snap
+        document.body.classList.add('ultra-minimal', 'snap-scroll');
+    }
+    
+    // RUTAS
+    router.register('/', () => {
+        console.log('🏠 HOME ROUTE HANDLER EXECUTED');
+        // Show ultra-minimal overlay experience
+        showImmersiveOverlay();
         
         document.getElementById('home-view').classList.remove('hidden');
         hideMicro();
@@ -113,27 +143,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     router.register('/portfolio', () => {
         console.log('🎨 PORTFOLIO ROUTE HANDLER EXECUTED');
         hideMicro();
-        
-        // Hide the ultra-minimal overlay experience
-        const ultraMinimal = document.getElementById('ultra-minimal-experience');
-        console.log('Ultra-minimal element:', ultraMinimal);
-        if (ultraMinimal) {
-            ultraMinimal.style.display = 'none';
-            console.log('✅ Ultra-minimal hidden');
-        }
-        
-        // Hide home view
-        const homeView = document.getElementById('home-view');
-        if (homeView) {
-            homeView.classList.add('hidden');
-        }
+        hideImmersiveOverlay();
         
         // Show portfolio view
         const portfolioView = document.getElementById('portfolio-view');
-        console.log('Portfolio element:', portfolioView);
         if (portfolioView) {
             portfolioView.classList.remove('hidden');
             portfolioView.style.display = 'block';
+            portfolioView.style.visibility = 'visible';
             console.log('✅ Portfolio shown');
             
             // Trigger reveal animations with GSAP if available
@@ -158,22 +175,66 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     
     router.register('/process', () => {
+        console.log('🔧 PROCESS ROUTE HANDLER EXECUTED');
         hideMicro();
+        hideImmersiveOverlay();
+        
+        // Show process view
+        const processView = document.getElementById('process-view');
+        if (processView) {
+            processView.classList.remove('hidden');
+            processView.style.display = 'block';
+            processView.style.visibility = 'visible';
+        }
+        
+        // Trigger process animations
         portfolio.renderProcess();
     });
 
     router.register('/bitacora', () => {
+        console.log('📓 BITACORA ROUTE HANDLER EXECUTED');
         hideMicro();
+        hideImmersiveOverlay();
+        
+        // Show bitacora view
+        const bitacoraView = document.getElementById('bitacora-view');
+        if (bitacoraView) {
+            bitacoraView.classList.remove('hidden');
+            bitacoraView.style.display = 'block';
+            bitacoraView.style.visibility = 'visible';
+        }
+        
         portfolio.renderBitacora();
     });
     
     router.register('/retrato', () => {
+        console.log('🎨 RETRATO ROUTE HANDLER EXECUTED');
         hideMicro();
-        document.getElementById('retrato-view').classList.remove('hidden');
+        hideImmersiveOverlay();
+        
+        // Show retrato view
+        const retratoView = document.getElementById('retrato-view');
+        if (retratoView) {
+            retratoView.classList.remove('hidden');
+            retratoView.style.display = 'block';
+            retratoView.style.visibility = 'visible';
+        }
     });
     
     router.register('/about', () => {
+        console.log('👤 ABOUT ROUTE HANDLER EXECUTED');
         hideMicro();
+        hideImmersiveOverlay();
+        
+        // Show about view
+        const aboutView = document.getElementById('about-view');
+        if (aboutView) {
+            aboutView.classList.remove('hidden');
+            aboutView.style.display = 'block';
+            aboutView.style.visibility = 'visible';
+        }
+        
+        // Trigger about animations
         portfolio.renderAbout();
     });
     

@@ -321,13 +321,38 @@ body.snap-scroll {
     height: 100vh;
 }
 
-/* Ocultar elementos antiguos */
-body.ultra-minimal .home-view,
-body.ultra-minimal .portfolio-view,
-body.ultra-minimal .process-view,
-body.ultra-minimal .about-view,
-body.ultra-minimal .retrato-view,
-body.ultra-minimal .bitacora-view,
-body.ultra-minimal .ritual-view {
-    display: none !important;
+/* ═══════════════════════════════════════════════════════════════════
+   TYPEWRITER EFFECT — Cursor parpadeante
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hero-name.typing::after {
+    content: '|';
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 0.7s infinite;
+    color: rgba(255, 255, 255, 0.8);
 }
+
+.hero-name.typed::after {
+    display: none;
+}
+
+/* Override animation for typewriter - we control this via JS */
+#hero-typewriter {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   VIEW VISIBILITY — Solo ocultar en home cuando overlay está activo
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Las vistas se ocultan por defecto via clase .hidden en el HTML */
+/* No usar display:none !important ya que interfiere con el router */
+

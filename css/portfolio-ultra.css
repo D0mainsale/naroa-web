@@ -158,6 +158,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     border-radius: 2rem;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 10;
     transform: translateY(-10px);
@@ -341,6 +342,7 @@
     letter-spacing: 0.08em;
     cursor: pointer;
     transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 

@@ -1,0 +1,12 @@
+# OpenSea Usernames/Addresses to check
+# One per line - can be username or 0x address
+# Lines starting with # are comments
+
+# Example artists/collectors:
+6529
+punk6529
+seedphrase
+xcopyart
+beeple
+delphinesteinberg
+shl0ms

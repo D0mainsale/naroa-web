@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es" data-mode="silence">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naroa — Del polvo al alma</title>
+  <meta name="description" content="Naroa Gutiérrez Gil. Artista plástica. Grafito, carboncillo, materia. Bilbao.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    /* === DESIGN TOKENS (inline para velocidad) === */
+    :root {
+      --graphite-900: #0d0d0f;
+      --graphite-800: #181820;
+      --graphite-700: #252530;
+      --graphite-100: #f0f0f4;
+      --mica-base: #e8e4dc;
+      --neon-acid: #c8ff00;
+      --font-editorial: 'Cormorant Garamond', Georgia, serif;
+      --font-system: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background: var(--graphite-900);
+      color: var(--graphite-100);
+      font-family: var(--font-system);
+      min-height: 100vh;
+      overflow: hidden;
+      cursor: none;
+    }
+    
+    /* === CURSOR === */
+    .cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--mica-base);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      mix-blend-mode: difference;
+      transition: transform 0.1s, width 0.2s, height 0.2s;
+    }
+    
+    .cursor.is-dragging {
+      width: 80px;
+      height: 80px;
+      background: rgba(200, 255, 0, 0.15);
+      border: 1px solid var(--neon-acid);
+      mix-blend-mode: normal;
+    }
+    
+    /* === ESCENA WOW === */
+    .wow-scene {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--graphite-900);
+    }
+    
+    /* Capa de carbón (oscuridad inicial) */
+    .carbon-veil {
+      position: absolute;
+      inset: 0;
+      background: var(--graphite-900);
+      pointer-events: none;
+      z-index: 10;
+      transition: opacity 2s var(--ease-out-expo);
+    }
+    
+    .carbon-veil.revealed {
+      opacity: 0;
+    }
+    
+    /* Partículas de polvo */
+    .dust-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 15;
+    }
+    
+    .dust {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 250, 240, 0.3);
+      border-radius: 50%;
+      animation: float-up 8s linear infinite;
+    }
+    
+    @keyframes float-up {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+    
+    /* Contenido central */
+    .wow-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: 
+        opacity 1.5s var(--ease-out-expo) 0.5s,
+        transform 1.5s var(--ease-out-expo) 0.5s;
+    }
+    
+    .wow-content.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    /* === ARTWORK FRAME === */
+    .artwork-frame {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+    }
+    
+    .artwork-reveal {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+      filter: grayscale(0.2) contrast(1.1);
+      transition: filter 1s ease, transform 1s ease;
+    }
+    
+    .artwork-reveal:hover {
+      filter: grayscale(0) contrast(1.05);
+      transform: scale(1.02);
+    }
+    
+    .artwork-glow {
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(200, 60, 60, 0.15) 0%,
+        transparent 60%
+      );
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 2s 1s;
+    }
+    
+    .wow-content.revealed .artwork-glow {
+      opacity: 1;
+    }
+    
+    /* Reveal text aparece después */
+    .reveal-text {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 
+        opacity 1s ease 2s,
+        transform 1s ease 2s;
+    }
+    
+    .wow-content.revealed .reveal-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .wow-name {
+      font-family: var(--font-editorial);
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 0.85;
+      margin-bottom: 2rem;
+      
+      /* Efecto grafito brillante */
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(220, 215, 205, 0.8) 40%,
+        rgba(200, 200, 210, 0.9) 60%,
+        rgba(255, 255, 255, 0.95) 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      
+      /* Brillo sutil */
+      text-shadow: 0 0 80px rgba(255, 250, 240, 0.2);
+    }
+    
+    .wow-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 4rem;
+    }
+    
+    /* Instrucción de interacción */
+    .wow-instruction {
+      font-family: var(--font-system);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      transition: opacity 2s 3s;
+    }
+    
+    .wow-instruction.visible {
+      opacity: 1;
+    }
+    
+    .wow-instruction span {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 100px;
+      transition: all 0.3s;
+    }
+    
+    .wow-instruction span:hover {
+      border-color: var(--neon-acid);
+      color: var(--neon-acid);
+    }
+    
+    /* Zona de arrastre */
+    .drag-zone {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      cursor: none;
+    }
+    
+    /* Indicador de progreso de revelación */
+    .reveal-progress {
+      position: fixed;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      z-index: 25;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    
+    .reveal-progress.visible {
+      opacity: 1;
+    }
+    
+    .reveal-progress__fill {
+      height: 100%;
+      width: 0%;
+      background: var(--neon-acid);
+      transition: width 0.1s;
+    }
+    
+    /* === POST-REVEAL: Navegación === */
+    .post-reveal-nav {
+      position: fixed;
+      bottom: 4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 3rem;
+      z-index: 30;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s 1s;
+    }
+    
+    .post-reveal-nav.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .nav-enter {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      transition: all 0.3s var(--ease-out-expo);
+    }
+    
+    .nav-enter:hover {
+      color: white;
+      border-color: white;
+      transform: translateY(-4px);
+    }
+    
+    .nav-enter--primary:hover {
+      background: var(--neon-acid);
+      border-color: var(--neon-acid);
+      color: var(--graphite-900);
+    }
+    
+    /* Mode toggle */
+    .mode-toggle {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      cursor: none;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      transition: all 0.3s;
+    }
+    
+    .mode-toggle:hover {
+      border-color: var(--neon-acid);
+    }
+    
+    .mode-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--mica-base);
+      transition: all 0.3s;
+    }
+    
+    [data-mode="hyperpop"] .mode-dot {
+      background: var(--neon-acid);
+      box-shadow: 0 0 10px var(--neon-acid);
+    }
+    
+    /* Hyperpop mode adjustments */
+    [data-mode="hyperpop"] .wow-name {
+      animation: shimmer 3s ease infinite;
+    }
+    
+    @keyframes shimmer {
+      0%, 100% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(10deg); }
+    }
+    
+    [data-mode="hyperpop"] .dust {
+      background: rgba(200, 255, 0, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <!-- Cursor personalizado -->
+  <div class="cursor" id="cursor"></div>
+  
+  <!-- Escena WOW -->
+  <div class="wow-scene">
+    <!-- Velo de carbón -->
+    <div class="carbon-veil" id="carbonVeil"></div>
+    
+    <!-- Partículas de polvo -->
+    <div class="dust-particles" id="dustParticles"></div>
+    
+    <!-- Contenido: OBRA EMERGIENDO -->
+    <div class="wow-content" id="wowContent">
+      <!-- La obra en pizarra -->
+      <div class="artwork-frame">
+        <img src="/public/images/wow-artwork.jpg" alt="Retrato en pizarra por Naroa" class="artwork-reveal" id="artworkImg">
+        <div class="artwork-glow"></div>
+      </div>
+      
+      <!-- Nombre aparece después -->
+      <div class="reveal-text" id="revealText">
+        <h1 class="wow-name">Naroa</h1>
+        <p class="wow-tagline">Del polvo al alma</p>
+      </div>
+      
+      <p class="wow-instruction" id="instruction">
+        <span>Arrastra para revelar</span>
+      </p>
+    </div>
+    
+    <!-- Main reveal container -->
+    <div class="reveal-container">
+        <!-- Artwork underneath -->
+        <div class="artwork-layer" id="artworkLayer">
+            <img src="/public/images/optimized/1543127323833350_000003_594972277_1543116283834454_8672784625256696657_n.webp" alt="Obra de Naroa" id="artworkImage">
+        </div>
+        
+        <!-- Canvas for reveal effect -->
+        <canvas id="revealCanvas"></canvas>
+    </div>
+    
+    <!-- Zona de arrastre -->
+    <div class="drag-zone" id="dragZone"></div>
+    
+    <!-- Progreso -->
+    <div class="reveal-progress" id="progress">
+      <div class="reveal-progress__fill" id="progressFill"></div>
+    </div>
+    
+    <!-- Navegación post-reveal -->
+    <nav class="post-reveal-nav" id="postNav">
+      <a href="/galeria.html" class="nav-enter nav-enter--primary">Entrar al estudio</a>
+      <a href="/bio.html" class="nav-enter">Conocer a Naroa</a>
+    </nav>
+  </div>
+  
+  <!-- Mode Toggle -->
+  <button class="mode-toggle" id="modeToggle" aria-label="Cambiar modo visual">
+    <span class="mode-dot"></span>
+    <span id="modeLabel">Silencio</span>
+  </button>
+  
+  <script>
+    // === CURSOR ===
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    
+    function updateCursor() {
+      const dx = mouseX - cursorX;
+      const dy = mouseY - cursorY;
+      cursorX += dx * 0.15;
+      cursorY += dy * 0.15;
+      cursor.style.transform = `translate(${cursorX - 4}px, ${cursorY - 4}px)`;
+      requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+    
+    // === PARTÍCULAS DE POLVO ===
+    const dustContainer = document.getElementById('dustParticles');
+    function createDust() {
+      const dust = document.createElement('div');
+      dust.className = 'dust';
+      dust.style.left = Math.random() * 100 + '%';
+      dust.style.animationDelay = Math.random() * 8 + 's';
+      dust.style.animationDuration = (6 + Math.random() * 4) + 's';
+      dustContainer.appendChild(dust);
+      
+      setTimeout(() => dust.remove(), 12000);
+    }
+    
+    // Crear partículas iniciales
+    for (let i = 0; i < 30; i++) {
+      setTimeout(createDust, i * 200);
+    }
+    setInterval(createDust, 300);
+    
+    // === SISTEMA DE REVELACIÓN (Drag) ===
+    const dragZone = document.getElementById('dragZone');
+    const carbonVeil = document.getElementById('carbonVeil');
+    const wowContent = document.getElementById('wowContent');
+    const instruction = document.getElementById('instruction');
+    const progress = document.getElementById('progress');
+    const progressFill = document.getElementById('progressFill');
+    const postNav = document.getElementById('postNav');
+    
+    let isDragging = false;
+    let revealProgress = 0;
+    let isRevealed = false;
+    
+    // Mostrar instrucción después de 3s
+    setTimeout(() => {
+      instruction.classList.add('visible');
+      progress.classList.add('visible');
+    }, 3000);
+    
+    function startDrag() {
+      if (isRevealed) return;
+      isDragging = true;
+      cursor.classList.add('is-dragging');
+    }
+    
+    function endDrag() {
+      isDragging = false;
+      cursor.classList.remove('is-dragging');
+      
+      // Si no se completó, resetear gradualmente
+      if (!isRevealed && revealProgress < 100) {
+        const decay = setInterval(() => {
+          revealProgress = Math.max(0, revealProgress - 2);
+          progressFill.style.width = revealProgress + '%';
+          carbonVeil.style.opacity = 1 - (revealProgress / 100);
+          
+          if (revealProgress <= 0) clearInterval(decay);
+        }, 50);
+      }
+    }
+    
+    function onDrag(e) {
+      if (!isDragging || isRevealed) return;
+      
+      const moveAmount = Math.abs(e.movementX) + Math.abs(e.movementY);
+      revealProgress = Math.min(100, revealProgress + moveAmount * 0.15);
+      
+      progressFill.style.width = revealProgress + '%';
+      carbonVeil.style.opacity = 1 - (revealProgress / 100);
+      
+      // Revelación completa
+      if (revealProgress >= 100) {
+        isRevealed = true;
+        carbonVeil.classList.add('revealed');
+        wowContent.classList.add('revealed');
+        instruction.style.opacity = '0';
+        progress.style.opacity = '0';
+        
+        setTimeout(() => {
+          postNav.classList.add('visible');
+        }, 1500);
+      }
+    }
+    
+    // Touch support
+    let lastTouch = null;
+    
+    dragZone.addEventListener('mousedown', startDrag);
+    dragZone.addEventListener('mouseup', endDrag);
+    dragZone.addEventListener('mouseleave', endDrag);
+    dragZone.addEventListener('mousemove', onDrag);
+    
+    dragZone.addEventListener('touchstart', e => {
+      lastTouch = e.touches[0];
+      startDrag();
+    });
+    
+    dragZone.addEventListener('touchend', endDrag);
+    
+    dragZone.addEventListener('touchmove', e => {
+      if (!lastTouch) return;
+      const touch = e.touches[0];
+      const fakeEvent = {
+        movementX: touch.clientX - lastTouch.clientX,
+        movementY: touch.clientY - lastTouch.clientY
+      };
+      lastTouch = touch;
+      onDrag(fakeEvent);
+    });
+    
+    // === MODE TOGGLE ===
+    const modeToggle = document.getElementById('modeToggle');
+    const modeLabel = document.getElementById('modeLabel');
+    
+    modeToggle.addEventListener('click', () => {
+      const html = document.documentElement;
+      const currentMode = html.dataset.mode;
+      
+      if (currentMode === 'silence') {
+        html.dataset.mode = 'hyperpop';
+        modeLabel.textContent = 'Hyperpop';
+      } else {
+        html.dataset.mode = 'silence';
+        modeLabel.textContent = 'Silencio';
+      }
+    });
+    
+    // === SKIP (para testing) ===
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        revealProgress = 100;
+        isRevealed = true;
+        carbonVeil.classList.add('revealed');
+        wowContent.classList.add('revealed');
+        instruction.style.opacity = '0';
+        progress.style.opacity = '0';
+        postNav.classList.add('visible');
+      }
+    });
+  </script>
+</body>
+</html>

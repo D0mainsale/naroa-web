@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 CHATUNGA — IA Generativa del VaiVén</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Space+Mono&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #0d0d0f;
+            --surface: #1a1a1f;
+            --mica: #c9a86c;
+            --grafito: #2a2a35;
+            --carbon: #0a0a0c;
+            --text: #e8e6e1;
+            --muted: #6a6a70;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(180deg, var(--surface), transparent);
+        }
+        
+        .logo {
+            font-family: 'Caveat', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--mica), #fff, var(--mica));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px rgba(201,168,108,0.5);
+        }
+        
+        .tagline {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Main Layout */
+        main {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 900px) {
+            main { grid-template-columns: 1fr; }
+        }
+        
+        /* Controls Panel */
+        .controls {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .control-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mica);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .prompt-input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--grafito);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 1rem;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .prompt-input:focus {
+            outline: none;
+            border-color: var(--mica);
+        }
+        
+        /* Sliders */
+        .slider-group {
+            margin-bottom: 1rem;
+        }
+        
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .slider-name {
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+        
+        .slider-value {
+            font-size: 0.8rem;
+            color: var(--mica);
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 4px;
+            background: var(--grafito);
+            border-radius: 2px;
+            appearance: none;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--mica);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        /* Style Chips */
+        .style-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .style-chip {
+            background: var(--bg);
+            border: 1px solid var(--grafito);
+            color: var(--muted);
+            font-family: inherit;
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .style-chip:hover, .style-chip.active {
+            border-color: var(--mica);
+            color: var(--mica);
+            background: rgba(201,168,108,0.1);
+        }
+        
+        /* Generate Button */
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--mica), #a08050);
+            border: none;
+            color: var(--bg);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.1em;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201,168,108,0.3);
+        }
+        
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Canvas Area */
+        .canvas-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .canvas-wrapper {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1rem;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #main-canvas {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            image-rendering: auto;
+        }
+        
+        .canvas-placeholder {
+            text-align: center;
+            color: var(--muted);
+        }
+        
+        .canvas-placeholder .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .loading.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .loading-text {
+            color: var(--mica);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .brush-animation {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--mica);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Gallery */
+        .gallery-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--surface);
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Lore Quote */
+        .lore-quote {
+            background: var(--surface);
+            border-left: 3px solid var(--mica);
+            padding: 1rem 1.5rem;
+            font-style: italic;
+            color: var(--muted);
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="logo">CHATUNGA</h1>
+        <p class="tagline">IA Generativa del VaiVén · Estilo Naroa</p>
+    </header>
+    
+    <main>
+        <!-- Panel de Controles -->
+        <aside class="controls">
+            <div class="control-group">
+                <label class="control-label">Describe tu visión</label>
+                <textarea class="prompt-input" id="prompt" placeholder="Un rostro emergiendo de la sombra, con destellos de mica en los ojos..."></textarea>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Estilo</label>
+                <div class="style-chips" id="styles">
+                    <button class="style-chip active" data-style="grafito">Grafito</button>
+                    <button class="style-chip" data-style="carbon">Carbón</button>
+                    <button class="style-chip" data-style="mica">Mica</button>
+                    <button class="style-chip" data-style="acrilico">Acrílico</button>
+                    <button class="style-chip" data-style="glitch">Glitch</button>
+                    <button class="style-chip" data-style="vaiven">VaiVén</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="slider-name">Oscuridad</span>
+                        <span class="slider-value" id="darkness-val">50%</span>
+                    </div>
+                    <input type="range" id="darkness" min="0" max="100" value="50">
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="slider-name">Brillo Mica</span>
+                        <span class="slider-value" id="mica-val">30%</span>
+                    </div>
+                    <input type="range" id="mica" min="0" max="100" value="30">
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="slider-name">Nivel de Glitch</span>
+                        <span class="slider-value" id="glitch-val">10%</span>
+                    </div>
+                    <input type="range" id="glitch" min="0" max="100" value="10">
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="slider-name">Detalle</span>
+                        <span class="slider-value" id="detail-val">70%</span>
+                    </div>
+                    <input type="range" id="detail" min="0" max="100" value="70">
+                </div>
+            </div>
+            
+            <button class="generate-btn" id="generate">
+                ✨ GENERAR OBRA
+            </button>
+            
+            <p class="lore-quote" id="lore-quote">
+                "El error como método. El accidente como revelación."
+            </p>
+        </aside>
+        
+        <!-- Área del Canvas -->
+        <section class="canvas-area">
+            <div class="canvas-wrapper" id="canvas-wrapper">
+                <canvas id="main-canvas" width="768" height="768"></canvas>
+                
+                <div class="canvas-placeholder" id="placeholder">
+                    <div class="icon">🎨</div>
+                    <p>Tu obra aparecerá aquí</p>
+                    <p style="font-size:0.8rem; margin-top:0.5rem">Describe y genera</p>
+                </div>
+                
+                <div class="loading" id="loading">
+                    <div class="brush-animation"></div>
+                    <p class="loading-text" id="loading-text">Mezclando pigmentos...</p>
+                </div>
+            </div>
+            
+            <div>
+                <p class="gallery-title">Galería de creaciones</p>
+                <div class="gallery" id="gallery">
+                    <!-- Las obras generadas aparecerán aquí -->
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // 🎨 CHATUNGA — Motor Generativo del VaiVén
+        // ═══════════════════════════════════════════════════════════════
+        
+        class ChataGepeta {
+            constructor() {
+                this.canvas = document.getElementById('main-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.currentStyle = 'grafito';
+                this.params = {
+                    darkness: 50,
+                    mica: 30,
+                    glitch: 10,
+                    detail: 70
+                };
+                this.gallery = [];
+                
+                this.loreQuotes = [
+                    "El error como método. El accidente como revelación.",
+                    "Donde el trazo falla, aparece la esencia divina.",
+                    "La perfección es asfixia; el error es ReCreo.",
+                    "Nuestras oscuridades contienen chispas de luz.",
+                    "El abrazo entre la caverna y el cielo.",
+                    "No corrijo el pálpito: lo atiendo.",
+                    "Cada capa es un recordatorio.",
+                    "El dibujo es un islote donde recreArte."
+                ];
+                
+                this.loadingTexts = [
+                    "Mezclando pigmentos...",
+                    "Preparando el lienzo...",
+                    "Invocando el VaiVén...",
+                    "Aplicando grafito...",
+                    "Añadiendo mica...",
+                    "Introduciendo glitches sagrados...",
+                    "Escuchando el pálpito...",
+                    "Dejando secar las capas..."
+                ];
+                
+                this.init();
+            }
+            
+            init() {
+                // Style chips
+                document.querySelectorAll('.style-chip').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        document.querySelectorAll('.style-chip').forEach(c => c.classList.remove('active'));
+                        chip.classList.add('active');
+                        this.currentStyle = chip.dataset.style;
+                    });
+                });
+                
+                // Sliders
+                ['darkness', 'mica', 'glitch', 'detail'].forEach(param => {
+                    const slider = document.getElementById(param);
+                    const display = document.getElementById(param + '-val');
+                    slider.addEventListener('input', () => {
+                        this.params[param] = parseInt(slider.value);
+                        display.textContent = slider.value + '%';
+                    });
+                });
+                
+                // Generate button
+                document.getElementById('generate').addEventListener('click', () => this.generate());
+                
+                // Keyboard shortcut
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && e.ctrlKey) this.generate();
+                });
+            }
+            
+            async generate() {
+                const prompt = document.getElementById('prompt').value;
+                const btn = document.getElementById('generate');
+                const loading = document.getElementById('loading');
+                const placeholder = document.getElementById('placeholder');
+                
+                btn.disabled = true;
+                loading.classList.add('active');
+                placeholder.style.display = 'none';
+                
+                // Simular proceso creativo
+                await this.simulateCreation();
+                
+                // Generar la obra
+                this.createArtwork(prompt);
+                
+                loading.classList.remove('active');
+                btn.disabled = false;
+                
+                // Actualizar quote
+                document.getElementById('lore-quote').textContent = 
+                    '"' + this.loreQuotes[Math.floor(Math.random() * this.loreQuotes.length)] + '"';
+                
+                // Añadir a galería
+                this.addToGallery();
+            }
+            
+            async simulateCreation() {
+                const loadingText = document.getElementById('loading-text');
+                const steps = 4 + Math.floor(Math.random() * 3);
+                
+                for (let i = 0; i < steps; i++) {
+                    loadingText.textContent = this.loadingTexts[Math.floor(Math.random() * this.loadingTexts.length)];
+                    await this.sleep(500 + Math.random() * 800);
+                }
+            }
+            
+            createArtwork(prompt) {
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                
+                // Base color según estilo
+                const baseColors = {
+                    grafito: '#1a1a1f',
+                    carbon: '#0a0a0c',
+                    mica: '#2a2a30',
+                    acrilico: '#1f1a1a',
+                    glitch: '#0f0a1a',
+                    vaiven: '#151520'
+                };
+                
+                // 1. Fondo base
+                this.ctx.fillStyle = baseColors[this.currentStyle] || '#1a1a1f';
+                this.ctx.fillRect(0, 0, w, h);
+                
+                // 2. Crear textura de papel
+                this.addPaperTexture();
+                
+                // 3. Formas abstractas basadas en prompt y estilo
+                this.generateForms(prompt);
+                
+                // 4. Añadir mica (destellos)
+                if (this.params.mica > 0) {
+                    this.addMicaSparkles();
+                }
+                
+                // 5. Aplicar glitch
+                if (this.params.glitch > 0) {
+                    this.applyGlitch();
+                }
+                
+                // 6. Añadir viñeta
+                this.addVignette();
+                
+                // 7. Firma
+                this.addSignature();
+            }
+            
+            addPaperTexture() {
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                const imageData = this.ctx.getImageData(0, 0, w, h);
+                const data = imageData.data;
+                
+                const noiseAmount = 15 + (this.params.detail / 10);
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    const noise = (Math.random() - 0.5) * noiseAmount;
+                    data[i] += noise;
+                    data[i + 1] += noise;
+                    data[i + 2] += noise;
+                }
+                
+                this.ctx.putImageData(imageData, 0, 0);
+            }
+            
+            generateForms(prompt) {
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                const numForms = 5 + Math.floor(this.params.detail / 15);
+                
+                // Detectar palabras clave en el prompt
+                const hasRostro = prompt.toLowerCase().includes('rostro') || prompt.toLowerCase().includes('cara');
+                const hasOjos = prompt.toLowerCase().includes('ojos') || prompt.toLowerCase().includes('mirada');
+                const hasSombra = prompt.toLowerCase().includes('sombra') || prompt.toLowerCase().includes('oscur');
+                const hasLuz = prompt.toLowerCase().includes('luz') || prompt.toLowerCase().includes('brill');
+                
+                // Paleta según estilo
+                const palettes = {
+                    grafito: ['#2a2a30', '#3a3a45', '#4a4a55', '#5a5a65', '#8a8a95'],
+                    carbon: ['#0a0a0c', '#151518', '#202025', '#2a2a30', '#3a3a40'],
+                    mica: ['#3a3540', '#4a4550', '#c9a86c', '#d4b87d', '#e5c88e'],
+                    acrilico: ['#3a2020', '#4a3030', '#5a4040', '#c04040', '#e06060'],
+                    glitch: ['#2a1a3a', '#3a2a4a', '#4a3a5a', '#00ffff', '#ff00ff'],
+                    vaiven: ['#1a1a25', '#2a2a35', '#3a3a45', '#c9a86c', '#4a4a55']
+                };
+                
+                const palette = palettes[this.currentStyle] || palettes.grafito;
+                
+                // Centro compositivo (más probable si hay rostro)
+                const centerX = w / 2 + (Math.random() - 0.5) * w * 0.2;
+                const centerY = h / 2 + (Math.random() - 0.5) * h * 0.2;
+                
+                // Generar formas abstractas
+                for (let i = 0; i < numForms; i++) {
+                    const color = palette[Math.floor(Math.random() * palette.length)];
+                    
+                    // Diferentes tipos de formas
+                    const formType = Math.random();
+                    
+                    if (formType < 0.3) {
+                        // Círculos/elipses (para ojos, rostros)
+                        this.drawOrganicCircle(
+                            centerX + (Math.random() - 0.5) * w * 0.6,
+                            centerY + (Math.random() - 0.5) * h * 0.6,
+                            50 + Math.random() * 150,
+                            color
+                        );
+                    } else if (formType < 0.6) {
+                        // Trazos de pincel
+                        this.drawBrushStroke(
+                            Math.random() * w,
+                            Math.random() * h,
+                            100 + Math.random() * 300,
+                            color
+                        );
+                    } else {
+                        // Manchas orgánicas
+                        this.drawOrganicBlob(
+                            Math.random() * w,
+                            Math.random() * h,
+                            50 + Math.random() * 200,
+                            color
+                        );
+                    }
+                }
+                
+                // Si hay rostro, añadir elementos centrales
+                if (hasRostro) {
+                    this.drawOrganicCircle(centerX, centerY - h * 0.1, 180, palette[2]);
+                    this.drawOrganicCircle(centerX, centerY - h * 0.1, 150, palette[3]);
+                }
+                
+                // Si hay ojos, añadir destellos
+                if (hasOjos) {
+                    this.drawEyeHighlight(centerX - 60, centerY - h * 0.15);
+                    this.drawEyeHighlight(centerX + 60, centerY - h * 0.15);
+                }
+                
+                // Si hay sombra, oscurecer zonas
+                if (hasSombra) {
+                    this.addShadowLayer();
+                }
+                
+                // Si hay luz, añadir rayos
+                if (hasLuz) {
+                    this.addLightRays();
+                }
+            }
+            
+            drawOrganicCircle(x, y, radius, color) {
+                this.ctx.beginPath();
+                this.ctx.fillStyle = color;
+                this.ctx.globalAlpha = 0.3 + Math.random() * 0.4;
+                
+                // Círculo distorsionado
+                const points = 60;
+                for (let i = 0; i <= points; i++) {
+                    const angle = (i / points) * Math.PI * 2;
+                    const distortion = radius * (0.8 + Math.random() * 0.4);
+                    const px = x + Math.cos(angle) * distortion;
+                    const py = y + Math.sin(angle) * distortion;
+                    
+                    if (i === 0) {
+                        this.ctx.moveTo(px, py);
+                    } else {
+                        this.ctx.lineTo(px, py);
+                    }
+                }
+                
+                this.ctx.closePath();
+                this.ctx.fill();
+                this.ctx.globalAlpha = 1;
+            }
+            
+            drawBrushStroke(x, y, length, color) {
+                this.ctx.beginPath();
+                this.ctx.strokeStyle = color;
+                this.ctx.lineWidth = 5 + Math.random() * 30;
+                this.ctx.lineCap = 'round';
+                this.ctx.globalAlpha = 0.2 + Math.random() * 0.4;
+                
+                this.ctx.moveTo(x, y);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const endX = x + Math.cos(angle) * length;
+                const endY = y + Math.sin(angle) * length;
+                
+                // Curva orgánica
+                const controlX = (x + endX) / 2 + (Math.random() - 0.5) * 100;
+                const controlY = (y + endY) / 2 + (Math.random() - 0.5) * 100;
+                
+                this.ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+                this.ctx.stroke();
+                this.ctx.globalAlpha = 1;
+            }
+            
+            drawOrganicBlob(x, y, size, color) {
+                this.ctx.beginPath();
+                this.ctx.fillStyle = color;
+                this.ctx.globalAlpha = 0.2 + Math.random() * 0.3;
+                
+                // Blob con ruido
+                const points = 8 + Math.floor(Math.random() * 8);
+                for (let i = 0; i <= points; i++) {
+                    const angle = (i / points) * Math.PI * 2;
+                    const r = size * (0.5 + Math.random() * 0.5);
+                    const px = x + Math.cos(angle) * r;
+                    const py = y + Math.sin(angle) * r;
+                    
+                    if (i === 0) {
+                        this.ctx.moveTo(px, py);
+                    } else {
+                        // Curva suave entre puntos
+                        const prevAngle = ((i - 1) / points) * Math.PI * 2;
+                        const prevR = size * (0.5 + Math.random() * 0.5);
+                        const cpx = x + Math.cos((angle + prevAngle) / 2) * (r + prevR) / 1.5;
+                        const cpy = y + Math.sin((angle + prevAngle) / 2) * (r + prevR) / 1.5;
+                        this.ctx.quadraticCurveTo(cpx, cpy, px, py);
+                    }
+                }
+                
+                this.ctx.closePath();
+                this.ctx.fill();
+                this.ctx.globalAlpha = 1;
+            }
+            
+            drawEyeHighlight(x, y) {
+                // Destello de ojo
+                const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, 30);
+                gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+                gradient.addColorStop(0.3, 'rgba(201, 168, 108, 0.5)');
+                gradient.addColorStop(1, 'rgba(201, 168, 108, 0)');
+                
+                this.ctx.beginPath();
+                this.ctx.fillStyle = gradient;
+                this.ctx.arc(x, y, 30, 0, Math.PI * 2);
+                this.ctx.fill();
+            }
+            
+            addShadowLayer() {
+                const gradient = this.ctx.createRadialGradient(
+                    this.canvas.width / 2, 
+                    this.canvas.height, 
+                    0,
+                    this.canvas.width / 2,
+                    this.canvas.height / 2,
+                    this.canvas.height
+                );
+                gradient.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+            
+            addLightRays() {
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                const numRays = 3 + Math.floor(Math.random() * 5);
+                
+                for (let i = 0; i < numRays; i++) {
+                    const startX = Math.random() * w;
+                    const startY = 0;
+                    const endX = startX + (Math.random() - 0.5) * 300;
+                    const endY = h;
+                    
+                    const gradient = this.ctx.createLinearGradient(startX, startY, endX, endY);
+                    gradient.addColorStop(0, 'rgba(201, 168, 108, 0.2)');
+                    gradient.addColorStop(1, 'rgba(201, 168, 108, 0)');
+                    
+                    this.ctx.beginPath();
+                    this.ctx.strokeStyle = gradient;
+                    this.ctx.lineWidth = 20 + Math.random() * 50;
+                    this.ctx.moveTo(startX, startY);
+                    this.ctx.lineTo(endX, endY);
+                    this.ctx.stroke();
+                }
+            }
+            
+            addMicaSparkles() {
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                const numSparkles = Math.floor(this.params.mica * 2);
+                
+                for (let i = 0; i < numSparkles; i++) {
+                    const x = Math.random() * w;
+                    const y = Math.random() * h;
+                    const size = 1 + Math.random() * 3;
+                    
+                    const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, size * 3);
+                    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+                    gradient.addColorStop(0.3, 'rgba(201, 168, 108, 0.6)');
+                    gradient.addColorStop(1, 'rgba(201, 168, 108, 0)');
+                    
+                    this.ctx.beginPath();
+                    this.ctx.fillStyle = gradient;
+                    this.ctx.arc(x, y, size * 3, 0, Math.PI * 2);
+                    this.ctx.fill();
+                }
+            }
+            
+            applyGlitch() {
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                const numGlitches = Math.floor(this.params.glitch / 10);
+                
+                for (let i = 0; i < numGlitches; i++) {
+                    // Cortar una franja y desplazarla
+                    const y = Math.floor(Math.random() * h);
+                    const sliceHeight = 2 + Math.floor(Math.random() * 20);
+                    const offset = (Math.random() - 0.5) * 50;
+                    
+                    const imageData = this.ctx.getImageData(0, y, w, sliceHeight);
+                    this.ctx.putImageData(imageData, offset, y);
+                }
+                
+                // Añadir líneas de escaneo
+                this.ctx.fillStyle = 'rgba(0, 255, 255, 0.03)';
+                for (let y = 0; y < h; y += 4) {
+                    this.ctx.fillRect(0, y, w, 1);
+                }
+            }
+            
+            addVignette() {
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                const darkness = this.params.darkness / 100;
+                
+                const gradient = this.ctx.createRadialGradient(
+                    w / 2, h / 2, w * 0.2,
+                    w / 2, h / 2, w * 0.8
+                );
+                gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+                gradient.addColorStop(1, `rgba(0, 0, 0, ${0.3 + darkness * 0.5})`);
+                
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(0, 0, w, h);
+            }
+            
+            addSignature() {
+                this.ctx.font = 'italic 16px Georgia, serif';
+                this.ctx.fillStyle = 'rgba(201, 168, 108, 0.4)';
+                this.ctx.textAlign = 'right';
+                this.ctx.fillText('CHATUNGA × Naroa', this.canvas.width - 20, this.canvas.height - 20);
+            }
+            
+            addToGallery() {
+                const dataUrl = this.canvas.toDataURL('image/png');
+                this.gallery.unshift(dataUrl);
+                
+                // Mantener máximo 8 items
+                if (this.gallery.length > 8) this.gallery.pop();
+                
+                this.renderGallery();
+            }
+            
+            renderGallery() {
+                const galleryEl = document.getElementById('gallery');
+                galleryEl.innerHTML = this.gallery.map((url, i) => `
+                    <div class="gallery-item" onclick="chata.loadFromGallery(${i})">
+                        <img src="${url}" alt="Obra ${i + 1}">
+                    </div>
+                `).join('');
+            }
+            
+            loadFromGallery(index) {
+                const img = new Image();
+                img.onload = () => {
+                    this.ctx.drawImage(img, 0, 0);
+                };
+                img.src = this.gallery[index];
+            }
+            
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+        
+        // Iniciar
+        const chata = new ChataGepeta();
+    </script>
+</body>
+</html>

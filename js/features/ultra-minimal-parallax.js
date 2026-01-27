@@ -52,10 +52,10 @@
             <section class="fullscreen-section hero-fullscreen" data-section="0">
                 <img src="${HERO_IMAGES[0]}" alt="Obra de Naroa Gutiérrez Gil" class="fullscreen-bg" loading="eager">
                 <div class="hero-content">
-                    <h1 class="hero-name">Naroa Gutiérrez Gil</h1>
-                    <p class="hero-tagline">El error como método · La espera como herramienta</p>
+                    <h1 class="hero-name" id="hero-typewriter"></h1>
+                    <p class="hero-tagline" style="opacity: 0;">El error como método · La espera como herramienta</p>
                 </div>
-                <div class="scroll-indicator">
+                <div class="scroll-indicator" style="opacity: 0;">
                     <span>Scroll</span>
                 </div>
             </section>
@@ -177,7 +177,76 @@
         initParallax();
         initNavDots();
         
+        // Inicializar efecto typewriter con partículas
+        initTypewriterWithParticles();
+        
         console.log('🖼️ Ultra-Minimal Fullscreen Parallax activo');
+    }
+    
+    /**
+     * Efecto typewriter para el nombre + aparición gradual de partículas
+     */
+    function initTypewriterWithParticles() {
+        const heroName = document.getElementById('hero-typewriter');
+        const tagline = document.querySelector('.hero-tagline');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        const micaCanvas = document.getElementById('mica-particles-canvas');
+        
+        if (!heroName) return;
+        
+        const fullText = 'Naroa Gutiérrez Gil';
+        const typingSpeed = 80; // ms por letra
+        let currentIndex = 0;
+        
+        // Ocultar el canvas de partículas inicialmente
+        if (micaCanvas) {
+            micaCanvas.style.opacity = '0';
+            micaCanvas.style.transition = 'opacity 2s ease-in-out';
+        }
+        
+        // Función de typing
+        function typeNextLetter() {
+            if (currentIndex < fullText.length) {
+                heroName.textContent = fullText.substring(0, currentIndex + 1);
+                // Añadir cursor parpadeante
+                heroName.classList.add('typing');
+                currentIndex++;
+                setTimeout(typeNextLetter, typingSpeed);
+            } else {
+                // Typing completado - quitar cursor
+                heroName.classList.remove('typing');
+                heroName.classList.add('typed');
+                
+                // Mostrar tagline con fade
+                setTimeout(() => {
+                    if (tagline) {
+                        tagline.style.transition = 'opacity 1s ease';
+                        tagline.style.opacity = '1';
+                    }
+                }, 300);
+                
+                // Mostrar scroll indicator
+                setTimeout(() => {
+                    if (scrollIndicator) {
+                        scrollIndicator.style.transition = 'opacity 1s ease';
+                        scrollIndicator.style.opacity = '1';
+                    }
+                }, 800);
+                
+                // Aparecer partículas gradualmente
+                setTimeout(() => {
+                    if (micaCanvas) {
+                        micaCanvas.style.opacity = '1';
+                        console.log('✨ Mica particles revealed after typewriter');
+                    }
+                }, 1200);
+            }
+        }
+        
+        // Comenzar el efecto después de un breve delay
+        setTimeout(typeNextLetter, 500);
+        
+        console.log('⌨️ Typewriter effect initialized');
     }
 
     /**
