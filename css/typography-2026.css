@@ -1,0 +1,118 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TIPOGRAFÍA VASCO-FUTURISTA 2026
+   Identidad visual basada en la piedra tallada y la proyección digital
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* IMPORTANTE: Estas fuentes deben estar en /fonts/ o cargadas desde un CDN.
+   Como fallback usamos fuentes del sistema con carácter similar. */
+
+@font-face {
+    font-family: 'Harri Text';
+    src: url('../fonts/HarriText-Regular.woff2') format('woff2'),
+         url('../fonts/HarriText-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mundaka';
+    src: url('../fonts/Mundaka-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* ══ FAMILIAS ══ */
+    /* Display: Harri o Fallback (Cinzel/Playfair para elegancia similar) */
+    --font-display: 'Harri Text', 'Cinzel', 'Playfair Display', serif;
+    
+    /* Cuerpo: Söhne o Inter (Limpieza suiza/futurista) */
+    --font-body: 'Söhne', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Manuscrita: Digitalización de Naroa */
+    --font-script: 'Naroa Hand', 'Caveat', cursive;
+
+    /* ══ ESCALA (Golden Ratio 1.618) ══ */
+    --text-xs: 0.75rem;   /* 12px */
+    --text-sm: 0.875rem;  /* 14px */
+    --text-base: 1rem;    /* 16px */
+    --text-md: 1.25rem;   /* 20px */
+    --text-lg: 1.618rem;  /* 25.88px - Clave visual */
+    --text-xl: 2.618rem;  /* 41.88px */
+    --text-2xl: 4.236rem; /* 67.7px - Headlines */
+    --text-3xl: 6.854rem; /* 109px - Impacto brutalista */
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ APLICACIÓN GLOBAL
+   ────────────────────────────────────────────────────────────────── */
+
+body {
+    font-family: var(--font-body);
+    /* Tracking ligeramente abierto para sensación 'aireada' */
+    letter-spacing: -0.01em; 
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-display {
+    font-family: var(--font-display);
+    font-weight: 400; /* La fuerza viene de la forma, no del peso */
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ ESTILOS ESPECÍFICOS
+   ────────────────────────────────────────────────────────────────── */
+
+/* Títulos Hero - Impacto monumental */
+.text-hero {
+    font-size: clamp(3rem, 8vw, var(--text-3xl));
+    font-weight: 700;
+    /* Efecto "tallado" en modo luz */
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.5), 
+                 -1px -1px 0px rgba(0,0,0,0.05);
+}
+
+/* Subtítulos etéreos */
+.text-ethereal {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: var(--text-md);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* Citas rituales */
+.text-ritual {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(var(--text-md), 4vw, var(--text-lg));
+    border-left: 2px solid var(--current-accent);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+}
+
+/* Notas marginales (Gloss) */
+.text-gloss {
+    font-family: var(--font-script);
+    color: var(--current-accent-warm);
+    font-size: var(--text-md);
+    transform: rotate(-2deg);
+    display: inline-block;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ TIPOGRAFÍA RESPONSIVA FLUIDA
+   ────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    :root {
+        --text-2xl: 3rem;
+        --text-3xl: 4.5rem;
+    }
+}

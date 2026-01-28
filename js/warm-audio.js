@@ -466,6 +466,41 @@ class WarmAudioEngine {
             this.warmFilter.gain.setValueAtTime(3 + this.warmth * 6, this.ctx.currentTime);
         }
     }
+    
+    // === SINCRONIZACIÓN CON MODO DUAL ===
+    // Ajusta el carácter sonoro según el modo atmosférico
+    setAtmosphere(mode) {
+        if (!this.ctx || !this.isPlaying) return;
+        
+        const now = this.ctx.currentTime;
+        console.log(`🌓 Warm Audio adaptándose a modo: ${mode}`);
+        
+        if (mode === 'tiniebla') {
+            // Tiniebla: Más profundo, reverb largo, crackle sutil
+            if (this.warmFilter) {
+                this.warmFilter.gain.linearRampToValueAtTime(8, now + 0.5); // Más graves
+            }
+            if (this.softFilter) {
+                this.softFilter.frequency.linearRampToValueAtTime(2500, now + 0.5); // Más cálido
+            }
+            if (this.subGain) {
+                this.subGain.gain.linearRampToValueAtTime(0.2, now + 0.5); // Más sub-bass
+            }
+            this.crackleIntensity = 0.8; // Más crackles
+        } else {
+            // Luz: Más brillante, reverb corto, menos crackle
+            if (this.warmFilter) {
+                this.warmFilter.gain.linearRampToValueAtTime(4, now + 0.5); // Menos graves
+            }
+            if (this.softFilter) {
+                this.softFilter.frequency.linearRampToValueAtTime(4500, now + 0.5); // Más abierto
+            }
+            if (this.subGain) {
+                this.subGain.gain.linearRampToValueAtTime(0.1, now + 0.5); // Menos sub-bass
+            }
+            this.crackleIntensity = 0.5; // Menos crackles
+        }
+    }
 }
 
 // === AUTO-INICIALIZACIÓN ===

@@ -97,14 +97,16 @@
     }
 
     /**
-     * Inicializa el efecto parallax
+     * Inicializa el efecto parallax para imágenes y texturas
      */
     function initParallax() {
         const sections = document.querySelectorAll('.fullscreen-section');
+        const textureParallax = document.querySelector('.texture-parallax-bg');
         
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             
+            // Parallax para secciones fullscreen
             sections.forEach(section => {
                 const bg = section.querySelector('.fullscreen-bg');
                 if (!bg) return;
@@ -120,7 +122,23 @@
                     bg.style.transform = `translateY(${parallaxOffset}px)`;
                 }
             });
+            
+            // Parallax para textura de papel (sutil)
+            if (textureParallax) {
+                textureParallax.style.transform = `translateY(${scrollY * 0.05}px)`;
+            }
         }, { passive: true });
+        
+        // === SINCRONIZACIÓN CON MODO DUAL ===
+        // Escuchar cambios de modo para ajustar el Warm Audio Engine
+        window.addEventListener('modo-dual:change', (e) => {
+            console.log(`🌓 Parallax detectó cambio de modo: ${e.detail.mode}`);
+            
+            // Sincronizar con Warm Audio si está activo
+            if (window.warmAudio && window.warmAudio.isPlaying) {
+                window.warmAudio.setAtmosphere(e.detail.mode);
+            }
+        });
     }
 
     /**

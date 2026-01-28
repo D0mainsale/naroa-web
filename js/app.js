@@ -56,6 +56,48 @@ document.addEventListener('DOMContentLoaded', async () => {
     const glitcher = new GlitchText();
     const decay = new WebDecay();
     const handshake = new RitualHandshake();
+    
+    // === 2026 ECOSISTEMA SYSTEMS ===
+    // Inicializar Modo Dual (Luz/Tiniebla) y Transiciones Orgánicas
+    if (typeof ModoDualController !== 'undefined') {
+        window.naroaMode = new ModoDualController();
+        console.log('🌓 Modo Dual Activado');
+    }
+    if (typeof OrganicPageTransitions !== 'undefined') {
+        window.naroaTransitions = new OrganicPageTransitions();
+        console.log('🌫️ Transiciones Orgánicas Activadas');
+    }
+    if (typeof MicaReactiveEffect !== 'undefined') {
+        window.mica = new MicaReactiveEffect();
+        console.log('✨ Efecto Mica Reactivo Activado');
+    }
+    if (typeof RitualCheckout !== 'undefined') {
+        window.checkout = new RitualCheckout();
+        console.log('📜 Ritual de Adquisición Activado');
+    }
+    // === 3D MUSEUM TRIGGER ===
+    const btnMuseo = document.getElementById('btn-open-museo');
+    if (btnMuseo) {
+        btnMuseo.addEventListener('click', async (e) => {
+            e.preventDefault();
+            console.log('🏛️ Abriendo Galería 3D...');
+            // Cargar script dinámicamente si no está (aunque lo pusimos en index) o simplemente init
+            if (typeof MuseoVirtual3DV3 !== 'undefined') {
+                const museo = new MuseoVirtual3DV3();
+                await museo.init();
+            } else {
+                console.error('MuseoVirtual3DV3 no encontrado via script tag.');
+                // Fallback dinámico si falló la carga estática
+                import('/js/museo-virtual-3d-v3.js').then(module => {
+                     const museo = new module.MuseoVirtual3DV3();
+                     museo.init();
+                });
+            }
+        });
+    }
+
+    // Init
+    router.handle();
     // DISABLED: These create overlays that cause the shading issue
     // const trail = new PigmentTrail();
     // const heartbeat = new HeartbeatCursor();

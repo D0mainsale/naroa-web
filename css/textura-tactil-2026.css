@@ -1,0 +1,319 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MAXIMALISMO TÁCTIL 2026 - FONDOS CON TEXTURA DE PAPEL
+   La pantalla como membrana permeable, no cristal frío
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 1. BASE TEXTURA PAPEL - Grano orgánico
+   ────────────────────────────────────────────────────────────────── */
+
+:root {
+    /* URLs de texturas (usar data URIs o paths relativos) */
+    --texture-paper-light: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    
+    --texture-linen: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath d='M0 0h4v4H0z' fill='%23f4f3f0'/%3E%3Cpath d='M0 0h1v1H0zm2 0h1v1H2zm1 1h1v1H3zm2 2h1v1H2zm-1 1h1v1H1z' fill='%23e8e6e1' fill-opacity='.3'/%3E%3C/svg%3E");
+    
+    /* Intensidad de textura */
+    --texture-opacity: 0.04;
+    --texture-opacity-strong: 0.08;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 2. CAPA DE TEXTURA GLOBAL
+   ────────────────────────────────────────────────────────────────── */
+
+/* Textura de papel algodón sobre todo el body */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: var(--texture-opacity);
+    mix-blend-mode: multiply;
+    
+    /* Patrón de grano de papel */
+    background-image: 
+        /* Ruido fino */
+        var(--texture-paper-light),
+        /* Fibras horizontales sutiles */
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.015) 2px,
+            rgba(0, 0, 0, 0.015) 3px
+        ),
+        /* Fibras verticales sutiles */
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.01) 3px,
+            rgba(0, 0, 0, 0.01) 4px
+        );
+    
+    background-size: 200px 200px, 100% 100%, 100% 100%;
+}
+
+/* En modo Tiniebla, invertir el blend mode */
+body[data-modo="tiniebla"]::after {
+    mix-blend-mode: soft-light;
+    opacity: 0.06;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 3. PARALAJE SUTIL EN SCROLL
+   ────────────────────────────────────────────────────────────────── */
+
+/* Contenedor con paralaje de textura */
+.texture-parallax-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.texture-parallax-bg {
+    position: absolute;
+    inset: -20%;
+    width: 140%;
+    height: 140%;
+    pointer-events: none;
+    z-index: 0;
+    
+    /* Textura de papel de algodón */
+    background: 
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(212, 165, 116, 0.03) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse at 70% 80%,
+            rgba(138, 115, 85, 0.02) 0%,
+            transparent 40%
+        ),
+        var(--texture-linen);
+    
+    background-size: 100% 100%, 100% 100%, 4px 4px;
+    
+    /* Parallax transform se aplica via JS */
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 4. BORDES RUGOSOS (Anti-perfección)
+   ────────────────────────────────────────────────────────────────── */
+
+/* Efecto de borde rasgado/orgánico */
+.edge-organic {
+    --edge-roughness: 3px;
+    position: relative;
+}
+
+.edge-organic::before,
+.edge-organic::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: var(--edge-roughness);
+    background: inherit;
+    pointer-events: none;
+}
+
+.edge-organic::before {
+    top: calc(-1 * var(--edge-roughness));
+    clip-path: polygon(
+        0% 100%, 3% 80%, 7% 95%, 12% 70%, 18% 90%, 
+        25% 75%, 32% 85%, 40% 65%, 48% 88%, 55% 72%,
+        62% 95%, 70% 68%, 78% 82%, 85% 70%, 92% 90%, 100% 75%, 
+        100% 100%
+    );
+}
+
+.edge-organic::after {
+    bottom: calc(-1 * var(--edge-roughness));
+    clip-path: polygon(
+        0% 0%, 5% 30%, 10% 10%, 18% 35%, 25% 15%,
+        33% 28%, 42% 8%, 50% 32%, 58% 12%, 65% 25%,
+        72% 5%, 80% 30%, 88% 10%, 95% 28%, 100% 0%,
+        100% 100%, 0% 100%
+    );
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 5. MANCHAS SUTILES (Imperfección intencional)
+   ────────────────────────────────────────────────────────────────── */
+
+/* Manchas orgánicas aleatorias */
+.organic-stains {
+    position: relative;
+}
+
+.organic-stains::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.015;
+    
+    background: 
+        /* Mancha cálida superior izquierda */
+        radial-gradient(
+            ellipse 200px 150px at 15% 20%,
+            rgba(184, 111, 80, 0.4) 0%,
+            transparent 70%
+        ),
+        /* Mancha fría inferior derecha */
+        radial-gradient(
+            ellipse 180px 220px at 85% 75%,
+            rgba(107, 93, 82, 0.3) 0%,
+            transparent 60%
+        ),
+        /* Sombra de agua sutil */
+        radial-gradient(
+            ellipse 120px 100px at 60% 40%,
+            rgba(200, 168, 130, 0.2) 0%,
+            transparent 80%
+        );
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 6. OVERLAYS MATERIALES (Mica/Grafito hints)
+   ────────────────────────────────────────────────────────────────── */
+
+/* Overlay con brillo de mica sutil */
+.mica-shimmer-overlay {
+    position: relative;
+}
+
+.mica-shimmer-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    
+    background: linear-gradient(
+        135deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.08) 45%,
+        rgba(255, 255, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0.08) 55%,
+        transparent 60%
+    );
+    background-size: 200% 200%;
+    animation: micaShimmer 3s ease-in-out infinite;
+    animation-play-state: paused;
+}
+
+.mica-shimmer-overlay:hover::after {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+@keyframes micaShimmer {
+    0% { background-position: 200% 200%; }
+    100% { background-position: -200% -200%; }
+}
+
+/* Overlay grafito (absorbe luz) */
+.graphite-overlay {
+    position: relative;
+}
+
+.graphite-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 1px,
+            rgba(45, 45, 45, 0.02) 1px,
+            rgba(45, 45, 45, 0.02) 2px
+        );
+    mix-blend-mode: multiply;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 7. HOVER CONTEMPLATIVO (Revelar con pausa)
+   ────────────────────────────────────────────────────────────────── */
+
+/* Elementos que revelan detalle solo con hover prolongado */
+.reveal-on-pause {
+    position: relative;
+}
+
+.reveal-on-pause .hidden-detail {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 
+        opacity 0.6s ease 0.8s,  /* Delay de 0.8s */
+        transform 0.6s ease 0.8s;
+    pointer-events: none;
+}
+
+.reveal-on-pause:hover .hidden-detail {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Indicador visual de "espera para revelar" */
+.reveal-on-pause::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--current-accent, #C8A882);
+    transition: width 0.8s linear;
+}
+
+.reveal-on-pause:hover::after {
+    width: 100%;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 8. RESPONSIVE - Reducir texturas en móvil
+   ────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    body::after {
+        opacity: 0.02;
+    }
+    
+    .organic-stains::before {
+        display: none;
+    }
+    
+    .mica-shimmer-overlay::after {
+        display: none;
+    }
+}
+
+/* Reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+    .mica-shimmer-overlay::after {
+        animation: none;
+    }
+    
+    .reveal-on-pause .hidden-detail {
+        transition-delay: 0s;
+    }
+    
+    .reveal-on-pause::after {
+        display: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   END MAXIMALISMO TÁCTIL
+   ═══════════════════════════════════════════════════════════════════ */

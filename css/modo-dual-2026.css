@@ -1,0 +1,450 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MODO DUAL ATMOSFÉRICO 2026 - "DIVINOS VAIVENES"
+   Sistema de estados emocionales Luz/Tiniebla con adaptación circadiana
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 1. VARIABLES DE ESTADO
+   ────────────────────────────────────────────────────────────────── */
+
+:root {
+    /* ═══ ESTADO LUZ (Público/Expositivo) ═══ */
+    --luz-bg: #FAF9F6;                    /* Cloud Dancer */
+    --luz-bg-alt: #F4F3F0;                /* Cream */
+    --luz-text: #1A1A1A;                  /* Charcoal */
+    --luz-muted: rgba(26, 26, 26, 0.5);
+    --luz-accent: #C8A882;                /* Clay medium */
+    --luz-accent-warm: #D4A574;           /* Siena Tostada */
+    --luz-glass: rgba(255, 255, 255, 0.85);
+    --luz-shadow: rgba(0, 0, 0, 0.08);
+    
+    /* ═══ ESTADO TINIEBLA (Íntimo/Procesual) ═══ */
+    --tiniebla-bg: #0A0A0F;               /* Carbón profundo */
+    --tiniebla-bg-alt: #121218;           /* Carbón suave */
+    --tiniebla-text: #F4F3F0;             /* Cloud Dancer inverso */
+    --tiniebla-muted: rgba(244, 243, 240, 0.5);
+    --tiniebla-accent: #B86F50;           /* Rust terracota */
+    --tiniebla-accent-warm: #C93030;      /* Rojo ritual */
+    --tiniebla-glass: rgba(10, 10, 15, 0.85);
+    --tiniebla-shadow: rgba(0, 0, 0, 0.4);
+    
+    /* ═══ TRANSICIÓN FLUIDA ═══ */
+    --modo-transition: 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+    --modo-transition-slow: 2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 2. ESTADO ACTIVO - LUZ (Default)
+   ────────────────────────────────────────────────────────────────── */
+
+body[data-modo="luz"],
+body:not([data-modo]) {
+    --current-bg: var(--luz-bg);
+    --current-bg-alt: var(--luz-bg-alt);
+    --current-text: var(--luz-text);
+    --current-muted: var(--luz-muted);
+    --current-accent: var(--luz-accent);
+    --current-accent-warm: var(--luz-accent-warm);
+    --current-glass: var(--luz-glass);
+    --current-shadow: var(--luz-shadow);
+    
+    background: var(--luz-bg);
+    color: var(--luz-text);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 3. ESTADO ACTIVO - TINIEBLA
+   ────────────────────────────────────────────────────────────────── */
+
+body[data-modo="tiniebla"] {
+    --current-bg: var(--tiniebla-bg);
+    --current-bg-alt: var(--tiniebla-bg-alt);
+    --current-text: var(--tiniebla-text);
+    --current-muted: var(--tiniebla-muted);
+    --current-accent: var(--tiniebla-accent);
+    --current-accent-warm: var(--tiniebla-accent-warm);
+    --current-glass: var(--tiniebla-glass);
+    --current-shadow: var(--tiniebla-shadow);
+    
+    background: var(--tiniebla-bg);
+    color: var(--tiniebla-text);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 4. TRANSICIONES FLUIDAS GLOBALES
+   ────────────────────────────────────────────────────────────────── */
+
+body,
+body * {
+    transition: 
+        background-color var(--modo-transition),
+        color var(--modo-transition),
+        border-color var(--modo-transition),
+        box-shadow var(--modo-transition);
+}
+
+/* ══ Aplicar variables semánticas a elementos base ══ */
+body[data-modo] .home-view,
+body[data-modo] .portfolio-view,
+body[data-modo] .bitacora-view,
+body[data-modo] .ritual-view,
+body[data-modo] .process-view,
+body[data-modo] .about-view,
+body[data-modo] .galeria-view {
+    background: var(--current-bg);
+    color: var(--current-text);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 5. TOGGLE DUAL - UI COMPONENT
+   ────────────────────────────────────────────────────────────────── */
+
+.modo-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9998;
+    
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    padding: 12px 20px;
+    background: var(--current-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+    border-radius: 50px;
+    
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.4s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.modo-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--current-shadow);
+}
+
+/* Label */
+.modo-toggle__label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    color: var(--current-muted);
+}
+
+/* Switch Track */
+.modo-toggle__switch {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    background: rgba(128, 128, 128, 0.2);
+    border-radius: 13px;
+    transition: background 0.4s ease;
+}
+
+/* Switch Knob */
+.modo-toggle__switch::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: var(--current-accent-warm);
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estado Tiniebla - Knob a la derecha */
+body[data-modo="tiniebla"] .modo-toggle__switch::after {
+    transform: translateX(22px);
+    background: var(--tiniebla-accent-warm);
+}
+
+/* Icons dentro del switch */
+.modo-toggle__switch .icon-luz,
+.modo-toggle__switch .icon-tiniebla {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.modo-toggle__switch .icon-luz {
+    left: 6px;
+}
+
+.modo-toggle__switch .icon-tiniebla {
+    right: 6px;
+}
+
+body[data-modo="luz"] .modo-toggle__switch .icon-luz,
+body:not([data-modo]) .modo-toggle__switch .icon-luz {
+    opacity: 1;
+}
+
+body[data-modo="tiniebla"] .modo-toggle__switch .icon-tiniebla {
+    opacity: 1;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 6. SPOTLIGHT FOCALIZADO (Tiniebla)
+   Iluminación tipo galería para modo íntimo
+   ────────────────────────────────────────────────────────────────── */
+
+body[data-modo="tiniebla"] .spotlight-container {
+    position: relative;
+}
+
+body[data-modo="tiniebla"] .spotlight-container::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 400px;
+    background: radial-gradient(
+        ellipse at center top,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.02) 40%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Spotlight seguidor de cursor en Tiniebla */
+body[data-modo="tiniebla"] .cursor-spotlight {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.06) 0%,
+        rgba(255, 255, 255, 0.02) 30%,
+        transparent 60%
+    );
+    pointer-events: none;
+    z-index: 9997;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    mix-blend-mode: screen;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 7. ADAPTACIÓN CIRCADIANA (Auto-switch)
+   ────────────────────────────────────────────────────────────────── */
+
+/* 
+   El sistema JS detectará la hora local y aplicará:
+   - 6:00 - 18:00 → data-modo="luz"
+   - 18:00 - 6:00 → data-modo="tiniebla"
+   
+   El usuario puede override manual con el toggle.
+*/
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 8. TRANSICIONES PÁGINA (Orgánicas)
+   Disoluciones como tinta en agua
+   ────────────────────────────────────────────────────────────────── */
+
+/* Overlay de transición global */
+.page-transition-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Efecto tinta expandiéndose */
+.page-transition-overlay.active {
+    animation: inkExpand var(--modo-transition-slow) ease-out forwards;
+}
+
+@keyframes inkExpand {
+    0% {
+        opacity: 0;
+        background: radial-gradient(
+            circle at var(--transition-origin-x, 50%) var(--transition-origin-y, 50%),
+            var(--current-bg) 0%,
+            transparent 0%
+        );
+    }
+    50% {
+        opacity: 1;
+        background: radial-gradient(
+            circle at var(--transition-origin-x, 50%) var(--transition-origin-y, 50%),
+            var(--current-bg) 0%,
+            var(--current-bg) 60%,
+            transparent 100%
+        );
+    }
+    100% {
+        opacity: 1;
+        background: var(--current-bg);
+    }
+}
+
+/* Efecto carbón difuminándose (alternativo) */
+.page-transition-overlay.carbon-dissolve {
+    animation: carbonDissolve var(--modo-transition-slow) ease-out forwards;
+}
+
+@keyframes carbonDissolve {
+    0% {
+        opacity: 0;
+        backdrop-filter: blur(0);
+    }
+    30% {
+        opacity: 0.8;
+        backdrop-filter: blur(8px);
+    }
+    70% {
+        opacity: 0.4;
+        backdrop-filter: blur(16px);
+    }
+    100% {
+        opacity: 0;
+        backdrop-filter: blur(0);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 9. CARDS & ELEMENTOS EN CONTEXTO DUAL
+   ────────────────────────────────────────────────────────────────── */
+
+/* Portfolio Card adaptativo */
+body[data-modo] .portfolio-card {
+    background: var(--current-bg-alt);
+    border-color: rgba(128, 128, 128, 0.1);
+}
+
+body[data-modo] .portfolio-card:hover .card-info {
+    background: var(--current-accent-warm);
+}
+
+/* Blog posts */
+body[data-modo] .blog-post {
+    background: rgba(128, 128, 128, 0.03);
+    border-color: rgba(128, 128, 128, 0.08);
+}
+
+body[data-modo] .blog-post:hover {
+    background: rgba(128, 128, 128, 0.06);
+    border-color: var(--current-accent);
+}
+
+/* Glass Cards */
+body[data-modo] .glass,
+body[data-modo] .glass-card {
+    background: var(--current-glass);
+    border-color: rgba(128, 128, 128, 0.15);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 10. RESPONSIVE
+   ────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .modo-toggle {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 16px;
+    }
+    
+    .modo-toggle__label {
+        display: none;
+    }
+    
+    .cursor-spotlight {
+        display: none; /* No cursor en móvil */
+    }
+}
+
+/* Preferencia de sistema (prefers-color-scheme) como fallback */
+@media (prefers-color-scheme: dark) {
+    body:not([data-modo]) {
+        --current-bg: var(--tiniebla-bg);
+        --current-text: var(--tiniebla-text);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▸ 11. COMPONENTES ADICIONALES ADAPTATIVOS
+   ────────────────────────────────────────────────────────────────── */
+
+/* Navegación principal */
+body[data-modo] .nav-item,
+body[data-modo] .studio-bar__link {
+    color: var(--current-text);
+    transition: color var(--modo-transition), opacity 0.3s;
+}
+
+body[data-modo] .nav-item:hover,
+body[data-modo] .studio-bar__link:hover {
+    color: var(--current-accent-warm);
+}
+
+/* Floating CTA adaptativo */
+body[data-modo] .floating-cta,
+body[data-modo] .solicitar-encargo {
+    background: var(--current-glass);
+    color: var(--current-text);
+    border-color: rgba(128, 128, 128, 0.2);
+    box-shadow: 0 8px 32px var(--current-shadow);
+}
+
+body[data-modo] .floating-cta:hover {
+    background: var(--current-accent-warm);
+    color: var(--luz-bg);
+}
+
+/* Partículas de mica - tinte según modo */
+body[data-modo="luz"] #mica-particles-canvas {
+    filter: brightness(0.9) sepia(0.1);
+}
+
+body[data-modo="tiniebla"] #mica-particles-canvas {
+    filter: brightness(1.1) saturate(1.2);
+}
+
+/* Scroll indicator */
+body[data-modo] .scroll-indicator {
+    color: var(--current-muted);
+}
+
+body[data-modo] .scroll-indicator::before {
+    background: var(--current-accent);
+}
+
+/* Haiku generator button */
+body[data-modo] .haiku-trigger {
+    background: var(--current-glass);
+    border-color: var(--current-accent);
+}
+
+/* Lightbox overlay */
+body[data-modo] .lightbox-overlay {
+    background: var(--current-bg);
+}
+
+/* Audio toggle */
+body[data-modo] .audio-toggle,
+body[data-modo] .warm-audio-toggle {
+    background: var(--current-glass);
+    color: var(--current-text);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   END MODO DUAL ATMOSFÉRICO
+   ═══════════════════════════════════════════════════════════════════ */

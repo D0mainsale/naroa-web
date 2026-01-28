@@ -130,7 +130,11 @@
     <!-- 🔥 DISRUPTIVO: Mata overlays, fuerza imágenes visibles -->
     <link rel="stylesheet" href="/css/disruptive.css">
     
-    <!-- ✨ v5.0 IMMERSIVE DESIGN SYSTEM -->
+    <!-- ✨ v5.0 IMMERSIVE DESIGN SYSTEM (2026 UPGRADE) -->
+    <link rel="stylesheet" href="/css/premium-2026.css">
+    <link rel="stylesheet" href="/css/typography-2026.css">
+    <link rel="stylesheet" href="/css/modo-dual-2026.css">
+    <link rel="stylesheet" href="/css/textura-tactil-2026.css">
     <link rel="stylesheet" href="/css/naroa-immersive.css">
     <link rel="stylesheet" href="/css/studio-nav.css">
     <link rel="stylesheet" href="/css/portfolio-hero.css">    
@@ -171,7 +175,7 @@
                 
                 <!-- Sí, Depende, Quiero Jugar -->
                 <nav class="intro-options">
-                    <a href="#/retrato" class="intro-btn intro-btn--ritual" data-action="retrato">
+                    <a href="#/retrato" class="intro-btn intro-btn--ritual" data-action="retrato" data-ritual="purchase" data-title="Retrato por Encargo">
                         <span class="btn-label">Sí</span>
                     </a>
                     <a href="#/portfolio" class="intro-btn intro-btn--portfolio" data-action="browse">
@@ -217,6 +221,10 @@
                     Explorar Serie
                     <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                 </a>
+                <button id="btn-open-museo" class="portfolio-hero-cta portfolio-hero-cta--secondary" style="margin-left: 1rem; background: transparent; border: 1px solid currentColor;">
+                    Galería 3D
+                    <span style="font-size: 1.2em; margin-left: 0.5rem;">🏛️</span>
+                </button>
             </div>
             
             <!-- Scroll Indicator -->
@@ -832,7 +840,10 @@
     <script src="/js/features/portfolio.js?v=2.0.1"></script>
     
     <!-- Main App (ties it together) -->
-    <script src="/js/app.js?v=2.0.1"></script>
+    <script src="/js/modo-dual.js"></script>
+    <script src="/js/mica-reactive.js"></script>
+    <script src="/js/features/ritual-checkout.js"></script>
+    <script src="js/app.js"></script>
     
     <!-- Lightbox (for clicking images) -->
     <script src="/js/lightbox.js?v=ULTRA_FAST" defer></script>
@@ -931,6 +942,12 @@
     
     <!-- Howler.js for audio (CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+    
+    <!-- ✨ v5.0+ ECOSISTEMA 2026 - Modo Dual y Sistemas Rituales -->
+    <script src="/js/modo-dual.js" defer></script>
+    <script src="/js/mica-reactive.js" defer></script>
+    <script src="/js/systems/lunar-circadian.js" defer></script>
+    <script src="/js/features/ritual-checkout.js" defer></script>
     
     <!-- GSAP Animation Engine -->
     <script src="/js/gsap-engine.js" defer></script>
